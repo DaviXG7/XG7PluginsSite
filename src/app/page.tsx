@@ -15,6 +15,7 @@ export default function Site() {
 
       <main>
         content
+        alguma coisa
 
         <button className="btn btn-primary">a</button>
 
