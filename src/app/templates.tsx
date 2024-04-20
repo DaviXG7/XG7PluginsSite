@@ -1,7 +1,7 @@
 "use client"
 import { useState } from 'react';
-import "./header.scss";
-import "./footer.scss"
+import "./css/header.scss";
+import "./css/footer.scss"
 
 import Logo from "./imgs/logo.png";
 import IconPesquisa from "./imgs/procurar.png";

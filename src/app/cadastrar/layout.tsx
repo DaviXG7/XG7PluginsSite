@@ -15,7 +15,7 @@ export default function RoostLayout({
       <head>
       <link rel="shortcut icon" type="image/png" href={ Logo.src }/>
 
-        <title>Login</title>
+        <title>Cadastrar</title>
       </head>
       <body>{children}</body>
     </html>

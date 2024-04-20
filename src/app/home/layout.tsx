@@ -1,4 +1,3 @@
-
 import Logo from "../imgs/logo.png"
 
 export const metadata = {

@@ -1,10 +1,7 @@
 "use client"
-import "./body.scss";
-import "./header.scss";
-import "./footer.scss";
+import "./css/body.scss";
 
 import { MainFooter, MainHeader } from "./templates"
-import { Container } from 'postcss';
 
 
 
@@ -15,7 +12,6 @@ export default function Site() {
 
       <main>
         content
-        alguma coisa
 
         <button className="btn btn-primary">a</button>
 
