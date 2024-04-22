@@ -1,8 +1,7 @@
 "use client"
-import "./css/body.scss";
+import "./css/body.scss"
 
 import { MainFooter, MainHeader } from "./templates"
-
 
 
 export default function Site() {
