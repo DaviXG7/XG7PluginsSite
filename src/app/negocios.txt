@@ -67,10 +67,11 @@
                     <li class="nav-item">
                       <a class="nav-link" href="javascript:void(0)">Fale Conosco</a>
                     </li >
-                    <button class="btn btn-primary">Fazer Login</button>
+                    
         </ul>
         
       </div>
+      <button class="btn btn-primary">Fazer Login</button>
     </div>
   </nav>
 
