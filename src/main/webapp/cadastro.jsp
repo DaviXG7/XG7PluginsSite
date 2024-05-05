@@ -18,16 +18,17 @@
     <link rel="icon" type="image/png" href="imgs/logo.png" />
 </head>
 <body>
-<form action="/cadastrar" method='post'>
+<form action="cadastro" method='post'>
     <img src=imgs/logo.png alt="Logo" />
 
-    <input type="text" name="nome" placeholder='nome de usuário*'/>
+    <input type="text" name="nome" placeholder='Nome de usuário*' required/>
 
-    <input type="text" name="login" placeholder='email*'/>
+    <input type="text" name="login" placeholder='Email*' required/>
 
-    <input type="text" placeholder='senha*'/>
+    <input type="text" name="senha" placeholder='Senha*' required/>
 
-    <input type="password" placeholder='confirmar senha*'/>
+    <input type="password" name="confirmarSenha" placeholder='Confirmar senha*' required/>
+    <input type="checkbox" name="aceitarTermos" placeholder="concordar termos" required>
 
     <input type="submit" />
 

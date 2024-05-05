@@ -24,9 +24,10 @@
     <input type="text" name="login" placeholder='email'/>
 
     <input type="text" placeholder='senha'/>
+    <input type="checkbox" name="Lembrar de mim" id="">
 
     <input type="submit" />
-    <a href="../cadastrar">Não tem uma conta?</a>
+    <a href="cadastro.jsp">Não tem uma conta?</a>
 
 </form>
 

@@ -34,29 +34,14 @@ public class UserFilter implements Filter {
 
         if (session.getAttribute("user") == null) {
 
-            if (request.getServletPath().contains("home"))
-            {
-                response.sendRedirect("/login.jsp");
-
-                filterChain.doFilter(request, response);
-
-
-                return;
-            }
+            if (request.getServletPath().contains("home")) response.sendRedirect("/login.jsp");
+            filterChain.doFilter(request, response);
+            return;
         }
 
-        if (session.getAttribute("user") != null) {
 
-            if (request.getServletPath().contains("login") ||
-                    request.getServletPath().contains("cadastar")) {
+        if (request.getServletPath().contains("login") || request.getServletPath().contains("cadastar")) response.sendRedirect("home/dashboard.jsp");
 
-                filterChain.doFilter(request, response);
-
-                return;
-
-            }
-
-        }
 
 
         filterChain.doFilter(request, response);
