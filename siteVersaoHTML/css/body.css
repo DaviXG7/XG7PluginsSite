@@ -3,8 +3,162 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+
+
+
+nav {
+    height: 100px;
+    width: 100%;
+
+}
+#nav-c {
+    border-bottom: 1px solid;
+    border-radius: 5px;
+}
+menu {
+    display: none;
+}
+#items {
+    border-right: solid 1px;
+    height: 40px;
+
+}
+
+#items > * {
+    margin: 0 10px 0 10px;
+}
+
+#items a > * {
+
+    margin: 0 5px 0 5px;
+
+}
+#hamburger {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
 main {
     padding-top: 150px;
     width: 100%;
+
+}
+
+.banner {
+    position: relative;
+}
+.banner img {
+    display: block;
+    border-radius: 10px;
+}
+.sobreposicao {
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    width: 50%;
+
+}
+.plugins {
+    display: flex;
+}
+
+.categoria {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    background-color: #eaeaea;
+    padding: 20px 7px 20px 7px;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+.plugins-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+.plugin-caixa {
+    width: calc(33.33% - 10px);
+    background-color: #f5f5f5;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0 10px 0;
+    border-radius: 10px;
+    margin: 0 0 0 6px;
+}
+
+
+
+
+
+
+
+@media screen and (max-width: 700px){
+
+    #pesquisa {
+        display: none;
+    }
+
+    .linkComum {
+        display: none;
+    }
+    #hamburger {
+        display: inline;
+    }
+    #hamburger:hover {
+        background-color: #eaeaea;
+    }
+    #textocliente {
+        display: none;
+    }
+
+    #menu {
+        display: none;
+
+
+    }
+
+
+
+
+    .plugins {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .categoria {
+        width: 100%;
+    }
+
+    .plugins-container {
+        width: 100%;
+        flex-direction: column;
+    }
+    .plugin-caixa {
+        margin: 10px 0 10px 0;
+        width: 100%;
+    }
+
+    .menu-items {
+        height: 40px;
+        border-bottom: solid 1px;
+        border-top: solid 1px;
+        display: flex;
+        align-items: center;
+        margin: 4px 0 4px 0;
+        padding-left: 10px;
+    }
+
+
 
 }
