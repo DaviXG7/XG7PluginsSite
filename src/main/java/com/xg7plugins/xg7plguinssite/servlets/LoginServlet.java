@@ -11,8 +11,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name = "cadastro", value = "/cadastro")
+@WebServlet(name = "login", value = "/login")
 public class LoginServlet extends HttpServlet {
+
+
 
 
     @Override
@@ -22,18 +24,16 @@ public class LoginServlet extends HttpServlet {
 
         if (email == null || email.isEmpty() || senha == null || senha.isEmpty()) {
             request.setAttribute("erromsg", "Preencha todos os campos!");
-            request.getRequestDispatcher("cadastro.jsp").forward(request, response);
-            response.sendRedirect("cadastro.jsp");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
 
         UserModel model;
 
         try {
-            if (!DBManager.exists(email)) {
+            if (!DBManager.exists(email, senha)) {
                 request.setAttribute("erromsg", "Este usuário não existe!");
-                request.getRequestDispatcher("cadastro.jsp").forward(request, response);
-                response.sendRedirect("cadastro.jsp");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
                 return;
             }
             model = DBManager.getUser(email,senha);
@@ -41,9 +41,9 @@ public class LoginServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-        request.setAttribute("user", model);
-        request.getRequestDispatcher("home/dashboard.jsp").forward(request, response);
+        request.getSession().setAttribute("user", model);
         response.sendRedirect("home/dashboard.jsp");
+
 
     }
 }

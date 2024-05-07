@@ -31,7 +31,7 @@
         <div class="nav-right d-flex justify-content-right align-items-center">
             <div class="d-md-flex align-items-center" id="items">
 
-                <a href="" class="linkComum d-md-flex link-underline link-underline-opacity-0" style="color: #646464">
+                <a href="#plugins" class="linkComum d-md-flex link-underline link-underline-opacity-0" style="color: #646464">
                     <i class="bi bi-plug"></i>
                     Plugins
                 </a>
@@ -48,7 +48,7 @@
 
             </div>
 
-            <a class="btn btn-primary d-md-flex justify-content-center align-items-center" style="margin-left: 15px">
+            <a href="login.jsp" class="btn btn-primary d-md-flex justify-content-center align-items-center" style="margin-left: 15px">
                 <i class="bi bi-person"></i>
                 <p id="textocliente">Área do cliente</p>
             </a>
@@ -67,7 +67,7 @@
 
     <div class="d-flex flex-column" style="padding: 0 10px 0 10px" id="itemsMenu">
 
-        <a href="" class="menu-items d-md-flex link-underline link-underline-opacity-0" style="color: #646464">
+        <a href="#plugins" class="menu-items d-md-flex link-underline link-underline-opacity-0" style="color: #646464">
             <i class="bi bi-plug"></i>
             Plugins
         </a>

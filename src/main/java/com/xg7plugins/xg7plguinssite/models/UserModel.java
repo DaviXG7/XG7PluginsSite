@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -17,6 +18,7 @@ public class UserModel {
     private String avatarPath;
     private String email;
     private String senha;
+    private List<Integer> permissions;
     public File getUserImage() {
         return (new File(avatarPath));
     }

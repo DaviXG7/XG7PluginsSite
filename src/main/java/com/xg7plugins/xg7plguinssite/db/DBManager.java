@@ -19,9 +19,10 @@ public class DBManager {
         );
         connection.setAutoCommit(true);
     }
-    public static boolean exists(String email) throws SQLException {
-        PreparedStatement ps = connection.prepareStatement("SELECT * FROM users WHERE email = ?");
+    public static boolean exists(String email, String senha) throws SQLException {
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM users WHERE email = ? AND senha = ?");
         ps.setString(1, email);
+        ps.setString(2, senha);
         ResultSet rs = ps.executeQuery();
         return rs.next();
     }
@@ -37,12 +38,31 @@ public class DBManager {
             return null;
         }
 
+        /*
+            CEO 6
+            ADMIN 5
+            EDITOR SITE 4
+            EDITOR PLUGINS 3
+            AUXILIAR 2
+            CLIENTE 1
+         */
+
+
+        List<Integer> permissions = new ArrayList<>();
+
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM permissions WHERE id_user = ?");
+        statement.setString(1, resultSet.getString("id"));
+        ResultSet resultSet1 = statement.executeQuery();
+        while (resultSet1.next()) {
+            permissions.add(resultSet1.getInt("id_perm"));
+        }
 
 
         return new UserModel(resultSet.getString("name"), UUID.fromString(resultSet.getString("id")),
                 resultSet.getString("avatarpath"),
                 resultSet.getString("email"),
-                resultSet.getString("senha"));
+                resultSet.getString("senha"),
+                permissions);
     }
     public static void addUser(UserModel session) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO users(name,id,email,senha,avatarpath) VALUES (?,?,?,?,?)");
@@ -56,10 +76,21 @@ public class DBManager {
     public static List<UserModel> allUsers() throws SQLException {
         List<UserModel> users = new ArrayList<>();
         ResultSet set = connection.prepareStatement("SELECT * FROM contas").executeQuery();
-        while (set.next()) users.add(new UserModel(set.getString("name"), UUID.fromString(set.getString("id")),
+
+        while (set.next()) {
+            List<Integer> permissions = new ArrayList<>();
+
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM permissions WHERE id_user = ?");
+            statement.setString(1, set.getString("id"));
+            ResultSet resultSet1 = statement.executeQuery();
+            while (resultSet1.next()) {
+                permissions.add(resultSet1.getInt("id_perm"));
+            }
+            users.add(new UserModel(set.getString("name"), UUID.fromString(set.getString("id")),
                 set.getString("avatarpath"),
                 set.getString("email"),
-                set.getString("senha")));
+                set.getString("senha"),permissions));
+        }
 
         return users;
 
@@ -79,7 +110,7 @@ public class DBManager {
 
     }
     public static void addPerm(UUID id, int perm) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO permissions(id,perm) VALUES (?,?)");
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO permissions(id_perm,id_user) VALUES (?,?)");
         preparedStatement.setString(2, id.toString());
         preparedStatement.setInt(1, perm);
         preparedStatement.executeUpdate();

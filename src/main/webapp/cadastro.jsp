@@ -1,14 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: davis
-  Date: 30/04/2024
-  Time: 11:41
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="br">
 <head>
-    <title>Title</title>
+    <meta charset="UTF-8">
+    <title>XG7Plugins</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -17,23 +11,52 @@
     <link href="css/cadastro.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="imgs/logo.png" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
 </head>
 <body>
-<form action="cadastro" method='post'>
-    <img src=imgs/logo.png alt="Logo" />
+<a href="index.jsp" class="voltar link link-light link-underline link-underline-opacity-0" style="font-size: 30px">
+    <i class="bi bi-arrow-left-short"></i>
+    Voltar
+</a>
+<div class="cadastro">
 
-    <input type="text" name="nome" placeholder='Nome de usuário*' required/>
 
-    <input type="text" name="login" placeholder='Email*' required/>
+    <img src="imgs/logo.png" width="133px">
+    <form action="cadastro" method="post" class="d-flex flex-column align-items-center">
+        <div class="form-group">
+            <label for="email">Email:*</label>
+            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Digite seu mail" required>
+        </div>
+        <div class="form-group">
+            <label for="nome">Nome:*</label>
+            <input type="text" class="form-control" id="nome" name="nome" aria-describedby="emailHelp" placeholder="Digite seu nome" required>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="password">Senha:*</label>
+            <input type="password" class="form-control" id="password" name="senha" placeholder="Senha" required>
+        </div>
+        <div class="form-group">
+            <label for="confirmarsenha">Confirmar Senha:*</label>
+            <input type="password" class="form-control" id="confirmarsenha" name="confirmarSenha" placeholder="Confirmar senha" required>
+        </div>
+        <br>
+        <div class="form-check">
+            <input type="checkbox" name="termos" class="form-check-input" id="termos" required>
+            <label style="font-size: 12px" class="form-check-label" for="termos">Ao continuar você concorda com os <a href=""> Termos e condições</a></label>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary w-100">Criar conta</button>
+        <p style="font-size: 11px">Já tem uma conta? Clique aqui para <a href="login.jsp">entrar na conta.</a></p>
+        <%=request.getAttribute("erromsg")
+        %>
+    </form>
 
-    <input type="text" name="senha" placeholder='Senha*' required/>
 
-    <input type="password" name="confirmarSenha" placeholder='Confirmar senha*' required/>
-    <input type="checkbox" name="aceitarTermos" placeholder="concordar termos" required>
 
-    <input type="submit" />
 
-</form>
+
+</div>
 
 </body>
 </html>
