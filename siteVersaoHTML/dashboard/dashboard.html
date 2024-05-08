@@ -21,6 +21,7 @@
         body {
             width: 100%;
             height: 100%;
+            display: flex;
         }
 
         .barra-lateral {
@@ -29,6 +30,9 @@
             background-color: rgba(0, 89, 255, 0.705);
             display: flex;
             flex-direction: column;
+            overflow: auto;
+            min-width: 250px;
+            max-width: 250px;
         }
 
         .texto-primary {
@@ -45,7 +49,22 @@
 
         .margin-esquerda {
             padding-left: 10px;
+        }
 
+        #início {
+            padding-left: 80px;
+        }
+
+        #ADM {
+            padding-left: 80px;
+        }
+
+        #minha-conta {
+            padding-left: 29px;
+        }
+
+        #dashboard {
+            display: none;
         }
     </style>
 
@@ -54,23 +73,17 @@
 
 </head>
 
-<body class=>
-
-
-
+<body>
     <div class="barra-lateral">
 
 
-        <img src="../imgs/logo.png" width="200" style="padding-left: 27px;">
+        <img src="../imgs/logo.png" width="200" style="padding-left: 50px;">
 
-        <a class="margin-esquerda" style=" text-decoration: none;color: black;">
-            <h4><i class="bi bi-person"></i> Minha conta</h4>
-        </a>
 
         <hr class="sidebar-divider">
 
         <div class="margin-esquerda">
-            <h4 class="" href=""><i class="bi bi-house-fill"></i> Início</h4>
+            <h4 id="início">Início</h4>
             <a class="texto-primary" href=""><i class="bi bi-telephone"></i> Suporte</a><br>
             <a class="texto-primary" href=""><i class="bi bi-cash"></i> Doação</a><br>
         </div>
@@ -79,16 +92,94 @@
 
         <div class="margin-esquerda">
 
-            <h4 class=""><i class="bi bi-key-fill"></i> ADM</h4>
+            <h4 id="ADM">ADM</h4>
             <a class="texto-primary" href=""><i class="bi bi-people"></i> Usuários</a><br>
             <a class="texto-primary" href="../index.html"><i class="bi bi-plug"></i> Plugins</a><br>
         </div>
 
     </div>
-    <main>
 
+
+    <main>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="bi bi-plus-lg"></i> Adicionar plugins</a>
+                        </li>
+                        <div class="dropdown ">
+                            <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <i class="bi bi-person-circle"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Perfil
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Configurações
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </ul>
+                        </div>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </main>
+    <menu id="dashboard">
+
+        <div class="d-flex flex-column" style="padding: 0 10px 0 10px" id="itemsMenu">
+
+            <a href="" class="menu-items d-md-flex link-underline link-underline-opacity-0" style="color: #646464">
+                <i class="bi bi-plug"></i>
+                Plugins
+            </a>
+            <a href="" class="menu-items d-md-flex link-underline link-underline-opacity-0" style="color: #646464">
+                <i class="bi bi-discord"></i>
+                Discord
+            </a>
+
+        </div>
+
+    </menu>
+
 
 </body>
+
+<script>
+
+    function toggleMenu() {
+        let menu = document.getElementById("dashboard");
+        if (menu.style.display === "none" || menu.style.display === "") {
+            menu.style.display = "inline";
+        } else {
+            menu.style.display = "none";
+        }
+    }
+
+    function getTamanhoDaTela() {
+        var largura = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
+        if (largura > 700) {
+            document.getElementById("dashboard").style.display = "none";
+        }
+    }
+    window.addEventListener("resize", getTamanhoDaTela);
+
+</script>
 
 </html>
