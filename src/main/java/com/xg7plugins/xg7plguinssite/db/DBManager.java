@@ -1,5 +1,6 @@
 package com.xg7plugins.xg7plguinssite.db;
 
+import com.xg7plugins.xg7plguinssite.models.PluginsModel;
 import com.xg7plugins.xg7plguinssite.models.UserModel;
 import lombok.Getter;
 
@@ -19,10 +20,9 @@ public class DBManager {
         );
         connection.setAutoCommit(true);
     }
-    public static boolean exists(String email, String senha) throws SQLException {
-        PreparedStatement ps = connection.prepareStatement("SELECT * FROM users WHERE email = ? AND senha = ?");
+    public static boolean exists(String email) throws SQLException {
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM users WHERE email = ?");
         ps.setString(1, email);
-        ps.setString(2, senha);
         ResultSet rs = ps.executeQuery();
         return rs.next();
     }
@@ -137,6 +137,31 @@ public class DBManager {
             permissions.add(resultSet.getInt("id_perm"));
         }
         return permissions;
+
+    }
+
+
+
+
+
+    public static void addPlugin(PluginsModel model) throws SQLException {
+
+        PreparedStatement preparedStatementPlugins = connection.prepareStatement("INSERT INTO plugins(name,category,video,pluginPath,versions,price,resources) VALUES (?,?,?,?,?,?,?)");
+        PreparedStatement preparedStatementCommands = connection.prepareStatement("INSERT INTO plugincommands(pluginname,command,description) VALUES (?,?,?)");
+        PreparedStatement preparedStatementPerms = connection.prepareStatement("INSERT INTO pluginperms(pluginname,perms,description) VALUES (?,?,?)");
+        PreparedStatement preparedStatementChangeLog = connection.prepareStatement("INSERT INTO pluginchangelog(pluginname,changedate,changelog) VALUES (?,?,?)");
+
+        preparedStatementPlugins.setString(1, model.getName());
+        preparedStatementPlugins.setInt(2, model.getCategory().ordinal());
+        preparedStatementPlugins.setString(3,model.getUrlVideo());
+        preparedStatementPlugins.setString(4,model.getPluginPath());
+        preparedStatementPlugins.setString(5,model.getVersions());
+        preparedStatementPlugins.setDouble(6,model.getPrice());
+        preparedStatementPlugins.setString(7,model.getResourses());
+        preparedStatementPlugins.executeUpdate();
+
+
+
 
     }
 

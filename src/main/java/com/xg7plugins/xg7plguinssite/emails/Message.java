@@ -1,13 +1,13 @@
 package com.xg7plugins.xg7plguinssite.emails;
 
-import jakarta.mail.Address;
-import jakarta.mail.MessagingException;
-import jakarta.mail.Multipart;
-import jakarta.mail.Transport;
-import jakarta.mail.internet.InternetAddress;
-import jakarta.mail.internet.MimeBodyPart;
-import jakarta.mail.internet.MimeMessage;
-import jakarta.mail.internet.MimeMultipart;
+import javax.mail.Address;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -36,7 +36,9 @@ public class Message {
 
             this.multipart = multipart;
 
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return this;
 
@@ -45,11 +47,11 @@ public class Message {
 
 
     public void enviarEmail(String destinatarios) throws UnsupportedEncodingException, MessagingException {
-            Address[] to = InternetAddress.parse(destinatarios);
+        Address[] to = InternetAddress.parse(destinatarios);
 
-            jakarta.mail.Message message = new MimeMessage(EmailManager.getSession());
+        javax.mail.Message message = new MimeMessage(EmailManager.getSession());
             message.setFrom(new InternetAddress("xg7mails@gmail.com", "XG7Plugins"));
-            message.setRecipients(jakarta.mail.Message.RecipientType.TO, to);
+            message.setRecipients(javax.mail.Message.RecipientType.TO, to);
             message.setSubject(assunto);
             if (multipart != null) {
 

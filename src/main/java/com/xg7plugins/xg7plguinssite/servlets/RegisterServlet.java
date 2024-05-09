@@ -3,8 +3,7 @@ package com.xg7plugins.xg7plguinssite.servlets;
 import com.xg7plugins.xg7plguinssite.db.DBManager;
 import com.xg7plugins.xg7plguinssite.emails.Message;
 import com.xg7plugins.xg7plguinssite.models.UserModel;
-import jakarta.mail.MessagingException;
-import jakarta.servlet.ServletConfig;
+import javax.mail.MessagingException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,7 +11,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.UUID;
 
 @WebServlet(name = "cadastro", value = "/cadastro")
@@ -44,7 +45,7 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
         try {
-            if (DBManager.exists(email, senha)) {
+            if (DBManager.exists(email)) {
                 request.setAttribute("erromsg", "Este usuário já existe!");
                 request.getRequestDispatcher("cadastro.jsp").forward(request, response);
                 return;
@@ -53,18 +54,22 @@ public class RegisterServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-        UserModel model = new UserModel(nome, UUID.randomUUID(), "", email,senha);
+        UserModel model = new UserModel(nome, UUID.randomUUID(), "", email,senha, new ArrayList<>());
+        new Thread(() -> {
+            try
 
-        /* try {
-            new Message("Bem-vindo ao XG7Plugins!",
-                    "<div style=\"\">" +
-                    "Depois eu coloco algo aqui, estou com preguiça :P" +
-                    "</div>").enviarEmail(email);
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
+            {
+                new Message("Bem-vindo ao XG7Plugins!",
+                        "<div style=\"\">" +
+                                "Depois eu coloco algo aqui, estou com preguiça :P" +
+                                "</div>").enviarEmail(email);
+            } catch(
+                    MessagingException | UnsupportedEncodingException e)
 
-         */
+            {
+                throw new RuntimeException(e);
+            }
+        });
 
         try {
             DBManager.addUser(model);

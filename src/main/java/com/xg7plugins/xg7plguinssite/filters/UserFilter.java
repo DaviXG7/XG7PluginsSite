@@ -1,6 +1,7 @@
 package com.xg7plugins.xg7plguinssite.filters;
 
 import com.xg7plugins.xg7plguinssite.db.DBManager;
+import com.xg7plugins.xg7plguinssite.emails.EmailManager;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ public class UserFilter implements Filter {
         Filter.super.init(filterConfig);
         try {
             DBManager.init();
+            EmailManager.loadSession();
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

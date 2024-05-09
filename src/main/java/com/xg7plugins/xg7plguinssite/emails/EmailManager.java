@@ -1,10 +1,10 @@
 package com.xg7plugins.xg7plguinssite.emails;
 
-import jakarta.mail.Authenticator;
-import jakarta.mail.PasswordAuthentication;
-import jakarta.mail.Session;
 import lombok.Getter;
 
+import javax.mail.Authenticator;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
 import java.util.Properties;
 
 public class EmailManager {

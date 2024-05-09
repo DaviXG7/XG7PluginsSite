@@ -37,3 +37,13 @@ body {
 
 
 }
+.erro {
+    background-color: red;
+    border-radius: 10px;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    margin-top: 10px;
+}

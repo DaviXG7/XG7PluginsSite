@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
         UserModel model;
 
         try {
-            if (!DBManager.exists(email, senha)) {
+            if (!DBManager.exists(email)) {
                 request.setAttribute("erromsg", "Este usuário não existe!");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
                 return;
@@ -40,10 +40,17 @@ public class LoginServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        if (model == null) {
+            request.setAttribute("erromsg", "Esta senha está incorreta!");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
+        }
 
         request.getSession().setAttribute("user", model);
         response.sendRedirect("home/dashboard.jsp");
 
 
     }
+
+    //https://pt.namemc.com/skin/32286edbd870c9cc
 }
