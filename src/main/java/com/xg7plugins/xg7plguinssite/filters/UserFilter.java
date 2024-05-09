@@ -1,6 +1,7 @@
 package com.xg7plugins.xg7plguinssite.filters;
 
 import com.xg7plugins.xg7plguinssite.db.DBManager;
+import com.xg7plugins.xg7plguinssite.emails.EmailManager;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ public class UserFilter implements Filter {
         Filter.super.init(filterConfig);
         try {
             DBManager.init();
+            EmailManager.loadSession();
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -34,29 +36,18 @@ public class UserFilter implements Filter {
 
         if (session.getAttribute("user") == null) {
 
-            if (request.getServletPath().contains("home"))
-            {
-                response.sendRedirect("/login.jsp");
+            if (request.getServletPath().contains("home")) response.sendRedirect("/login.jsp");
 
-                filterChain.doFilter(request, response);
-
-
-                return;
-            }
+            filterChain.doFilter(request, response);
+            return;
         }
 
-        if (session.getAttribute("user") != null) {
-
-            if (request.getServletPath().contains("login") ||
-                    request.getServletPath().contains("cadastar")) {
-
+        if (request.getServletPath().contains("login") || request.getServletPath().contains("cadastro")) {
+                response.sendRedirect("home/dashboard.jsp");
                 filterChain.doFilter(request, response);
-
                 return;
-
-            }
-
         }
+
 
 
         filterChain.doFilter(request, response);
