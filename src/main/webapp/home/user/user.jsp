@@ -143,7 +143,7 @@
         </form>
         <form class ="configs imagem" method="post" action="editarimagem">
             <h4>Alterar imagem</h4>
-            <img src="">
+            <img src=<%=model.getAvatarPath()%>>
             <p>Imagem atual</p>
 
             <div class="form-group">
@@ -153,6 +153,10 @@
 
             <input type="submit" class="btn btn-primary" value="Enviar"></input>
         </form>
+
+        <%
+            if (model.getPermission() >= 8) {
+        %>
 
         <form class ="configs usuario" method="post" action="editarpermissao">
             <h4>Permissão</h4>
@@ -174,6 +178,9 @@
 
             <input type="submit" class="btn btn-primary" value="Atualizar"></input>
         </form>
+        <%
+            }
+        %>
 
     </div>
 
