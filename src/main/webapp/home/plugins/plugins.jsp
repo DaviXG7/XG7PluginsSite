@@ -1,3 +1,4 @@
+<%@ page import="com.xg7plugins.xg7plguinssite.models.UserModel" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true" %>
 
 <!DOCTYPE html>
@@ -9,11 +10,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="../css/dashboard.css" rel="stylesheet">
+    <link href="css/dashboard.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="../imgs/logo.png" />
 
 
-
+    <%
+        UserModel model = (UserModel) request.getSession().getAttribute("user");
+    %>
 
 
 
@@ -35,13 +38,16 @@
             INTERFACE
         </div>
         <div class="botoes">
-            <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href=""><i style="color: rgba(255,255,255,.5);" class="bi bi-house"></i><p class="textos-botoes"> Início</p></a>
             <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href=""><i style="color: rgba(255,255,255,.5);" class="bi bi-telephone"></i><p class="textos-botoes"> Suporte</p></a>
             <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href=""><i style="color: rgba(255,255,255,.5);" class="bi bi-cash"></i><p class="textos-botoes" > Doação</p></a>
         </div>
     </div>
 
     <hr>
+
+    <%
+        if (model.getPermission() > 1) {
+    %>
 
     <div class="menus">
         <div class="sidebar-heading side-title">
@@ -54,6 +60,10 @@
     </div>
 
     <hr>
+    <%
+        }
+    %>
+
 
 
 
@@ -70,12 +80,15 @@
             </svg>
         </button>
         <div class="h-botoes">
+            <%
+                if (model.getPermission() > 1) {
+            %>
             <a>
                 <i class="bi bi-plus" style="font-size: 30px; padding: 0 10px 0 10px"></i>
             </a>
-            <a>
-                <i class="bi bi-box-arrow-left" style="font-size: 30px; padding: 0 10px 0 10px"></i>
-            </a>
+            <%
+                }
+            %>
 
             <div class="dropdown">
                 <button style="border: none; background-color: white" type="button" data-bs-toggle="dropdown">
@@ -83,17 +96,13 @@
                 </button>
                 <ul class="dropdown-menu">
                     <a class="dropdown-item" href="#">
-                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Perfil
-                    </a>
-                    <a class="dropdown-item" href="#">
                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                         Configurações
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                    <a href="/logout" class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Logout
+                        Encerrar seção
                     </a>
                 </ul>
             </div>
@@ -104,7 +113,7 @@
 
 </body>
 
-<script src="../js/menu.js"></script>
+<script src="js/menu.js"></script>
 <script>
     function getTamanhoDaTela() {
         var largura = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;

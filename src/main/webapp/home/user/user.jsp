@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="css/dashboard.css" rel="stylesheet">
+    <link href="../css/dashboard.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="../imgs/logo.png" />
 
 
@@ -80,40 +80,110 @@
             </svg>
         </button>
         <div class="h-botoes">
-            <%
-                if (model.getPermission() > 1) {
-            %>
             <a>
                 <i class="bi bi-plus" style="font-size: 30px; padding: 0 10px 0 10px"></i>
             </a>
-            <%
-                }
-            %>
+            <a>
+                <i class="bi bi-box-arrow-left" style="font-size: 30px; padding: 0 10px 0 10px"></i>
+            </a>
 
             <div class="dropdown">
                 <button style="border: none; background-color: white" type="button" data-bs-toggle="dropdown">
                     <img src="../imgs/logo.png" width="80" alt="">
                 </button>
                 <ul class="dropdown-menu">
-                    <a href=<%="user/user.jsp?uuid=" + model.getId().toString()%> class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#">
+                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Perfil
+                    </a>
+                    <a class="dropdown-item" href="#">
                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                         Configurações
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="/logout" class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Encerrar seção
+                        Logout
                     </a>
                 </ul>
             </div>
         </div>
     </header>
+
+    <div class="pag">
+        <form class ="configs usuario" method="post" action="editarusuario">
+            <h4>Configurações</h4>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Nome: </label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="Novo nome" value="DaviXG7">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Email: </label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" value="email@example.com">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Senha*: </label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" placeholder="Senha">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Nova senha: </label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" placeholder="Nova senha">
+                </div>
+            </div>
+
+            <input type="submit" class="btn btn-primary" value="Atualizar"></input>
+        </form>
+        <form class ="configs imagem" method="post" action="editarimagem">
+            <h4>Alterar imagem</h4>
+            <img src="">
+            <p>Imagem atual</p>
+
+            <div class="form-group">
+                <label for="exampleFormControlFile1">Enviar imagem</label>
+                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+            </div>
+
+            <input type="submit" class="btn btn-primary" value="Enviar"></input>
+        </form>
+
+        <form class ="configs usuario" method="post" action="editarpermissao">
+            <h4>Permissão</h4>
+
+            <div class="form-group row">
+                <label for="exampleFormControlSelect2">Escolha a permissão</label>
+                <select multiple class="form-control" id="exampleFormControlSelect2">
+                    <option>CEO</option>
+                    <option>Administrador</option>
+                    <option>Editor site</option>
+                    <option>Editor plugin</option>
+                    <option>Auxiliar</option>
+                    <option>Cliente</option>
+                </select>
+                <div class="col">
+                    Permissão atual:
+                </div>
+            </div>
+
+            <input type="submit" class="btn btn-primary" value="Atualizar"></input>
+        </form>
+
+    </div>
+
+
 </main>
 
 
 </body>
 
-<script src="../js/menu.js"></script>
+<script src="js/menu.js"></script>
 <script>
     function getTamanhoDaTela() {
         var largura = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;

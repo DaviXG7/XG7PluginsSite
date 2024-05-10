@@ -18,7 +18,7 @@ public class UserModel {
     private String avatarPath;
     private String email;
     private String senha;
-    private List<Integer> permissions;
+    private int permission;
     public File getUserImage() {
         return (new File(avatarPath));
     }

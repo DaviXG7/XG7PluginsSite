@@ -54,7 +54,7 @@ public class RegisterServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-        UserModel model = new UserModel(nome, UUID.randomUUID(), "", email,senha, new ArrayList<>());
+        UserModel model = new UserModel(nome, UUID.randomUUID(), "", email,senha, 1);
         new Thread(() -> {
             try
 

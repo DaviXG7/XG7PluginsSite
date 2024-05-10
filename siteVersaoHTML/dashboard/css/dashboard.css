@@ -3,6 +3,7 @@ html {
 }
 
 body {
+
     width: 100%;
     height: 100%;
     display: flex;
@@ -54,6 +55,35 @@ header {
     display: flex;
     align-items: center;
 }
+.configs {
+    width: 70%;
+    background-color: #e7e7e7;
+    display: flex;
+    padding: 25px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border: solid black 1px;
+    border-radius: 10px;
+    margin: 10px 0 10px 0;
+}
+.pag {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.usuario {
+    height: 350px;
+}
+.imagem {
+
+    height: 250px;
+
+}
+
 
 @media screen and (max-width: 650px) {
     #barra-lateral {
@@ -80,6 +110,12 @@ header {
     }
     .side-title {
         text-align: center;
+    }
+    .configs {
+        width: 100%;
+    }
+    .usuario {
+        height: 450px;
     }
 
 }
