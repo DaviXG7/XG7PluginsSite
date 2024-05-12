@@ -23,10 +23,11 @@
 </head>
 
 <body>
+<div class="wrapper">
 <div id="barra-lateral" class="barra-lateral sidebar">
 
 
-    <a>
+    <a href="../index.jsp">
         <img src="../imgs/logo.png" width="135" alt="">
     </a>
 
@@ -38,8 +39,8 @@
             INTERFACE
         </div>
         <div class="botoes">
-            <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href=""><i style="color: rgba(255,255,255,.5);" class="bi bi-telephone"></i><p class="textos-botoes"> Suporte</p></a>
-            <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href=""><i style="color: rgba(255,255,255,.5);" class="bi bi-cash"></i><p class="textos-botoes" > Doação</p></a>
+            <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href="https://discord.gg/84rqYVREsY"><i style="color: rgba(255,255,255,.5);" class="bi bi-telephone"></i><p class="textos-botoes"> Suporte</p></a>
+            <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href="https://ko-fi.com/davixg7"><i style="color: rgba(255,255,255,.5);" class="bi bi-cash"></i><p class="textos-botoes" > Doação</p></a>
         </div>
     </div>
 
@@ -54,8 +55,8 @@
             ADMIN
         </div>
         <div class="botoes">
-            <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href=""><i style="color: rgba(255,255,255,.5);" class="bi bi-people"></i> <p class="textos-botoes" > Clientes</p></a>
-            <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href="../index.html"><i style="color: rgba(255,255,255,.5);" class="bi bi-plug"></i> <p class="textos-botoes" > Plugins</p></a>
+            <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href="admin/clientes.jsp?page=1"><i style="color: rgba(255,255,255,.5);" class="bi bi-people"></i> <p class="textos-botoes" > Clientes</p></a>
+            <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href=""><i style="color: rgba(255,255,255,.5);" class="bi bi-plug"></i> <p class="textos-botoes" > Plugins</p></a>
         </div>
     </div>
 
@@ -92,15 +93,17 @@
 
             <div class="dropdown">
                 <button style="border: none; background-color: white" type="button" data-bs-toggle="dropdown">
-                    <img src="../imgs/logo.png" width="80" alt="">
+                    <img src="<%=model.getImageData() == null ? "alt.png" : model.getImageData()%>" width="60" style="border: solid black 1px; border-radius: 100%" alt="">
                 </button>
                 <ul class="dropdown-menu">
-                    <a href=<%="user/user.jsp?uuid=" + model.getId().toString()%> class="dropdown-item" href="#">
+                    <p class="dropdown-item"><%=model.getNome()%></p>
+                    <div class="dropdown-divider"></div>
+                    <a href=<%="user/user.jsp?uuid=" + model.getId().toString()%> class="dropdown-item">
                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                         Configurações
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="/logout" class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                    <a href="/logout" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                         Encerrar seção
                     </a>
@@ -109,6 +112,7 @@
         </div>
     </header>
 </main>
+</div>
 
 
 </body>

@@ -20,11 +20,36 @@ public class DBManager {
         );
         connection.setAutoCommit(true);
     }
+    public static void discconect() throws SQLException {
+        connection.close();
+        connection = null;
+    }
     public static boolean exists(String email) throws SQLException {
         PreparedStatement ps = connection.prepareStatement("SELECT * FROM users WHERE email = ?");
         ps.setString(1, email);
         ResultSet rs = ps.executeQuery();
         return rs.next();
+    }
+    public static void updateUserImage(UserModel user) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("UPDATE users SET avatarimg = ? WHERE id = ?");
+        statement.setBlob(1, user.getAvatarImg());
+        statement.setString(2, user.getId().toString());
+        statement.executeUpdate();
+
+    }
+    public static void updateUserPermission(UserModel userModel) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("UPDATE users SET perm = ? WHERE id = ?");
+        statement.setInt(1, userModel.getPermission());
+        statement.setString(2, userModel.getId().toString());
+        statement.executeUpdate();
+    }
+
+    public static void updateUser(UserModel user) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("UPDATE users SET name = ?, senha = ? WHERE id = ?");
+        statement.setString(1, user.getNome());
+        statement.setString(2, user.getSenha());
+        statement.setString(3, user.getId().toString());
+        statement.executeUpdate();
     }
 
     public static UserModel getUser(String email, String senha) throws SQLException {
@@ -34,6 +59,33 @@ public class DBManager {
         preparedStatement.setString(1, email);
         ResultSet resultSet = preparedStatement.executeQuery();
 
+        if (!resultSet.next()) {
+            return null;
+        }
+
+
+        /*
+            CEO 6
+            ADMIN 5
+            EDITOR SITE 4
+            EDITOR PLUGINS 3
+            AUXILIAR 2
+            CLIENTE 1
+         */
+
+
+
+
+        return new UserModel(resultSet.getString("name"), UUID.fromString(resultSet.getString("id")),
+                resultSet.getBlob("avatarimg"),
+                resultSet.getString("email"),
+                resultSet.getString("senha"),
+                resultSet.getInt("perm"));
+    }
+    public static UserModel getUserById(String id) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
+        preparedStatement.setString(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
         if (!resultSet.next()) {
             return null;
         }
@@ -51,29 +103,30 @@ public class DBManager {
 
 
         return new UserModel(resultSet.getString("name"), UUID.fromString(resultSet.getString("id")),
-                resultSet.getString("avatarpath"),
+                resultSet.getBlob("avatarimg"),
                 resultSet.getString("email"),
                 resultSet.getString("senha"),
                 resultSet.getInt("perm"));
     }
     public static void addUser(UserModel session) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO users(name,id,email,senha,avatarpath) VALUES (?,?,?,?,?)");
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO users(name,id,email,senha,perm,avatarimg) VALUES (?,?,?,?,?,?)");
         preparedStatement.setString(1, session.getNome());
         preparedStatement.setString(2, session.getId().toString());
         preparedStatement.setString(3, session.getEmail());
         preparedStatement.setString(4, session.getSenha());
-        preparedStatement.setString(5, session.getAvatarPath());
+        preparedStatement.setInt(5, session.getPermission());
+        preparedStatement.setBlob(6, session.getAvatarImg());
         preparedStatement.executeUpdate();
     }
     public static List<UserModel> allUsers() throws SQLException {
         List<UserModel> users = new ArrayList<>();
-        ResultSet set = connection.prepareStatement("SELECT * FROM contas").executeQuery();
+        ResultSet set = connection.prepareStatement("SELECT * FROM users").executeQuery();
 
         while (set.next()) {
             List<Integer> permissions = new ArrayList<>();
 
             users.add(new UserModel(set.getString("name"), UUID.fromString(set.getString("id")),
-                set.getString("avatarpath"),
+                set.getBlob("avatarimg"),
                 set.getString("email"),
                 set.getString("senha"),
                     set.getInt("perm")));
@@ -88,21 +141,6 @@ public class DBManager {
         preparedStatement.setString(1, id.toString());
         preparedStatement.executeUpdate();
     }
-
-    public static void deletePerm(UUID id, int perm) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM permissions WHERE id_perm = ? AND id_user = ?");
-        preparedStatement.setInt(1, perm);
-        preparedStatement.setString(2, id.toString());
-        preparedStatement.executeUpdate();
-
-    }
-    public static void addPerm(UUID id, int perm) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO permissions(id_perm,id_user) VALUES (?,?)");
-        preparedStatement.setString(2, id.toString());
-        preparedStatement.setInt(1, perm);
-        preparedStatement.executeUpdate();
-    }
-
     public static List<Integer> userPermissions(UUID id) throws SQLException {
 
         /*

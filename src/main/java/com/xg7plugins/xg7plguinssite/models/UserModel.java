@@ -4,8 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.File;
-import java.util.List;
+import java.sql.Blob;
+import java.sql.SQLException;
+import java.util.Base64;
 import java.util.UUID;
 
 @Getter
@@ -15,11 +16,18 @@ public class UserModel {
 
     private String nome;
     private UUID id;
-    private String avatarPath;
+    private Blob avatarImg;
     private String email;
     private String senha;
     private int permission;
-    public File getUserImage() {
-        return (new File(avatarPath));
+    public String getImageData() {
+        if (this.avatarImg == null) return null;
+        byte[] imagemBytes = null;
+        try {
+            imagemBytes = this.avatarImg.getBytes(1, (int) this.avatarImg.length());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return "data:image/png;base64," + Base64.getEncoder().encodeToString(imagemBytes);
     }
 }

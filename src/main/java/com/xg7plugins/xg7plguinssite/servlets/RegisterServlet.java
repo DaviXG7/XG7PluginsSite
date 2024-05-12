@@ -4,14 +4,19 @@ import com.xg7plugins.xg7plguinssite.db.DBManager;
 import com.xg7plugins.xg7plguinssite.emails.Message;
 import com.xg7plugins.xg7plguinssite.models.UserModel;
 import javax.mail.MessagingException;
+import javax.sql.rowset.serial.SerialBlob;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -54,7 +59,14 @@ public class RegisterServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-        UserModel model = new UserModel(nome, UUID.randomUUID(), "", email,senha, 1);
+        InputStream inputStream = new URL("https://minotar.net/avatar/" + nome + ".png").openStream();
+
+        UserModel model = null;
+        try {
+            model = new UserModel(nome, UUID.randomUUID(), new SerialBlob(inputStream.readAllBytes()), email,senha, 1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         new Thread(() -> {
             try
 
@@ -73,7 +85,6 @@ public class RegisterServlet extends HttpServlet {
 
         try {
             DBManager.addUser(model);
-            DBManager.addPerm(model.getId(), 1);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

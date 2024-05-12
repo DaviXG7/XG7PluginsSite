@@ -51,6 +51,4 @@ public class LoginServlet extends HttpServlet {
 
 
     }
-
-    //https://pt.namemc.com/skin/32286edbd870c9cc
 }

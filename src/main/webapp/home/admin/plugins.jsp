@@ -1,7 +1,4 @@
 <%@ page import="com.xg7plugins.xg7plguinssite.models.UserModel" %>
-<%@ page import="com.xg7plugins.xg7plguinssite.db.DBManager" %>
-<%@ page import="java.sql.SQLException" %>
-<%@ page import="java.rmi.RemoteException" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true" %>
 
 <!DOCTYPE html>
@@ -14,31 +11,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="../css/dashboard.css" rel="stylesheet">
-    <link href="../css/user.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="../imgs/logo.png" />
 
 
     <%
         UserModel model = (UserModel) request.getSession().getAttribute("user");
-        if (model == null) response.sendRedirect("../webapp/login.jsp");
-        UserModel userModel = null;
-        try {
-            userModel = DBManager.getUserById((String) request.getParameter("uuid"));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        if (userModel == null) throw new RemoteException("User nor found");
-        if (model.getPermission() < 5 && !userModel.getId().equals(model.getId())) {
-            throw new RemoteException("You don't have permission");
-        }
-
-
     %>
 
 
 
 </head>
-
 <body>
 <div class="wrapper">
     <div id="barra-lateral" class="barra-lateral sidebar">
@@ -128,85 +110,6 @@
                 </div>
             </div>
         </header>
-
-    <div class="pag">
-        <form class="configs usuario" method="post" action=<%="editarusuario?uuid=" + userModel.getId().toString()%>>
-            <h4>Configurações</h4>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Nome: </label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="nome" placeholder="Novo nome" value="<%=userModel.getNome()%>" required>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Email: </label>
-                <div class="col-sm-10">
-                    <input type="text" disabled class="form-control-plaintext" value="<%=userModel.getEmail()%>">
-                </div>
-            </div>
-            <% if (model.getPermission() < 5 || userModel.getId().equals(model.getId())) { %>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Senha*: </label>
-                <div class="col-sm-10">
-                    <input type="password" class="form-control" name="senha" placeholder="Senha" required>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Nova senha: </label>
-                <div class="col-sm-10">
-                    <input type="password" class="form-control" name="novaSenha" placeholder="Nova senha">
-                </div>
-            </div>
-            <%}%>
-
-            <input type="submit" class="btn btn-primary" value="Atualizar"></input>
-            <h2><%=request.getAttribute("errormsg")%></h2>
-        </form>
-        <form enctype="multipart/form-data" class="configs imagem" method="post" action=<%="editarimagem?uuid=" + userModel.getId().toString()%>>
-            <h4>Alterar imagem</h4>
-            <img alt="Você não tem uma imagem" src="<%=userModel.getImageData()%>" width="100" height="100">
-            <p>Imagem atual</p>
-
-            <div class="form-group">
-                <label for="exampleFormControlFile1">Enviar imagem</label>
-                <input type="file" class="form-control-file" name="imagem" id="exampleFormControlFile1" required>
-            </div>
-
-            <input type="submit" class="btn btn-primary" value="Enviar"></input>
-        </form>
-
-        <%
-            if (model.getPermission() >= 5) {
-        %>
-
-        <form class ="configs usuario" method="post" action=<%="editarpermissao?uuid=" + userModel.getId().toString()%>>
-            <h4>Permissão</h4>
-
-            <div class="form-group row">
-                <label for="exampleFormControlSelect2">Escolha a permissão</label>
-                <select multiple class="form-control" name="permissions" id="exampleFormControlSelect2">
-                    <option value="6">CEO</option>
-                    <option value="5">Administrador</option>
-                    <option value="4">Editor site</option>
-                    <option value="3">Editor plugin</option>
-                    <option value="2">Auxiliar</option>
-                    <option value="1">Cliente</option>
-                </select>
-                <div class="col">
-                    Nível de permissão atual: <%=userModel.getPermission()%>
-                </div>
-            </div>
-
-            <input type="submit" class="btn btn-primary" value="Atualizar"></input>
-        </form>
-        <%
-            }
-        %>
-
-    </div>
-
-
 </main>
 </div>
 

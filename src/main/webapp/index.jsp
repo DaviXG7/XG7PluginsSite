@@ -50,13 +50,13 @@
 
             <a href="login.jsp" class="btn btn-primary d-md-flex justify-content-center align-items-center" style="margin-left: 15px">
                 <%
-                    if (model == null || model.getAvatarPath() == null || model.getAvatarPath().isEmpty()) {
+                    if (model == null || model.getImageData() == null) {
                 %>
                 <i class="bi bi-person"></i>
                 <%
                     } else {
                 %>
-                <img src="<%=model.getAvatarPath()%>" alt="img">
+                <img src="<%=model.getImageData()%>" width="70" height="70" alt="img">
                 <%
                     }
                 %>
