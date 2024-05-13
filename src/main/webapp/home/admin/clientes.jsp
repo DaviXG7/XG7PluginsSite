@@ -183,13 +183,13 @@
                 <a class="page-link" href="?page=<%= paginaAtual - 1 %>" tabindex="-1">Anterior</a>
             </li>
             <%
-                for (int i = Math.max(1, paginaAtual - 1); i <= Math.max(allUsers.size() / 15, paginaAtual / 15 + 3); i++) {
+                for (int i = Math.max(1, paginaAtual - 1); i <= Math.min(3, Math.max(1, Math.max(allUsers.size() / 15, paginaAtual / 3))); i++) {
             %>
             <li class="page-item"><a class="page-link" href="?page=<%= i %>"><%=i%></a></li>
             <%
                 }
             %>
-            <li class="page-item <%=paginaAtual > 1 ? "" : "disabled"%>">
+            <li class="page-item <%=paginaAtual == 1 ? "" : "disabled"%>">
                 <a class="page-link" href="?page=<%= paginaAtual + 1 %>">Próxima</a>
             </li>
         </ul>
