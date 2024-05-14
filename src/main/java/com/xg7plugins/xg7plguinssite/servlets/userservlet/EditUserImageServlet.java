@@ -1,4 +1,4 @@
-package com.xg7plugins.xg7plguinssite.servlets;
+package com.xg7plugins.xg7plguinssite.servlets.userservlet;
 
 import com.xg7plugins.xg7plguinssite.db.DBManager;
 import com.xg7plugins.xg7plguinssite.models.UserModel;

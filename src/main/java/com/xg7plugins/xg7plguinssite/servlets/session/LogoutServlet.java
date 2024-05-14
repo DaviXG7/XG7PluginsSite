@@ -1,4 +1,4 @@
-package com.xg7plugins.xg7plguinssite.servlets;
+package com.xg7plugins.xg7plguinssite.servlets.session;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

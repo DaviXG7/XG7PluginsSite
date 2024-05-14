@@ -1,3 +1,5 @@
+<%@ page import="com.xg7plugins.xg7plguinssite.db.DBManager" %>
+<%@ page import="java.sql.SQLException" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true" %>
 <!DOCTYPE html>
 <html lang="br">
@@ -20,19 +22,26 @@
 
 
     <img src="imgs/logo.png" width="133px">
-    <form action="cadastro" method="post" class="d-flex flex-column align-items-center">
+    <form class="d-flex flex-column align-items-center">
         <div class="form-group">
             <label for="email">Email:*</label>
             <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Digite seu mail" required>
+            <small class="form-text text-muted" id="e" style="display: none">Esse email já existe</small>
+
         </div>
         <div class="form-group">
             <label for="nome">Nome:*</label>
             <input type="text" class="form-control" id="nome" name="nome" aria-describedby="emailHelp" placeholder="Digite seu nome" required>
+            <small class="form-text text-muted">Se você usar o seu nome do Minecraft,<br> a sua foto será tua skin!<br> (Precisa de uma conta original)</small>
         </div>
         <br>
         <div class="form-group">
             <label for="password">Senha:*</label>
             <input type="password" class="form-control" id="password" name="senha" placeholder="Senha" required>
+            <small class="form-text text-muted"><i id="caractere" style="color: red" class="bi bi-exclamation-circle"></i> Pelo menos 8 caracteres</small> <br>
+            <small class="form-text text-muted"><i id="caixaalta" style="color: red" class="bi bi-exclamation-circle"></i> Pelo menos 1 letra maiúscula</small> <br>
+            <small class="form-text text-muted"><i id="senhasIguais" style="color: red" class="bi bi-exclamation-circle"></i> Senhas iguais</small>
+
         </div>
         <div class="form-group">
             <label for="confirmarsenha">Confirmar Senha:*</label>
@@ -44,8 +53,9 @@
             <label style="font-size: 12px" class="form-check-label" for="termos">Ao continuar você concorda com os <a href=""> Termos e condições</a></label>
         </div>
         <br>
-        <button type="submit" class="btn btn-primary w-100">Criar conta</button>
+        <button id="submit" type="submit" class="btn btn-primary w-100 disabled">Criar conta</button>
         <p style="font-size: 11px">Já tem uma conta? Clique aqui para <a href="login.jsp">entrar na conta.</a></p>
+        <p style="font-size: 11px; color: red"><%=request.getAttribute("errormsg") != null ? request.getAttribute("errormsg") : ""%></p>
     </form>
 
 
@@ -53,29 +63,7 @@
 
 
 </div>
-
-<%
-    String error = (String) request.getAttribute("erromsg");
-    if (error != null) {
-
-
-%>
-<div style="
-background-color: red;
-    border-radius: 10px;
-    width: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    margin-top: 10px;
-    transition: 0.3s;
-">
-    <h2 class="text-light"><i class="bi bi-exclamation-circle-fill"></i> <%=error%></h2>
-</div>
-<%
-    }
-%>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="js/cadastro.js"></script>
 </body>
 </html>

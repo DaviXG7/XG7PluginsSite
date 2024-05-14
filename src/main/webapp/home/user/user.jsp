@@ -130,38 +130,38 @@
         </header>
 
     <div class="pag">
-        <form class="configs usuario" method="post" action=<%="editarusuario?uuid=" + userModel.getId().toString()%>>
+        <form class="configs usuario" id="usuario" method="post" action=<%="editarusuario?uuid=" + userModel.getId().toString()%> >
             <h4>Configurações</h4>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Nome: </label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="nome" placeholder="Novo nome" value="<%=userModel.getNome()%>" required>
+                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Novo nome" value="<%=userModel.getNome()%>">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Email: </label>
                 <div class="col-sm-10">
-                    <input type="text" disabled class="form-control-plaintext" value="<%=userModel.getEmail()%>">
+                    <p disabled class="form-control-plaintext"><%=userModel.getEmail()%></p>
                 </div>
             </div>
             <% if (model.getPermission() < 5 || userModel.getId().equals(model.getId())) { %>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Senha*: </label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" name="senha" placeholder="Senha" required>
+                    <input type="password" id="senha" class="form-control" name="senha" placeholder="Senha" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Nova senha: </label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" name="novaSenha" placeholder="Nova senha">
+                    <input type="password" class="form-control" name="novaSenha" id="novasenha" placeholder="Nova senha">
                 </div>
             </div>
             <%}%>
 
             <input type="submit" class="btn btn-primary" value="Atualizar"></input>
-            <h2><%=request.getAttribute("errormsg")%></h2>
+            <p id="erro" style="font-size: 11px; color: red"><%=request.getAttribute("errormsg") != null ? request.getAttribute("errormsg") : ""%></p>
         </form>
         <form enctype="multipart/form-data" class="configs imagem" method="post" action=<%="editarimagem?uuid=" + userModel.getId().toString()%>>
             <h4>Alterar imagem</h4>
@@ -180,12 +180,13 @@
             if (model.getPermission() >= 5) {
         %>
 
-        <form class ="configs usuario" method="post" action=<%="editarpermissao?uuid=" + userModel.getId().toString()%>>
+        <form class="configs usuario" id="permissao" method="post" action=<%="editarpermissao?uuid=" + userModel.getId().toString()%>>
             <h4>Permissão</h4>
 
             <div class="form-group row">
                 <label for="exampleFormControlSelect2">Escolha a permissão</label>
-                <select multiple class="form-control" name="permissions" id="exampleFormControlSelect2">
+                <select class="form-control" name="permissions" id="exampleFormControlSelect2">
+                    <option value="0">Selecione uma permissão...</option>
                     <option value="6">CEO</option>
                     <option value="5">Administrador</option>
                     <option value="4">Editor site</option>
@@ -199,6 +200,8 @@
             </div>
 
             <input type="submit" class="btn btn-primary" value="Atualizar"></input>
+            <p id="erroPermissao" style="font-size: 11px; color: red"></p>
+
         </form>
         <%
             }
@@ -213,7 +216,27 @@
 
 </body>
 
-<script src="js/menu.js"></script>
+<script src="../../js/menu.js"></script>
+<script>
+    $('#usuario').on('submit', function (event) {
+        let nome = document.getElementById("nome");
+        let senha = document.getElementById("novasenha");
+        if (nome.value === "" || senha.value === "") {
+            let erro = document.getElementById("erro");
+            erro.textContent = "Você precisa preencher pelo menos um dos campos não obrigatórios!"
+            event.preventDefault();
+
+        }
+    })
+    $('#permissao').on('submit', function (event) {
+        let permissao = document.getElementById("exampleFormControlSelect2");
+        if (permissao.value === "" || permissao.value === "0") {
+            document.getElementById("erroPermissao").textContent = "Selecione uma permissão!"
+            event.preventDefault();
+        }
+
+    })
+</script>
 <script>
     function getTamanhoDaTela() {
         var largura = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;

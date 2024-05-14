@@ -27,5 +27,11 @@ public class PluginsModel {
     private List<UUID> downloads;
     private double price;
 
+    public void addDownload(UUID id) {
+        for (UUID uuid : downloads) {
+            if (!uuid.equals(id)) downloads.add(id);
+        }
+    }
+
 
 }

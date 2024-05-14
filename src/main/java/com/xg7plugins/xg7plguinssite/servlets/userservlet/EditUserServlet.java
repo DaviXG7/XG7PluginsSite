@@ -1,4 +1,4 @@
-package com.xg7plugins.xg7plguinssite.servlets;
+package com.xg7plugins.xg7plguinssite.servlets.userservlet;
 
 import com.xg7plugins.xg7plguinssite.db.DBManager;
 import com.xg7plugins.xg7plguinssite.models.UserModel;
@@ -40,9 +40,7 @@ public class EditUserServlet extends HttpServlet {
         }
 
         if (novoNome.isEmpty() && novaSenha.isEmpty()) {
-            request.setAttribute("errormsg", "Por favor, preencha pelo menos um campo vazio!");
-            request.getRequestDispatcher("user.jsp?uuid=" + userEdit.getId().toString()).forward(request, response);
-            return;
+            throw new RuntimeException();
         }
 
         if (!novoNome.equals(userEdit.getNome()) && !novoNome.isEmpty()) {

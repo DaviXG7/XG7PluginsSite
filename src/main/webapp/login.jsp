@@ -39,6 +39,7 @@
         <br>
         <button type="submit" class="btn btn-primary w-100">Iniciar seção</button>
         <p style="font-size: 11px">Não tem uma conta? Clique aqui para <a href="cadastro.jsp">criar uma conta</a></p>
+        <p style="font-size: 11px; color: red"><%=request.getAttribute("errormsg") != null ? request.getAttribute("errormsg") : ""%></p>
 
 
     </form>
@@ -48,29 +49,6 @@
 
 
 </div>
-
-<%
-    String error = (String) request.getAttribute("erromsg");
-    if (error != null) {
-
-
-%>
-<div style="
-background-color: red;
-    border-radius: 10px;
-    width: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    margin-top: 10px;
-    transition: 0.3s;
-">
-    <h2 class="text-light"><i class="bi bi-exclamation-circle-fill"></i> <%=error%></h2>
-</div>
-<%
-    }
-%>
 
 </body>
 </html>

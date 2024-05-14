@@ -1,4 +1,4 @@
-package com.xg7plugins.xg7plguinssite.servlets;
+package com.xg7plugins.xg7plguinssite.servlets.session;
 
 import com.xg7plugins.xg7plguinssite.db.DBManager;
 import com.xg7plugins.xg7plguinssite.models.UserModel;
@@ -23,9 +23,7 @@ public class LoginServlet extends HttpServlet {
         String senha = request.getParameter("senha");
 
         if (email == null || email.isEmpty() || senha == null || senha.isEmpty()) {
-            request.setAttribute("erromsg", "Preencha todos os campos!");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-            return;
+            throw new RuntimeException();
         }
 
         UserModel model;

@@ -1,4 +1,4 @@
-package com.xg7plugins.xg7plguinssite.servlets;
+package com.xg7plugins.xg7plguinssite.servlets.session;
 
 import com.xg7plugins.xg7plguinssite.db.DBManager;
 import com.xg7plugins.xg7plguinssite.emails.Message;
@@ -12,13 +12,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.UUID;
 
 @WebServlet(name = "cadastro", value = "/cadastro")
@@ -34,20 +32,17 @@ public class RegisterServlet extends HttpServlet {
         String confirmarSenha = request.getParameter("confirmarSenha");
         boolean aceitarTermos = request.getParameter("termos").equals("on");
         if (nome == null || nome.isEmpty() || email == null || email.isEmpty() || senha == null || senha.isEmpty() || confirmarSenha == null || confirmarSenha.isEmpty()) {
-            request.setAttribute("erromsg", "Preencha todos os campos!");
-            request.getRequestDispatcher("cadastro.jsp").forward(request, response);
-            return;
+            throw new RuntimeException();
+        }
+        if (senha.toLowerCase().equals(senha) || senha.length() < 7) {
+            throw new RuntimeException();
         }
         if (!senha.equals(confirmarSenha)) {
-            request.setAttribute("erromsg", "As senhas devem combinar!");
-            request.getRequestDispatcher("cadastro.jsp").forward(request, response);
-            return;
+            throw new RuntimeException();
         }
 
         if (!aceitarTermos) {
-            request.setAttribute("erromsg", "Você precisa aceitar os termos!");
-            request.getRequestDispatcher("cadastro.jsp").forward(request, response);
-            return;
+            throw new RuntimeException();
         }
         try {
             if (DBManager.exists(email)) {

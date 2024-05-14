@@ -1,4 +1,4 @@
-package com.xg7plugins.xg7plguinssite.servlets;
+package com.xg7plugins.xg7plguinssite.servlets.userservlet;
 
 import com.xg7plugins.xg7plguinssite.db.DBManager;
 import com.xg7plugins.xg7plguinssite.models.UserModel;
@@ -26,13 +26,10 @@ public class EditUserPermissionServlet extends HttpServlet {
         }
         if (userEdit == null) throw new RuntimeException();
         if (userRequest.getPermission() < 5) throw new RuntimeException();
-        if (request.getParameter("permissions") == null) {
-            request.setAttribute("errormsg", "Selecione alguma permissão!");
-            request.getRequestDispatcher("user.jsp?uuid=" + userEdit.getId().toString()).forward(request, response);
-            return;
-        }
+        if (request.getParameter("permissions") == null) throw new RuntimeException();
 
         int permission = Integer.parseInt(request.getParameter("permissions"));
+        if (permission == 0) throw new RuntimeException();
 
         userEdit.setPermission(permission);
         try {
