@@ -130,7 +130,7 @@
         </header>
 
     <div class="pag">
-        <form class="configs usuario" id="usuario" method="post" action=<%="editarusuario?uuid=" + userModel.getId().toString()%> >
+        <form class="configs usuario" id="usuario">
             <h4>Configurações</h4>
 
             <div class="form-group row">
@@ -180,7 +180,7 @@
             if (model.getPermission() >= 5) {
         %>
 
-        <form class="configs usuario" id="permissao" method="post" action=<%="editarpermissao?uuid=" + userModel.getId().toString()%>>
+        <form class="configs usuario" id="permissao">
             <h4>Permissão</h4>
 
             <div class="form-group row">
@@ -217,24 +217,29 @@
 </body>
 
 <script src="../../js/menu.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
-    $('#usuario').on('submit', function (event) {
+    $('#usuario').submit(function (event) {
         let nome = document.getElementById("nome");
         let senha = document.getElementById("novasenha");
         if (nome.value === "" || senha.value === "") {
             let erro = document.getElementById("erro");
             erro.textContent = "Você precisa preencher pelo menos um dos campos não obrigatórios!"
             event.preventDefault();
-
+            return;
         }
+        $.ajax({
+                type: "POST",
+                url: "<%="editarusuario?uuid=" + userModel.getId().toString()%>"
+            })
     })
-    $('#permissao').on('submit', function (event) {
+    $('#permissao').submit(function (event) {
         let permissao = document.getElementById("exampleFormControlSelect2");
         if (permissao.value === "" || permissao.value === "0") {
             document.getElementById("erroPermissao").textContent = "Selecione uma permissão!"
             event.preventDefault();
         }
-
+        $.post("/<%="editarpermissao?uuid=" + userModel.getId().toString()%>")
     })
 </script>
 <script>

@@ -111,6 +111,57 @@
                 </div>
             </div>
         </header>
+        <form action="">
+            <input type="file" required>
+            <br>
+            <input type="file">
+            <input type="text" placeholder="Digite o nome do plugin" required>
+            <br>
+            <select required>
+                <option value="0">Categoria</option>
+                <option value="1">Gestão</option>
+                <option value="2">Utilidades</option>
+                <option value="3">Minigames</option>
+            </select>
+            <br>
+            <input type="url" placeholder="Digite a url do vídeo">
+            <br>
+            <input type="number" placeholder="Digite o preço do plugin" required>
+            <br>
+            <input type="url" placeholder="Digite o github do plugin">
+            <br>
+            <input type="text" placeholder="Digite as versões do plugin" required>
+            <br>
+            <input type="text" placeholder="Digite as dependências do plugin">
+            <br>
+            <div>
+                <button onclick="adicionarComando('comandos','nome do comando','commandValue','commandDescription',true)" type="button">Adicionar +</button>
+                <button onclick="removerComando('comandos')" type="button">Remover -</button> <br>
+                <div id="comandos" style="overflow: auto; scroll-behavior: smooth; height: 100px">
+                    <input type="text" placeholder="nome do comando" name="commandValue" required > <input type="text" placeholder="descrição" name="commandDescription" required> <br>
+                </div>
+            </div>
+            <br>
+            <div>
+                <button onclick="adicionarComando('perm','nome da perm','permValue','permDescription', true)" type="button">Adicionar +</button>
+                <button onclick="removerComando('perm')" type="button">Remover -</button> <br>
+                <div id="perm" style="overflow: auto; scroll-behavior: smooth; height: 100px">
+                    <input type="text" placeholder="nome da perm" name="permValue" required> <input type="text" placeholder="descrição" name="permDescription" required> <br>
+
+                </div>
+            </div>
+            <br>
+            <div>
+                <button onclick="adicionarComando('recursos','recurso','resourceValue','',false)" type="button">Adicionar +</button>
+                <button onclick="removerComando('recursos')" type="button">Remover -</button> <br>
+                <div id="recursos" style="overflow: auto; scroll-behavior: smooth; height: 100px">
+                    <input type="text" placeholder="recurso" name="resourceValue" required> <p></p><br>
+                </div>
+            </div>
+            <br>
+            <input type="submit" class="btn btn-primary" value="Atualizar"></input>
+
+        </form>
     </main>
 </div>
 
@@ -118,7 +169,22 @@
 </body>
 
 <script src="../js/menu.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
+    function adicionarComando(id, placeholder, nome, nome2, aparecer) {
+
+
+        $('#' + id).append("<input type=\"text\" placeholder=\"" + placeholder +"\" name=" + nome + " required>").append(aparecer ? "<input type=\"text\" placeholder=\"descrição\" name="+ nome2 +" required>" : "").append("<br>")
+    }
+    function removerComando(id) {
+
+        let div = $("#" + id);
+        let elementos = div.children();
+
+        let startIndex = Math.max(elementos.length - 3, 0);
+        elementos.slice(startIndex).remove();
+    }
+
     function getTamanhoDaTela() {
         var largura = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 
