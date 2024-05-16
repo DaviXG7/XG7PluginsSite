@@ -3,9 +3,6 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-
-
-
 nav {
     height: 100px;
     width: 100%;
@@ -53,18 +50,15 @@ main {
 }
 
 .banner {
-    position: relative;
-}
-.banner img {
-    display: block;
+    background-image: url("../imgs/banner.png");
+    width: 85%;
+    height: 450px;
+    background-size: cover;
+    background-position: center;
     border-radius: 10px;
-}
-.sobreposicao {
-    position: absolute;
-    top: 50%;
-    left: 25%;
-    width: 50%;
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .plugins {
     display: flex;
@@ -157,6 +151,9 @@ main {
         align-items: center;
         margin: 4px 0 4px 0;
         padding-left: 10px;
+    }
+    .banner {
+        width: 100%;
     }
 
 

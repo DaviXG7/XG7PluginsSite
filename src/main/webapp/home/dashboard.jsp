@@ -111,6 +111,10 @@
             </div>
         </div>
     </header>
+    <div class="pag">
+
+
+    </div>
 </main>
 </div>
 
@@ -118,15 +122,6 @@
 </body>
 
 <script src="../js/menu.js"></script>
-<script>
-    function getTamanhoDaTela() {
-        var largura = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-
-        if (largura > 700) {
-            document.getElementById("barra-lateral").style.display = "flex";
-        }
-    }
-    window.addEventListener("resize", getTamanhoDaTela);
-</script>
+<script src="../js/dashboard.js"></script>
 
 </html>

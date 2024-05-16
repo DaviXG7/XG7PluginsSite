@@ -129,7 +129,7 @@
                     <ul class="dropdown-menu">
                         <p class="dropdown-item"><%=model.getNome()%></p>
                         <div class="dropdown-divider"></div>
-                        <a href=<%="user/user.jsp?uuid=" + model.getId().toString()%> class="dropdown-item">
+                        <a href=<%="../user/user.jsp?uuid=" + model.getId().toString()%> class="dropdown-item">
                             <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                             Configurações
                         </a>
@@ -143,57 +143,58 @@
             </div>
         </header>
 
+        <div class="pag">
+            <div class="tabela">
+                <table class="table table-md ">
+                    <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Avatar</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Senha</th>
+                        <th scope="col">Nível perm</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% for (UserModel item : itensPagina) { %>
+                    <tr>
+                        <th scope="row"><%=item.getId().toString()%></th>
+                        <td><img src="<%=item.getImageData() != null ? item.getImageData() : ""%>" alt="N/A" width="50" height="auto"></td>
+                        <td><%=item.getNome()%></td>
+                        <td><%=item.getEmail()%></td>
+                        <td><%=item.getSenha()%></td>
+                        <td><%=item.getPermission()%></td>
+                        <td>
+                            <a href="../user/user.jsp?uuid=<%=item.getId().toString()%>" class="<%=model.getPermission() < 5 ? "disabled" : ""%> btn btn-primary">Editar</a>
+                            <button class="<%=model.getPermission() < 5 ? "disabled" : ""%> btn btn-primary" onclick="solicitar('confirmar','none','flex','<%=item.getId().toString()%>')">Excluir</button>
+                        </td>
 
-    <div class="tabela">
-        <table class="table table-md ">
-            <thead>
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Avatar</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Email</th>
-                <th scope="col">Senha</th>
-                <th scope="col">Nível perm</th>
-                <th scope="col">Ações</th>
-            </tr>
-            </thead>
-            <tbody>
-            <% for (UserModel item : itensPagina) { %>
-            <tr>
-                <th scope="row"><%=item.getId().toString()%></th>
-                <td><img src="<%=item.getImageData() != null ? item.getImageData() : ""%>" alt="N/A" width="50" height="auto"></td>
-                <td><%=item.getNome()%></td>
-                <td><%=item.getEmail()%></td>
-                <td><%=item.getSenha()%></td>
-                <td><%=item.getPermission()%></td>
-                <td>
-                    <a href="../user/user.jsp?uuid=<%=item.getId().toString()%>" class="<%=model.getPermission() < 5 ? "disabled" : ""%> btn btn-primary">Editar</a>
-                    <button class="<%=model.getPermission() < 5 ? "disabled" : ""%> btn btn-primary" onclick="solicitar('confirmar','none','flex','<%=item.getId().toString()%>')">Excluir</button>
-                </td>
+                    </tr>
+                    <% } %>
+                    </tbody>
+                </table>
 
-            </tr>
-            <% } %>
-            </tbody>
-        </table>
-
-    </div>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-end">
-            <li class="page-item <%=paginaAtual > 1 ? "" : "disabled"%>">
-                <a class="page-link" href="?page=<%= paginaAtual - 1 %>" tabindex="-1">Anterior</a>
-            </li>
-            <%
-                for (int i = Math.max(1, paginaAtual - 1); i <= Math.min(3, Math.max(1, Math.max(allUsers.size() / 15, paginaAtual / 3))); i++) {
-            %>
-            <li class="page-item"><a class="page-link" href="?page=<%= i %>"><%=i%></a></li>
-            <%
-                }
-            %>
-            <li class="page-item <%=paginaAtual == 1 ? "" : "disabled"%>">
-                <a class="page-link" href="?page=<%= paginaAtual + 1 %>">Próxima</a>
-            </li>
-        </ul>
-    </nav>
+            </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end">
+                    <li class="page-item <%=paginaAtual > 1 ? "" : "disabled"%>">
+                        <a class="page-link" href="?page=<%= paginaAtual - 1 %>" tabindex="-1">Anterior</a>
+                    </li>
+                    <%
+                        for (int i = Math.max(1, paginaAtual - 1); i <= Math.min(3, Math.max(1, Math.max(allUsers.size() / 15, paginaAtual / 3))); i++) {
+                    %>
+                    <li class="page-item"><a class="page-link" href="?page=<%= i %>"><%=i%></a></li>
+                    <%
+                        }
+                    %>
+                    <li class="page-item <%=paginaAtual == 1 ? "" : "disabled"%>">
+                        <a class="page-link" href="?page=<%= paginaAtual + 1 %>">Próxima</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
 
 </main>
 </div>
@@ -201,6 +202,7 @@
 </body>
 
 <script src="../../js/menu.js"></script>
+<script src="../../js/dashboard.js"></script>
 <script>
     let itemAtual = "";
     function cancelar() {
@@ -216,15 +218,6 @@
     function confirmar() {
         window.location.href = "excluirusuario?uuid=" + itemAtual;
     }
-
-    function getTamanhoDaTela() {
-        var largura = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-
-        if (largura > 700) {
-            document.getElementById("barra-lateral").style.display = "flex";
-        }
-    }
-    window.addEventListener("resize", getTamanhoDaTela);
 </script>
 
 </html>

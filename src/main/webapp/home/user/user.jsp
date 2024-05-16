@@ -136,31 +136,33 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Nome: </label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Novo nome" value="<%=userModel.getNome()%>">
+                    <input type="text" class="form-control" id="nome" placeholder="Novo nome" value="<%=userModel.getNome()%>">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Email: </label>
                 <div class="col-sm-10">
-                    <p disabled class="form-control-plaintext"><%=userModel.getEmail()%></p>
+                    <p class="disabled form-control-plaintext"><%=userModel.getEmail()%></p>
                 </div>
             </div>
             <% if (model.getPermission() < 5 || userModel.getId().equals(model.getId())) { %>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Senha*: </label>
                 <div class="col-sm-10">
-                    <input type="password" id="senha" class="form-control" name="senha" placeholder="Senha" required>
+                    <input type="password" id="senha" class="form-control" placeholder="Senha" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Nova senha: </label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" name="novaSenha" id="novasenha" placeholder="Nova senha">
+                    <input type="password" class="form-control" id="novasenha" placeholder="Nova senha">
+                    <small class="form-text text-muted"><i id="caractere" style="color: red" class="bi bi-exclamation-circle"></i> Pelo menos 8 caracteres</small> <br>
+                    <small class="form-text text-muted"><i id="caixaalta" style="color: red" class="bi bi-exclamation-circle"></i> Pelo menos 1 letra maiúscula</small> <br>
                 </div>
             </div>
             <%}%>
 
-            <input type="submit" class="btn btn-primary" value="Atualizar"></input>
+            <input id="cadsubmit" type="submit" class="btn btn-primary" value="Atualizar">
             <p id="erro" style="font-size: 11px; color: red"><%=request.getAttribute("errormsg") != null ? request.getAttribute("errormsg") : ""%></p>
         </form>
         <form enctype="multipart/form-data" class="configs imagem" method="post" action=<%="editarimagem?uuid=" + userModel.getId().toString()%>>
@@ -218,39 +220,39 @@
 
 <script src="../../js/menu.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="../../js/user.js"></script>
+<script src="../../js/dashboard.js.js"></script>
 <script>
     $('#usuario').submit(function (event) {
-        let nome = document.getElementById("nome");
-        let senha = document.getElementById("novasenha");
-        if (nome.value === "" || senha.value === "") {
+        let txtnome = $('#nome').val();
+        let txtsenha = $('#senha').val();
+        let txtnovaSenha = $('#novasenha').val() + "";
+        if (txtnome === "" && txtnovaSenha === "") {
             let erro = document.getElementById("erro");
             erro.textContent = "Você precisa preencher pelo menos um dos campos não obrigatórios!"
             event.preventDefault();
             return;
         }
-        $.ajax({
-                type: "POST",
-                url: "<%="editarusuario?uuid=" + userModel.getId().toString()%>"
-            })
+        $.post("<%="editarusuario?uuid=" + userModel.getId().toString()%>", {
+
+            nome: txtnome,
+            senha: txtsenha,
+            novaSenha: txtnovaSenha
+
+        })
     })
     $('#permissao').submit(function (event) {
-        let permissao = document.getElementById("exampleFormControlSelect2");
-        if (permissao.value === "" || permissao.value === "0") {
+        let txtpermissao = $('#exampleFormControlSelect2').val();
+        if (txtpermissao === "" || txtpermissao === "0") {
             document.getElementById("erroPermissao").textContent = "Selecione uma permissão!"
             event.preventDefault();
         }
-        $.post("/<%="editarpermissao?uuid=" + userModel.getId().toString()%>")
-    })
-</script>
-<script>
-    function getTamanhoDaTela() {
-        var largura = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        $.post("<%="editarpermissao?uuid=" + userModel.getId().toString()%>", {
 
-        if (largura > 700) {
-            document.getElementById("barra-lateral").style.display = "flex";
-        }
-    }
-    window.addEventListener("resize", getTamanhoDaTela);
+            permissao: txtpermissao,
+
+        })
+    })
 </script>
 
 </html>

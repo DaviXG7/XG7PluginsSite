@@ -94,18 +94,15 @@
 <main style="padding: 15px;">
 
     <div class="banner d-flex justify-content-center container">
-        <img src="imgs/banner.png" width="85%">
-        <div class="sobreposicao">
-            <p style="color: white; font-size: 2vw">
-                Deixe seu servidor mais profissional com os melhores plugins do Brasil!
-            </p>
-            <a href="#plugins" class="btn btn-outline-light" style="font-size: 2vw; width: 40vw; height: 6vh">
-                Conheça agora os melhores plugins!
-            </a>
-            <a href="" class="btn btn-outline-light" style="font-size: 2vw; width: 40vw; height: 6vh">
-                Quem somos?
-            </a>
-        </div>
+        <p style="color: white; padding: 50px">
+            Deixe seu servidor mais profissional com os melhores plugins do Brasil!
+        </p>
+        <a href="#plugins" class="btn btn-outline-light">
+            Conheça agora os melhores plugins!
+        </a>
+        <a href="" class="btn btn-outline-light" >
+            Quem somos?
+        </a>
     </div>
 
     <div class="mt-5">

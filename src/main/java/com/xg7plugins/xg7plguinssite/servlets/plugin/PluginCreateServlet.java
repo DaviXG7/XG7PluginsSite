@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
 
 @WebServlet(name = "criarplugin", value = "/criarplugin")
 public class PluginCreateServlet extends HttpServlet {

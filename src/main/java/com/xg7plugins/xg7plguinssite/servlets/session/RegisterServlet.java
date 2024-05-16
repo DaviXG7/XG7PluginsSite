@@ -12,11 +12,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @WebServlet(name = "cadastro", value = "/cadastro")
@@ -32,17 +36,17 @@ public class RegisterServlet extends HttpServlet {
         String confirmarSenha = request.getParameter("confirmarSenha");
         boolean aceitarTermos = request.getParameter("termos").equals("on");
         if (nome == null || nome.isEmpty() || email == null || email.isEmpty() || senha == null || senha.isEmpty() || confirmarSenha == null || confirmarSenha.isEmpty()) {
-            throw new RuntimeException();
+            throw new RuntimeException("Não foi preenchido os campos!");
         }
-        if (senha.toLowerCase().equals(senha) || senha.length() < 7) {
-            throw new RuntimeException();
+        if (senha.toLowerCase().equals(senha) || senha.length() < 8) {
+            throw new RuntimeException("O tamanho da senha é menor que 8 caracteres ou não tem letra maiúscula");
         }
         if (!senha.equals(confirmarSenha)) {
-            throw new RuntimeException();
+            throw new RuntimeException("As senhas não conhecidem");
         }
 
         if (!aceitarTermos) {
-            throw new RuntimeException();
+            throw new RuntimeException("Você precisa aceitar os termos");
         }
         try {
             if (DBManager.exists(email)) {
@@ -70,8 +74,7 @@ public class RegisterServlet extends HttpServlet {
                         "<div style=\"\">" +
                                 "Depois eu coloco algo aqui, estou com preguiça :P" +
                                 "</div>").enviarEmail(email);
-            } catch(
-                    MessagingException | UnsupportedEncodingException e)
+            } catch(MessagingException | UnsupportedEncodingException e)
 
             {
                 throw new RuntimeException(e);

@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="../css/dashboard.css" rel="stylesheet">
+    <link href="css/dashboard.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="../imgs/logo.png" />
 
 
@@ -21,13 +21,14 @@
 
 
 </head>
+
 <body>
 <div class="wrapper">
     <div id="barra-lateral" class="barra-lateral sidebar">
 
 
-        <a href="../../index.jsp">
-            <img src="../../imgs/logo.png" width="135" alt="">
+        <a href="../index.jsp">
+            <img src="../imgs/logo.png" width="135" alt="">
         </a>
 
         <hr>
@@ -54,7 +55,7 @@
                 ADMIN
             </div>
             <div class="botoes">
-                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href="../admin/clientes.jsp?page=1"><i style="color: rgba(255,255,255,.5);" class="bi bi-people"></i> <p class="textos-botoes" > Clientes</p></a>
+                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href="admin/clientes.jsp?page=1"><i style="color: rgba(255,255,255,.5);" class="bi bi-people"></i> <p class="textos-botoes" > Clientes</p></a>
                 <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href=""><i style="color: rgba(255,255,255,.5);" class="bi bi-plug"></i> <p class="textos-botoes" > Plugins</p></a>
             </div>
         </div>
@@ -110,22 +111,17 @@
                 </div>
             </div>
         </header>
-</main>
+        <div class="pag">
+
+
+        </div>
+    </main>
 </div>
 
 
 </body>
 
-<script src="js/menu.js"></script>
-<script>
-    function getTamanhoDaTela() {
-        var largura = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-
-        if (largura > 700) {
-            document.getElementById("barra-lateral").style.display = "flex";
-        }
-    }
-    window.addEventListener("resize", getTamanhoDaTela);
-</script>
+<script src="../js/menu.js"></script>
+<script src="../js/dashboard.js"></script>
 
 </html>

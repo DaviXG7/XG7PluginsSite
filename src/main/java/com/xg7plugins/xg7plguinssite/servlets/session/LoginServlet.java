@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
         }
         if (model == null) {
             request.setAttribute("erromsg", "Esta senha está incorreta!");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            response.sendRedirect("login.jsp");
             return;
         }
 

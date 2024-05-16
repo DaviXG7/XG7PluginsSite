@@ -1,6 +1,6 @@
 function verificar() {
     let input = document.getElementById("password");
-    let inputConfirmar = document.getElementById("confirmarsenha");
+    let inputConfirmar = document.getElementById("confirmarSenha");
 
     let tamanho = document.getElementById("caractere");
     let caixaalta = document.getElementById("caixaalta");
@@ -27,7 +27,7 @@ function verificar() {
 
 window.addEventListener("input", function (event) {
     let verificarSub = verificar() && document.getElementById("termos").checked;
-    let submit = document.getElementById("submit");
+    let submit = document.getElementById("cadsubmit");
 
     if (verificarSub) {
         submit.classList.remove("disabled");
@@ -35,10 +35,21 @@ window.addEventListener("input", function (event) {
         submit.classList.add("disabled");
     }
 });
-$('form').submit(function () {
-    submit.classList.add("disabled");
-    $.ajax({
-        type: "POST",
-        url: "/cadastro"
+$('form').submit(function (event) {
+    let txtnome = $('#nome').val();
+    let txtsenha = $('#password').val();
+    let txtemail = $('#email').val();
+    let txtconfirmarSenha = $('#confirmarSenha').val();
+    let txttermos = $('#termos').val();
+
+    $(this).find('[type="submit"]').addClass("disabled");
+    $.post("cadastro", {
+        nome: txtnome,
+        senha: txtsenha,
+        email: txtemail,
+        confirmarSenha: txtconfirmarSenha,
+        termos: txttermos
+    }).fail(function (error) {
+        window.alert(error)
     })
 })

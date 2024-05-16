@@ -26,9 +26,9 @@ public class EditUserPermissionServlet extends HttpServlet {
         }
         if (userEdit == null) throw new RuntimeException();
         if (userRequest.getPermission() < 5) throw new RuntimeException();
-        if (request.getParameter("permissions") == null) throw new RuntimeException();
-
-        int permission = Integer.parseInt(request.getParameter("permissions"));
+        if (request.getParameter("permissao") == null) throw new RuntimeException();
+        System.out.println(request.getParameter("permissao"));
+        int permission = Integer.parseInt(request.getParameter("permissao"));
         if (permission == 0) throw new RuntimeException();
 
         userEdit.setPermission(permission);

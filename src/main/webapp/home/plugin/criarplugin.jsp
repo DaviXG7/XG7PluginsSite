@@ -98,7 +98,7 @@
                     <ul class="dropdown-menu">
                         <p class="dropdown-item"><%=model.getNome()%></p>
                         <div class="dropdown-divider"></div>
-                        <a href=<%="user/user.jsp?uuid=" + model.getId().toString()%> class="dropdown-item">
+                        <a href=<%="../user/user.jsp?uuid=" + model.getId().toString()%> class="dropdown-item">
                             <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                             Configurações
                         </a>
@@ -111,57 +111,59 @@
                 </div>
             </div>
         </header>
-        <form action="">
-            <input type="file" required>
-            <br>
-            <input type="file">
-            <input type="text" placeholder="Digite o nome do plugin" required>
-            <br>
-            <select required>
-                <option value="0">Categoria</option>
-                <option value="1">Gestão</option>
-                <option value="2">Utilidades</option>
-                <option value="3">Minigames</option>
-            </select>
-            <br>
-            <input type="url" placeholder="Digite a url do vídeo">
-            <br>
-            <input type="number" placeholder="Digite o preço do plugin" required>
-            <br>
-            <input type="url" placeholder="Digite o github do plugin">
-            <br>
-            <input type="text" placeholder="Digite as versões do plugin" required>
-            <br>
-            <input type="text" placeholder="Digite as dependências do plugin">
-            <br>
-            <div>
-                <button onclick="adicionarComando('comandos','nome do comando','commandValue','commandDescription',true)" type="button">Adicionar +</button>
-                <button onclick="removerComando('comandos')" type="button">Remover -</button> <br>
-                <div id="comandos" style="overflow: auto; scroll-behavior: smooth; height: 100px">
-                    <input type="text" placeholder="nome do comando" name="commandValue" required > <input type="text" placeholder="descrição" name="commandDescription" required> <br>
+        <div class="pag">
+            <form action="">
+                <input type="file" id="plugin" required>
+                <br>
+                <input type="file" id="config">
+                <input type="text" id="nomePlugin" placeholder="Digite o nome do plugin" required>
+                <br>
+                <select required id="categoria">
+                    <option value="0">Categoria</option>
+                    <option value="1">Gestão</option>
+                    <option value="2">Utilidades</option>
+                    <option value="3">Minigames</option>
+                </select>
+                <br>
+                <input type="url" placeholder="Digite a url do vídeo" id="urlVideo">
+                <br>
+                <input type="number" placeholder="Digite o preço do plugin" id="preco" required>
+                <br>
+                <input type="url" placeholder="Digite o github do plugin" id="urlGithub">
+                <br>
+                <input type="text" placeholder="Digite as versões do plugin" id="versoes" required>
+                <br>
+                <input type="text" placeholder="Digite as dependências do plugin" id="dependencias">
+                <br>
+                <div>
+                    <button onclick="adicionarComando('comandos','nome do comando','commandValue','commandDescription',true)" type="button">Adicionar +</button>
+                    <button onclick="removerComando('comandos')" type="button">Remover -</button> <br>
+                    <div id="comandos" style="overflow: auto; scroll-behavior: smooth; height: 100px">
+                        <input type="text" placeholder="nome do comando" name="commandValue" required > <input type="text" placeholder="descrição" name="commandDescription" required> <br>
+                    </div>
                 </div>
-            </div>
-            <br>
-            <div>
-                <button onclick="adicionarComando('perm','nome da perm','permValue','permDescription', true)" type="button">Adicionar +</button>
-                <button onclick="removerComando('perm')" type="button">Remover -</button> <br>
-                <div id="perm" style="overflow: auto; scroll-behavior: smooth; height: 100px">
-                    <input type="text" placeholder="nome da perm" name="permValue" required> <input type="text" placeholder="descrição" name="permDescription" required> <br>
+                <br>
+                <div>
+                    <button onclick="adicionarComando('perm','nome da perm','permValue','permDescription', true)" type="button">Adicionar +</button>
+                    <button onclick="removerComando('perm')" type="button">Remover -</button> <br>
+                    <div id="perm" style="overflow: auto; scroll-behavior: smooth; height: 100px">
+                        <input type="text" placeholder="nome da perm" name="permValue" required> <input type="text" placeholder="descrição" name="permDescription" required> <br>
 
+                    </div>
                 </div>
-            </div>
-            <br>
-            <div>
-                <button onclick="adicionarComando('recursos','recurso','resourceValue','',false)" type="button">Adicionar +</button>
-                <button onclick="removerComando('recursos')" type="button">Remover -</button> <br>
-                <div id="recursos" style="overflow: auto; scroll-behavior: smooth; height: 100px">
-                    <input type="text" placeholder="recurso" name="resourceValue" required> <p></p><br>
+                <br>
+                <div>
+                    <button onclick="adicionarComando('recursos','recurso','resourceValue','',false)" type="button">Adicionar +</button>
+                    <button onclick="removerComando('recursos')" type="button">Remover -</button> <br>
+                    <div id="recursos" style="overflow: auto; scroll-behavior: smooth; height: 100px">
+                        <input type="text" placeholder="recurso" name="resourceValue" required> <p></p><br>
+                    </div>
                 </div>
-            </div>
-            <br>
-            <input type="submit" class="btn btn-primary" value="Atualizar"></input>
+                <br>
+                <input type="submit" class="btn btn-primary" value="Atualizar"></input>
 
-        </form>
+            </form>
+        </div>
     </main>
 </div>
 
@@ -185,14 +187,60 @@
         elementos.slice(startIndex).remove();
     }
 
-    function getTamanhoDaTela() {
-        var largura = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    $('form').submit(function (event) {
 
-        if (largura > 700) {
-            document.getElementById("barra-lateral").style.display = "flex";
-        }
-    }
-    window.addEventListener("resize", getTamanhoDaTela);
+        let pluginArquivo = $('#plugin').prop('files')[0];
+        let configArquivo = $('#config').prop('files')[0];
+        let nomePlugintxt = $('#nomePlugin').val();
+        let categiaValue = $("#categoria").val();
+        let urlVideo = $("#urlVideo").val();
+        let urlGithub = $("#urlGithub").val();
+        let versionstxt = $("#versoes").val();
+        let dependenciastxt = $("#dependencias").val();
+        let precotxt = $("preco").val();
+        let commandsName = '';
+        let commandsDescriptions = '';
+        let permName = '';
+        let permDescriptions = '';
+        let resourceName = '';
+
+
+        const cmddiv = document.getElementById('comandos');
+        const cmdinputs = cmddiv.querySelectorAll('input');
+
+        cmdinputs.forEach(function(input) {
+            if (input.getAttribute("name") === "commandValue") commandsName += input.value + ';;;';
+            if (input.getAttribute("name") === "commandDescription") commandsName += input.value + ';;;';
+        });
+
+        const permdiv = document.getElementById('perm');
+        const perminputs = div.querySelectorAll('input');
+
+        perminputs.forEach(function(input) {
+            if (input.getAttribute("name") === "permValue") permName += input.value + ';;;';
+            if (input.getAttribute("name") === "permDescription") permName += input.value + ';;;';
+        });
+
+        const resourcediv = document.getElementById('recursos');
+        const resourceinputs = resourcediv.querySelectorAll('input');
+
+        resourceinputs.forEach(function(input) {
+            resourceName += input.value + ';;;';
+        });
+
+        $(this).find('[type="submit"]').addClass("disabled");
+        $.post("/", {
+            nome: txtnome,
+            senha: txtsenha,
+            email: txtemail,
+            confirmarSenha: txtconfirmarSenha,
+            termos: txttermos
+        }).fail(function (error) {
+            window.alert(error)
+        })
+    })
+
 </script>
+<script src="../../js/dashboard.js"></script>
 
 </html>
