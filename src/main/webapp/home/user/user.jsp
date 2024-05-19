@@ -130,7 +130,7 @@
         </header>
 
     <div class="pag">
-        <form class="configs usuario" id="usuario">
+        <form class="configs usuario" id="usuario" method="post" action="<%="editarusuario?uuid=" + model.getId().toString()%>">
             <h4>Configurações</h4>
 
             <div class="form-group row">
@@ -172,7 +172,7 @@
 
             <div class="form-group">
                 <label for="exampleFormControlFile1">Enviar imagem</label>
-                <input type="file" class="form-control-file" name="imagem" id="exampleFormControlFile1" required>
+                <input type="file" class="form-control-file" name="imagem" id="exampleFormControlFile1" required accept="image/*">
             </div>
 
             <input type="submit" class="btn btn-primary" value="Enviar"></input>
@@ -182,7 +182,7 @@
             if (model.getPermission() >= 5) {
         %>
 
-        <form class="configs usuario" id="permissao">
+        <form class="configs usuario" id="permissao" action="<%="editarpermissao?uuid=" + model.getId().toString()%>" method="post">
             <h4>Permissão</h4>
 
             <div class="form-group row">
@@ -221,37 +221,15 @@
 <script src="../../js/menu.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="../../js/user.js"></script>
-<script src="../../js/dashboard.js.js"></script>
+<script src="../../js/dashboard.js"></script>
 <script>
     $('#usuario').submit(function (event) {
         let txtnome = $('#nome').val();
-        let txtsenha = $('#senha').val();
-        let txtnovaSenha = $('#novasenha').val() + "";
         if (txtnome === "" && txtnovaSenha === "") {
             let erro = document.getElementById("erro");
             erro.textContent = "Você precisa preencher pelo menos um dos campos não obrigatórios!"
             event.preventDefault();
-            return;
         }
-        $.post("<%="editarusuario?uuid=" + userModel.getId().toString()%>", {
-
-            nome: txtnome,
-            senha: txtsenha,
-            novaSenha: txtnovaSenha
-
-        })
-    })
-    $('#permissao').submit(function (event) {
-        let txtpermissao = $('#exampleFormControlSelect2').val();
-        if (txtpermissao === "" || txtpermissao === "0") {
-            document.getElementById("erroPermissao").textContent = "Selecione uma permissão!"
-            event.preventDefault();
-        }
-        $.post("<%="editarpermissao?uuid=" + userModel.getId().toString()%>", {
-
-            permissao: txtpermissao,
-
-        })
     })
 </script>
 

@@ -11,12 +11,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name = "editarusuario", value = "/home/user/editarusuario")
+@WebServlet(name = "editarusuario", urlPatterns = "/editarusuario")
 public class EditUserServlet extends HttpServlet {
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        //Pega o usuário que edita e o usuário que está sendo editado
         UserModel userRequest = (UserModel) request.getSession().getAttribute("user");
         UserModel userEdit = null;
         try {
@@ -27,16 +28,14 @@ public class EditUserServlet extends HttpServlet {
         if (userEdit == null) throw new RuntimeException();
         if (userRequest.getPermission() < 5 && !userEdit.getId().equals(userRequest.getId())) throw new RuntimeException();
 
+        //Pega o valor dos inputs
         String novoNome = request.getParameter("nome");
         String senha = request.getParameter("senha");
         String novaSenha = request.getParameter("novaSenha");
         novaSenha = novaSenha.equals("undefined") ? "" : novaSenha;
         novoNome = novoNome.equals("undefined") ? "" : novoNome;
 
-        System.out.println(novoNome);
-        System.out.println(senha);
-        System.out.println(novaSenha);
-
+        //Verifica se não há erros
         if (userRequest.getPermission() < 5) {
             if (!senha.equals(userEdit.getSenha()) || !userRequest.getId().equals(userEdit.getId())) {
                 request.setAttribute("errormsg", "A senha está incorreta!");
@@ -45,20 +44,17 @@ public class EditUserServlet extends HttpServlet {
             }
         }
 
-        if (novoNome.isEmpty() && novaSenha.isEmpty()) {
-            throw new RuntimeException();
-        }
-        if (novaSenha.toLowerCase().equals(novaSenha) || novaSenha.length() < 8) {
-            throw new RuntimeException("O tamanho da senha é menor que 8 caracteres ou não tem letra maiúscula");
-        }
+        if (novoNome.isEmpty() && novaSenha.isEmpty()) throw new RuntimeException();
 
-        if (!novoNome.equals(userEdit.getNome()) && !novoNome.isEmpty()) {
-            userEdit.setNome(novoNome);
-        }
+        if (novaSenha.toLowerCase().equals(novaSenha) || novaSenha.length() < 8) throw new RuntimeException("O tamanho da senha é menor que 8 caracteres ou não tem letra maiúscula");
 
-        if (!novaSenha.equals(userEdit.getSenha()) && !novaSenha.isEmpty()) {
-            userEdit.setSenha(novaSenha);
-        }
+        //Coloca o nome e a senha
+        if (!novoNome.equals(userEdit.getNome()) && !novoNome.isEmpty()) userEdit.setNome(novoNome);
+
+
+        if (!novaSenha.equals(userEdit.getSenha()) && !novaSenha.isEmpty()) userEdit.setSenha(novaSenha);
+
+        //Manda ao banco de dados
         try {
             DBManager.updateUser(userEdit);
         } catch (SQLException e) {

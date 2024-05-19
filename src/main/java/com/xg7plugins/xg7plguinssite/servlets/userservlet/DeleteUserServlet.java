@@ -17,6 +17,8 @@ public class DeleteUserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        //Pega o usuário que edita, o usuário que está sendo editado e exclui
         UserModel user = (UserModel) req.getSession().getAttribute("user");
         UserModel targetUser = null;
         try {
@@ -26,11 +28,17 @@ public class DeleteUserServlet extends HttpServlet {
         }
         if (targetUser == null) throw new RuntimeException();
         if (!user.getId().equals(targetUser.getId()) && user.getPermission() < 5 || targetUser.getPermission() >= 5) throw new RuntimeException();
+
         try {
             DBManager.deleteUser(targetUser.getId());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        /*
+            Caso o usuário que edita for igual ao usuário que
+            está sendo editado ele desloga e manda para a página principal
+         */
         if (user.getId().equals(targetUser.getId())) {
             req.getSession().setAttribute("user" , null);
             resp.sendRedirect("../../index.jsp");

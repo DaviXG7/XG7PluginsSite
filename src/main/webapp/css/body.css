@@ -52,7 +52,7 @@ main {
 .banner {
     background-image: url("../imgs/banner.png");
     width: 85%;
-    height: 450px;
+    height: 550px;
     background-size: cover;
     background-position: center;
     border-radius: 10px;

@@ -1,7 +1,7 @@
 package com.xg7plugins.xg7plguinssite.filters;
 
 import com.xg7plugins.xg7plguinssite.db.DBManager;
-import com.xg7plugins.xg7plguinssite.emails.EmailManager;
+import com.xg7plugins.xg7plguinssite.utils.emails.EmailManager;
 import com.xg7plugins.xg7plguinssite.models.UserModel;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
@@ -34,6 +34,10 @@ public class UserFilter implements Filter {
 
         HttpSession session = request.getSession();
 
+        System.out.println(session.getAttribute("user") == null);
+        System.out.println(request.getRequestURL());
+
+        //Se o usuário for nulo o ele não está logado. Por estas condições ele não pode ir para o home
         if (session.getAttribute("user") == null) {
 
             if (request.getServletPath().contains("home")) response.sendRedirect("/login.jsp");
@@ -41,6 +45,11 @@ public class UserFilter implements Filter {
             filterChain.doFilter(request, response);
             return;
         }
+
+        /*
+            Toda vez que usuário está no fluxo de sair e entrar no user
+            (Onde edita o usuário) ele atualiza o usuário
+        */
         if (request.getServletPath().contains("user")) {
             try {
                 request.getSession().setAttribute("user", DBManager.getUserById(((UserModel) request.getSession().getAttribute("user")).getId().toString()));
@@ -50,27 +59,31 @@ public class UserFilter implements Filter {
             filterChain.doFilter(request, response);
             return;
         }
+
+        //Só admins podem fazer alterações nesta pasta
         if (request.getServletPath().contains("admin")) {
-            if (((UserModel) request.getSession().getAttribute("user")).getPermission() < 2) {
+            if (((UserModel) session.getAttribute("user")).getPermission() < 2) {
                 response.sendRedirect("home/dashboard.jsp");
                 filterChain.doFilter(request, response);
                 return;
             }
         }
+
+        //Só quem tem permissão pode fazer alterações nesta pasta
         if (request.getServletPath().contains("plugin")) {
-            if (((UserModel) request.getSession().getAttribute("user")).getPermission() != 4 && ((UserModel) request.getSession().getAttribute("user")).getPermission() < 2) {
+            if (((UserModel) session.getAttribute("user")).getPermission() != 4 && ((UserModel) session.getAttribute("user")).getPermission() < 2) {
                 response.sendRedirect("home/dashboard.jsp");
                 filterChain.doFilter(request, response);
                 return;
             }
         }
+
+        //Se o usuário tiver logado ele não pode acessar essas duas páginas
         if (request.getServletPath().contains("login") || request.getServletPath().contains("cadastro")) {
             response.sendRedirect("home/dashboard.jsp");
                 filterChain.doFilter(request, response);
                 return;
         }
-
-
 
         filterChain.doFilter(request, response);
 

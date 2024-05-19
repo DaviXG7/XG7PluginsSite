@@ -5,6 +5,7 @@ import lombok.Getter;
 
 import java.util.Date;
 
+//Changelog de plugin
 @Getter
 @AllArgsConstructor
 public class Changelog {

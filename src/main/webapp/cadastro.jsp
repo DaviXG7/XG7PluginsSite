@@ -22,22 +22,22 @@
 
 
     <img src="imgs/logo.png" width="133px">
-    <form class="d-flex flex-column align-items-center" method="post">
+    <form class="d-flex flex-column align-items-center" method="post" action="cadastro">
         <div class="form-group">
             <label for="email">Email:*</label>
-            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Digite seu mail" required>
+            <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Digite seu mail" required>
             <small class="form-text text-muted" id="e" style="display: none">Esse email já existe</small>
 
         </div>
         <div class="form-group">
             <label for="nome">Nome:*</label>
-            <input type="text" class="form-control" id="nome" aria-describedby="emailHelp" placeholder="Digite seu nome" required>
+            <input type="text" class="form-control" id="nome" name="nome" aria-describedby="emailHelp" placeholder="Digite seu nome" required>
             <small class="form-text text-muted">Se você usar o seu nome do Minecraft,<br> a sua foto será tua skin!<br> (Precisa de uma conta original)</small>
         </div>
         <br>
         <div class="form-group">
             <label for="password">Senha:*</label>
-            <input type="password" class="form-control" id="password" placeholder="Senha" required>
+            <input type="password" class="form-control" id="password" name="senha" placeholder="Senha" required>
             <small class="form-text text-muted"><i id="caractere" style="color: red" class="bi bi-exclamation-circle"></i> Pelo menos 8 caracteres</small> <br>
             <small class="form-text text-muted"><i id="caixaalta" style="color: red" class="bi bi-exclamation-circle"></i> Pelo menos 1 letra maiúscula</small> <br>
             <small class="form-text text-muted"><i id="senhasIguais" style="color: red" class="bi bi-exclamation-circle"></i> Senhas iguais</small>
@@ -45,11 +45,11 @@
         </div>
         <div class="form-group">
             <label for="confirmarsenha">Confirmar Senha:*</label>
-            <input type="password" class="form-control" id="confirmarSenha" placeholder="Confirmar senha" required>
+            <input type="password" class="form-control" id="confirmarSenha" name="confirmarSenha" placeholder="Confirmar senha" required>
         </div>
         <br>
         <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="termos" required>
+            <input type="checkbox" class="form-check-input" id="termos" name="termos" required>
             <label style="font-size: 12px" class="form-check-label" for="termos">Ao continuar você concorda com os <a href=""> Termos e condições</a></label>
         </div>
         <br>

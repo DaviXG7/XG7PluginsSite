@@ -1,7 +1,10 @@
 package com.xg7plugins.xg7plguinssite.db;
 
-import com.xg7plugins.xg7plguinssite.models.PluginsModel;
+import com.xg7plugins.xg7plguinssite.models.PluginModel;
 import com.xg7plugins.xg7plguinssite.models.UserModel;
+import com.xg7plugins.xg7plguinssite.models.extras.Categoria;
+import com.xg7plugins.xg7plguinssite.models.extras.Changelog;
+import com.xg7plugins.xg7plguinssite.utils.Pair;
 import lombok.Getter;
 
 import java.sql.*;
@@ -13,6 +16,7 @@ public class DBManager {
     @Getter
     private static Connection connection;
 
+    //Iniciar Database
     public static void init() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         connection = DriverManager.getConnection(
@@ -20,16 +24,22 @@ public class DBManager {
         );
         connection.setAutoCommit(true);
     }
+
+    //Desconectar database
     public static void discconect() throws SQLException {
         connection.close();
         connection = null;
     }
+
+    //Verificar se o usuário existe
     public static boolean exists(String email) throws SQLException {
         PreparedStatement ps = connection.prepareStatement("SELECT * FROM users WHERE email = ?");
         ps.setString(1, email);
         ResultSet rs = ps.executeQuery();
         return rs.next();
     }
+
+    //Usuários
     public static void updateUserImage(UserModel user) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("UPDATE users SET avatarimg = ? WHERE id = ?");
         statement.setBlob(1, user.getAvatarImg());
@@ -63,19 +73,6 @@ public class DBManager {
             return null;
         }
 
-
-        /*
-            CEO 6
-            ADMIN 5
-            EDITOR SITE 4
-            EDITOR PLUGINS 3
-            AUXILIAR 2
-            CLIENTE 1
-         */
-
-
-
-
         return new UserModel(resultSet.getString("name"), UUID.fromString(resultSet.getString("id")),
                 resultSet.getBlob("avatarimg"),
                 resultSet.getString("email"),
@@ -89,18 +86,6 @@ public class DBManager {
         if (!resultSet.next()) {
             return null;
         }
-
-        /*
-            CEO 6
-            ADMIN 5
-            EDITOR SITE 4
-            EDITOR PLUGINS 3
-            AUXILIAR 2
-            CLIENTE 1
-         */
-
-
-
 
         return new UserModel(resultSet.getString("name"), UUID.fromString(resultSet.getString("id")),
                 resultSet.getBlob("avatarimg"),
@@ -141,53 +126,91 @@ public class DBManager {
         preparedStatement.setString(1, id.toString());
         preparedStatement.executeUpdate();
     }
-    public static List<Integer> userPermissions(UUID id) throws SQLException {
 
-        /*
-            CEO 6
-            ADMIN 5
-            EDITOR SITE 4
-            EDITOR PLUGINS 3
-            AUXILIAR 2
-            CLIENTE 1
-         */
+    //Add a plugin
+    public static void addPlugin(PluginModel model) throws SQLException {
+        PreparedStatement preparedStatementPlugins = connection.prepareStatement("INSERT INTO plugins(name,category,video,pluginPath,versions,price,resources,github,dependencies,configpath) VALUES (?,?,?,?,?,?,?,?,?,?)");
+        PreparedStatement preparedStatementCommands = connection.prepareStatement("INSERT INTO plugincommands(pluginname,command,description) VALUES (?,?,?)");
+        PreparedStatement preparedStatementPerms = connection.prepareStatement("INSERT INTO pluginperms(pluginname,perms,description) VALUES (?,?,?)");
 
+        preparedStatementPlugins.setString(1, model.getName());
+        preparedStatementPlugins.setInt(2, model.getCategory().getIndex());
+        preparedStatementPlugins.setString(3,model.getUrlVideo());
+        preparedStatementPlugins.setString(4, model.getPluginPath());
+        preparedStatementPlugins.setString(5, model.getVersions());
+        preparedStatementPlugins.setDouble(6, model.getPrice());
+        preparedStatementPlugins.setString(7, model.getResourses());
+        preparedStatementPlugins.setString(8, model.getGithub());
+        preparedStatementPlugins.setString(9, model.getDependencies());
+        preparedStatementPlugins.setString(10,model.getConfigPath());
+        preparedStatementPlugins.executeUpdate();
 
-        List<Integer> permissions = new ArrayList<>();
-
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM permissions WHERE id_user = ?");
-        statement.setString(1, id.toString());
-        ResultSet resultSet = statement.executeQuery();
-        while (resultSet.next()) {
-            permissions.add(resultSet.getInt("id_perm"));
+        for (Pair<String, String> commands : model.getCommands()) {
+            preparedStatementCommands.setString(1, model.getName());
+            preparedStatementCommands.setString(2, commands.getFirst());
+            preparedStatementCommands.setString(3, commands.getSecond());
+            preparedStatementCommands.executeUpdate();
         }
-        return permissions;
+        for (Pair<String, String> perms : model.getPermissions()) {
+            preparedStatementPerms.setString(1, model.getName());
+            preparedStatementPerms.setString(2, perms.getFirst());
+            preparedStatementPerms.setString(3, perms.getSecond());
+            preparedStatementPerms.executeUpdate();
+        }
 
     }
 
+    public PluginModel getPlugin(String pluginName) throws SQLException {
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM plugins WHERE name = ?");
+        ps.setString(1, pluginName);
+        ResultSet resultSet = ps.executeQuery();
+        if (!resultSet.next()) {
+            return null;
+        }
+        PreparedStatement cs = connection.prepareStatement("SELECT * FROM plugincommands WHERE pluginname = ?");
+        cs.setString(1, pluginName);
+        ResultSet cr = cs.executeQuery();
 
+        PreparedStatement pes = connection.prepareStatement("SELECT * FROM pluginperms WHERE pluginname = ?");
+        pes.setString(1, pluginName);
+        ResultSet per = cs.executeQuery();
 
+        PreparedStatement pcs = connection.prepareStatement("SELECT * FROM pluginchangelog WHERE pluginname = ?");
+        pcs.setString(1, pluginName);
+        ResultSet pcr = pcs.executeQuery();
 
+        PreparedStatement pds = connection.prepareStatement("SELECT * FROM plugindownloads WHERE pluginname = ?");
+        pds.setString(1, pluginName);
+        ResultSet pdr = pds.executeQuery();
 
-    public static void addPlugin(PluginsModel model) throws SQLException {
+        List<Pair<String,String>> commands = new ArrayList<>();
+        while (cr.next()) commands.add(new Pair<>(cr.getString("command"), cr.getString("description")));
 
-        PreparedStatement preparedStatementPlugins = connection.prepareStatement("INSERT INTO plugins(name,category,video,pluginPath,versions,price,resources) VALUES (?,?,?,?,?,?,?)");
-        PreparedStatement preparedStatementCommands = connection.prepareStatement("INSERT INTO plugincommands(pluginname,command,description) VALUES (?,?,?)");
-        PreparedStatement preparedStatementPerms = connection.prepareStatement("INSERT INTO pluginperms(pluginname,perms,description) VALUES (?,?,?)");
-        PreparedStatement preparedStatementChangeLog = connection.prepareStatement("INSERT INTO pluginchangelog(pluginname,changedate,changelog) VALUES (?,?,?)");
+        List<Pair<String,String>> perms = new ArrayList<>();
+        while (cr.next()) perms.add(new Pair<>(per.getString("permname"), per.getString("description")));
 
-        preparedStatementPlugins.setString(1, model.getName());
-        preparedStatementPlugins.setInt(2, model.getCategory().ordinal());
-        preparedStatementPlugins.setString(3,model.getUrlVideo());
-        preparedStatementPlugins.setString(4,model.getPluginPath());
-        preparedStatementPlugins.setString(5,model.getVersions());
-        preparedStatementPlugins.setDouble(6,model.getPrice());
-        preparedStatementPlugins.setString(7,model.getResourses());
-        preparedStatementPlugins.executeUpdate();
+        List<UUID> downloads = new ArrayList<>();
+        while (pdr.next()) downloads.add(UUID.fromString(pdr.getString("userid")));
 
+        List<Changelog> changelogs = new ArrayList<>();
+        while (pcr.next()) changelogs.add(new Changelog(pcr.getDate("changedate"), pcr.getString("changelog"), pcr.getString("pluginversion")));
 
-
-
+        return new PluginModel(
+                resultSet.getString("name"),
+                Categoria.fromValue(resultSet.getInt("category")),
+                resultSet.getString("versions"),
+                resultSet.getString("resources"),
+                resultSet.getString("video"),
+                resultSet.getString("github"),
+                resultSet.getString("dependencies"),
+                commands,
+                perms,
+                resultSet.getString("pluginPath"),
+                resultSet.getString("configPath"),
+                changelogs,
+                downloads,
+                resultSet.getInt("price")
+        );
     }
 
 

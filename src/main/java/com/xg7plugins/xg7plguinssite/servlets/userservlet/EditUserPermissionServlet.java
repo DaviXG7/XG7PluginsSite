@@ -11,12 +11,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name = "editarpermissao", value = "/home/user/editarpermissao")
+@WebServlet(name = "editarpermissao", urlPatterns = "/editarpermissao")
 public class EditUserPermissionServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        //Pega o usuário que edita e o usuário que está sendo editado
         UserModel userRequest = (UserModel) request.getSession().getAttribute("user");
         UserModel userEdit = null;
         try {
@@ -24,13 +25,16 @@ public class EditUserPermissionServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        //Verifica se tem erros
         if (userEdit == null) throw new RuntimeException();
         if (userRequest.getPermission() < 5) throw new RuntimeException();
         if (request.getParameter("permissao") == null) throw new RuntimeException();
-        System.out.println(request.getParameter("permissao"));
+
         int permission = Integer.parseInt(request.getParameter("permissao"));
         if (permission == 0) throw new RuntimeException();
 
+        //Coloca a permissão e manda ao banco de dados
         userEdit.setPermission(permission);
         try {
             DBManager.updateUserPermission(userEdit);

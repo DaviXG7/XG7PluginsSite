@@ -112,28 +112,29 @@
             </div>
         </header>
         <div class="pag">
-            <form action="">
-                <input type="file" id="plugin" required>
+            <form enctype="multipart/form-data" method="post" action="criarplugin">
+                <input type="file" accept="application/java-archive" id="plugin" name="plugin" required>
                 <br>
-                <input type="file" id="config">
-                <input type="text" id="nomePlugin" placeholder="Digite o nome do plugin" required>
+                <input type="file" accept=".zip" id="config" name="configs">
                 <br>
-                <select required id="categoria">
+                <input type="text" id="nomePlugin" name="name" placeholder="Digite o nome do plugin" required>
+                <br>
+                <select required id="categoria" name="categoria">
                     <option value="0">Categoria</option>
                     <option value="1">Gestão</option>
                     <option value="2">Utilidades</option>
                     <option value="3">Minigames</option>
                 </select>
                 <br>
-                <input type="url" placeholder="Digite a url do vídeo" id="urlVideo">
+                <input type="url" placeholder="Digite a url do vídeo" id="urlVideo" name="urlVideo">
                 <br>
-                <input type="number" placeholder="Digite o preço do plugin" id="preco" required>
+                <input type="number" placeholder="Digite o preço do plugin" id="preco" name="preco" required>
                 <br>
-                <input type="url" placeholder="Digite o github do plugin" id="urlGithub">
+                <input type="url" placeholder="Digite o github do plugin" id="urlGithub" name="github">
                 <br>
-                <input type="text" placeholder="Digite as versões do plugin" id="versoes" required>
+                <input type="text" placeholder="Digite as versões do plugin" id="versoes" name="versions" required>
                 <br>
-                <input type="text" placeholder="Digite as dependências do plugin" id="dependencias">
+                <input type="text" placeholder="Digite as dependências do plugin" id="dependencias" name="dependencies">
                 <br>
                 <div>
                     <button onclick="adicionarComando('comandos','nome do comando','commandValue','commandDescription',true)" type="button">Adicionar +</button>
@@ -186,59 +187,6 @@
         let startIndex = Math.max(elementos.length - 3, 0);
         elementos.slice(startIndex).remove();
     }
-
-    $('form').submit(function (event) {
-
-        let pluginArquivo = $('#plugin').prop('files')[0];
-        let configArquivo = $('#config').prop('files')[0];
-        let nomePlugintxt = $('#nomePlugin').val();
-        let categiaValue = $("#categoria").val();
-        let urlVideo = $("#urlVideo").val();
-        let urlGithub = $("#urlGithub").val();
-        let versionstxt = $("#versoes").val();
-        let dependenciastxt = $("#dependencias").val();
-        let precotxt = $("preco").val();
-        let commandsName = '';
-        let commandsDescriptions = '';
-        let permName = '';
-        let permDescriptions = '';
-        let resourceName = '';
-
-
-        const cmddiv = document.getElementById('comandos');
-        const cmdinputs = cmddiv.querySelectorAll('input');
-
-        cmdinputs.forEach(function(input) {
-            if (input.getAttribute("name") === "commandValue") commandsName += input.value + ';;;';
-            if (input.getAttribute("name") === "commandDescription") commandsName += input.value + ';;;';
-        });
-
-        const permdiv = document.getElementById('perm');
-        const perminputs = div.querySelectorAll('input');
-
-        perminputs.forEach(function(input) {
-            if (input.getAttribute("name") === "permValue") permName += input.value + ';;;';
-            if (input.getAttribute("name") === "permDescription") permName += input.value + ';;;';
-        });
-
-        const resourcediv = document.getElementById('recursos');
-        const resourceinputs = resourcediv.querySelectorAll('input');
-
-        resourceinputs.forEach(function(input) {
-            resourceName += input.value + ';;;';
-        });
-
-        $(this).find('[type="submit"]').addClass("disabled");
-        $.post("/", {
-            nome: txtnome,
-            senha: txtsenha,
-            email: txtemail,
-            confirmarSenha: txtconfirmarSenha,
-            termos: txttermos
-        }).fail(function (error) {
-            window.alert(error)
-        })
-    })
 
 </script>
 <script src="../../js/dashboard.js"></script>

@@ -19,12 +19,14 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        //Pega todas as informações da página
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
 
-        if (email == null || email.isEmpty() || senha == null || senha.isEmpty()) {
-            throw new RuntimeException();
-        }
+        //Vê se algo ta errado e faz o modelo caso contrário
+        if (email == null || email.isEmpty() || senha == null || senha.isEmpty()) throw new RuntimeException();
+
 
         UserModel model;
 
@@ -44,6 +46,7 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
+        //Manda o usuário para a página do dashboard
         request.getSession().setAttribute("user", model);
         response.sendRedirect("home/dashboard.jsp");
 

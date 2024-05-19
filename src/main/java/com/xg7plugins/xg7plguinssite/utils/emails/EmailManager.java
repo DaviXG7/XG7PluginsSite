@@ -1,4 +1,4 @@
-package com.xg7plugins.xg7plguinssite.emails;
+package com.xg7plugins.xg7plguinssite.utils.emails;
 
 import lombok.Getter;
 

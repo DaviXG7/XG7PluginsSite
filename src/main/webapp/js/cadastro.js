@@ -35,21 +35,6 @@ window.addEventListener("input", function (event) {
         submit.classList.add("disabled");
     }
 });
-$('form').submit(function (event) {
-    let txtnome = $('#nome').val();
-    let txtsenha = $('#password').val();
-    let txtemail = $('#email').val();
-    let txtconfirmarSenha = $('#confirmarSenha').val();
-    let txttermos = $('#termos').val();
-
+$('form').submit(function(event) {
     $(this).find('[type="submit"]').addClass("disabled");
-    $.post("cadastro", {
-        nome: txtnome,
-        senha: txtsenha,
-        email: txtemail,
-        confirmarSenha: txtconfirmarSenha,
-        termos: txttermos
-    }).fail(function (error) {
-        window.alert(error)
-    })
-})
+});
