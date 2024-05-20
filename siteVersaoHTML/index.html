@@ -18,8 +18,8 @@
 </head>
 
 <body>
-<div class="detalhes-plugin">
-    <header class="caixa-detalhe">
+<div class="detalhes-plugin d-none" id="detalhes">
+    <div class="caixa-detalhe" id="caixaDetalhe">
         <div class="detalhes-header">
             <div class="d-flex w-auto">
                 <img src="imgs/logo.png" width="100" height="100" alt="">
@@ -55,7 +55,7 @@
                         </div>
                         <div class="visao-geral-dependencias">
                             <h5><strong>Dependências:</strong></h5>
-                            <div id="dependências" class="d-flex w-100" style="padding-left: 15px; flex-wrap: wrap">
+                            <div id="dependencias" class="d-flex w-100" style="padding-left: 15px; flex-wrap: wrap">
                                 <p class="visao-geral-dependencia-item">Uma dependência (Pode tirar)</p>
                                 <p class="visao-geral-dependencia-item">Outra dependência (Opicional)</p>
                                 <p class="visao-geral-dependencia-item">Outra dependência (Opicional)</p>
@@ -154,7 +154,7 @@
 
             </div>
         </div>
-    </header>
+    </div>
 </div>
     <nav>
         <div id="nav-c" class="container d-flex justify-content-between">
@@ -274,7 +274,7 @@
                         <p>Preço</p>
                         <div class="plugin-botoes">
                             <button class="btn btn-primary">Baixar</button>
-                            <button class="btn btn-primary">Ver detalhes</button>
+                            <button onclick="abrirTela('Plugin1')" class="btn btn-primary">Ver detalhes</button>
                         </div>
 
                     </div>
@@ -331,9 +331,8 @@
 
 
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="js/menu.js"></script>
-
 <script>
 
     function mostrarAba(nomeAba, link) {
@@ -361,6 +360,7 @@
         downloads: 2,
         github: "",
         baixar: "",
+        linkYoutube: "https://www.youtube.com/embed/VFvSylJUJNg?si=BBn8yL8B9Vl5ME2V",
         versoes: [
             "1.2",
             "1.3",
@@ -374,14 +374,13 @@
             "1",
             "2"
         ],
-        linkYoutube: "https://www.youtube.com/embed/VFvSylJUJNg?si=BBn8yL8B9Vl5ME2V",
         comandos: [
-            "comandos,,, descrição",
-            "comandos,,, descrição",
+            {nome: "comandos",descricao: "descrição"},
+            {nome: "comandos",descricao: "descrição"}
         ],
         perms: [
-            "perms,,, descrição",
-            "perms,,, descrição",
+            {nome: "perm",descricao: "descrição"},
+            {nome: "perm",descricao: "descrição"}
         ],
         changelog: [
             {
@@ -399,7 +398,7 @@
 
         let plselect = null;
 
-        for (const pl in pls) {
+        for (const pl of pls) {
             if (pl.nome === NomePlugin) {
                 plselect = pl;
                 break;
@@ -407,10 +406,66 @@
         }
         if (plselect == null) return;
 
-        let
+        let nomelabel = $("#nome");
+        let downloads = $("#downloads")
+        let linkBaixar = $("#baixar");
+        let linkGithub = $("#github");
+        let linkVideo = $("#urlVideo");
+        let versoes = $("#versoes");
+        let dependencias = $("#dependencias");
+        let recursos = $("#recursos");
+        let comandos = $("#comandosL");
+        let perms = $("#perms");
+        let changelog = $("#changelog");
+
+        nomelabel.text(plselect.nome);
+        downloads.text(plselect.downloads);
+        linkBaixar.href = plselect.baixar;
+        linkGithub.href = plselect.github;
+        linkVideo.href = plselect.linkYoutube;
+        plselect.versoes.forEach(function (e) {
+            versoes.innerHTML = "<p class=\"visao-geral-versão-item\">" + e + "</p>";
+        })
+        plselect.dependencias.forEach(function (e) {
+            dependencias.html("<p class=\"visao-geral-dependencia-item\">" + e + "</p>")
+        })
+        plselect.recursos.forEach(function (e) {
+            recursos.html("<li>" + e +"</li>")
+        })
+        plselect.comandos.forEach(function (e) {
+            comandos.html("<li><strong>" + e.nome + "</strong> - " + e.descricao + "</li>")
+        })
+        plselect.perms.forEach(function (e) {
+            perms.html("<li><strong>" + e.nome + "</strong> - " + e.descricao + "</li>")
+        })
+        plselect.changelog.forEach(function (e) {
+            let html = "<div className=\"atualizacao\">\n" +
+                "                    <div style=\"border-left: 1px solid black; padding: 5px 5px 5px 10px; width: 100%; height: auto\">\n" +
+                "\n" +
+                "                        <h2><strong>Versão " + e.versao + "</strong></h2>\n" +
+                "                        <p style=\"font-size: 15px\">" + e.data + "</p>\n" +
+                "                        <ul>\n";
+
+            e.logs.forEach(function (el) {
+                html += "<li>" + el + "</li>"
+            })
+            html += "                        </ul>\n" +
+                "\n" +
+                "                    </div>\n" +
+                "                </div>";
+
+                changelog.html(html)
+        })
+
+        $("#detalhes").removeClass("d-none")
 
 
     }
+
+    $("#caixaDetalhe").on("blur", function (event) {
+        $("#detalhes").addClass("d-none");
+    })
+
 
 
 </script>
@@ -425,10 +480,10 @@
             document.getElementById("menu").style.display = "none";
         }
     }
+
     window.addEventListener("resize", getTamanhoDaTela);
 
 </script>
-
 
 
 </html>

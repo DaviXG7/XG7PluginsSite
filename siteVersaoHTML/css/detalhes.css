@@ -12,7 +12,7 @@
 }
 
 .caixa-detalhe {
-    max-height: 600px;
+    height: 90vh;
     width: 75%;
     background-color: #eaeaea;
     border: black solid 3px;
@@ -45,7 +45,7 @@
 .content {
     padding: 15px;
     width: 100%;
-    max-height: 350px;
+    max-height: 300px;
     display: flex;
     align-items: center;
 }
