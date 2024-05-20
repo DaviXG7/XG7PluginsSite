@@ -356,7 +356,7 @@
         abaSelecionada.classList.add("active")
     }
 
-    let pl1 = {
+    let pls = [{
         nome: "Plugin1",
         downloads: 2,
         github: "",
@@ -393,9 +393,22 @@
                 ]
             }
         ]
-    }
+    }]
 
-    function abrirTela() {
+    function abrirTela(NomePlugin) {
+
+        let plselect = null;
+
+        for (const pl in pls) {
+            if (pl.nome === NomePlugin) {
+                plselect = pl;
+                break;
+            }
+        }
+        if (plselect == null) return;
+
+        let
+
 
     }
 
