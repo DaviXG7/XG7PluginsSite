@@ -34,9 +34,6 @@ public class UserFilter implements Filter {
 
         HttpSession session = request.getSession();
 
-        System.out.println(session.getAttribute("user") == null);
-        System.out.println(request.getRequestURL());
-
         //Se o usuário for nulo o ele não está logado. Por estas condições ele não pode ir para o home
         if (session.getAttribute("user") == null) {
 
