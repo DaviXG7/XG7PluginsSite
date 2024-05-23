@@ -83,6 +83,7 @@ public class PluginCreateServlet extends HttpServlet {
                 url,
                 github,
                 depedencies,
+
                 commands,
                 perms,
                 pluginPath,
@@ -98,7 +99,7 @@ public class PluginCreateServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-        response.sendRedirect("home/plugin/criarplugin.jsp");
+        response.sendRedirect("home/plugin/create.jsp");
 
 
     }

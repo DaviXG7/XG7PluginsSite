@@ -7,13 +7,15 @@
     justify-content: center;
     background-color: rgba(0,0,0,.8);
 }
+#abas {
+    height: 350px;
+}
 #abas > * {
     display: none;
+    height: 100%;
 }
 
 .caixa-detalhe {
-    height: 90vh;
-    width: 75%;
     background-color: #eaeaea;
     border: black solid 3px;
     border-radius: 15px;
@@ -45,14 +47,15 @@
 .content {
     padding: 15px;
     width: 100%;
-    max-height: 300px;
+    max-height: 350px;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 .content .plugin-content {
     padding: 15px;
     width: 100%;
-    max-height: 300px;
+    height: 350px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -67,7 +70,8 @@
 .visao-geral-versão-item {
     border: solid 1px;
     border-radius: 10px;
-    width: 40px;
+    padding: 0 5px 0 5px;
+    width: 55px;
     font-size: 15px;
     display: flex;
     align-items: center;

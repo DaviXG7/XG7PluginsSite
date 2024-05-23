@@ -131,7 +131,7 @@ public class DBManager {
     public static void addPlugin(PluginModel model) throws SQLException {
         PreparedStatement preparedStatementPlugins = connection.prepareStatement("INSERT INTO plugins(name,category,video,pluginPath,versions,price,resources,github,dependencies,configpath) VALUES (?,?,?,?,?,?,?,?,?,?)");
         PreparedStatement preparedStatementCommands = connection.prepareStatement("INSERT INTO plugincommands(pluginname,command,description) VALUES (?,?,?)");
-        PreparedStatement preparedStatementPerms = connection.prepareStatement("INSERT INTO pluginperms(pluginname,perms,description) VALUES (?,?,?)");
+        PreparedStatement preparedStatementPerms = connection.prepareStatement("INSERT INTO pluginperms(pluginname,perm,description) VALUES (?,?,?)");
 
         preparedStatementPlugins.setString(1, model.getName());
         preparedStatementPlugins.setInt(2, model.getCategory().getIndex());
@@ -187,7 +187,7 @@ public class DBManager {
         while (cr.next()) commands.add(new Pair<>(cr.getString("command"), cr.getString("description")));
 
         List<Pair<String,String>> perms = new ArrayList<>();
-        while (cr.next()) perms.add(new Pair<>(per.getString("permname"), per.getString("description")));
+        while (cr.next()) perms.add(new Pair<>(per.getString("perm"), per.getString("description")));
 
         List<UUID> downloads = new ArrayList<>();
         while (pdr.next()) downloads.add(UUID.fromString(pdr.getString("userid")));

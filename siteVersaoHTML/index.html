@@ -24,8 +24,8 @@
             <div class="d-flex w-auto">
                 <img src="imgs/logo.png" width="100" height="100" alt="">
                 <div class="d-flex flex-column justify-content-between mt-2">
-                    <h5><strong id="nomePlugin">NomePlugin</strong></h5>
-                    <p style="font-size: 14px"><strong id="downloads">1</strong> Downloads</p>
+                    <h5><strong id="nomePlugin"></strong></h5>
+                    <p style="font-size: 14px"><strong id="downloads"></strong> Downloads</p>
                 </div>
 
             </div>
@@ -41,6 +41,8 @@
             <a id="a2" class="link link-dark" onclick="mostrarAba('comandos', 'a2')">Comandos</a>
             <a id="a3" class="link link-dark" onclick="mostrarAba('permissions', 'a3')">Permissões</a>
             <a id="a4" class="link link-dark" onclick="mostrarAba('atualizacoes', 'a4')">Atualizações</a>
+            <a id="a5" class="link link-dark">Configs</a>
+
         </nav>
         <div id="abas">
             <div id="visao-geral" class="active">
@@ -48,35 +50,23 @@
                     <div class="plugin-content">
                         <div class="visao-geral-versão">
                             <h5><strong>Versões compatíveis:</strong></h5>
-                            <div id="versoes" class="d-flex w-100" style="padding-left: 15px">
-                                <p class="visao-geral-versão-item">1.15</p>
-                                <p class="visao-geral-versão-item">1.15</p>
+                            <div id="versoes" class="d-flex w-100" style="padding-left: 15px; flex-wrap: wrap">
+
                             </div>
                         </div>
                         <div class="visao-geral-dependencias">
                             <h5><strong>Dependências:</strong></h5>
                             <div id="dependencias" class="d-flex w-100" style="padding-left: 15px; flex-wrap: wrap">
-                                <p class="visao-geral-dependencia-item">Uma dependência (Pode tirar)</p>
-                                <p class="visao-geral-dependencia-item">Outra dependência (Opicional)</p>
-                                <p class="visao-geral-dependencia-item">Outra dependência (Opicional)</p>
                             </div>
                         </div>
                         <div class="visao-geral-recursos">
                             <h5><strong>Recursos:</strong></h5>
                             <ol id="recursos">
-                                <li>Recurso 1</li>
-                                <li>Recurso 2</li>
-                                <li>Recurso 3</li>
-                                <li>Recurso 4</li>
-                                <li>Recurso 5</li>
-                                <li>Recurso 6</li>
-                                <li>Recurso 7</li>
-                                <li>Recurso 8</li>
+
                             </ol>
                         </div>
-                        <div>
-                            <h5><strong>Demostração:</strong></h5>
-                            <iframe id="youtube" width="100%" height="235px" src="https://www.youtube.com/embed/VFvSylJUJNg?si=BBn8yL8B9Vl5ME2V" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <div id="urlVideo">
+
                         </div>
                     </div>
                 </div>
@@ -85,18 +75,6 @@
                 <div class="content">
                     <div class="plugin-content">
                         <ul class="no-decoration-list" id="comandosL">
-                            <li><strong>Comando</strong> - Descrição</li>
-                            <li><strong>Comando</strong> - Descrição</li>
-                            <li><strong>Comando</strong> - Descrição</li>
-                            <li><strong>Comando</strong> - Descrição</li>
-                            <li><strong>Comando</strong> - Descrição</li>
-                            <li><strong>Comando</strong> - Descrição</li>
-                            <li><strong>Comando</strong> - Descrição</li>
-                            <li><strong>Comando</strong> - Descrição</li>
-                            <li><strong>Comando</strong> - Descrição</li>
-                            <li><strong>Comando</strong> - Descrição</li>
-                            <li><strong>Comando</strong> - Descrição</li>
-                            <li><strong>Comando</strong> - Descrição</li>
                         </ul>
                     </div>
                 </div>
@@ -105,18 +83,6 @@
                 <div class="content">
                     <div class="plugin-content">
                         <ul class="no-decoration-list" id="perms">
-                            <li><strong>Permissao</strong> - Descrição</li>
-                            <li><strong>Permissao</strong> - Descrição</li>
-                            <li><strong>Permissao</strong> - Descrição</li>
-                            <li><strong>Permissao</strong> - Descrição</li>
-                            <li><strong>Permissao</strong> - Descrição</li>
-                            <li><strong>Permissao</strong> - Descrição</li>
-                            <li><strong>Permissao</strong> - Descrição</li>
-                            <li><strong>Permissao</strong> - Descrição</li>
-                            <li><strong>Permissao</strong> - Descrição</li>
-                            <li><strong>Permissao</strong> - Descrição</li>
-                            <li><strong>Permissao</strong> - Descrição</li>
-                            <li><strong>Permissao</strong> - Descrição</li>
                         </ul>
                     </div>
                 </div>
@@ -124,30 +90,7 @@
             <div id="atualizacoes" class="">
                 <div class="content">
                     <div id="changelog" class="plugin-content" style="background-color: #eaeaea !important;">
-                        <div class="atualizacao">
-                            <div style="border-left: 1px solid black; padding: 5px 5px 5px 10px; width: 100%; height: auto">
 
-                                <h2><strong>Versão 1.1</strong></h2>
-                                <p style="font-size: 15px">20/2/0000</p>
-                                <ul>
-                                    <li>Alguma log</li>
-                                    <li>Alguma outra log</li>
-                                </ul>
-
-                            </div>
-                        </div>
-                        <div class="atualizacao">
-                            <div style="border-left: 1px solid black; padding: 5px 5px 5px 10px; width: 100%; height: auto">
-
-                                <h2><strong>Versão 1.1</strong></h2>
-                                <p style="font-size: 15px">20/2/0000</p>
-                                <ul>
-                                    <li>Alguma log</li>
-                                    <li>Alguma outra log</li>
-                                </ul>
-
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -274,7 +217,7 @@
                         <p>Preço</p>
                         <div class="plugin-botoes">
                             <button class="btn btn-primary">Baixar</button>
-                            <button onclick="abrirTela('Plugin1')" class="btn btn-primary">Ver detalhes</button>
+                            <button onclick="abrirTela('Plugin2')" class="btn btn-primary">Ver detalhes</button>
                         </div>
 
                     </div>
@@ -392,7 +335,46 @@
                 ]
             }
         ]
-    }]
+    },
+
+        {
+            nome: "Plugin2",
+            downloads: 2,
+            github: "",
+            baixar: "",
+            linkYoutube: "https://www.youtube.com/embed/VFvSylJUJNg?si=BBn8yL8B9Vl5ME2V",
+            versoes: [
+                "1.20",
+                "1.20.1",
+                "1.20.2"
+            ],
+            dependencias: [
+                "1",
+                "2asdasdas"
+            ],
+            recursos: [
+                "1asdasdasdasd",
+                "2"
+            ],
+            comandos: [
+                {nome: "comaadssadadsndos",descricao: "descrição"},
+                {nome: "comandos",descricao: "descrição"}
+            ],
+            perms: [
+                {nome: "perm",descricao: "descrição"},
+                {nome: "perasdsadsadasdadsasdm",descricao: "descrição"}
+            ],
+            changelog: [
+                {
+                    versao: "asasdsaasasdadsa",
+                    data: "20/02/20202",
+                    logs: [
+                        "asadasdasdasd",
+                        "b"
+                    ]
+                }
+            ]
+        }]
 
     function abrirTela(NomePlugin) {
 
@@ -406,7 +388,7 @@
         }
         if (plselect == null) return;
 
-        let nomelabel = $("#nome");
+        let nomelabel = $("#nomePlugin");
         let downloads = $("#downloads")
         let linkBaixar = $("#baixar");
         let linkGithub = $("#github");
@@ -420,26 +402,29 @@
 
         nomelabel.text(plselect.nome);
         downloads.text(plselect.downloads);
-        linkBaixar.href = plselect.baixar;
-        linkGithub.href = plselect.github;
-        linkVideo.href = plselect.linkYoutube;
+        linkBaixar.attr("href", plselect.baixar);
+        linkGithub.attr("href", plselect.github);
+        linkVideo.html("<h5><strong>Demostração:</strong></h5> <iframe width=\"200\" height=\"135" +
+            "" +
+            "" +
+            "\" src=\"" + plselect.linkYoutube + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>");
         plselect.versoes.forEach(function (e) {
-            versoes.innerHTML = "<p class=\"visao-geral-versão-item\">" + e + "</p>";
+            versoes.append("<p class=\"visao-geral-versão-item\">" + e + "</p>");
         })
         plselect.dependencias.forEach(function (e) {
-            dependencias.html("<p class=\"visao-geral-dependencia-item\">" + e + "</p>")
+            dependencias.append("<p class=\"visao-geral-dependencia-item\">" + e + "</p>")
         })
         plselect.recursos.forEach(function (e) {
-            recursos.html("<li>" + e +"</li>")
+            recursos.append("<li>" + e +"</li>")
         })
         plselect.comandos.forEach(function (e) {
-            comandos.html("<li><strong>" + e.nome + "</strong> - " + e.descricao + "</li>")
+            comandos.append("<li><strong>" + e.nome + "</strong> - " + e.descricao + "</li>")
         })
         plselect.perms.forEach(function (e) {
-            perms.html("<li><strong>" + e.nome + "</strong> - " + e.descricao + "</li>")
+            perms.append("<li><strong>" + e.nome + "</strong> - " + e.descricao + "</li>")
         })
         plselect.changelog.forEach(function (e) {
-            let html = "<div className=\"atualizacao\">\n" +
+            let html = "<div class=\"atualizacao\">\n" +
                 "                    <div style=\"border-left: 1px solid black; padding: 5px 5px 5px 10px; width: 100%; height: auto\">\n" +
                 "\n" +
                 "                        <h2><strong>Versão " + e.versao + "</strong></h2>\n" +
@@ -454,7 +439,7 @@
                 "                    </div>\n" +
                 "                </div>";
 
-                changelog.html(html)
+                changelog.append(html)
         })
 
         $("#detalhes").removeClass("d-none")
@@ -462,8 +447,24 @@
 
     }
 
-    $("#caixaDetalhe").on("blur", function (event) {
-        $("#detalhes").addClass("d-none");
+    $("#detalhes").on("click", function (event) {
+        if (event.target.id === "detalhes") {
+
+            $("#nomePlugin").text("");
+            $("#downloads").text("")
+            $("#baixar").attr("href", "");
+            $("#github").attr("href", "");
+            $("#urlVideo").attr("src", "");
+            $("#versoes").html("");
+            $("#dependencias").html("");
+            $("#recursos").html("");
+            $("#comandosL").html("");
+            $("#perms").html("");
+            $("#changelog").html("");
+
+
+            $("#detalhes").addClass("d-none");
+        }
     })
 
 
@@ -471,8 +472,6 @@
 </script>
 
 <script>
-
-
     function getTamanhoDaTela() {
         var largura = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 

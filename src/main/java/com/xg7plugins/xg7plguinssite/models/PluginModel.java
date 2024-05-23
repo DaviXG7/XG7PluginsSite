@@ -19,6 +19,8 @@ public class PluginModel {
 
     private String name;
     private Categoria category;
+    private String version;
+    private String description;
     private String versions;
     private String resourses;
     private String urlVideo;

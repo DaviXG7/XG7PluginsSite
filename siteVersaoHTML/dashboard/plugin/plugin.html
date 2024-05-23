@@ -14,6 +14,21 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        form > * {
+            margin: 10px;
+            padding: 10px;
+            border-top: black solid 1px;
+            border-bottom: black solid 1px;
+        }
+        .titulo {
+            display: flex;
+            flex-direction: column;
+        }
     </style>
 
 
@@ -62,89 +77,118 @@
 
 
     <main>
-
         <header>
-            <button id="hamburger" class="btn" onclick="toggleMenu('barra-lateral','flex','none')">
-                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
-                </svg>
-            </button>
-            <div class="h-botoes">
-                <a>
-                    <i class="bi bi-plus" style="font-size: 30px; padding: 0 10px 0 10px"></i>
-                </a>
-                <a>
-                    <i class="bi bi-box-arrow-left" style="font-size: 30px; padding: 0 10px 0 10px"></i>
-                </a>
+                <button id="hamburger" class="btn" onclick="toggleMenu('barra-lateral','flex','none')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                    </svg>
+                </button>
+                <div class="h-botoes">
+                    <a>
+                        <i class="bi bi-plus" style="font-size: 30px; padding: 0 10px 0 10px"></i>
+                    </a>
+                    <a>
+                        <i class="bi bi-box-arrow-left" style="font-size: 30px; padding: 0 10px 0 10px"></i>
+                    </a>
 
-                <div class="dropdown">
-                    <button style="border: none; background-color: white" type="button" data-bs-toggle="dropdown">
-                        <img src="../imgs/logo.png" width="80" alt="">
-                    </button>
-                    <ul class="dropdown-menu">
-                        <a class="dropdown-item" href="#">
-                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Perfil
-                        </a>
-                        <a class="dropdown-item" href="#">
-                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Configurações
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Logout
-                        </a>
-                    </ul>
+                    <div class="dropdown">
+                        <button style="border: none; background-color: white" type="button" data-bs-toggle="dropdown">
+                            <img src="../imgs/logo.png" width="80" alt="">
+                        </button>
+                        <ul class="dropdown-menu">
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Perfil
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Configurações
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Logout
+                            </a>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </header>
-        <form action="">
-            <input type="file" accept="application/java-archive">
-            <input type="file">
-            <input type="text" placeholder="Digite o nome do plugin">
-            <br>
-            <select>
-                <option value="0">Categoria</option>
-                <option value="0">Gestão</option>
-                <option value="0">Utilidades</option>
-                <option value="0">Minigames</option>
-            </select>
-            <br>
-            <input type="text" placeholder="Digite a url do vídeo">
-            <br>
-            <input type="text" placeholder="Digite o preço do plugin">
-            <br>
-            <input type="text" placeholder="Digite o github do plugin">
-            <input type="text" placeholder="Digite as versões do plugin">
-            <input type="text" placeholder="Digite as dependências do plugin">
-            <br>
-            <div>
-                <button onclick="adicionarComando('comandos','nome do comando',true)" type="button">Adicionar +</button>
-                <button onclick="removerComando('comandos')" type="button">Remover -</button> <br>
-                <div id="comandos" style="overflow: auto; scroll-behavior: smooth; height: 100px">
-                    <input type="text" placeholder="nome do comando"> <input type="text" placeholder="descrição"> <br>
+            </header>
+            <div class="pag">
+                <form enctype="multipart/form-data" method="post" action="criarplugin">
 
-                </div>
-            </div>
-            <div>
-                <button onclick="adicionarComando('perm','nome da perm',true)" type="button">Adicionar +</button>
-                <button onclick="removerComando('perm')" type="button">Remover -</button> <br>
-                <div id="perm" style="overflow: auto; scroll-behavior: smooth; height: 100px">
-                    <input type="text" placeholder="nome da perm"> <input type="text" placeholder="descrição"> <br>
+                    <div class="titulo">
 
-                </div>
-            </div>
-            <div>
-                <button onclick="adicionarComando('recursos','recurso',false)" type="button">Adicionar +</button>
-                <button onclick="removerComando('recursos')" type="button">Remover -</button> <br>
-                <div id="recursos" style="overflow: auto; scroll-behavior: smooth; height: 100px">
-                    <input type="text" placeholder="recurso"> <input type="text" placeholder="descrição"> <br>
-                </div>
-            </div>
-            <input type="submit" class="btn btn-primary" value="Atualizar"></input>
+                        <h2>Principal</h2>
 
-        </form>
+                        <div class="form-group">
+                            <label for="nome">Nome</label>
+                            <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite o nome do plugin">
+                        </div>
+                        <div class="form-group bg-primary row">
+                            <div class="col-4 bg-success d-flex flex-column">
+                                <label for="versaoPlugin">Versão atual</label>
+                                <input type="text" class="form-control w-100" style="width: 40%;" name="pluginversion" id="versaoPlugin" placeholder="Digite a versão">
+                            </div>
+                            <div class="col-6">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile">
+                                    <label class="custom-file-label" for="customFile">Escolher arquivo</label>
+                                </div>
+                            </div>
+                            </div>
+                        <div class="form-group">
+                            <label for="description">Descrição do plugin</label>
+                            <textarea class="form-control" id="description" name="description" placeholder="Digite a descrição do plugin" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <select required id="categoria" name="categoria">
+                        <option value="0">Categoria</option>
+                        <option value="1">Gestão</option>
+                        <option value="2">Utilidades</option>
+                        <option value="3">Minigames</option>
+                    </select>
+                    <br>
+                    <input type="url" placeholder="Digite a url do vídeo" id="urlVideo" name="urlVideo">
+                    <br>
+                    <input type="number" placeholder="Digite o preço do plugin" id="preco" name="preco" required>
+                    <br>
+                    <input type="url" placeholder="Digite o github do plugin" id="urlGithub" name="github">
+                    <br>
+                    <input type="text" placeholder="Digite as versões do plugin" id="versoes" name="versions" required>
+                    <br>
+                    <input type="text" placeholder="Digite as dependências do plugin" id="dependencias" name="dependencies">
+                    <br>
+                    <div>
+                        <button onclick="adicionarComando('comandos','nome do comando','commandValue','commandDescription',true)" type="button">Adicionar +</button>
+                        <button onclick="removerComando('comandos')" type="button">Remover -</button> <br>
+                        <div id="comandos" style="overflow: auto; scroll-behavior: smooth; height: 100px">
+                            <input type="text" placeholder="nome do comando" name="commandValue" required > <input type="text" placeholder="descrição" name="commandDescription" required> <br>
+                        </div>
+                    </div>
+                    <br>
+                    <div>
+                        <button onclick="adicionarComando('perm','nome da perm','permValue','permDescription', true)" type="button">Adicionar +</button>
+                        <button onclick="removerComando('perm')" type="button">Remover -</button> <br>
+                        <div id="perm" style="overflow: auto; scroll-behavior: smooth; height: 100px">
+                            <input type="text" placeholder="nome da perm" name="permValue" required> <input type="text" placeholder="descrição" name="permDescription" required> <br>
+
+                        </div>
+                    </div>
+                    <br>
+                    <div>
+                        <button onclick="adicionarComando('recursos','recurso','resourceValue','',false)" type="button">Adicionar +</button>
+                        <button onclick="removerComando('recursos')" type="button">Remover -</button> <br>
+                        <div id="recursos" style="overflow: auto; scroll-behavior: smooth; height: 100px">
+                            <input type="text" placeholder="recurso" name="resourceValue" required> <p></p><br>
+                        </div>
+                    </div>
+                    <br>
+                    <input type="submit" class="btn btn-primary" value="Atualizar"></input>
+
+                </form>
+            </div>
+
     </main>
 </div>
 
