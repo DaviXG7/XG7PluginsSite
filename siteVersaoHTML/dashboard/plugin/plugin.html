@@ -24,10 +24,11 @@
             padding: 10px;
             border-top: black solid 1px;
             border-bottom: black solid 1px;
-        }
-        .titulo {
             display: flex;
             flex-direction: column;
+        }
+        .titulo {
+
         }
     </style>
 
@@ -140,12 +141,15 @@
                         </div>
                     </div>
                     <div class="configs">
-                        <select required id="categoria" name="categoria">
-                            <option value="0">Categoria</option>
-                            <option value="1">Gestão</option>
-                            <option value="2">Utilidades</option>
-                            <option value="3">Minigames</option>
-                        </select>
+                        <div class="form-group">
+                            <label for="categoria">Selecione a categoria</label>
+                            <select class="form-control" id="categoria" name="categoria">
+                                <option value="0">Categoria</option>
+                                <option value="1">Gestão</option>
+                                <option value="2">Utilidades</option>
+                                <option value="3">Minigames</option>
+                            </select>
+                        </div>
                         <br>
                         <input type="url" placeholder="Digite a url do vídeo" id="urlVideo" name="urlVideo">
                         <br>
