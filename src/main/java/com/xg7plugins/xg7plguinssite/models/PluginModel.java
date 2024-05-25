@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,7 +20,7 @@ public class PluginModel {
     private Categoria category;
     private String version;
     private String description;
-    private String versions;
+    private String compatibilyVersion;
     private String resourses;
     private String urlVideo;
     private String github;

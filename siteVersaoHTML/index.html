@@ -48,11 +48,9 @@
             <div id="visao-geral" class="active">
                 <div class="content">
                     <div class="plugin-content">
-                        <div class="visao-geral-versão">
-                            <h5><strong>Versões compatíveis:</strong></h5>
-                            <div id="versoes" class="d-flex w-100" style="padding-left: 15px; flex-wrap: wrap">
-
-                            </div>
+                        <div class="d-flex">
+                            <h5><strong>Versão compatível:</strong></h5>
+                            <p id="versao" class="visao-geral-versão-item"></p>
                         </div>
                         <div class="visao-geral-dependencias">
                             <h5><strong>Dependências:</strong></h5>
@@ -304,11 +302,7 @@
         github: "",
         baixar: "",
         linkYoutube: "https://www.youtube.com/embed/VFvSylJUJNg?si=BBn8yL8B9Vl5ME2V",
-        versoes: [
-            "1.2",
-            "1.3",
-            "1.4"
-        ],
+        versao: "1.8+",
         dependencias: [
             "1",
             "2"
@@ -343,11 +337,7 @@
             github: "",
             baixar: "",
             linkYoutube: "https://www.youtube.com/embed/VFvSylJUJNg?si=BBn8yL8B9Vl5ME2V",
-            versoes: [
-                "1.20",
-                "1.20.1",
-                "1.20.2"
-            ],
+            versao: "1.16+",
             dependencias: [
                 "1",
                 "2asdasdas"
@@ -393,7 +383,7 @@
         let linkBaixar = $("#baixar");
         let linkGithub = $("#github");
         let linkVideo = $("#urlVideo");
-        let versoes = $("#versoes");
+        let versao = $("#versao");
         let dependencias = $("#dependencias");
         let recursos = $("#recursos");
         let comandos = $("#comandosL");
@@ -402,15 +392,13 @@
 
         nomelabel.text(plselect.nome);
         downloads.text(plselect.downloads);
+        versao.text(plselect.versao);
         linkBaixar.attr("href", plselect.baixar);
         linkGithub.attr("href", plselect.github);
         linkVideo.html("<h5><strong>Demostração:</strong></h5> <iframe width=\"200\" height=\"135" +
             "" +
             "" +
             "\" src=\"" + plselect.linkYoutube + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>");
-        plselect.versoes.forEach(function (e) {
-            versoes.append("<p class=\"visao-geral-versão-item\">" + e + "</p>");
-        })
         plselect.dependencias.forEach(function (e) {
             dependencias.append("<p class=\"visao-geral-dependencia-item\">" + e + "</p>")
         })

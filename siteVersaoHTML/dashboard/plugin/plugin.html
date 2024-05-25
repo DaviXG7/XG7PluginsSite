@@ -27,9 +27,7 @@
             display: flex;
             flex-direction: column;
         }
-        .titulo {
 
-        }
     </style>
 
 
@@ -117,73 +115,102 @@
             <div class="pag">
                 <form enctype="multipart/form-data" method="post" action="criarplugin">
 
-                    <div class="titulo">
+                    <div>
 
-                        <h2>Principal</h2>
+                        <h1><strong>Principal</strong></h1>
 
-                        <div class="form-group">
-                            <label for="nome">Nome</label>
-                            <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite o nome do plugin">
-                        </div>
-                        <div class="form-group bg-primary row">
-                            <div class="col-4 bg-success d-flex flex-column">
-                                <label for="versaoPlugin">Versão atual</label>
+                        <div class="form-group row">
+                            <div class="col-7">
+                                <label for="nome">Nome*</label>
+                                <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite o nome do plugin">
+                            </div>
+                            <div class="col-5">
+                                <label for="versaoPlugin">Versão atual*</label>
                                 <input type="text" class="form-control w-100" style="width: 40%;" name="pluginversion" id="versaoPlugin" placeholder="Digite a versão">
                             </div>
-                            <div class="col-6">
-                                <input type="file" accept="application/java-archive" id="plugin" name="plugin" required>
-                                <input type="file" accept="application/zip" id="configs" name="configs">
-                            </div>
-                            </div>
+                        </div>
                         <div class="form-group">
-                            <label for="description">Descrição do plugin</label>
+                            <label>Arquivos</label>
+                            <input type="file" accept="application/java-archive" id="plugin" name="plugin" required>
+                            <input type="file" accept="application/zip" id="configs" name="configs">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Descrição do plugin*</label>
                             <textarea class="form-control" id="description" name="description" placeholder="Digite a descrição do plugin" rows="3"></textarea>
                         </div>
                     </div>
-                    <div class="configs">
+                    <div>
+                        <h1><strong>Configurações</strong></h1>
+
                         <div class="form-group">
-                            <label for="categoria">Selecione a categoria</label>
-                            <select class="form-control" id="categoria" name="categoria">
-                                <option value="0">Categoria</option>
+                            <label for="categoria">Categoria*</label>
+                            <select class="form-select" id="categoria" name="categoria" required>
+                                <option selected value="0">Selecione uma categoria...</option>
                                 <option value="1">Gestão</option>
                                 <option value="2">Utilidades</option>
                                 <option value="3">Minigames</option>
                             </select>
                         </div>
-                        <br>
-                        <input type="url" placeholder="Digite a url do vídeo" id="urlVideo" name="urlVideo">
-                        <br>
-                        <input type="number" placeholder="Digite o preço do plugin" id="preco" name="preco" required>
-                        <br>
-                        <input type="url" placeholder="Digite o github do plugin" id="urlGithub" name="github">
-                        <br>
-                        <input type="text" placeholder="Digite as versões do plugin" id="versoes" name="versions" required>
-                    </div>
-                    <br>
-                    <input type="text" placeholder="Digite as dependências do plugin" id="dependencias" name="dependencies">
-                    <br>
-                    <div>
-                        <button onclick="adicionarComando('comandos','nome do comando','commandValue','commandDescription',true)" type="button">Adicionar +</button>
-                        <button onclick="removerComando('comandos')" type="button">Remover -</button> <br>
-                        <div id="comandos" style="overflow: auto; scroll-behavior: smooth; height: 100px">
-                            <input type="text" placeholder="nome do comando" name="commandValue" required > <input type="text" placeholder="descrição" name="commandDescription" required> <br>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <label for="urlVideo">URL do vídeo</label>
+                                <input class="form-control" type="url" placeholder="Digite a url do vídeo" id="urlVideo" name="urlVideo">
+                            </div>
+                            <div class="col-12">
+                                <label for="github">URL do github</label>
+                                <input class="form-control" type="url" placeholder="Digite a url do vídeo" id="github" name="github">
+                            </div>
+                            <div class="col-6">
+                                <label for="compatibilyVersion">Versão compatível*</label>
+                                <input class="form-control" type="url" placeholder="Digite a url do vídeo" id="compatibilyVersion" name="compatibilyVersion" required>
+                            </div>
+                            <div class="col-6">
+                                <label for="preco">Preço*</label>
+                                <input class="form-control" type="url" placeholder="Digite a url do vídeo" id="preco" name="preco" required>
+                            </div>
+                            <div class="col-12">
+                                <label for="dependencias">Dependências</label>
+                                <input type="text" class="form-control" placeholder="Digite as dependências do plugin" id="dependencias" name="dependencies">
+                            </div>
                         </div>
                     </div>
-                    <br>
-                    <div>
-                        <button onclick="adicionarComando('perm','nome da perm','permValue','permDescription', true)" type="button">Adicionar +</button>
-                        <button onclick="removerComando('perm')" type="button">Remover -</button> <br>
-                        <div id="perm" style="overflow: auto; scroll-behavior: smooth; height: 100px">
-                            <input type="text" placeholder="nome da perm" name="permValue" required> <input type="text" placeholder="descrição" name="permDescription" required> <br>
 
+                    <div class="recursos">
+                        <div class="row">
+                            <h4>Comandos:</h4>
+                            <div class="col-9" id="comandos" style="overflow: auto; scroll-behavior: smooth; height: 160px">
+                                <div class="mt-3 mb-3 rounded border row" style="background-color: rgba(0,255,225,0.37)">
+                                    <div class="col-sm-6">
+                                        <label class="">Comando</label>
+                                        <input class="form-control" type="text" placeholder="Nome do comando (ex.: pular)">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="">Descrição</label>
+                                        <input class="form-control" type="text" placeholder="Descrição do comando">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <button onclick="adicionarComando('comandos','')" class="btn btn-success" style="width: 40px; height: 40px; border-radius: 100%" type="button"><i class="bi bi-plus-circle"></i></button>
+                                <button onclick="removerComando('comandos')" class="btn btn-danger" style="width: 40px; height: 40px; border-radius: 100%" type="button"><i class="bi bi-x-circle"></i></button>
+                            </div>
                         </div>
-                    </div>
-                    <br>
-                    <div>
-                        <button onclick="adicionarComando('recursos','recurso','resourceValue','',false)" type="button">Adicionar +</button>
-                        <button onclick="removerComando('recursos')" type="button">Remover -</button> <br>
-                        <div id="recursos" style="overflow: auto; scroll-behavior: smooth; height: 100px">
-                            <input type="text" placeholder="recurso" name="resourceValue" required> <p></p><br>
+                        <br>
+                        <div>
+                            <button onclick="adicionarComando('perm','nome da perm','permValue','permDescription', true)" class="btn btn-primary" style="width: 40px; height: 40px; border-radius: 100%" type="button"><i class="bi bi-plus-circle"></i></button>
+                            <button onclick="removerComando('perm')" type="button">Remover -</button> <br>
+                            <div id="perm" style="overflow: auto; scroll-behavior: smooth; height: 100px">
+                                <input type="text" placeholder="nome da perm" name="permValue" required> <input type="text" placeholder="descrição" name="permDescription" required> <br>
+
+                            </div>
+                        </div>
+                        <br>
+                        <div>
+                            <button onclick="adicionarComando('recursos','recurso',false)" class="btn btn-success" style="width: 40px; height: 40px; border-radius: 100%" type="button"><i class="bi bi-plus-circle"></i></button>
+                            <button onclick="removerComando('recursos')" class="btn btn-danger" style="width: 40px; height: 40px; border-radius: 100%" type="button"><i class="bi bi-x-circle"></i></button> <br>
+                            <div id="recursos" style="overflow: auto; scroll-behavior: smooth; height: 100px">
+                                <input type="text" placeholder="recurso" name="resourceValue" required> <br>
+                            </div>
                         </div>
                     </div>
                     <br>
@@ -202,10 +229,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
 
-    function adicionarComando(id, placeholder, aparecer) {
+    function adicionarComando(id, html) {
 
 
-        $('#' + id).append("<input type=\"text\" placeholder=\"" + placeholder +"\">").append(aparecer ? "<input type=\"text\" placeholder=\"descrição\">" : "").append("<br>")
+        $('#' + id).append(html)
     }
     function removerComando(id) {
 
