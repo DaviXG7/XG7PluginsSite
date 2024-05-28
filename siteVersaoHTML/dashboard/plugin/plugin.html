@@ -5,81 +5,156 @@
     <meta charset="UTF-8">
     <title>XG7Plugins</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-            crossorigin="anonymous"></script>
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
     <link href="../css/dashboard.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="imgs/logo.png" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
+        @media screen and (max-width: 600px) {
+            .cmd {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
         form {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            align-items: center;
         }
-        form > * {
+
+        form>div {
+            width: 95%;
+        }
+
+        form>* {
             margin: 10px;
             padding: 10px;
             border-top: black solid 1px;
             border-bottom: black solid 1px;
+            background-color: #fafafa;
+            border-radius: 10px;
             display: flex;
             flex-direction: column;
         }
 
+        form>input {
+            align-items: center;
+            justify-content: center;
+        }
+
+        .input-file {
+            width: 0;
+            height: 0;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+
+        .imgs {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+
+        }
+
+        .imgs>* {
+            margin: 10px 0 10px 0;
+        }
+
+        img {
+            max-width: 300px;
+        }
+
+        .btn-upload {
+            display: flex;
+            border: 1px dashed #00c3ff;
+            border-radius: 10px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(000, 192, 255, .2);
+            width: 80%;
+            height: 100px
+        }
+
+        .btn-upload:hover {
+            background-color: rgba(000, 192, 255, .4);
+            transition: 0.3s;
+        }
     </style>
 
 
 </head>
 
 <body>
-<div class="wrapper">
-    <div id="barra-lateral" class="barra-lateral sidebar">
+    <div class="wrapper">
+        <div id="barra-lateral" class="barra-lateral sidebar">
 
 
-        <a>
-            <img src="../imgs/logo.png" width="135" alt="">
-        </a>
+            <a>
+                <img src="../imgs/logo.png" width="135" alt="">
+            </a>
 
-        <hr>
+            <hr>
 
-        <!-- Heading -->
-        <div class="menus">
-            <div class="sidebar-heading side-title">
-                INTERFACE
+            <div class="menus">
+                <div class="sidebar-heading side-title">
+                    INTERFACE
+                </div>
+                <div class="botoes">
+                    <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href=""><i
+                            style="color: rgba(255,255,255,.5);" class="bi bi-telephone"></i>
+                        <p class="textos-botoes"> Suporte <i class="bi bi-box-arrow-up-right"></i></p>
+                    </a>
+                    <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href=""><i
+                            style="color: rgba(255,255,255,.5);" class="bi bi-cash"></i>
+                        <p class="textos-botoes"> Doação <i class="bi bi-box-arrow-up-right"></i></p>
+                    </a>
+                </div>
             </div>
-            <div class="botoes">
-                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href=""><i style="color: rgba(255,255,255,.5);" class="bi bi-telephone"></i><p class="textos-botoes"> Suporte <i class="bi bi-box-arrow-up-right"></i></p></a>
-                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href=""><i style="color: rgba(255,255,255,.5);" class="bi bi-cash"></i><p class="textos-botoes" > Doação <i class="bi bi-box-arrow-up-right"></i></p></a>
+
+            <hr>
+
+            <div class="menus">
+                <div class="sidebar-heading side-title">
+                    ADMIN
+                </div>
+                <div class="botoes">
+                    <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href=""><i
+                            style="color: rgba(255,255,255,.5);" class="bi bi-people"></i>
+                        <p class="textos-botoes"> Clientes</p>
+                    </a>
+                    <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0"
+                        href="../index.html"><i style="color: rgba(255,255,255,.5);" class="bi bi-plug"></i>
+                        <p class="textos-botoes"> Plugins</p>
+                    </a>
+                </div>
             </div>
+
+            <hr>
+
+
+
+
         </div>
 
-        <hr>
 
-        <div class="menus">
-            <div class="sidebar-heading side-title">
-                ADMIN
-            </div>
-            <div class="botoes">
-                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href=""><i style="color: rgba(255,255,255,.5);" class="bi bi-people"></i> <p class="textos-botoes" > Clientes</p></a>
-                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href="../index.html"><i style="color: rgba(255,255,255,.5);" class="bi bi-plug"></i> <p class="textos-botoes" > Plugins</p></a>
-            </div>
-        </div>
-
-        <hr>
-
-
-
-
-    </div>
-
-
-    <main>
-        <header>
+        <main>
+            <header>
                 <button id="hamburger" class="btn" onclick="toggleMenu('barra-lateral','flex','none')">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor"
+                        class="bi bi-list" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
                     </svg>
                 </button>
                 <div class="h-botoes">
@@ -122,21 +197,41 @@
                         <div class="form-group row">
                             <div class="col-7">
                                 <label for="nome">Nome*</label>
-                                <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite o nome do plugin">
+                                <input type="text" class="form-control" name="nome" id="nome"
+                                    placeholder="Digite o nome do plugin" required>
                             </div>
                             <div class="col-5">
                                 <label for="versaoPlugin">Versão atual*</label>
-                                <input type="text" class="form-control w-100" style="width: 40%;" name="pluginversion" id="versaoPlugin" placeholder="Digite a versão">
+                                <input type="text" class="form-control w-100" style="width: 40%;" name="pluginversion"
+                                    id="versaoPlugin" placeholder="Digite a versão" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col  d-sm-flex justify-content-between">
+                                <label>Plguin (.jar)*: </label>
+                                <label for="plugin" class="btn btn-outline-primary"><i class="bi bi-upload"></i>
+                                    Upload</label>
+                                <div>
+                                    <input type="file" class="input-file" accept=".jar" id="plugin" name="plugin"
+                                        required>
+                                    <span>Nenhum arquivo escolhido</span>
+                                </div>
+                            </div>
+                            <div class="col d-sm-flex justify-content-between">
+                                <label>Pasta config (.zip): </label>
+                                <label for="configs" class="btn btn-outline-primary"><i class="bi bi-upload"></i>
+                                    Upload</label>
+                                <div>
+                                    <input type="file" class="input-file" accept="application/zip" id="configs"
+                                        name="configs">
+                                    <span>Nenhum arquivo escolhido</span>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Arquivos</label>
-                            <input type="file" accept="application/java-archive" id="plugin" name="plugin" required>
-                            <input type="file" accept="application/zip" id="configs" name="configs">
-                        </div>
-                        <div class="form-group">
                             <label for="description">Descrição do plugin*</label>
-                            <textarea class="form-control" id="description" name="description" placeholder="Digite a descrição do plugin" rows="3"></textarea>
+                            <textarea class="form-control" id="description" name="description"
+                                placeholder="Digite a descrição do plugin" rows="3" required></textarea>
                         </div>
                     </div>
                     <div>
@@ -154,73 +249,141 @@
                         <div class="form-group row">
                             <div class="col-12">
                                 <label for="urlVideo">URL do vídeo</label>
-                                <input class="form-control" type="url" placeholder="Digite a url do vídeo" id="urlVideo" name="urlVideo">
+                                <input class="form-control" type="url" placeholder="Digite a url do vídeo" id="urlVideo"
+                                    name="urlVideo">
                             </div>
                             <div class="col-12">
                                 <label for="github">URL do github</label>
-                                <input class="form-control" type="url" placeholder="Digite a url do vídeo" id="github" name="github">
+                                <input class="form-control" type="url" placeholder="Digite a url do github" id="github"
+                                    name="github">
                             </div>
                             <div class="col-6">
                                 <label for="compatibilyVersion">Versão compatível*</label>
-                                <input class="form-control" type="url" placeholder="Digite a url do vídeo" id="compatibilyVersion" name="compatibilyVersion" required>
+                                <input class="form-control" type="text" placeholder="Digite a versão mínima a ser usada"
+                                    id="compatibilyVersion" name="compatibilyVersion" required>
                             </div>
                             <div class="col-6">
                                 <label for="preco">Preço*</label>
-                                <input class="form-control" type="url" placeholder="Digite a url do vídeo" id="preco" name="preco" required>
+                                <input class="form-control" type="number" placeholder="Digite o preço" id="preco"
+                                    name="preco" required>
                             </div>
                             <div class="col-12">
                                 <label for="dependencias">Dependências</label>
-                                <input type="text" class="form-control" placeholder="Digite as dependências do plugin" id="dependencias" name="dependencies">
+                                <input type="text" class="form-control" placeholder="Digite as dependências do plugin"
+                                    id="dependencias" name="dependencies">
                             </div>
                         </div>
                     </div>
 
-                    <div class="recursos">
-                        <div class="row">
+                    <div class="p-3">
+                        <h1><strong>Recursos</strong></h1>
+                        <div class="row d-flex justify-content-between cmd">
                             <h4>Comandos:</h4>
-                            <div class="col-9" id="comandos" style="overflow: auto; scroll-behavior: smooth; height: 160px">
-                                <div class="mt-3 mb-3 rounded border row" style="background-color: rgba(0,255,225,0.37)">
+                            <div class="col-9" id="comandos"
+                                style="overflow: auto; scroll-behavior: smooth; height: 160px">
+                                <div class="mt-3 mb-3 rounded border row p-2 caixacomando"
+                                    style="background-color: rgba(0,255,225,0.37)">
                                     <div class="col-sm-6">
                                         <label class="">Comando</label>
-                                        <input class="form-control" type="text" placeholder="Nome do comando (ex.: pular)">
+                                        <input name="commandName" class="form-control" type="text"
+                                            placeholder="Nome do comando (ex.: pular)" required>
                                     </div>
                                     <div class="col-sm-6">
                                         <label class="">Descrição</label>
-                                        <input class="form-control" type="text" placeholder="Descrição do comando">
+                                        <input name="commandDescription" class="form-control" type="text"
+                                            placeholder="Descrição do comando" required>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-3">
-                                <button onclick="adicionarComando('comandos','')" class="btn btn-success" style="width: 40px; height: 40px; border-radius: 100%" type="button"><i class="bi bi-plus-circle"></i></button>
-                                <button onclick="removerComando('comandos')" class="btn btn-danger" style="width: 40px; height: 40px; border-radius: 100%" type="button"><i class="bi bi-x-circle"></i></button>
+                            <div class="col-3 d-flex align-items-center justify-content-center">
+                                <button onclick="adicionar('comandos','caixacomando')" class="btn btn-success"
+                                    style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                        class="bi bi-plus-circle"></i></button>
+                                <button onclick="remover('comandos','caixacomando')" class="btn btn-danger"
+                                    style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                        class="bi bi-x-circle"></i></button>
                             </div>
                         </div>
-                        <br>
-                        <div>
-                            <button onclick="adicionarComando('perm','nome da perm','permValue','permDescription', true)" class="btn btn-primary" style="width: 40px; height: 40px; border-radius: 100%" type="button"><i class="bi bi-plus-circle"></i></button>
-                            <button onclick="removerComando('perm')" type="button">Remover -</button> <br>
-                            <div id="perm" style="overflow: auto; scroll-behavior: smooth; height: 100px">
-                                <input type="text" placeholder="nome da perm" name="permValue" required> <input type="text" placeholder="descrição" name="permDescription" required> <br>
-
+                        <div class="row d-flex justify-content-between cmd">
+                            <h4>Permissões:</h4>
+                            <div class="col-9" id="permissoes"
+                                style="overflow: auto; scroll-behavior: smooth; height: 160px">
+                                <div class="mt-3 mb-3 rounded border row p-2 caixapermissao"
+                                    style="background-color: rgba(0,255,225,0.37)">
+                                    <div class="col-sm-6">
+                                        <label class="">Comando</label>
+                                        <input name="commandName" class="form-control" type="text"
+                                            placeholder="Nome da permissão (ex.: sua.permissao)" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="">Descrição</label>
+                                        <input name="commandDescription" class="form-control" type="text"
+                                            placeholder="Descrição da permissão" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 d-flex align-items-center justify-content-center">
+                                <button onclick="adicionar('permissoes','caixapermissao')" class="btn btn-success"
+                                    style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                        class="bi bi-plus-circle"></i></button>
+                                <button onclick="remover('permissoes','caixapermissao')" class="btn btn-danger"
+                                    style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                        class="bi bi-x-circle"></i></button>
                             </div>
                         </div>
-                        <br>
-                        <div>
-                            <button onclick="adicionarComando('recursos','recurso',false)" class="btn btn-success" style="width: 40px; height: 40px; border-radius: 100%" type="button"><i class="bi bi-plus-circle"></i></button>
-                            <button onclick="removerComando('recursos')" class="btn btn-danger" style="width: 40px; height: 40px; border-radius: 100%" type="button"><i class="bi bi-x-circle"></i></button> <br>
-                            <div id="recursos" style="overflow: auto; scroll-behavior: smooth; height: 100px">
-                                <input type="text" placeholder="recurso" name="resourceValue" required> <br>
+                        <div class="row d-flex justify-content-between cmd">
+                            <h4>Recursos:</h4>
+                            <div class="col-9" id="recursos"
+                                style="overflow: auto; scroll-behavior: smooth; height: 160px">
+                                <div class="mt-3 mb-3 rounded border row p-2 caixarecurso"
+                                    style="background-color: rgba(0,255,225,0.37)">
+                                    <div class="col-sm-12">
+                                        <label class="">Recurso</label>
+                                        <input name="resource" class="form-control" type="text"
+                                            placeholder="Recurso (Uma das coisas que o plugin faz)" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 d-flex align-items-center justify-content-center">
+                                <button onclick="adicionar('recursos','caixarecurso')" class="btn btn-success"
+                                    style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                        class="bi bi-plus-circle"></i></button>
+                                <button onclick="remover('recursos','caixarecurso')" class="btn btn-danger"
+                                    style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                        class="bi bi-x-circle"></i></button>
                             </div>
                         </div>
                     </div>
-                    <br>
-                    <input type="submit" class="btn btn-primary" value="Atualizar"></input>
+
+                    <div>
+                        <h2><strong>Insira imagens do plugin</strong></h2>
+                        <div class="imgs" id="imgs">
+                            <div id="0"
+                                class="w-100 d-flex flex-column align-items-center justify-content-center caixa-imagem">
+                                <label class="btn-upload"><i class="bi bi-upload"></i>
+                                    <p>Adicionar imagem</p>
+                                    <input name="img0" type="file" class="input-file" accept="image/*">
+                                </label>
+
+                            </div>
+                        </div>
+                        <div class="w-100 mt-3 d-flex align-items-center justify-content-center">
+                            <button onclick="adicionarImagem()" class="btn btn-success"
+                                style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                    class="bi bi-plus-circle"></i></button>
+                            <button onclick="removerImagem()" class="btn btn-danger"
+                                style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                    class="bi bi-x-circle"></i></button>
+                        </div>
+                    </div>
+
+                    <input type="submit" class="btn btn-primary w-25" value="Criar"></input>
 
                 </form>
             </div>
 
-    </main>
-</div>
+        </main>
+    </div>
 
 
 </body>
@@ -229,18 +392,77 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
 
-    function adicionarComando(id, html) {
+    let img_index = 0
+
+    function imageInput(event, label, input, index) {
+        if (!(event.target && event.target.files && event.target.files.length > 0)) {
+            return;
+        }
 
 
-        $('#' + id).append(html)
+        var r = new FileReader();
+
+        if ($(label).find("img").attr('src') === undefined) {
+            $(input).parent().parent().append('<label class="w-50"> Título: <input class="form-control" type="text" placeholder="Digite um título" name="img-titulo' + index + '"></label><label class="w-50">Descrição:<input class="form-control" type="text" placeholder="Digite uma breve descrição" name="img-desc' + index + '"></label>');
+            $(label).children().slice(0, 2).remove();
+        }
+
+        $(label).find("img").remove();
+
+        $(label).removeClass("btn-upload")
+        $(label).append('<img src="" alt="">')
+        r.onload = function () {
+            console.log(r.result)
+            $(label).find("img").attr("src", r.result)
+        }
+
+        r.readAsDataURL(event.target.files[0])
     }
-    function removerComando(id) {
 
-        let div = $("#" + id);
-        let elementos = div.children();
+    function adicionarImagem() {
+        img_index++;
 
-        let startIndex = Math.max(elementos.length - 3, 0);
-        elementos.slice(startIndex).remove();
+        $("#imgs").append('<div id="' + img_index + '"" class="w-100 d-flex flex-column align-items-center justify-content-center caixa-imagem"><label class="btn-upload"><i class="bi bi-upload"></i> <p>Adicionar imagem</p> <input name="img' + img_index + '"" type="file" class="input-file" accept="image/*"></label></div>').find("label").first().find("input");
+        $(".caixa-imagem input").on("change", function (event) {
+
+            imageInput(event, $(this).parent(), $(this), img_index)
+        });
+    }
+
+    function removerImagem() {
+        if (img_index === 0) return;
+
+        $("#imgs").find('div').last().remove();
+        
+        img_index--;
+    }
+
+    $(".caixa-imagem input").on("change", function (event) {
+
+        imageInput(event, $(this).parent(), $(this), 0)
+    });
+
+    $("form").submit(function (event) {
+        if (parseInt($("#preco").val()) < 0) {
+            event.preventDefault();
+            window.alert("O valor do plugin não pode ser menor que 0");
+        }
+    }
+    )
+    document.getElementById("plugin").addEventListener('change', function (e) {
+        var nextSibling = e.target.nextElementSibling;
+        nextSibling.innerText = document.getElementById("plugin").files.length + " arquivo selecionado";
+    });
+    document.getElementById("configs").addEventListener('change', function (e) {
+        var nextSibling = e.target.nextElementSibling;
+        nextSibling.innerText = document.getElementById("configs").files.length + " arquivo selecionado";
+    });
+
+    function adicionar(id, classe) {
+        $('#' + id).append($("." + classe)[0].outerHTML)
+    }
+    function remover(id, classe) {
+        if ($("#" + id).children().length > 1) $("." + classe + ":last").remove();
     }
 
     function getTamanhoDaTela() {

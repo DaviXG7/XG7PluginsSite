@@ -4,99 +4,126 @@
 <head>
     <meta charset="UTF-8">
     <title>XG7Plugins</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="css/body.css" rel="stylesheet">
     <link href="css/detalhes.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="imgs/logo.png" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-
 </head>
 
 <body>
-<div class="detalhes-plugin d-none" id="detalhes">
-    <div class="caixa-detalhe" id="caixaDetalhe">
-        <div class="detalhes-header">
-            <div class="d-flex w-auto">
-                <img src="imgs/logo.png" width="100" height="100" alt="">
-                <div class="d-flex flex-column justify-content-between mt-2">
-                    <h5><strong id="nomePlugin"></strong></h5>
-                    <p style="font-size: 14px"><strong id="downloads"></strong> Downloads</p>
+    <div class="detalhes-plugin d-none" id="detalhes">
+        <button id="sair" class="btn bg-white position-absolute">
+            <i class="bi bi-x-circle bg-white"></i>
+        </button>
+        <div class="caixa-detalhe" id="caixaDetalhe">
+            <div class="detalhes-header">
+                <div class="d-flex w-auto">
+                    <img src="imgs/logo.png" width="100" height="100" alt="">
+                    <div class="d-flex flex-column justify-content-between mt-2">
+                        <h5><strong id="nomePlugin"></strong></h5>
+                        <p style="font-size: 14px"><strong id="downloads"></strong> Downloads</p>
+                    </div>
+
                 </div>
 
+                <div class="d-flex flex-column w-auto">
+                    <a id="baixar" href="" class="btn btn-outline-primary mt-1 mb-1">Baixar</a>
+                    <a id="github" href="" class="btn btn-outline-primary mt-1 mb-1">Github</a>
+                </div>
             </div>
+            <nav class="detalhes-nav">
 
-            <div class="d-flex flex-column w-auto">
-                <a id="baixar" href="" class="btn btn-outline-primary mt-1 mb-1">Baixar</a>
-                <a id="github" href="" class="btn btn-outline-primary mt-1 mb-1">Github</a>
-            </div>
-        </div>
-        <nav class="detalhes-nav">
+                <a id="a1" class="link link-primary" onclick="mostrarAba('visao-geral', 'a1')">Visão geral</a>
+                <a id="a2" class="link link-dark" onclick="mostrarAba('comandos', 'a2')">Comandos</a>
+                <a id="a3" class="link link-dark" onclick="mostrarAba('permissions', 'a3')">Permissões</a>
+                <a id="a4" class="link link-dark" onclick="mostrarAba('atualizacoes', 'a4')">Atualizações</a>
+                <a id="a5" class="link link-dark">Configs</a>
 
-            <a id="a1" class="link link-primary" onclick="mostrarAba('visao-geral', 'a1')">Visão geral</a>
-            <a id="a2" class="link link-dark" onclick="mostrarAba('comandos', 'a2')">Comandos</a>
-            <a id="a3" class="link link-dark" onclick="mostrarAba('permissions', 'a3')">Permissões</a>
-            <a id="a4" class="link link-dark" onclick="mostrarAba('atualizacoes', 'a4')">Atualizações</a>
-            <a id="a5" class="link link-dark">Configs</a>
+            </nav>
+            <div id="abas">
+                <div id="visao-geral" class="active">
+                    <div class="content">
+                        <div class="plugin-content">
+                            <p id="description" style="max-width: 350px;">
 
-        </nav>
-        <div id="abas">
-            <div id="visao-geral" class="active">
-                <div class="content">
-                    <div class="plugin-content">
-                        <div class="d-flex">
-                            <h5><strong>Versão compatível:</strong></h5>
-                            <p id="versao" class="visao-geral-versão-item"></p>
-                        </div>
-                        <div class="visao-geral-dependencias">
-                            <h5><strong>Dependências:</strong></h5>
-                            <div id="dependencias" class="d-flex w-100" style="padding-left: 15px; flex-wrap: wrap">
+                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                                mollit anim id est laborum."
+
+                            </p>
+                            <div class="d-flex">
+                                <h5><strong>Versão compatível:</strong></h5>
+                                <p id="versao" class="visao-geral-versão-item"></p>
+                            </div>
+                            <div class="visao-geral-dependencias" id="caixa-dependencia">
+                                <h5><strong>Dependências:</strong></h5>
+                                <div id="dependencias" class="d-flex w-100" style="padding-left: 15px; flex-wrap: wrap">
+                                </div>
+                            </div>
+                            <div class="visao-geral-recursos">
+                                <h5><strong>Recursos:</strong></h5>
+                                <ol id="recursos">
+
+                                </ol>
+                            </div>
+                            <div id="imagens" class="carousel slide" data-bs-ride="carousel">
+                                <h5><strong>Imagens</strong></h5>
+
+                                <div class="carousel-indicators" id="indicators">
+                                </div>
+
+                                <div class="carousel-inner" id="imgs">
+
+                                </div>
+
+                                <button class="carousel-control-prev" type="button" data-bs-target="#imagens"
+                                    data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon"></span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#imagens"
+                                    data-bs-slide="next">
+                                    <span class="carousel-control-next-icon"></span>
+                                </button>
+                            </div>
+                            <div id="urlVideo">
+
                             </div>
                         </div>
-                        <div class="visao-geral-recursos">
-                            <h5><strong>Recursos:</strong></h5>
-                            <ol id="recursos">
-
-                            </ol>
+                    </div>
+                </div>
+                <div id="comandos" class="">
+                    <div class="content">
+                        <div class="plugin-content">
+                            <ul class="no-decoration-list" id="comandosL">
+                            </ul>
                         </div>
-                        <div id="urlVideo">
-
+                    </div>
+                </div>
+                <div id="permissions" class="">
+                    <div class="content">
+                        <div class="plugin-content">
+                            <ul class="no-decoration-list" id="perms">
+                            </ul>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div id="comandos" class="">
-                <div class="content">
-                    <div class="plugin-content">
-                        <ul class="no-decoration-list" id="comandosL">
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div id="permissions" class="">
-                <div class="content">
-                    <div class="plugin-content">
-                        <ul class="no-decoration-list" id="perms">
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div id="atualizacoes" class="">
-                <div class="content">
-                    <div id="changelog" class="plugin-content" style="background-color: #eaeaea !important;">
+                <div id="atualizacoes" class="">
+                    <div class="content">
+                        <div id="changelog" class="plugin-content" style="background-color: #eaeaea !important;">
 
+                        </div>
                     </div>
-                </div>
 
 
+                </div>
             </div>
         </div>
     </div>
-</div>
     <nav>
         <div id="nav-c" class="container d-flex justify-content-between">
             <div class="nav-left d-flex justify-content-left align-items-center">
@@ -164,15 +191,15 @@
     <main style="padding: 15px;">
 
         <div class="banner d-flex justify-content-center container">
-                <p style="font-size: 25px; color: white; padding: 50px">
-                    Deixe seu servidor mais profissional com os melhores plugins do Brasil!
-                </p>
-                <a href="#plugins" class="btn btn-outline-light">
-                    Conheça agora os melhores plugins!
-                </a>
-                <a href="" class="btn btn-outline-light" >
-                    Quem somos?
-                </a>
+            <p style="font-size: 25px; color: white; padding: 50px">
+                Deixe seu servidor mais profissional com os melhores plugins do Brasil!
+            </p>
+            <a href="#plugins" class="btn btn-outline-light">
+                Conheça agora os melhores plugins!
+            </a>
+            <a href="" class="btn btn-outline-light">
+                Quem somos?
+            </a>
         </div>
 
         <div class="mt-5">
@@ -201,24 +228,9 @@
                     <a class="link link-dark link-underline-opacity-0" href=""><i class="bi bi-hash"></i> Minigames</a>
                     <a class="link link-dark link-underline-opacity-0" href=""><i class="bi bi-hash"></i> Utilidades</a>
                 </div>
-                <div class="plugins-container">
+                <div class="plugins-container" id="plugins-caixas">
 
-                    <div class="plugin-caixa">
 
-                        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="currentColor"
-                            class="bi bi-plugin" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                d="M1 8a7 7 0 1 1 2.898 5.673c-.167-.121-.216-.406-.002-.62l1.8-1.8a3.5 3.5 0 0 0 4.572-.328l1.414-1.415a.5.5 0 0 0 0-.707l-.707-.707 1.559-1.563a.5.5 0 1 0-.708-.706l-1.559 1.562-1.414-1.414 1.56-1.562a.5.5 0 1 0-.707-.706l-1.56 1.56-.707-.706a.5.5 0 0 0-.707 0L5.318 5.975a3.5 3.5 0 0 0-.328 4.571l-1.8 1.8c-.58.58-.62 1.6.121 2.137A8 8 0 1 0 0 8a.5.5 0 0 0 1 0" />
-                        </svg>
-                        <p>Categoria</p>
-                        <h5>Nome</h5>
-                        <p>Preço</p>
-                        <div class="plugin-botoes">
-                            <button class="btn btn-primary">Baixar</button>
-                            <button onclick="abrirTela('Plugin2')" class="btn btn-primary">Ver detalhes</button>
-                        </div>
-
-                    </div>
                 </div>
             </div>
 
@@ -275,6 +287,130 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="js/menu.js"></script>
 <script>
+    let pls = [{
+        nome: "Plugin1",
+        descricao: "dadaddadad",
+        downloads: 2,
+        github: "",
+        baixar: "ihoiugi",
+        config: "",
+        preco: 1,
+        categoria: "Gestão",
+        linkYoutube: "",
+        versao: "1.8+",
+        dependencias: [
+
+        ],
+        recursos: [
+            "1",
+            "2"
+        ],
+        imagens64: [
+            {
+                titulo: "",
+                descricao: "",
+                imagem64: ""
+            }
+
+        ],
+        comandos: [
+            { nome: "comandos", descricao: "descrição" },
+            { nome: "comandos", descricao: "descrição" }
+        ],
+        perms: [
+            { nome: "perm", descricao: "descrição" },
+            { nome: "perm", descricao: "descrição" }
+        ],
+        changelog: [
+            {
+                versao: "a",
+                data: "20/02/2002",
+                logs: [
+                    "a",
+                    "b"
+                ]
+            }
+        ]
+    },
+
+    {
+        nome: "Plugin2",
+        descricao: "dadfafdsfdsafsadfasfdasfasfasdafsfsdaf \n daddadad",
+        downloads: 22,
+        github: "aasdsad",
+        baixar: "ihoiugi",
+        config: "asdasdsad",
+        preco: 0,
+        categoria: "ADM",
+        linkYoutube: "asdasd",
+        versao: "1.8+",
+        dependencias: [
+
+        ],
+        recursos: [
+            "1",
+            "2"
+        ],
+        imagens64: [
+            {
+                titulo: "",
+                descricao: "",
+                imagem64: "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"
+            },
+            {
+                titulo: "",
+                descricao: "",
+                imagem64: "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"
+            },
+            {
+                titulo: "",
+                descricao: "",
+                imagem64: "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"
+            }
+
+        ],
+        comandos: [
+            { nome: "comandos", descricao: "descrição" },
+            { nome: "comandos", descricao: "descrição" }
+        ],
+        perms: [
+            { nome: "perm", descricao: "descrição" },
+            { nome: "perm", descricao: "descrição" }
+        ],
+        changelog: [
+            {
+                versao: "a",
+                data: "20/02/2002",
+                logs: [
+                    "a",
+                    "b"
+                ]
+            }
+        ]
+    }]
+    $().ready(function (e) {
+
+        pls.forEach(function (e) {
+            const c1 = e.preco === 0 ? "Grátis" : "R$" + e.preco;
+            const c2 = e.preco === 0 ? "Baixar" : "Comprar R$" + e.preco;
+            const html = '<div class="plugin-caixa">' +
+                '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="currentColor" class="bi bi-plugin" viewBox="0 0 16 16">' +
+                '<path fill-rule="evenodd" d="M1 8a7 7 0 1 1 2.898 5.673c-.167-.121-.216-.406-.002-.62l1.8-1.8a3.5 3.5 0 0 0 4.572-.328l1.414-1.415a.5.5 0 0 0 0-.707l-.707-.707 1.559-1.563a.5.5 0 1 0-.708-.706l-1.559 1.562-1.414-1.414 1.56-1.562a.5.5 0 1 0-.707-.706l-1.56 1.56-.707-.706a.5.5 0 0 0-.707 0L5.318 5.975a3.5 3.5 0 0 0-.328 4.571l-1.8 1.8c-.58.58-.62 1.6.121 2.137A8 8 0 1 0 0 8a.5.5 0 0 0 1 0"/>' +
+                '</svg>' +
+                '</svg>' +
+                '<p>' + e.categoria + '</p>' +
+                '<h5>' + e.nome + '</h5>' +
+                '<p>' + c1 + '</p>' +
+                '<div class="plugin-botoes">' +
+                '<button class="btn btn-primary">' + c2 + '</button>' +
+                '<button onclick="abrirTela(\'' + e.nome + '\')" class="btn btn-primary">Ver detalhes</button>' +
+                '</div>' +
+                '</div>'
+            console.log(html)
+            $("#plugins-caixas").append(html)
+        })
+
+    })
 
     function mostrarAba(nomeAba, link) {
         const abas = document.getElementById("abas");
@@ -296,75 +432,6 @@
         abaSelecionada.classList.add("active")
     }
 
-    let pls = [{
-        nome: "Plugin1",
-        downloads: 2,
-        github: "",
-        baixar: "",
-        linkYoutube: "https://www.youtube.com/embed/VFvSylJUJNg?si=BBn8yL8B9Vl5ME2V",
-        versao: "1.8+",
-        dependencias: [
-            "1",
-            "2"
-        ],
-        recursos: [
-            "1",
-            "2"
-        ],
-        comandos: [
-            {nome: "comandos",descricao: "descrição"},
-            {nome: "comandos",descricao: "descrição"}
-        ],
-        perms: [
-            {nome: "perm",descricao: "descrição"},
-            {nome: "perm",descricao: "descrição"}
-        ],
-        changelog: [
-            {
-                versao: "a",
-                data: "20/02/2002",
-                logs: [
-                    "a",
-                    "b"
-                ]
-            }
-        ]
-    },
-
-        {
-            nome: "Plugin2",
-            downloads: 2,
-            github: "",
-            baixar: "",
-            linkYoutube: "https://www.youtube.com/embed/VFvSylJUJNg?si=BBn8yL8B9Vl5ME2V",
-            versao: "1.16+",
-            dependencias: [
-                "1",
-                "2asdasdas"
-            ],
-            recursos: [
-                "1asdasdasdasd",
-                "2"
-            ],
-            comandos: [
-                {nome: "comaadssadadsndos",descricao: "descrição"},
-                {nome: "comandos",descricao: "descrição"}
-            ],
-            perms: [
-                {nome: "perm",descricao: "descrição"},
-                {nome: "perasdsadsadasdadsasdm",descricao: "descrição"}
-            ],
-            changelog: [
-                {
-                    versao: "asasdsaasasdadsa",
-                    data: "20/02/20202",
-                    logs: [
-                        "asadasdasdasd",
-                        "b"
-                    ]
-                }
-            ]
-        }]
 
     function abrirTela(NomePlugin) {
 
@@ -379,7 +446,8 @@
         if (plselect == null) return;
 
         let nomelabel = $("#nomePlugin");
-        let downloads = $("#downloads")
+        let downloads = $("#downloads");
+        let descricao = $("#description");
         let linkBaixar = $("#baixar");
         let linkGithub = $("#github");
         let linkVideo = $("#urlVideo");
@@ -389,21 +457,91 @@
         let comandos = $("#comandosL");
         let perms = $("#perms");
         let changelog = $("#changelog");
+        let indicadores = $("#indicators")
+        let imagens = $("#imgs");
+        let config = $("#a5");
 
         nomelabel.text(plselect.nome);
         downloads.text(plselect.downloads);
+        descricao.text(plselect.descricao);
         versao.text(plselect.versao);
-        linkBaixar.attr("href", plselect.baixar);
-        linkGithub.attr("href", plselect.github);
-        linkVideo.html("<h5><strong>Demostração:</strong></h5> <iframe width=\"200\" height=\"135" +
+
+        //Provisório!
+        linkBaixar.text("Comprar R$" + plselect.preco)
+        if (plselect.preco === 0) {
+            linkBaixar.attr("href", plselect.baixar);
+            linkBaixar.text("Baixar");
+        }
+
+        if (plselect.github !== "") linkGithub.attr("href", plselect.github);
+        else linkGithub.addClass("d-none");
+
+        if (plselect.github !== "") config.attr("href", plselect.config);
+        else config.addClass("d-none");
+
+        if (plselect.linkYoutube !== "") linkVideo.html("<h5><strong>Demostração:</strong></h5> <iframe width=\"100%\" height=\"250" +
             "" +
             "" +
             "\" src=\"" + plselect.linkYoutube + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>");
-        plselect.dependencias.forEach(function (e) {
+        else linkVideo.addClass("d-none");
+
+        if (plselect.imagens64.length === 0) $("#imagens").addClass("d-none");
+        else plselect.imagens64.forEach(function (e, i) {
+
+            let html = '<div class="carousel-item';
+
+            if (i === 0) {
+                html += ' active'
+            }
+            html += '"> <img class="d-block w-100" src="data:image/jpeg;base64, ' + e.imagem64 + '" alt="Imagem não carregada">'
+
+            if (e.titulo !== "" || e.descricao !== "") {
+
+                html += '<div class="carousel-caption">'
+
+                if (e.titulo !== "") {
+                    html += '<h3 style="color: #ffffff;' +
+                        'text-shadow: ' +
+                        '     -1px -1px 0px #000000,' +
+                        '      -1px 1px 0px #000000,  ' +
+                        '        1px -1px 0px #000000,  ' +
+                        '         1px 0px 0px #000000;">' + e.titulo + '</h3> '
+                }
+                if (e.descricao !== "") {
+                    html += '<p style="color: #ffffff; ' +
+                        'text-shadow: ' +
+                        '         -1px -1px 0px #000000, ' +
+                        '          -1px 1px 0px #000000,   ' +
+                        '            1px -1px 0px #000000,   ' +
+                        '             1px 0px 0px #000000;">' + e.descricao + '</p> '
+                }
+
+
+                html += '</div> ';
+
+            }
+
+            html += '</div> ';
+            console.log("html")
+
+            imagens.append(html)
+
+
+
+            if (i === 0) {
+                indicadores.append('<button type=\"button\" data-bs-target=\"#imagens\" class=\"active\" data-bs-slide-to=\"0\"></button>')
+                return;
+            }
+
+            indicadores.append('<button type=\"button\" data-bs-target=\"#imagens\" data-bs-slide-to=\"' + i + '\"></button>')
+
+        })
+        if (plselect.dependencias.length === 0) $("#caixa-dependencia").addClass("d-none");
+        else plselect.dependencias.forEach(function (e) {
             dependencias.append("<p class=\"visao-geral-dependencia-item\">" + e + "</p>")
         })
         plselect.recursos.forEach(function (e) {
-            recursos.append("<li>" + e +"</li>")
+            recursos.append("<li>" + e + "</li>")
         })
         plselect.comandos.forEach(function (e) {
             comandos.append("<li><strong>" + e.nome + "</strong> - " + e.descricao + "</li>")
@@ -427,7 +565,7 @@
                 "                    </div>\n" +
                 "                </div>";
 
-                changelog.append(html)
+            changelog.append(html)
         })
 
         $("#detalhes").removeClass("d-none")
@@ -435,31 +573,67 @@
 
     }
 
+    function sair() {
+        $("#nomePlugin").text("");
+        $("#downloads").text("")
+        $("#baixar").attr("href", "");
+        $("#github").attr("href", "");
+        $("#urlVideo").attr("src", "");
+        $("#versoes").html("");
+        $("#dependencias").html("");
+        $("#recursos").html("");
+        $("#comandosL").html("");
+        $("#perms").html("");
+        $("#changelog").html("");
+        $("#a5").attr("href", "");
+        $("#imgs").html("");
+        $("#indicators").html("");
+
+        $("#a5").removeClass("d-none");
+        $("#caixa-dependencia").removeClass("d-none");
+        $("#github").removeClass("d-none");
+        $("#imagens").removeClass("d-none");
+        $("#urlVideo").removeClass("d-none");
+
+
+        $("#detalhes").addClass("d-none");
+        document.getElementById("sair").classList.remove("out")
+        document.getElementById("sair").classList.remove("in")
+
+    }
+
     $("#detalhes").on("click", function (event) {
         if (event.target.id === "detalhes") {
+            sair();
 
-            $("#nomePlugin").text("");
-            $("#downloads").text("")
-            $("#baixar").attr("href", "");
-            $("#github").attr("href", "");
-            $("#urlVideo").attr("src", "");
-            $("#versoes").html("");
-            $("#dependencias").html("");
-            $("#recursos").html("");
-            $("#comandosL").html("");
-            $("#perms").html("");
-            $("#changelog").html("");
-
-
-            $("#detalhes").addClass("d-none");
         }
     })
+
+    $("#sair").on("click", sair)
 
 
 
 </script>
 
 <script>
+    document.addEventListener('mousemove', function (event) {
+        const mouseY = event.clientY;
+
+        const threshold = window.innerHeight * 0.75;
+
+    if (!$("#detalhes").hasClass("d-none")) {
+        if (mouseY > threshold || window.innerWidth <= 600) {
+            document.getElementById("sair").classList.remove("out")
+            document.getElementById("sair").classList.add("in")
+            document.getElementById("sair").style.bottom = "15%";
+        } else if (document.getElementById("sair").classList.contains("in")) {
+            document.getElementById("sair").classList.remove("in")
+            document.getElementById("sair").classList.add("out")
+            document.getElementById("sair").style.bottom = "-10%";
+        }
+    }
+    });
+
     function getTamanhoDaTela() {
         var largura = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 

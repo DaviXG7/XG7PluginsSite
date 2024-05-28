@@ -60,7 +60,7 @@ public class UserFilter implements Filter {
         //Só admins podem fazer alterações nesta pasta
         if (request.getServletPath().contains("admin")) {
             if (((UserModel) session.getAttribute("user")).getPermission() < 2) {
-                response.sendRedirect("home/dashboard.jsp");
+                response.sendRedirect("/home/dashboard.jsp");
                 filterChain.doFilter(request, response);
                 return;
             }
@@ -69,7 +69,7 @@ public class UserFilter implements Filter {
         //Só quem tem permissão pode fazer alterações nesta pasta
         if (request.getServletPath().contains("plugin")) {
             if (((UserModel) session.getAttribute("user")).getPermission() != 4 && ((UserModel) session.getAttribute("user")).getPermission() < 2) {
-                response.sendRedirect("home/dashboard.jsp");
+                response.sendRedirect("/home/dashboard.jsp");
                 filterChain.doFilter(request, response);
                 return;
             }
@@ -77,7 +77,7 @@ public class UserFilter implements Filter {
 
         //Se o usuário tiver logado ele não pode acessar essas duas páginas
         if (request.getServletPath().contains("login") || request.getServletPath().contains("cadastro")) {
-            response.sendRedirect("home/dashboard.jsp");
+            response.sendRedirect("/home/dashboard.jsp");
                 filterChain.doFilter(request, response);
                 return;
         }

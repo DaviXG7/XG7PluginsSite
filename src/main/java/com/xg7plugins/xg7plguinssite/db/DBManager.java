@@ -137,7 +137,7 @@ public class DBManager {
         preparedStatementPlugins.setInt(2, model.getCategory().getIndex());
         preparedStatementPlugins.setString(3,model.getUrlVideo());
         preparedStatementPlugins.setString(4, model.getPluginPath());
-        preparedStatementPlugins.setString(5, model.getVersions());
+        preparedStatementPlugins.setString(5, model.getVersion());
         preparedStatementPlugins.setDouble(6, model.getPrice());
         preparedStatementPlugins.setString(7, model.getResourses());
         preparedStatementPlugins.setString(8, model.getGithub());
@@ -195,22 +195,7 @@ public class DBManager {
         List<Changelog> changelogs = new ArrayList<>();
         while (pcr.next()) changelogs.add(new Changelog(pcr.getDate("changedate"), pcr.getString("changelog"), pcr.getString("pluginversion")));
 
-        return new PluginModel(
-                resultSet.getString("name"),
-                Categoria.fromValue(resultSet.getInt("category")),
-                resultSet.getString("versions"),
-                resultSet.getString("resources"),
-                resultSet.getString("video"),
-                resultSet.getString("github"),
-                resultSet.getString("dependencies"),
-                commands,
-                perms,
-                resultSet.getString("pluginPath"),
-                resultSet.getString("configPath"),
-                changelogs,
-                downloads,
-                resultSet.getInt("price")
-        );
+        return null;
     }
 
 
