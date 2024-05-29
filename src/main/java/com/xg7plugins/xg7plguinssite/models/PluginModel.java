@@ -2,12 +2,14 @@ package com.xg7plugins.xg7plguinssite.models;
 
 import com.xg7plugins.xg7plguinssite.models.extras.Categoria;
 import com.xg7plugins.xg7plguinssite.models.extras.Changelog;
+import com.xg7plugins.xg7plguinssite.models.extras.Imagem;
 import com.xg7plugins.xg7plguinssite.utils.Pair;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.sql.Blob;
+import java.sql.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,8 +29,9 @@ public class PluginModel {
     private String dependencies;
     private List<Pair<String, String>> commands;
     private List<Pair<String, String>> permissions;
-    private String pluginPath;
-    private String configPath;
+    private List<Imagem> images;
+    private Blob plugin;
+    private Blob config;
     private List<Changelog> changelogList;
     private List<UUID> downloads;
     private double price;
@@ -39,7 +42,7 @@ public class PluginModel {
         }
     }
     public void addChangelog(String version, String text) {
-        changelogList.add(new Changelog(new Date(),version,text));
+        changelogList.add(new Changelog(new Date(System.currentTimeMillis()),version,text));
     }
 
 

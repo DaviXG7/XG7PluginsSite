@@ -4,6 +4,7 @@ import com.xg7plugins.xg7plguinssite.models.PluginModel;
 import com.xg7plugins.xg7plguinssite.models.UserModel;
 import com.xg7plugins.xg7plguinssite.models.extras.Categoria;
 import com.xg7plugins.xg7plguinssite.models.extras.Changelog;
+import com.xg7plugins.xg7plguinssite.models.extras.Imagem;
 import com.xg7plugins.xg7plguinssite.utils.Pair;
 import lombok.Getter;
 
@@ -121,6 +122,10 @@ public class DBManager {
 
     }
 
+    public static ResultSet executeQuery(String sql) throws SQLException {
+        return connection.prepareStatement(sql).executeQuery();
+    }
+
     public static void deleteUser(UUID id) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM users WHERE id = ?");
         preparedStatement.setString(1, id.toString());
@@ -129,20 +134,24 @@ public class DBManager {
 
     //Add a plugin
     public static void addPlugin(PluginModel model) throws SQLException {
-        PreparedStatement preparedStatementPlugins = connection.prepareStatement("INSERT INTO plugins(name,category,video,pluginPath,versions,price,resources,github,dependencies,configpath) VALUES (?,?,?,?,?,?,?,?,?,?)");
+        PreparedStatement preparedStatementPlugins = connection.prepareStatement("INSERT INTO plugins(name,category,version,description,video,plugin,compatibilyVersion,price,resourses,github,dependencies,config) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
         PreparedStatement preparedStatementCommands = connection.prepareStatement("INSERT INTO plugincommands(pluginname,command,description) VALUES (?,?,?)");
         PreparedStatement preparedStatementPerms = connection.prepareStatement("INSERT INTO pluginperms(pluginname,perm,description) VALUES (?,?,?)");
+        PreparedStatement preparedStatementChangelog = connection.prepareStatement("INSERT INTO pluginchangelog(pluginname,changedate,changelog,pluginversion) VALUES (?,?,?,?)");
+        PreparedStatement preparedStatementIamges = connection.prepareStatement("INSERT INTO pluginimages(pluginname,image,title,description) VALUES (?,?,?,?)");
 
         preparedStatementPlugins.setString(1, model.getName());
         preparedStatementPlugins.setInt(2, model.getCategory().getIndex());
-        preparedStatementPlugins.setString(3,model.getUrlVideo());
-        preparedStatementPlugins.setString(4, model.getPluginPath());
-        preparedStatementPlugins.setString(5, model.getVersion());
-        preparedStatementPlugins.setDouble(6, model.getPrice());
-        preparedStatementPlugins.setString(7, model.getResourses());
-        preparedStatementPlugins.setString(8, model.getGithub());
-        preparedStatementPlugins.setString(9, model.getDependencies());
-        preparedStatementPlugins.setString(10,model.getConfigPath());
+        preparedStatementPlugins.setString(3,model.getVersion());
+        preparedStatementPlugins.setString(4, model.getDescription());
+        preparedStatementPlugins.setString(5, model.getUrlVideo());
+        preparedStatementPlugins.setBlob(6, model.getPlugin());
+        preparedStatementPlugins.setString(7, model.getCompatibilyVersion());
+        preparedStatementPlugins.setDouble(8, model.getPrice());
+        preparedStatementPlugins.setString(9, model.getResourses());
+        preparedStatementPlugins.setString(10,model.getGithub());
+        preparedStatementPlugins.setString(11,model.getDependencies());
+        preparedStatementPlugins.setBlob(12,model.getConfig());
         preparedStatementPlugins.executeUpdate();
 
         for (Pair<String, String> commands : model.getCommands()) {
@@ -157,6 +166,31 @@ public class DBManager {
             preparedStatementPerms.setString(3, perms.getSecond());
             preparedStatementPerms.executeUpdate();
         }
+        for (Changelog log : model.getChangelogList()) {
+            preparedStatementChangelog.setString(1, model.getName());
+            preparedStatementChangelog.setDate(2, log.getDate());
+            preparedStatementChangelog.setString(3, log.getChangelogText());
+            preparedStatementChangelog.setString(4, log.getPluginVersion());
+            preparedStatementChangelog.executeUpdate();
+        }
+        for (Imagem imagem : model.getImages()) {
+            preparedStatementIamges.setString(1, model.getName());
+            preparedStatementIamges.setBlob(2, imagem.getImage());
+            preparedStatementIamges.setString(3, imagem.getTitulo());
+            preparedStatementIamges.setString(4, imagem.getDescricao());
+            preparedStatementIamges.executeUpdate();
+        }
+
+    }
+
+    public void postUpdate(String name, Changelog log) throws SQLException {
+
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO pluginchangelog(changedate,changelog,pluginversion) VALUES(?,?,?) WHERE pluginname = ?");
+        statement.setString(1, log.getDate().toString());
+        statement.setString(2, log.getChangelogText());
+        statement.setString(3, log.getPluginVersion());
+        statement.setString(4, name);
+        statement.executeUpdate();
 
     }
 
@@ -183,6 +217,10 @@ public class DBManager {
         pds.setString(1, pluginName);
         ResultSet pdr = pds.executeQuery();
 
+        PreparedStatement pis = connection.prepareStatement("SELECT * FROM pluginimages WHERE pluginname = ?");
+        pds.setString(1, pluginName);
+        ResultSet pir = pis.executeQuery();
+
         List<Pair<String,String>> commands = new ArrayList<>();
         while (cr.next()) commands.add(new Pair<>(cr.getString("command"), cr.getString("description")));
 
@@ -195,7 +233,25 @@ public class DBManager {
         List<Changelog> changelogs = new ArrayList<>();
         while (pcr.next()) changelogs.add(new Changelog(pcr.getDate("changedate"), pcr.getString("changelog"), pcr.getString("pluginversion")));
 
-        return null;
+        List<Imagem> imagens = new ArrayList<>();
+        while (pir.next()) imagens.add(new Imagem(pir.getBlob("image"), pir.getString("title"), pir.getString("description")));
+
+        return new PluginModel(
+                resultSet.getString("name"),
+                Categoria.fromValue(resultSet.getInt("category")),
+                resultSet.getString("version"),
+                resultSet.getString("description"),
+                resultSet.getString("compatibilyVersion"),
+                resultSet.getString("resourses"),
+                resultSet.getString("video"),
+                resultSet.getString("github"),
+                resultSet.getString("dependencies"),
+                commands,perms,imagens,
+                resultSet.getBlob("plugin"),
+                resultSet.getBlob("config"),
+                changelogs,downloads,
+                resultSet.getDouble("price")
+        );
     }
 
 

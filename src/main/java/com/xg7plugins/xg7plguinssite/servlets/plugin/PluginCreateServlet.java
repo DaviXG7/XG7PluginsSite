@@ -2,6 +2,9 @@ package com.xg7plugins.xg7plguinssite.servlets.plugin;
 
 import com.xg7plugins.xg7plguinssite.db.DBManager;
 import com.xg7plugins.xg7plguinssite.models.PluginModel;
+import com.xg7plugins.xg7plguinssite.models.extras.Categoria;
+import com.xg7plugins.xg7plguinssite.models.extras.Changelog;
+import com.xg7plugins.xg7plguinssite.models.extras.Imagem;
 import com.xg7plugins.xg7plguinssite.utils.Pair;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -11,14 +14,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
-import java.io.File;
+import javax.imageio.ImageIO;
+import javax.sql.rowset.serial.SerialBlob;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.nio.file.Paths;
+import java.io.InputStream;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
+import java.sql.Date;
 import java.util.stream.IntStream;
 
 @WebServlet(name = "criarplugin", value = "/home/plugin/criarplugin")
@@ -30,7 +33,6 @@ public class PluginCreateServlet extends HttpServlet {
         //Pega todas as informações da página
         Part plugin = request.getPart("plugin");
         Part configs = request.getPart("configs");
-        Part images = request.getPart("imagens");
 
         String name = request.getParameter("nome");
         String versaoPlugin = request.getParameter("pluginversion");
@@ -64,28 +66,56 @@ public class PluginCreateServlet extends HttpServlet {
         if (commandValues.length != commandDescriptions.length) throw new RuntimeException();
         if (permValues.length != permDescriptions.length) throw new RuntimeException();
 
-        File file = new File("C:\\Users\\davis\\Documents\\XG7Plugins\\PastaSite\\XG7PlguinsSite\\src\\main\\java\\com\\xg7plugins\\xg7plguinssite\\data\\plugindata" + File.separator + name);
-        if (!file.exists()) {
-            file.mkdirs();
-        }
-        File imagesDir = new File("C:\\Users\\davis\\Documents\\XG7Plugins\\PastaSite\\XG7PlguinsSite\\src\\main\\java\\com\\xg7plugins\\xg7plguinssite\\data\\plugindata" + File.separator + name + File.separator + "images");
-        if (!imagesDir.exists()) {
-            imagesDir.mkdirs();
-        }
         Collection<Part> fileParts = request.getParts();
 
+        List<Imagem> imagens = new ArrayList<>();
+        for (int i = 0; i < fileParts.size() - 2; i++) {
+            if (fileParts.stream().toList().get(i).getName().contains("img")) {
 
-        //Escreve o arquivo na paste de dados
-        String pluginPath = "C:\\Users\\davis\\Documents\\XG7Plugins\\PastaSite\\XG7PlguinsSite\\src\\main\\java\\com\\xg7plugins\\xg7plguinssite\\data\\plugindata" + File.separator + name + File.separator + name + ".jar";
-        String configPath = "C:\\Users\\davis\\Documents\\XG7Plugins\\PastaSite\\XG7PlguinsSite\\src\\main\\java\\com\\xg7plugins\\xg7plguinssite\\data\\plugindata" + File.separator + name + File.separator + name + "Config.zip";
-        plugin.write(pluginPath);
-        configs.write(configPath);
+                Part part = request.getPart("img" + i);
+                String title = request.getParameter("img-titulo" + i);
+                String description = request.getParameter("img-desc" + i);
 
-        List<Pair<String, String>> commands = IntStream.range(0, permValues.length - 1).mapToObj(i -> new Pair<>(commandValues[i], commandDescriptions[i])).collect(Collectors.toList());
-        List<Pair<String, String>> perms = IntStream.range(0, permValues.length - 1).mapToObj(i -> new Pair<>(permValues[i], permDescriptions[i])).collect(Collectors.toList());
+                if (part != null) {
+                    if (!isImage(part)) throw new RuntimeException();
+                    try {
+                        imagens.add(new Imagem(new SerialBlob(part.getInputStream().readAllBytes()), title, description));
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        }
 
-        //Faz o modelo e manda ao banco de dados
+        List<Pair<String, String>> commands = IntStream.range(0, permValues.length - 1).mapToObj(i -> new Pair<>(commandValues[i], commandDescriptions[i])).toList();
+        List<Pair<String, String>> perms = IntStream.range(0, permValues.length - 1).mapToObj(i -> new Pair<>(permValues[i], permDescriptions[i])).toList();
+
+        Changelog log = new Changelog(new Date(System.currentTimeMillis()), versaoPlugin, "Lançamento do plugin com seus recursos: \n\n" + resources.replace(";;;", "\n"));
+
         PluginModel model = null;
+        try {
+            model = new PluginModel(
+                    name,
+                    Categoria.fromValue(Integer.parseInt(categoria)),
+                    versaoPlugin,
+                    descricao,
+                    versaoCompativel,
+                    resources,
+                    url,
+                    github,
+                    depedencies,
+                    commands,
+                    perms,
+                    imagens,
+                    new SerialBlob(plugin.getInputStream().readAllBytes()),
+                    new SerialBlob(configs.getInputStream().readAllBytes()),
+                    Collections.singletonList(log),
+                    new ArrayList<>(),
+                    preco
+            );
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         try {
             DBManager.addPlugin(model);
@@ -96,6 +126,16 @@ public class PluginCreateServlet extends HttpServlet {
         response.sendRedirect("home/plugin/create.jsp");
 
 
+    }
+
+    private boolean isImage(Part part) {
+        try (InputStream input = part.getInputStream()) {
+            BufferedImage image = ImageIO.read(input);
+            return image != null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 

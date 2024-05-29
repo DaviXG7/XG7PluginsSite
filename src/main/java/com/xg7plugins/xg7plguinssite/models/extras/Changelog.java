@@ -3,7 +3,7 @@ package com.xg7plugins.xg7plguinssite.models.extras;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.util.Date;
+import java.sql.Date;
 
 //Changelog de plugin
 @Getter
