@@ -183,7 +183,7 @@ public class DBManager {
 
     }
 
-    public void postUpdate(String name, Changelog log) throws SQLException {
+    public static void postUpdate(String name, Changelog log) throws SQLException {
 
         PreparedStatement statement = connection.prepareStatement("INSERT INTO pluginchangelog(changedate,changelog,pluginversion) VALUES(?,?,?) WHERE pluginname = ?");
         statement.setString(1, log.getDate().toString());
@@ -194,7 +194,7 @@ public class DBManager {
 
     }
 
-    public PluginModel getPlugin(String pluginName) throws SQLException {
+    public static PluginModel getPlugin(String pluginName) throws SQLException {
         PreparedStatement ps = connection.prepareStatement("SELECT * FROM plugins WHERE name = ?");
         ps.setString(1, pluginName);
         ResultSet resultSet = ps.executeQuery();
@@ -218,14 +218,14 @@ public class DBManager {
         ResultSet pdr = pds.executeQuery();
 
         PreparedStatement pis = connection.prepareStatement("SELECT * FROM pluginimages WHERE pluginname = ?");
-        pds.setString(1, pluginName);
+        pis.setString(1, pluginName);
         ResultSet pir = pis.executeQuery();
 
         List<Pair<String,String>> commands = new ArrayList<>();
         while (cr.next()) commands.add(new Pair<>(cr.getString("command"), cr.getString("description")));
 
         List<Pair<String,String>> perms = new ArrayList<>();
-        while (cr.next()) perms.add(new Pair<>(per.getString("perm"), per.getString("description")));
+        while (per.next()) perms.add(new Pair<>(per.getString("perm"), per.getString("description")));
 
         List<UUID> downloads = new ArrayList<>();
         while (pdr.next()) downloads.add(UUID.fromString(pdr.getString("userid")));

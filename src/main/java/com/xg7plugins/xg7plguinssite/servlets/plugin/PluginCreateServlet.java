@@ -6,6 +6,7 @@ import com.xg7plugins.xg7plguinssite.models.extras.Categoria;
 import com.xg7plugins.xg7plguinssite.models.extras.Changelog;
 import com.xg7plugins.xg7plguinssite.models.extras.Imagem;
 import com.xg7plugins.xg7plguinssite.utils.Pair;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,7 +23,6 @@ import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.*;
 import java.sql.Date;
-import java.util.stream.IntStream;
 
 @WebServlet(name = "criarplugin", value = "/home/plugin/criarplugin")
 @MultipartConfig
@@ -61,20 +61,22 @@ public class PluginCreateServlet extends HttpServlet {
         descricao == null || descricao.isEmpty()) throw new RuntimeException();
         if (categoria.equals("0")) throw new RuntimeException();
         if (preco < 0) throw new RuntimeException();
+        if (!Objects.equals(configs.getSubmittedFileName(), "") && !configs.getSubmittedFileName().contains("zip")) throw new RuntimeException();
         if (!plugin.getSubmittedFileName().contains("jar")) throw new RuntimeException();
-        if (!configs.getSubmittedFileName().contains("zip")) throw new RuntimeException();
         if (commandValues.length != commandDescriptions.length) throw new RuntimeException();
         if (permValues.length != permDescriptions.length) throw new RuntimeException();
 
         Collection<Part> fileParts = request.getParts();
 
         List<Imagem> imagens = new ArrayList<>();
-        for (int i = 0; i < fileParts.size() - 2; i++) {
+        int indexImage = 0;
+        for (int i = 0; i < fileParts.size(); i++) {
             if (fileParts.stream().toList().get(i).getName().contains("img")) {
 
-                Part part = request.getPart("img" + i);
-                String title = request.getParameter("img-titulo" + i);
-                String description = request.getParameter("img-desc" + i);
+                Part part = request.getPart("img" + indexImage);
+                String title = request.getParameter("img-titulo" + indexImage);
+                String description = request.getParameter("img-desc" + indexImage);
+
 
                 if (part != null) {
                     if (!isImage(part)) throw new RuntimeException();
@@ -84,11 +86,22 @@ public class PluginCreateServlet extends HttpServlet {
                         throw new RuntimeException(e);
                     }
                 }
+                indexImage++;
             }
         }
 
-        List<Pair<String, String>> commands = IntStream.range(0, permValues.length - 1).mapToObj(i -> new Pair<>(commandValues[i], commandDescriptions[i])).toList();
-        List<Pair<String, String>> perms = IntStream.range(0, permValues.length - 1).mapToObj(i -> new Pair<>(permValues[i], permDescriptions[i])).toList();
+        List<Pair<String, String>> commands = new ArrayList<>();
+        for (int i = 0; i < commandValues.length; i++) {
+            if (Objects.equals(commandValues[i], "") || Objects.equals(commandDescriptions[i], "")) throw new RuntimeException();
+            Pair<String, String> stringStringPair = new Pair<>(commandValues[i], commandDescriptions[i]);
+            commands.add(stringStringPair);
+        }
+        List<Pair<String, String>> perms = new ArrayList<>();
+        for (int i = 0; i < permValues.length; i++) {
+            if (Objects.equals(permValues[i], "") || Objects.equals(permDescriptions[i], "")) throw new RuntimeException();
+            Pair<String, String> stringStringPair = new Pair<>(permValues[i], permDescriptions[i]);
+            perms.add(stringStringPair);
+        }
 
         Changelog log = new Changelog(new Date(System.currentTimeMillis()), versaoPlugin, "Lançamento do plugin com seus recursos: \n\n" + resources.replace(";;;", "\n"));
 
@@ -108,7 +121,7 @@ public class PluginCreateServlet extends HttpServlet {
                     perms,
                     imagens,
                     new SerialBlob(plugin.getInputStream().readAllBytes()),
-                    new SerialBlob(configs.getInputStream().readAllBytes()),
+                    configs.getSubmittedFileName().equals("") ? null : new SerialBlob(configs.getInputStream().readAllBytes()),
                     Collections.singletonList(log),
                     new ArrayList<>(),
                     preco
@@ -123,7 +136,7 @@ public class PluginCreateServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-        response.sendRedirect("home/plugin/create.jsp");
+        response.sendRedirect("/home/admin/plugins.jsp");
 
 
     }

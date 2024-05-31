@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>XG7Plugins</title>
+    <title>Atualizar plugin</title>
     <link rel="stylesheet" href="../../css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="../css/dashboard.css" rel="stylesheet">
@@ -83,9 +83,15 @@
                 <%
                     if (model.getPermission() > 1) {
                 %>
-                <a>
-                    <i class="bi bi-plus" style="font-size: 30px; padding: 0 10px 0 10px"></i>
-                </a>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="pluginDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="bi bi-plus" style="font-size: 30px; padding: 0 10px 0 10px"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="pluginDropdown">
+                        <a class="dropdown-item" href="create.jsp">Criar Plugin</a>
+                        <a class="dropdown-item" href="">Postar atualização</a>
+                    </div>
+                </div>
                 <%
                     }
                 %>
@@ -169,6 +175,7 @@
 </body>
 
 <script src="../js/menu.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     function adicionarComando(id, placeholder, nome, nome2, aparecer) {

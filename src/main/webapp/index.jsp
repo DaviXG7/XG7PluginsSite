@@ -167,7 +167,7 @@
                 <%
                     } else {
                 %>
-                <img src="<%=model.getImageData()%>" width="70" height="70" alt="img">
+                <img src="<%=model.getImageData()%>" width="50" height="50" style="border-radius: 20px" alt="img">
                 <%
                     }
                 %>
@@ -295,7 +295,7 @@
 
 
 
-<script src="js/bootstrap.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/showplugins.js"></script>
 
 <script>

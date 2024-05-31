@@ -14,6 +14,82 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
+        @media screen and (max-width: 600px) {
+            .cmd {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        form>div {
+            width: 95%;
+        }
+
+        form>* {
+            margin: 10px;
+            padding: 10px;
+            border-top: black solid 1px;
+            border-bottom: black solid 1px;
+            background-color: #fafafa;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        form>input {
+            align-items: center;
+            justify-content: center;
+        }
+
+        .input-file {
+            width: 0;
+            height: 0;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+
+        .imgs {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+
+        }
+
+        .imgs>* {
+            margin: 10px 0 10px 0;
+        }
+
+        img {
+            max-width: 300px;
+        }
+
+        .btn-upload {
+            display: flex;
+            border: 1px dashed #00c3ff;
+            border-radius: 10px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(000, 192, 255, .2);
+            width: 80%;
+            height: 100px
+        }
+
+        .btn-upload:hover {
+            background-color: rgba(000, 192, 255, .4);
+            transition: 0.3s;
+        }
     </style>
 
 
@@ -30,14 +106,19 @@
 
         <hr>
 
-        <!-- Heading -->
         <div class="menus">
             <div class="sidebar-heading side-title">
                 INTERFACE
             </div>
             <div class="botoes">
-                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href=""><i style="color: rgba(255,255,255,.5);" class="bi bi-telephone"></i><p class="textos-botoes"> Suporte <i class="bi bi-box-arrow-up-right"></i></p></a>
-                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href=""><i style="color: rgba(255,255,255,.5);" class="bi bi-cash"></i><p class="textos-botoes" > Doação <i class="bi bi-box-arrow-up-right"></i></p></a>
+                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href=""><i
+                        style="color: rgba(255,255,255,.5);" class="bi bi-telephone"></i>
+                    <p class="textos-botoes"> Suporte <i class="bi bi-box-arrow-up-right"></i></p>
+                </a>
+                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href=""><i
+                        style="color: rgba(255,255,255,.5);" class="bi bi-cash"></i>
+                    <p class="textos-botoes"> Doação <i class="bi bi-box-arrow-up-right"></i></p>
+                </a>
             </div>
         </div>
 
@@ -48,8 +129,14 @@
                 ADMIN
             </div>
             <div class="botoes">
-                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href=""><i style="color: rgba(255,255,255,.5);" class="bi bi-people"></i> <p class="textos-botoes" > Clientes</p></a>
-                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href="../index.html"><i style="color: rgba(255,255,255,.5);" class="bi bi-plug"></i> <p class="textos-botoes" > Plugins</p></a>
+                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href=""><i
+                        style="color: rgba(255,255,255,.5);" class="bi bi-people"></i>
+                    <p class="textos-botoes"> Clientes</p>
+                </a>
+                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0"
+                   href="../index.html"><i style="color: rgba(255,255,255,.5);" class="bi bi-plug"></i>
+                    <p class="textos-botoes"> Plugins</p>
+                </a>
             </div>
         </div>
 
@@ -62,11 +149,12 @@
 
 
     <main>
-
         <header>
             <button id="hamburger" class="btn" onclick="toggleMenu('barra-lateral','flex','none')">
-                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor"
+                     class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                          d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
                 </svg>
             </button>
             <div class="h-botoes">
@@ -99,51 +187,187 @@
                 </div>
             </div>
         </header>
-        <form action="">
-            <input type="file">
-            <input type="text" placeholder="Digite o nome do plugin">
-            <br>
-            <select>
-                <option value="0">Editar categoria</option>
-                <option value="0">Gestão</option>
-                <option value="0">Utilidades</option>
-                <option value="0">Minigames</option>
-            </select>
-            <br>
-            <input type="text" placeholder="Digite a url do vídeo">
-            <br>
-            <input type="text" placeholder="Digite o preço do plugin">
-            <br>
-            <input type="text" placeholder="Digite o github do plugin">
-            <input type="text" placeholder="Digite as versões do plugin">
-            <input type="text" placeholder="Digite as dependências do plugin">
-            <br>
-            <div>
-                <button onclick="adicionarComando('comandos','nome do comando',true)" type="button">Adicionar +</button>
-                <button onclick="removerComando('comandos')" type="button">Remover -</button> <br>
-                <div id="comandos" style="overflow: auto; scroll-behavior: smooth; height: 100px">
-                    <input type="text" placeholder="nome do comando"> <input type="text" placeholder="descrição"> <br>
+        <div class="pag">
+            <form enctype="multipart/form-data" method="post" action="criarplugin">
 
-                </div>
-            </div>
-            <div>
-                <button onclick="adicionarComando('perm','nome da perm',true)" type="button">Adicionar +</button>
-                <button onclick="removerComando('perm')" type="button">Remover -</button> <br>
-                <div id="perm" style="overflow: auto; scroll-behavior: smooth; height: 100px">
-                    <input type="text" placeholder="nome da perm"> <input type="text" placeholder="descrição"> <br>
+                <div>
 
-                </div>
-            </div>
-            <div>
-                <button onclick="adicionarComando('recursos','recurso',false)" type="button">Adicionar +</button>
-                <button onclick="removerComando('recursos')" type="button">Remover -</button> <br>
-                <div id="recursos" style="overflow: auto; scroll-behavior: smooth; height: 100px">
-                    <input type="text" placeholder="recurso"> <input type="text" placeholder="descrição"> <br>
-                </div>
-            </div>
-            <input type="submit" class="btn btn-primary" value="Atualizar"></input>
+                    <h1><strong>Principal</strong></h1>
 
-        </form>
+                    <div class="form-group row">
+                        <div class="col-5">
+                            <label for="nome">Nome*</label>
+                            <input type="text" class="form-control-plaintext" disabled value="XG7RandomKits" name="nome" id="nome"
+                                   placeholder="Sem nome???" required>
+                        </div>
+                        <div class="col-7">
+                            <label for="description">Descrição do plugin*</label>
+                            <textarea class="form-control" id="description" name="description"
+                                      placeholder="Edite a descrição do plugin" rows="2" required></textarea>
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col d-sm-flex justify-content-between">
+                            <label>Pasta config (.zip): </label>
+                            <label for="configs" class="btn btn-outline-primary"><i class="bi bi-upload"></i>
+                                Upload</label>
+                            <div>
+                                <input type="file" class="input-file" accept="application/zip" id="configs"
+                                       name="configs">
+                                <span>Nenhum arquivo escolhido</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h1><strong>Configurações</strong></h1>
+
+                    <div class="form-group">
+                        <label for="categoria">Categoria*</label>
+                        <select class="form-select" id="categoria" name="categoria" required>
+                            <option selected value="0">Selecione uma categoria...</option>
+                            <option value="1">Gestão</option>
+                            <option value="2">Utilidades</option>
+                            <option value="3">Minigames</option>
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <label for="urlVideo">URL do vídeo</label>
+                            <input class="form-control" type="url" placeholder="Edite a url do vídeo" id="urlVideo"
+                                   name="urlVideo">
+                        </div>
+                        <div class="col-12">
+                            <label for="github">URL do github</label>
+                            <input class="form-control" type="url" placeholder="Edite a url do github" id="github"
+                                   name="github">
+                        </div>
+                        <div class="col-6">
+                            <label for="compatibilyVersion">Versão compatível*</label>
+                            <input class="form-control" type="text" placeholder="Edite a versão mínima a ser usada"
+                                   id="compatibilyVersion" name="compatibilyVersion" required>
+                        </div>
+                        <div class="col-6">
+                            <label for="preco">Preço*</label>
+                            <input class="form-control" type="number" placeholder="Edite o preço" id="preco"
+                                   name="preco" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="dependencias">Dependências</label>
+                            <input type="text" class="form-control" placeholder="Edite as dependências do plugin"
+                                   id="dependencias" name="dependencies">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-3">
+                    <h1><strong>Recursos</strong></h1>
+                    <div class="row d-flex justify-content-between cmd">
+                        <h4>Comandos:</h4>
+                        <div class="col-9" id="comandos"
+                             style="overflow: auto; scroll-behavior: smooth; height: 160px">
+                            <div class="mt-3 mb-3 rounded border row p-2 caixacomando"
+                                 style="background-color: rgba(0,255,225,0.37)">
+                                <div class="col-sm-6">
+                                    <label class="">Comando</label>
+                                    <input name="commandName" class="form-control" type="text"
+                                           placeholder="Nome do comando (ex.: pular)" required>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="">Descrição</label>
+                                    <input name="commandDescription" class="form-control" type="text"
+                                           placeholder="Descrição do comando" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 d-flex align-items-center justify-content-center">
+                            <button onclick="adicionar('comandos','caixacomando')" class="btn btn-success"
+                                    style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                    class="bi bi-plus-circle"></i></button>
+                            <button onclick="remover('comandos','caixacomando')" class="btn btn-danger"
+                                    style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                    class="bi bi-x-circle"></i></button>
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-between cmd">
+                        <h4>Permissões:</h4>
+                        <div class="col-9" id="permissoes"
+                             style="overflow: auto; scroll-behavior: smooth; height: 160px">
+                            <div class="mt-3 mb-3 rounded border row p-2 caixapermissao"
+                                 style="background-color: rgba(0,255,225,0.37)">
+                                <div class="col-sm-6">
+                                    <label class="">Comando</label>
+                                    <input name="commandName" class="form-control" type="text"
+                                           placeholder="Nome da permissão (ex.: sua.permissao)" required>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="">Descrição</label>
+                                    <input name="commandDescription" class="form-control" type="text"
+                                           placeholder="Descrição da permissão" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 d-flex align-items-center justify-content-center">
+                            <button onclick="adicionar('permissoes','caixapermissao')" class="btn btn-success"
+                                    style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                    class="bi bi-plus-circle"></i></button>
+                            <button onclick="remover('permissoes','caixapermissao')" class="btn btn-danger"
+                                    style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                    class="bi bi-x-circle"></i></button>
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-between cmd">
+                        <h4>Recursos:</h4>
+                        <div class="col-9" id="recursos"
+                             style="overflow: auto; scroll-behavior: smooth; height: 160px">
+                            <div class="mt-3 mb-3 rounded border row p-2 caixarecurso"
+                                 style="background-color: rgba(0,255,225,0.37)">
+                                <div class="col-sm-12">
+                                    <label class="">Recurso</label>
+                                    <input name="resource" class="form-control" type="text"
+                                           placeholder="Recurso (Uma das coisas que o plugin faz)" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 d-flex align-items-center justify-content-center">
+                            <button onclick="adicionar('recursos','caixarecurso')" class="btn btn-success"
+                                    style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                    class="bi bi-plus-circle"></i></button>
+                            <button onclick="remover('recursos','caixarecurso')" class="btn btn-danger"
+                                    style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                    class="bi bi-x-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h2><strong>Insira imagens do plugin</strong></h2>
+                    <div class="imgs" id="imgs">
+                        <div id="0"
+                             class="w-100 d-flex flex-column align-items-center justify-content-center caixa-imagem">
+                            <label class="btn-upload"><i class="bi bi-upload"></i>
+                                <p>Adicionar imagem</p>
+                                <input name="img0" type="file" class="input-file" accept="image/*">
+                            </label>
+
+                        </div>
+                    </div>
+                    <div class="w-100 mt-3 d-flex align-items-center justify-content-center">
+                        <button onclick="adicionarImagem()" class="btn btn-success"
+                                style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                class="bi bi-plus-circle"></i></button>
+                        <button onclick="removerImagem()" class="btn btn-danger"
+                                style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                class="bi bi-x-circle"></i></button>
+                    </div>
+                </div>
+
+                <input type="submit" class="btn btn-primary w-25" value="Criar"></input>
+
+            </form>
+        </div>
+
     </main>
 </div>
 
@@ -153,18 +377,78 @@
 <script src="../js/menu.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
-    function adicionarComando(id, placeholder, aparecer) {
+
+    let img_index = 0
+
+    function imageInput(event, label, input, index) {
+        if (!(event.target && event.target.files && event.target.files.length > 0)) {
+            return;
+        }
 
 
-        $('#' + id).append("<input type=\"text\" placeholder=\"" + placeholder +"\">").append(aparecer ? "<input type=\"text\" placeholder=\"descrição\">" : "").append("<br>")
+        var r = new FileReader();
+
+        if ($(label).find("img").attr('src') === undefined) {
+            $(input).parent().parent().append('<label class="w-50"> Título: <input class="form-control" type="text" placeholder="Digite um título" name="img-titulo' + index + '"></label><label class="w-50">Descrição:<input class="form-control" type="text" placeholder="Digite uma breve descrição" name="img-desc' + index + '"></label>');
+            $(label).children().slice(0, 2).remove();
+        }
+
+        $(label).find("img").remove();
+
+        $(label).removeClass("btn-upload")
+        $(label).append('<img src="" alt="">')
+        r.onload = function () {
+            console.log(r.result)
+            $(label).find("img").attr("src", r.result)
+        }
+
+        r.readAsDataURL(event.target.files[0])
     }
-    function removerComando(id) {
 
-        let div = $("#" + id);
-        let elementos = div.children();
+    function adicionarImagem() {
+        img_index++;
 
-        let startIndex = Math.max(elementos.length - 3, 0);
-        elementos.slice(startIndex).remove();
+        $("#imgs").append('<div id="' + img_index + '"" class="w-100 d-flex flex-column align-items-center justify-content-center caixa-imagem"><label class="btn-upload"><i class="bi bi-upload"></i> <p>Adicionar imagem</p> <input name="img' + img_index + '"" type="file" class="input-file" accept="image/*"></label></div>').find("label").first().find("input");
+        $(".caixa-imagem input").on("change", function (event) {
+
+            imageInput(event, $(this).parent(), $(this), img_index)
+        });
+    }
+
+    function removerImagem() {
+        if (img_index === 0) return;
+
+        $("#imgs").find('div').last().remove();
+
+        img_index--;
+    }
+
+    $(".caixa-imagem input").on("change", function (event) {
+
+        imageInput(event, $(this).parent(), $(this), 0)
+    });
+
+    $("form").submit(function (event) {
+            if (parseInt($("#preco").val()) < 0) {
+                event.preventDefault();
+                window.alert("O valor do plugin não pode ser menor que 0");
+            }
+        }
+    )
+    document.getElementById("plugin").addEventListener('change', function (e) {
+        var nextSibling = e.target.nextElementSibling;
+        nextSibling.innerText = document.getElementById("plugin").files.length + " arquivo selecionado";
+    });
+    document.getElementById("configs").addEventListener('change', function (e) {
+        var nextSibling = e.target.nextElementSibling;
+        nextSibling.innerText = document.getElementById("configs").files.length + " arquivo selecionado";
+    });
+
+    function adicionar(id, classe) {
+        $('#' + id).append($("." + classe)[0].outerHTML)
+    }
+    function remover(id, classe) {
+        if ($("#" + id).children().length > 1) $("." + classe + ":last").remove();
     }
 
     function getTamanhoDaTela() {

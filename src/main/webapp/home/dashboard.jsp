@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>XG7Plugins</title>
+    <title>Página principal</title>
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="css/dashboard.css" rel="stylesheet">
@@ -83,9 +83,15 @@
             <%
                 if (model.getPermission() > 1) {
             %>
-            <a>
-                <i class="bi bi-plus" style="font-size: 30px; padding: 0 10px 0 10px"></i>
-            </a>
+            <div class="dropdown">
+                <button style="border: none; background: none" type="button" data-bs-toggle="dropdown">
+                    <i class="bi bi-plus" style="font-size: 30px; padding: 0 10px 0 10px"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <a class="dropdown-item" href="plugin/create.jsp">Criar Plugin</a>
+                    <a class="dropdown-item" href="plugin/update.jsp">Postar atualização</a>
+                </ul>
+            </div>
             <%
                 }
             %>
@@ -121,6 +127,7 @@
 </body>
 
 <script src="../js/menu.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../js/dashboard.js"></script>
 
 </html>

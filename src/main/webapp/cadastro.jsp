@@ -5,7 +5,7 @@
 <html lang="br">
 <head>
     <meta charset="UTF-8">
-    <title>XG7Plugins</title>
+    <title>Faça seu cadastro</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="css/cadastro.css" rel="stylesheet">
