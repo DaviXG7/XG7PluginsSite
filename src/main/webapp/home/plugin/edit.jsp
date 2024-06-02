@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="../css/dashboard.css" rel="stylesheet">
     <link href="css/plugin.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="../imgs/logo.png" />
+    <link rel="icon" type="image/png" href="../../imgs/logo.png" />
 
 
     <%
@@ -39,8 +39,8 @@
     <div id="barra-lateral" class="barra-lateral sidebar">
 
 
-        <a href="../index.jsp">
-            <img src="../imgs/logo.png" width="135" alt="">
+        <a href="../../index.jsp">
+            <img src="../../imgs/logo.png" width="135" alt="">
         </a>
 
         <hr>
@@ -111,7 +111,7 @@
 
                 <div class="dropdown">
                     <button style="border: none; background-color: white" type="button" data-bs-toggle="dropdown">
-                        <img src="<%=model.getImageData() == null ? "alt.png" : model.getImageData()%>" width="60" style="border: solid black 1px; border-radius: 100%" alt="">
+                        <img src="<%=model.getImageData() == null ? "alt.png" : model.getImageData()%>" width="60" height="60" style="border: solid black 1px; border-radius: 100%" alt="">
                     </button>
                     <ul class="dropdown-menu">
                         <p class="dropdown-item"><%=model.getNome()%></p>
@@ -130,7 +130,7 @@
             </div>
         </header>
         <div class="pag">
-            <form enctype="multipart/form-data" method="post" action="criarplugin">
+            <form enctype="multipart/form-data" method="post" action="<%="editarplugin?plugin=" + request.getParameter("plugin")%>">
 
                 <div>
 
@@ -230,7 +230,7 @@
                             %>
                         </div>
                         <div class="col-3 d-flex align-items-center justify-content-center">
-                            <button onclick="adicionar('comandos','caixacomando')" class="btn btn-success"
+                            <button onclick="adicionar('comandos')" class="btn btn-success"
                                     style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
                                     class="bi bi-plus-circle"></i></button>
                             <button onclick="remover('comandos','caixacomando')" class="btn btn-danger"
@@ -263,7 +263,7 @@
                             %>
                         </div>
                         <div class="col-3 d-flex align-items-center justify-content-center">
-                            <button onclick="adicionar('permissoes','caixapermissao')" class="btn btn-success"
+                            <button onclick="adicionar('permissoes')" class="btn btn-success"
                                     style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
                                     class="bi bi-plus-circle"></i></button>
                             <button onclick="remover('permissoes','caixapermissao')" class="btn btn-danger"
@@ -291,7 +291,7 @@
                             %>
                         </div>
                         <div class="col-3 d-flex align-items-center justify-content-center">
-                            <button onclick="adicionar('recursos','caixarecurso')" class="btn btn-success"
+                            <button onclick="adicionar('recursos')" class="btn btn-success"
                                     style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
                                     class="bi bi-plus-circle"></i></button>
                             <button onclick="remover('recursos','caixarecurso')" class="btn btn-danger"
@@ -313,7 +313,7 @@
                             <label class="">
 
                                 <input name="img<%=imageIndex%>" type="file" class="input-file" accept="image/*">
-                                <img src="<%=image.getImage()%>" alt=""></label>
+                                <img src="<%=image.getImageData()%>" alt=""></label>
 
                             <label class="w-50"> Título: <input value="<%=image.getTitulo()%>" class="form-control" type="text" placeholder="Digite um título" name="img-titulo<%=imageIndex%>"></label><label class="w-50">Descrição:<input value="<%=image.getDescricao()%>" class="form-control" type="text" placeholder="Digite uma breve descrição" name="img-desc<%=imageIndex%>"></label></div>
                         <%
@@ -324,7 +324,7 @@
                              class="w-100 d-flex flex-column align-items-center justify-content-center caixa-imagem">
                             <label class="btn-upload"><i class="bi bi-upload"></i>
                                 <p>Adicionar imagem</p>
-                                <input name="img0" type="file" class="input-file" accept="image/*">
+                                <input name="img<%=imageIndex%>" type="file" class="input-file" accept="image/*">
                             </label>
 
                         </div>
@@ -339,7 +339,7 @@
                     </div>
                 </div>
 
-                <input type="submit" class="btn btn-primary w-25" value="Criar">
+                <input type="submit" class="btn btn-primary w-25" value="Editar">
 
             </form>
         </div>
@@ -350,6 +350,9 @@
 </body>
 
 <script src="../../js/menu.js"></script>
+<script>
+    let img_index = parseInt(<%=imageIndex%>)
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="js/createpl.js"></script>

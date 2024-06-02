@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../../css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="css/dashboard.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="../imgs/logo.png" />
+    <link rel="icon" type="image/png" href="../../imgs/logo.png" />
 
 
     <%
@@ -26,8 +26,8 @@
     <div id="barra-lateral" class="barra-lateral sidebar">
 
 
-        <a href="../index.jsp">
-            <img src="../imgs/logo.png" width="135" alt="">
+        <a href="../../index.jsp">
+            <img src="../../imgs/logo.png" width="135" alt="">
         </a>
 
         <hr>
@@ -98,12 +98,12 @@
 
                 <div class="dropdown">
                     <button style="border: none; background-color: white" type="button" data-bs-toggle="dropdown">
-                        <img src="<%=model.getImageData() == null ? "alt.png" : model.getImageData()%>" width="60" style="border: solid black 1px; border-radius: 100%" alt="">
+                        <img src="<%=model.getImageData() == null ? "alt.png" : model.getImageData()%>" width="60" height="60" style="border: solid black 1px; border-radius: 100%" alt="">
                     </button>
                     <ul class="dropdown-menu">
                         <p class="dropdown-item"><%=model.getNome()%></p>
                         <div class="dropdown-divider"></div>
-                        <a href=<%="user/user.jsp?uuid=" + model.getId().toString()%> class="dropdown-item">
+                        <a href=<%="../user/user.jsp?uuid=" + model.getId().toString()%> class="dropdown-item">
                             <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                             Configurações
                         </a>

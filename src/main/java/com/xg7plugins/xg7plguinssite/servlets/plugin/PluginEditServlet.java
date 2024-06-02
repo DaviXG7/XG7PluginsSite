@@ -6,7 +6,6 @@ import com.xg7plugins.xg7plguinssite.models.extras.Categoria;
 import com.xg7plugins.xg7plguinssite.models.extras.Changelog;
 import com.xg7plugins.xg7plguinssite.models.extras.Imagem;
 import com.xg7plugins.xg7plguinssite.utils.Pair;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -20,22 +19,22 @@ import javax.sql.rowset.serial.SerialBlob;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.rmi.RemoteException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.*;
-import java.sql.Date;
 
-@WebServlet(name = "criarplugin", value = "/home/plugin/criarplugin")
+@WebServlet(name = "editarplugin", value = "/home/plugin/editarplugin")
 @MultipartConfig
-public class PluginCreateServlet extends HttpServlet {
+public class PluginEditServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String plName = request.getParameter("plugin");
+        if (plName.isEmpty()) throw new RuntimeException();
 
         //Pega todas as informações da página
-        Part plugin = request.getPart("plugin");
         Part configs = request.getPart("configs");
 
-        String name = request.getParameter("nome");
-        String versaoPlugin = request.getParameter("pluginversion");
         String descricao = request.getParameter("description");
         String categoria = request.getParameter("categoria");
         String url = request.getParameter("urlVideo");
@@ -54,15 +53,13 @@ public class PluginCreateServlet extends HttpServlet {
 
         //Verifica se algo saiu errado
         if (commandValues.length == 0 || commandDescriptions.length == 0 ||
-        permDescriptions.length == 0 || permValues.length == 0 || resources.isEmpty() ||
-        plugin == null || name == null || name.isEmpty()
-        || categoria == null || versaoPlugin == null || versaoPlugin.isEmpty() || depedencies == null
-        || depedencies.isEmpty() || versaoCompativel == null || versaoCompativel.isEmpty() ||
-        descricao == null || descricao.isEmpty()) throw new RuntimeException();
+                permDescriptions.length == 0 || permValues.length == 0 || resources.isEmpty()
+                || categoria == null || depedencies == null
+                || depedencies.isEmpty() || versaoCompativel == null || versaoCompativel.isEmpty() ||
+                descricao == null || descricao.isEmpty()) throw new RuntimeException();
         if (categoria.equals("0")) throw new RuntimeException();
         if (preco < 0) throw new RuntimeException();
         if (!Objects.equals(configs.getSubmittedFileName(), "") && !configs.getSubmittedFileName().contains("zip")) throw new RuntimeException();
-        if (!plugin.getSubmittedFileName().contains("jar")) throw new RuntimeException();
         if (commandValues.length != commandDescriptions.length) throw new RuntimeException();
         if (permValues.length != permDescriptions.length) throw new RuntimeException();
 
@@ -71,7 +68,8 @@ public class PluginCreateServlet extends HttpServlet {
         List<Imagem> imagens = new ArrayList<>();
         int indexImage = 0;
         for (int i = 0; i < fileParts.size(); i++) {
-            if (fileParts.stream().toList().get(i).getName().contains("img")) {
+            if (fileParts.stream().toList().get(i).getName().contains("img") &&
+                    !fileParts.stream().toList().get(i).getName().contains("-")) {
 
                 Part part = request.getPart("img" + indexImage);
                 String title = request.getParameter("img-titulo" + indexImage);
@@ -82,6 +80,14 @@ public class PluginCreateServlet extends HttpServlet {
                     if (!isImage(part)) throw new RuntimeException();
                     try {
                         imagens.add(new Imagem(new SerialBlob(part.getInputStream().readAllBytes()), title, description));
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else {
+                    try {
+                        PluginModel model = DBManager.getPlugin(plName);
+
+                       if (model.getImages().size() > indexImage) imagens.add(model.getImages().get(indexImage));
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
@@ -103,38 +109,28 @@ public class PluginCreateServlet extends HttpServlet {
             perms.add(stringStringPair);
         }
 
-        Changelog log = new Changelog(new Date(System.currentTimeMillis()), versaoPlugin, "Lançamento do plugin com seus recursos: \n\n" + resources.replace(";;;", "\n"));
-
-        PluginModel model = null;
         try {
-            model = new PluginModel(
-                    name,
-                    Categoria.fromValue(Integer.parseInt(categoria)),
-                    versaoPlugin,
-                    descricao,
-                    versaoCompativel,
-                    resources,
-                    url,
-                    github,
-                    depedencies,
-                    commands,
-                    perms,
-                    imagens,
-                    new SerialBlob(plugin.getInputStream().readAllBytes()),
-                    configs.getSubmittedFileName().equals("") ? null : new SerialBlob(configs.getInputStream().readAllBytes()),
-                    Collections.singletonList(log),
-                    new ArrayList<>(),
-                    preco
-            );
+            PluginModel model = DBManager.getPlugin(plName);
+            if (model == null) throw new RuntimeException();
+
+            model.setDescription(descricao);
+            model.setCategory(Categoria.fromValue(Integer.parseInt(categoria)));
+            model.setCommands(commands);
+            model.setPermissions(perms);
+            model.setImages(imagens);
+            model.setGithub(github);
+            model.setCompatibilyVersion(versaoCompativel);
+            model.setUrlVideo(url);
+            model.setResourses(resources);
+            model.setDependencies(depedencies);
+            model.setPrice(preco);
+            model.setConfig(configs.getSubmittedFileName().isEmpty() ? model.getConfig() : new SerialBlob(configs.getInputStream().readAllBytes()));
+
+            DBManager.editPlugin(model);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        try {
-            DBManager.addPlugin(model);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
 
         response.sendRedirect("/home/admin/plugins.jsp");
 
@@ -150,8 +146,5 @@ public class PluginCreateServlet extends HttpServlet {
             return false;
         }
     }
-
-
-
 
 }

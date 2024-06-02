@@ -12,8 +12,9 @@
     <link rel="stylesheet" href="../../css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="../css/dashboard.css" rel="stylesheet">
-    <link href="../css/user.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="../imgs/logo.png" />
+    <link href="css/user.css" rel="stylesheet">
+    <link href="css/upload.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../../imgs/logo.png" />
 
 
     <%
@@ -116,12 +117,12 @@
 
                 <div class="dropdown">
                     <button style="border: none; background-color: white" type="button" data-bs-toggle="dropdown">
-                        <img src="<%=model.getImageData() == null ? "alt.png" : model.getImageData()%>" width="60" style="border: solid black 1px; border-radius: 100%" alt="">
+                        <img src="<%=model.getImageData() == null ? "alt.png" : model.getImageData()%>" width="60" height="60" style="border: solid black 1px; border-radius: 100%" alt="">
                     </button>
                     <ul class="dropdown-menu">
                         <p class="dropdown-item"><%=model.getNome()%></p>
                         <div class="dropdown-divider"></div>
-                        <a href=<%="user/user.jsp?uuid=" + model.getId().toString()%> class="dropdown-item">
+                        <a href=<%="?uuid=" + model.getId().toString()%> class="dropdown-item">
                             <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                             Configurações
                         </a>
@@ -173,12 +174,20 @@
         </form>
         <form enctype="multipart/form-data" class="configs imagem" method="post" action=<%="editarimagem?uuid=" + userModel.getId().toString()%>>
             <h4>Alterar imagem</h4>
-            <img alt="Você não tem uma imagem" src="<%=userModel.getImageData()%>" width="100" height="100">
-            <p>Imagem atual</p>
+            <div class="d-flex flex-column align-items-center">
+                <div class="d-flex flex-column justify-content-between align-items-center">
+                    <h4><strong>Imagem atual</strong></h4>
+                    <img alt="Você não tem uma imagem" width="125" height="125" src="<%=model.getImageData()%>">
+                </div>
 
-            <div class="form-group">
-                <label for="exampleFormControlFile1">Enviar imagem</label>
-                <input type="file" class="form-control-file" name="imagem" id="exampleFormControlFile1" required accept="image/*">
+
+                <div class="d-flex align-items-center justify-content-center w-75">
+                    <label class="btn-upload"><i class="bi bi-upload"></i>
+                        <p>Adicionar imagem</p>
+                        <input name="img0" type="file" class="input-file" accept="image/*">
+                    </label>
+                </div>
+
             </div>
 
             <input type="submit" class="btn btn-primary" value="Enviar"></input>
@@ -195,7 +204,13 @@
                 <label for="exampleFormControlSelect2">Escolha a permissão</label>
                 <select class="form-control" name="permissions" id="exampleFormControlSelect2">
                     <option value="0">Selecione uma permissão...</option>
-                    <option value="6">CEO</option>
+                    <%
+                        if (model.getPermission() <= 5) {
+                    %>>
+                        <option value="6">CEO</option>
+                    <%
+                        }
+                    %>
                     <option value="5">Administrador</option>
                     <option value="4">Editor site</option>
                     <option value="3">Editor plugin</option>

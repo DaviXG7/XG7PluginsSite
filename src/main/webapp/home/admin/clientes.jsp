@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="../css/dashboard.css" rel="stylesheet">
     <link href="../css/confirmar.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="../imgs/logo.png" />
+    <link rel="icon" type="image/png" href="../../imgs/logo.png" />
 
 
     <%
@@ -129,7 +129,7 @@
 
                 <div class="dropdown">
                     <button style="border: none; background-color: white" type="button" data-bs-toggle="dropdown">
-                        <img src="<%=model.getImageData() == null ? "alt.png" : model.getImageData()%>" width="60" style="border: solid black 1px; border-radius: 100%" alt="">
+                        <img src="<%=model.getImageData() == null ? "alt.png" : model.getImageData()%>" width="60" height="60" style="border: solid black 1px; border-radius: 100%" alt="">
                     </button>
                     <ul class="dropdown-menu">
                         <p class="dropdown-item"><%=model.getNome()%></p>

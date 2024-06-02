@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Blob;
+import java.sql.SQLException;
+import java.util.Base64;
 
 @AllArgsConstructor
 @Getter
@@ -13,4 +15,14 @@ public class Imagem {
     private Blob image;
     private String titulo;
     private String descricao;
+
+    public String getImageData() {
+        byte[] imagemBytes = null;
+        try {
+            imagemBytes = this.image.getBytes(1, (int) this.image.length());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return "data:image/png;base64," + Base64.getEncoder().encodeToString(imagemBytes);
+    }
 }

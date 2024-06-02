@@ -18,7 +18,7 @@ import java.io.InputStream;
 import java.sql.SQLException;
 
 @MultipartConfig
-@WebServlet(name = "editarimagem", urlPatterns = "/editarimagem")
+@WebServlet(name = "editarimagem", urlPatterns = "/home/user/editarimagem")
 public class EditUserImageServlet extends HttpServlet {
 
 

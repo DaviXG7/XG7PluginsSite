@@ -56,8 +56,9 @@
     justify-content: center;
 }
 .content .plugin-content {
-    padding: 15px;
-    width: 100%;
+    padding: 25px;
+    width: 450px;
+    max-width: 450px;
     height: 350px;
     overflow-y: auto;
     display: flex;

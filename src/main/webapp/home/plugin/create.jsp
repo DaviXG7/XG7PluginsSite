@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="../css/dashboard.css" rel="stylesheet">
     <link href="css/plugin.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="../imgs/logo.png" />
+    <link rel="icon" type="image/png" href="../../imgs/logo.png" />
 
 
     <%
@@ -27,8 +27,8 @@
     <div id="barra-lateral" class="barra-lateral sidebar">
 
 
-        <a href="../index.jsp">
-            <img src="../imgs/logo.png" width="135" alt="">
+        <a href="../../index.jsp">
+            <img src="../../imgs/logo.png" width="135" alt="">
         </a>
 
         <hr>
@@ -99,7 +99,7 @@
 
                 <div class="dropdown">
                     <button style="border: none; background-color: white" type="button" data-bs-toggle="dropdown">
-                        <img src="<%=model.getImageData() == null ? "alt.png" : model.getImageData()%>" width="60" style="border: solid black 1px; border-radius: 100%" alt="">
+                        <img src="<%=model.getImageData() == null ? "alt.png" : model.getImageData()%>" width="60" height="60" style="border: solid black 1px; border-radius: 100%" alt="">
                     </button>
                     <ul class="dropdown-menu">
                         <p class="dropdown-item"><%=model.getNome()%></p>
@@ -226,7 +226,7 @@
                                         </div>
                                     </div>
                                     <div class="col-3 d-flex align-items-center justify-content-center">
-                                        <button onclick="adicionar('comandos','caixacomando')" class="btn btn-success"
+                                        <button onclick="adicionar('comandos')" class="btn btn-success"
                                             style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
                                                 class="bi bi-plus-circle"></i></button>
                                         <button onclick="remover('comandos','caixacomando')" class="btn btn-danger"
@@ -253,7 +253,7 @@
                                         </div>
                                     </div>
                                     <div class="col-3 d-flex align-items-center justify-content-center">
-                                        <button onclick="adicionar('permissoes','caixapermissao')" class="btn btn-success"
+                                        <button onclick="adicionar('permissoes')" class="btn btn-success"
                                             style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
                                                 class="bi bi-plus-circle"></i></button>
                                         <button onclick="remover('permissoes','caixapermissao')" class="btn btn-danger"
@@ -275,7 +275,7 @@
                                         </div>
                                     </div>
                                     <div class="col-3 d-flex align-items-center justify-content-center">
-                                        <button onclick="adicionar('recursos','caixarecurso')" class="btn btn-success"
+                                        <button onclick="adicionar('recursos')" class="btn btn-success"
                                             style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
                                                 class="bi bi-plus-circle"></i></button>
                                         <button onclick="remover('recursos','caixarecurso')" class="btn btn-danger"
@@ -319,6 +319,9 @@
 
 <script src="../../js/menu.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    let img_index = 0;
+</script>
 <script src="js/createpl.js"></script>
 <script>
 

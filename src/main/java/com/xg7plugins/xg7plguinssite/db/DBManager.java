@@ -138,7 +138,7 @@ public class DBManager {
         PreparedStatement preparedStatementCommands = connection.prepareStatement("INSERT INTO plugincommands(pluginname,command,description) VALUES (?,?,?)");
         PreparedStatement preparedStatementPerms = connection.prepareStatement("INSERT INTO pluginperms(pluginname,perm,description) VALUES (?,?,?)");
         PreparedStatement preparedStatementChangelog = connection.prepareStatement("INSERT INTO pluginchangelog(pluginname,changedate,changelog,pluginversion) VALUES (?,?,?,?)");
-        PreparedStatement preparedStatementIamges = connection.prepareStatement("INSERT INTO pluginimages(pluginname,image,title,description) VALUES (?,?,?,?)");
+        PreparedStatement preparedStatementImages = connection.prepareStatement("INSERT INTO pluginimages(pluginname,image,title,description) VALUES (?,?,?,?)");
 
         preparedStatementPlugins.setString(1, model.getName());
         preparedStatementPlugins.setInt(2, model.getCategory().getIndex());
@@ -174,13 +174,20 @@ public class DBManager {
             preparedStatementChangelog.executeUpdate();
         }
         for (Imagem imagem : model.getImages()) {
-            preparedStatementIamges.setString(1, model.getName());
-            preparedStatementIamges.setBlob(2, imagem.getImage());
-            preparedStatementIamges.setString(3, imagem.getTitulo());
-            preparedStatementIamges.setString(4, imagem.getDescricao());
-            preparedStatementIamges.executeUpdate();
+            preparedStatementImages.setString(1, model.getName());
+            preparedStatementImages.setBlob(2, imagem.getImage());
+            preparedStatementImages.setString(3, imagem.getTitulo());
+            preparedStatementImages.setString(4, imagem.getDescricao());
+            preparedStatementImages.executeUpdate();
         }
 
+    }
+    public static List<PluginModel> getAllPlugins() throws SQLException {
+        ResultSet set = connection.prepareStatement("SELECT name FROM plugins").executeQuery();
+        List<PluginModel> models = new ArrayList<>();
+
+        while (set.next()) models.add(getPlugin(set.getString("name")));
+        return models;
     }
 
     public static void postUpdate(String name, Changelog log) throws SQLException {
@@ -192,6 +199,56 @@ public class DBManager {
         statement.setString(4, name);
         statement.executeUpdate();
 
+    }
+    public static void editPlugin(PluginModel model) throws SQLException {
+
+        PreparedStatement deletecmd = connection.prepareStatement("DELETE FROM plugincommands WHERE pluginname = ?");
+        deletecmd.setString(1, model.getName());
+        deletecmd.executeUpdate();
+
+        PreparedStatement deleteper = connection.prepareStatement("DELETE FROM pluginperms WHERE pluginname = ?");
+        deleteper.setString(1, model.getName());
+        deleteper.executeUpdate();
+
+        PreparedStatement deleteimg = connection.prepareStatement("DELETE FROM pluginimages WHERE pluginname = ?");
+        deleteimg.setString(1, model.getName());
+        deleteimg.executeUpdate();
+
+
+        PreparedStatement preparedStatementPlugins = connection.prepareStatement("UPDATE plugins SET description = ?, category = ?, video = ?, github = ?, price = ?, dependencies = ?, config = ? WHERE name = ?");
+        PreparedStatement preparedStatementCommands = connection.prepareStatement("INSERT INTO plugincommands(pluginname,command,description) VALUES (?,?,?)");
+        PreparedStatement preparedStatementPerms = connection.prepareStatement("INSERT INTO pluginperms(pluginname,perm,description) VALUES (?,?,?)");
+        PreparedStatement preparedStatementImages = connection.prepareStatement("INSERT INTO pluginimages(pluginname,image,title,description) VALUES (?,?,?,?)");
+
+        preparedStatementPlugins.setString(1, model.getDescription());
+        preparedStatementPlugins.setInt(2, model.getCategory().getIndex());
+        preparedStatementPlugins.setString(3,model.getUrlVideo());
+        preparedStatementPlugins.setString(4, model.getGithub());
+        preparedStatementPlugins.setDouble(5, model.getPrice());
+        preparedStatementPlugins.setString(6, model.getDependencies());
+        preparedStatementPlugins.setBlob(7, model.getConfig());
+        preparedStatementPlugins.setString(8,model.getName());
+        preparedStatementPlugins.executeUpdate();
+
+        for (Pair<String, String> commands : model.getCommands()) {
+            preparedStatementCommands.setString(1, model.getName());
+            preparedStatementCommands.setString(2, commands.getFirst());
+            preparedStatementCommands.setString(3, commands.getSecond());
+            preparedStatementCommands.executeUpdate();
+        }
+        for (Pair<String, String> perms : model.getPermissions()) {
+            preparedStatementPerms.setString(1, model.getName());
+            preparedStatementPerms.setString(2, perms.getFirst());
+            preparedStatementPerms.setString(3, perms.getSecond());
+            preparedStatementPerms.executeUpdate();
+        }
+        for (Imagem imagem : model.getImages()) {
+            preparedStatementImages.setString(1, model.getName());
+            preparedStatementImages.setBlob(2, imagem.getImage());
+            preparedStatementImages.setString(3, imagem.getTitulo());
+            preparedStatementImages.setString(4, imagem.getDescricao());
+            preparedStatementImages.executeUpdate();
+        }
     }
 
     public static PluginModel getPlugin(String pluginName) throws SQLException {
@@ -207,7 +264,7 @@ public class DBManager {
 
         PreparedStatement pes = connection.prepareStatement("SELECT * FROM pluginperms WHERE pluginname = ?");
         pes.setString(1, pluginName);
-        ResultSet per = cs.executeQuery();
+        ResultSet per = pes.executeQuery();
 
         PreparedStatement pcs = connection.prepareStatement("SELECT * FROM pluginchangelog WHERE pluginname = ?");
         pcs.setString(1, pluginName);
@@ -231,7 +288,7 @@ public class DBManager {
         while (pdr.next()) downloads.add(UUID.fromString(pdr.getString("userid")));
 
         List<Changelog> changelogs = new ArrayList<>();
-        while (pcr.next()) changelogs.add(new Changelog(pcr.getDate("changedate"), pcr.getString("changelog"), pcr.getString("pluginversion")));
+        while (pcr.next()) changelogs.add(new Changelog(pcr.getDate("changedate"), pcr.getString("pluginversion"), pcr.getString("changelog")));
 
         List<Imagem> imagens = new ArrayList<>();
         while (pir.next()) imagens.add(new Imagem(pir.getBlob("image"), pir.getString("title"), pir.getString("description")));

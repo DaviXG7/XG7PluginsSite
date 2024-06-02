@@ -35,7 +35,19 @@ menu {
 }
 
 
-
+footer h6 {
+    padding: 20px;
+}
+.footer-buttons a {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 1000px;
+    background-color: white;
+}
 
 
 

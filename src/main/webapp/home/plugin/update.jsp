@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../../css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="../css/dashboard.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="../imgs/logo.png" />
+    <link rel="icon" type="image/png" href="../../imgs/logo.png" />
 
 
     <%
@@ -26,8 +26,8 @@
     <div id="barra-lateral" class="barra-lateral sidebar">
 
 
-        <a href="../index.jsp">
-            <img src="../imgs/logo.png" width="135" alt="">
+        <a href="../../index.jsp">
+            <img src="../../imgs/logo.png" width="135" alt="">
         </a>
 
         <hr>
@@ -98,7 +98,7 @@
 
                 <div class="dropdown">
                     <button style="border: none; background-color: white" type="button" data-bs-toggle="dropdown">
-                        <img src="<%=model.getImageData() == null ? "alt.png" : model.getImageData()%>" width="60" style="border: solid black 1px; border-radius: 100%" alt="">
+                        <img src="<%=model.getImageData() == null ? "alt.png" : model.getImageData()%>" width="60" height="60" style="border: solid black 1px; border-radius: 100%" alt="">
                     </button>
                     <ul class="dropdown-menu">
                         <p class="dropdown-item"><%=model.getNome()%></p>
@@ -117,54 +117,133 @@
             </div>
         </header>
         <div class="pag">
-            <form enctype="multipart/form-data" method="post" action="criarplugin">
-                <input type="file" accept=".zip" id="config" name="configs">
-                <br>
-                <input type="text" id="nomePlugin" name="name" placeholder="Edite o nome do plugin" required>
-                <br>
-                <select required id="categoria" name="categoria">
-                    <option value="0">Editar categoria</option>
-                    <option value="1">Gestão</option>
-                    <option value="2">Utilidades</option>
-                    <option value="3">Minigames</option>
-                </select>
-                <br>
-                <input type="url" placeholder="Digite a url do vídeo" id="urlVideo" name="urlVideo">
-                <br>
-                <input type="number" placeholder="Digite o preço do plugin" id="preco" name="preco" required>
-                <br>
-                <input type="url" placeholder="Digite o github do plugin" id="urlGithub" name="github">
-                <br>
-                <input type="text" placeholder="Digite as versões do plugin" id="versoes" name="versions" required>
-                <br>
-                <input type="text" placeholder="Digite as dependências do plugin" id="dependencias" name="dependencies">
-                <br>
-                <div>
-                    <button onclick="adicionarComando('comandos','nome do comando','commandValue','commandDescription',true)" type="button">Adicionar +</button>
-                    <button onclick="removerComando('comandos')" type="button">Remover -</button> <br>
-                    <div id="comandos" style="overflow: auto; scroll-behavior: smooth; height: 100px">
-                        <input type="text" placeholder="nome do comando" name="commandValue" required > <input type="text" placeholder="descrição" name="commandDescription" required> <br>
-                    </div>
-                </div>
-                <br>
-                <div>
-                    <button onclick="adicionarComando('perm','nome da perm','permValue','permDescription', true)" type="button">Adicionar +</button>
-                    <button onclick="removerComando('perm')" type="button">Remover -</button> <br>
-                    <div id="perm" style="overflow: auto; scroll-behavior: smooth; height: 100px">
-                        <input type="text" placeholder="nome da perm" name="permValue" required> <input type="text" placeholder="descrição" name="permDescription" required> <br>
+            <form class="w-100" enctype="multipart/form-data" method="post" action="">
 
-                    </div>
-                </div>
-                <br>
                 <div>
-                    <button onclick="adicionarComando('recursos','recurso','resourceValue','',false)" type="button">Adicionar +</button>
-                    <button onclick="removerComando('recursos')" type="button">Remover -</button> <br>
-                    <div id="recursos" style="overflow: auto; scroll-behavior: smooth; height: 100px">
-                        <input type="text" placeholder="recurso" name="resourceValue" required> <p></p><br>
+                    <h1><strong>Postar atualização</strong></h1>
+
+                    <h3><strong>Atualização</strong></h3>
+
+                    <div class="form-group">
+                        <label for="plugin">Plugin*</label>
+                        <select class="form-select" id="plugin" name="plugin" required>
+                            <option selected value="0">Selecione o plugin...</option>
+                            <%
+
+                            %>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="compatibilyVersion">Nova versão*</label>
+                            <input class="form-control" type="text" placeholder="Digite a nova versão do plugin"
+                                   id="compatibilyVersion" name="compatibilyVersion" required>
+                        </div>
+                        <div class="col-6">
+                            <label for="preco">Log*</label>
+                            <textarea class="form-control" type="number" placeholder="Digite o preço" id="preco"
+                                      name="preco" required></textarea>
+                        </div>
+                    </div>
+                    <h3><strong>Editar</strong></h3>
+                    <div class="row d-flex justify-content-between cmd">
+                        <h4>Comandos:</h4>
+                        <div class="col-9" id="comandos"
+                             style="overflow: auto; scroll-behavior: smooth; height: 160px">
+                            <div class="mt-3 mb-3 rounded border row p-2 caixacomando"
+                                 style="background-color: rgba(0,255,225,0.37)">
+                                <div class="col-sm-6">
+                                    <label class="">Comando</label>
+                                    <input name="commandName" class="form-control" type="text"
+                                           placeholder="Nome do comando (ex.: pular)" required>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="">Descrição</label>
+                                    <input name="commandDescription" class="form-control" type="text"
+                                           placeholder="Descrição do comando" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 d-flex align-items-center justify-content-center">
+                            <button onclick="adicionar('comandos','caixacomando')" class="btn btn-success"
+                                    style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                    class="bi bi-plus-circle"></i></button>
+                            <button onclick="remover('comandos','caixacomando')" class="btn btn-danger"
+                                    style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                    class="bi bi-x-circle"></i></button>
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-between cmd">
+                        <h4>Permissões:</h4>
+                        <div class="col-9" id="permissoes"
+                             style="overflow: auto; scroll-behavior: smooth; height: 160px">
+                            <div class="mt-3 mb-3 rounded border row p-2 caixapermissao"
+                                 style="background-color: rgba(0,255,225,0.37)">
+                                <div class="col-sm-6">
+                                    <label class="">Comando</label>
+                                    <input name="commandName" class="form-control" type="text"
+                                           placeholder="Nome da permissão (ex.: sua.permissao)" required>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="">Descrição</label>
+                                    <input name="commandDescription" class="form-control" type="text"
+                                           placeholder="Descrição da permissão" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 d-flex align-items-center justify-content-center">
+                            <button onclick="adicionar('permissoes','caixapermissao')" class="btn btn-success"
+                                    style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                    class="bi bi-plus-circle"></i></button>
+                            <button onclick="remover('permissoes','caixapermissao')" class="btn btn-danger"
+                                    style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                    class="bi bi-x-circle"></i></button>
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-between cmd">
+                        <h4>Recursos:</h4>
+                        <div class="col-9" id="recursos"
+                             style="overflow: auto; scroll-behavior: smooth; height: 160px">
+                            <div class="mt-3 mb-3 rounded border row p-2 caixarecurso"
+                                 style="background-color: rgba(0,255,225,0.37)">
+                                <div class="col-sm-12">
+                                    <label class="">Recurso</label>
+                                    <input name="resource" class="form-control" type="text"
+                                           placeholder="Recurso (Uma das coisas que o plugin faz)" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 d-flex align-items-center justify-content-center">
+                            <button onclick="adicionar('recursos','caixarecurso')" class="btn btn-success"
+                                    style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                    class="bi bi-plus-circle"></i></button>
+                            <button onclick="remover('recursos','caixarecurso')" class="btn btn-danger"
+                                    style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                    class="bi bi-x-circle"></i></button>
+                        </div>
+                    </div>
+                    <h5><strong>Insira imagens do plugin</strong></h5>
+                    <div class="imgs" id="imgs">
+                        <div id="0"
+                             class="w-100 d-flex flex-column align-items-center justify-content-center caixa-imagem">
+                            <label class="btn-upload"><i class="bi bi-upload"></i>
+                                <p>Adicionar imagem</p>
+                                <input name="img0" type="file" class="input-file" accept="image/*">
+                            </label>
+
+                        </div>
+                    </div>
+                    <div class="w-100 mt-3 d-flex align-items-center justify-content-center">
+                        <button onclick="adicionarImagem()" class="btn btn-success"
+                                style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                class="bi bi-plus-circle"></i></button>
+                        <button onclick="removerImagem()" class="btn btn-danger"
+                                style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                class="bi bi-x-circle"></i></button>
                     </div>
                 </div>
-                <br>
-                <input type="submit" class="btn btn-primary" value="Atualizar"></input>
+
+                <input type="submit" class="btn btn-primary w-25" value="Postar">
 
             </form>
         </div>
@@ -177,6 +256,10 @@
 <script src="../js/menu.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    let img_index = parseInt(<%=imageIndex%>)
+</script>
+<script src="js/createpl.js"></script>
 <script>
     function adicionarComando(id, placeholder, nome, nome2, aparecer) {
 

@@ -31,11 +31,6 @@
         </div>
         <a href="">Esqueci minha senha</a>
         <br>
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Continuar conectado?</label>
-        </div>
-        <br>
         <button type="submit" class="btn btn-primary w-100">Iniciar seção</button>
         <p style="font-size: 11px">Não tem uma conta? Clique aqui para <a href="cadastro.jsp">criar uma conta</a></p>
         <p style="font-size: 11px; color: red"><%=request.getAttribute("errormsg") != null ? request.getAttribute("errormsg") : ""%></p>

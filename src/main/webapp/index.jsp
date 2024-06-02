@@ -1,4 +1,6 @@
 <%@ page import="com.xg7plugins.xg7plguinssite.models.UserModel" %>
+<%@ page import="com.xg7plugins.xg7plguinssite.db.DBManager" %>
+<%@ page import="com.xg7plugins.xg7plguinssite.servlets.plugin.PluginJson" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true" %>
 <!DOCTYPE html>
 <html>
@@ -223,7 +225,7 @@
                 <i class="bi bi-archive-fill"></i>
                 <h3 class="m-3">Plugins</h3>
             </div>
-            <div class="dropdown">
+            <div class="dropdown" style="position: static !important;">
                 <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="bi bi-bar-chart-fill"></i> Mais recentes
                 </button>
@@ -258,44 +260,33 @@
 
 </main>
 
-<footer class="text-center text-lg-start text-white" style="background-color:#919191">
+<footer class="bg-light rounded pt-3 d-flex align-items-center justify-content-between flex-column" style="height: 250px">
 
-    <div class="container p-4 pb-0">
+    <h1><strong>XG7Plugins</strong></h1>
+    <p>Os melhores plugins para seu servidor de Minecraft!</p>
+    <div class="footer-buttons mb-2 w-25 d-flex justify-content-around">
+        <a href="https://github.com/DaviXG7"><i class="bi bi-github" style="font-size: 40px; color: black"></i></a>
+        <a href="https://discord.gg/2fACbYbBsf"><i class="bi bi-discord" style="font-size: 40px; color: black"></i></a>
+    </div> 
+    <h6 class="w-100 d-flex align-items-center justify-content-center" style="background-color: rgb(196, 196, 196); height: 3em;">
+        Copyright ₢ XG7Plugins Todos os direitos reservados
+    </h6>
+</div>
 
-        <div class="row">
-
-            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 ">
-                <h6 class="text-uppercase mb-4 font-weight-bold">XG7 Plugins</h6>
-                <p> Melhores plugins para seu servidor de Minecraft! </p>
-            </div>
-
-            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-
-
-                <a class="btn btn-floating m-1" href="#!" role="button">API para desenvolvedores
-                </a>
-
-                <a class="btn btn-floating m-1" href="#!" role="button">Sobre
-                </a>
-
-                <a class="btn btn-floating m-1" href="#!" role="button">Discord
-                </a>
-            </div>
-
-            <div class="text-center p-3">
-                Copyright © 2024 XG7Plugins Todos os direitos reservadors
-            </div>
-            <div class="text-center text-dark p-1">
-                Este site não possui nenhum vínculo com MojangAB
-            </div>
-        </div>
-    </div>
 
 </footer>
 
 
-
+<script src="js/jQuery.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    let plsJSON = <%=PluginJson.getAllPluginsJSON()%>;
+    let pls = []
+    plsJSON.forEach(function (e) {
+        pls.push(JSON.parse(e))
+    })
+
+</script>
 <script src="js/showplugins.js"></script>
 
 <script>

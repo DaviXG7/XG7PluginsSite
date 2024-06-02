@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name = "editarusuario", urlPatterns = "/editarusuario")
+@WebServlet(name = "editarusuario", urlPatterns = "/home/user/editarusuario")
 public class EditUserServlet extends HttpServlet {
 
 

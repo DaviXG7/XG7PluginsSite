@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name = "editarpermissao", urlPatterns = "/editarpermissao")
+@WebServlet(name = "editarpermissao", urlPatterns = "/home/user/editarpermissao")
 public class EditUserPermissionServlet extends HttpServlet {
 
     @Override
@@ -29,10 +29,11 @@ public class EditUserPermissionServlet extends HttpServlet {
         //Verifica se tem erros
         if (userEdit == null) throw new RuntimeException();
         if (userRequest.getPermission() < 5) throw new RuntimeException();
-        if (request.getParameter("permissao") == null) throw new RuntimeException();
+        if (request.getParameter("permissions") == null) throw new RuntimeException();
 
-        int permission = Integer.parseInt(request.getParameter("permissao"));
+        int permission = Integer.parseInt(request.getParameter("permissions"));
         if (permission == 0) throw new RuntimeException();
+        if (permission < 6 && userEdit.getPermission() <= 5) throw new RuntimeException();
 
         //Coloca a permissão e manda ao banco de dados
         userEdit.setPermission(permission);

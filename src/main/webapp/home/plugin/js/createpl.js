@@ -1,4 +1,4 @@
-let img_index = 0
+
 
     function imageInput(event, label, input, index) {
         if (!(event.target && event.target.files && event.target.files.length > 0)) {
@@ -64,8 +64,49 @@ let img_index = 0
         nextSibling.innerText = document.getElementById("configs").files.length + " arquivo selecionado";
     });
 
-    function adicionar(id, classe) {
-        $('#' + id).append($("." + classe)[0].outerHTML)
+    function adicionar(id) {
+        switch (id) {
+            case "comandos":
+                $('#comandos').append("<div class=\"mt-3 mb-3 rounded border row p-2 caixacomando\"\n" +
+                    "                                            style=\"background-color: rgba(0,255,225,0.37)\">\n" +
+                    "                                            <div class=\"col-sm-6\">\n" +
+                    "                                                <label class=\"\">Comando</label>\n" +
+                    "                                                <input name=\"commandName\" class=\"form-control\" type=\"text\"\n" +
+                    "                                                    placeholder=\"Nome do comando (ex.: pular)\" required>\n" +
+                    "                                            </div>\n" +
+                    "                                            <div class=\"col-sm-6\">\n" +
+                    "                                                <label class=\"\">Descrição</label>\n" +
+                    "                                                <input name=\"commandDescription\" class=\"form-control\" type=\"text\"\n" +
+                    "                                                    placeholder=\"Descrição do comando\" required>\n" +
+                    "                                            </div>\n" +
+                    "                                        </div>")
+                return;
+            case "recursos":
+                $('#recursos').append("<div class=\"mt-3 mb-3 rounded border row p-2 caixarecurso\"\n" +
+                    "                                            style=\"background-color: rgba(0,255,225,0.37)\">\n" +
+                    "                                            <div class=\"col-sm-12\">\n" +
+                    "                                                <label class=\"\">Recurso</label>\n" +
+                    "                                                <input name=\"resource\" class=\"form-control\" type=\"text\"\n" +
+                    "                                                    placeholder=\"Recurso (Uma das coisas que o plugin faz)\" required>\n" +
+                    "                                            </div>\n" +
+                    "                                        </div>")
+                return;
+            case "permissoes":
+                $('#permissoes').append("<div class=\"mt-3 mb-3 rounded border row p-2 caixapermissao\"\n" +
+                    "                                            style=\"background-color: rgba(0,255,225,0.37)\">\n" +
+                    "                                            <div class=\"col-sm-6\">\n" +
+                    "                                                <label class=\"\">Permissão</label>\n" +
+                    "                                                <input name=\"permName\" class=\"form-control\" type=\"text\"\n" +
+                    "                                                    placeholder=\"Nome da permissão (ex.: sua.permissao)\" required>\n" +
+                    "                                            </div>\n" +
+                    "                                            <div class=\"col-sm-6\">\n" +
+                    "                                                <label class=\"\">Descrição</label>\n" +
+                    "                                                <input name=\"permDescription\" class=\"form-control\" type=\"text\"\n" +
+                    "                                                    placeholder=\"Descrição da permissão\" required>\n" +
+                    "                                            </div>\n" +
+                    "                                        </div>")
+                return;
+        }
     }
     function remover(id, classe) {
         if ($("#" + id).children().length > 1) $("." + classe + ":last").remove();
