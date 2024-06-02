@@ -157,7 +157,6 @@
                         <th scope="col">Avatar</th>
                         <th scope="col">Nome</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Senha</th>
                         <th scope="col">Nível perm</th>
                         <th scope="col">Ações</th>
                     </tr>
@@ -169,7 +168,6 @@
                         <td><img src="<%=item.getImageData() != null ? item.getImageData() : ""%>" alt="N/A" width="50" height="auto"></td>
                         <td><%=item.getNome()%></td>
                         <td><%=item.getEmail()%></td>
-                        <td><%=item.getSenha()%></td>
                         <td><%=item.getPermission()%></td>
                         <td>
                             <a href="../user/user.jsp?uuid=<%=item.getId().toString()%>" class="<%=model.getPermission() < 5 ? "disabled" : ""%> btn btn-primary">Editar</a>
