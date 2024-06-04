@@ -193,10 +193,15 @@ public class DBManager {
     public static void postUpdate(String name, Changelog log) throws SQLException {
 
         PreparedStatement statement = connection.prepareStatement("INSERT INTO pluginchangelog(changedate,changelog,pluginversion) VALUES(?,?,?) WHERE pluginname = ?");
+        PreparedStatement statement2 = connection.prepareStatement("UPDATE plugins SET version = ? WHERE pluginname = ?");
         statement.setString(1, log.getDate().toString());
         statement.setString(2, log.getChangelogText());
         statement.setString(3, log.getPluginVersion());
         statement.setString(4, name);
+        statement.executeUpdate();
+
+        statement2.setString(1, log.getPluginVersion());
+        statement2.setString(2, name);
         statement.executeUpdate();
 
     }

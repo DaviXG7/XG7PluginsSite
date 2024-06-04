@@ -171,7 +171,7 @@
                         <td><%=item.getPermission()%></td>
                         <td>
                             <a href="../user/user.jsp?uuid=<%=item.getId().toString()%>" class="<%=model.getPermission() < 5 ? "disabled" : ""%> btn btn-primary">Editar</a>
-                            <button class="<%=model.getPermission() < 5 ? "disabled" : ""%> btn btn-primary" onclick="solicitar('confirmar','none','flex','<%=item.getId().toString()%>')">Excluir</button>
+                            <button class="<%=model.getPermission() < 5 ? "disabled" : ""%> btn btn-danger" onclick="solicitar('confirmar','none','flex','<%=item.getId().toString()%>')">Excluir</button>
                         </td>
 
                     </tr>

@@ -48,7 +48,7 @@
         imageInput(event, $(this).parent(), $(this), 0)
     });
 
-    $("form").submit(function (event) {
+    $("#form").submit(function (event) {
         if (parseInt($("#preco").val()) < 0) {
             event.preventDefault();
             window.alert("O valor do plugin não pode ser menor que 0");

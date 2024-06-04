@@ -205,60 +205,66 @@
                                 <option  value="XG7Lobby">XG7Lobby</option>
                             </select>
                         </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <label for="compatibilyVersion">Nova versão*</label>
-                                <input class="form-control" type="text" placeholder="Digite a nova versão do plugin"
-                                    id="compatibilyVersion" name="compatibilyVersion" required>
-                            </div>
-                            <div class="col-6">
-                                <label for="preco">Log*</label>
-                                <textarea class="form-control" type="number" placeholder="Digite o preço" id="preco"
-                                    name="preco" required></textarea>
-                            </div>
-                        </div>
-                        <h3><strong>Editar</strong></h3>
-                        <div class="row d-flex justify-content-between cmd">
-                            <h4>Comandos:</h4>
-                            <div class="col-9" id="comandos"
-                                style="overflow: auto; scroll-behavior: smooth; height: 160px">
-                                <div class="mt-3 mb-3 rounded border row p-2 caixacomando"
-                                    style="background-color: rgba(0,255,225,0.37)">
-                                    <div class="col-sm-6">
-                                        <label class="">Comando</label>
-                                        <input name="commandName" class="form-control" type="text"
-                                            placeholder="Nome do comando (ex.: pular)" required>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label class="">Descrição</label>
-                                        <input name="commandDescription" class="form-control" type="text"
-                                            placeholder="Descrição do comando" required>
-                                    </div>
+                        <div class="d-none" id="atualizacao">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="compatibilyVersion">Nova versão*</label>
+                                    <input class="form-control" type="text" placeholder="Digite a nova versão do plugin"
+                                           id="compatibilyVersion" name="compatibilyVersion" required>
+                                </div>
+                                <div class="col-6">
+                                    <label for="preco">Log*</label>
+                                    <textarea class="form-control" type="number" placeholder="Digite o preço" id="preco"
+                                              name="preco" required></textarea>
                                 </div>
                             </div>
-                            <div class="col-3 d-flex align-items-center justify-content-center">
-                                <button onclick="adicionar('comandos','caixacomando')" class="btn btn-success"
-                                    style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
-                                        class="bi bi-plus-circle"></i></button>
-                                <button onclick="remover('comandos','caixacomando')" class="btn btn-danger"
-                                    style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
-                                        class="bi bi-x-circle"></i></button>
-                            </div>
+                            <label for="editar" class="d-flex">
+                                <input id="editar" type="checkbox" name="editar" class="form-check"> Editar Plugin?
+                            </label>
                         </div>
-                        <div class="row d-flex justify-content-between cmd">
+                        <div class="d-none" id="edicao">
+                            <h3><strong>Editar</strong></h3>
+                            <div style="display: flex" class="row justify-content-between cmd">
+                                <h4>Comandos:</h4>
+                                <div class="col-9" id="comandos"
+                                     style="overflow: auto; scroll-behavior: smooth; height: 160px">
+                                    <div class="mt-3 mb-3 rounded border row p-2 caixacomando"
+                                         style="background-color: rgba(0,255,225,0.37)">
+                                        <div class="col-sm-6">
+                                            <label class="">Comando</label>
+                                            <input name="commandName" class="form-control" type="text"
+                                                   placeholder="Nome do comando (ex.: pular)" required>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="">Descrição</label>
+                                            <input name="commandDescription" class="form-control" type="text"
+                                                   placeholder="Descrição do comando" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3 d-flex align-items-center justify-content-center">
+                                    <button onclick="adicionar('comandos','caixacomando')" class="btn btn-success"
+                                            style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                            class="bi bi-plus-circle"></i></button>
+                                    <button onclick="remover('comandos','caixacomando')" class="btn btn-danger"
+                                            style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
+                                            class="bi bi-x-circle"></i></button>
+                                </div>
+                            </div>
+                        <div style="display: flex" class="row justify-content-between cmd">
                             <h4>Permissões:</h4>
                             <div class="col-9" id="permissoes"
                                 style="overflow: auto; scroll-behavior: smooth; height: 160px">
                                 <div class="mt-3 mb-3 rounded border row p-2 caixapermissao"
                                     style="background-color: rgba(0,255,225,0.37)">
                                     <div class="col-sm-6">
-                                        <label class="">Comando</label>
-                                        <input name="commandName" class="form-control" type="text"
+                                        <label class="">Permissão</label>
+                                        <input name="permName" class="form-control" type="text"
                                             placeholder="Nome da permissão (ex.: sua.permissao)" required>
                                     </div>
                                     <div class="col-sm-6">
                                         <label class="">Descrição</label>
-                                        <input name="commandDescription" class="form-control" type="text"
+                                        <input name="permDescription" class="form-control" type="text"
                                             placeholder="Descrição da permissão" required>
                                     </div>
                                 </div>
@@ -272,7 +278,7 @@
                                         class="bi bi-x-circle"></i></button>
                             </div>
                         </div>
-                        <div class="row d-flex justify-content-between cmd">
+                        <div style="display: flex" class="row justify-content-between cmd">
                             <h4>Recursos:</h4>
                             <div class="col-9" id="recursos"
                                 style="overflow: auto; scroll-behavior: smooth; height: 160px">
@@ -296,8 +302,7 @@
                         </div>
                         <h5><strong>Insira imagens do plugin</strong></h5>
                             <div class="imgs" id="imgs">
-                                <div id="0"
-                                    class="w-100 d-flex flex-column align-items-center justify-content-center caixa-imagem">
+                                <div id="0" style="display: flex" class="w-100 flex-column align-items-center justify-content-center caixa-imagem">
                                     <label class="btn-upload"><i class="bi bi-upload"></i>
                                         <p>Adicionar imagem</p>
                                         <input name="img0" type="file" class="input-file" accept="image/*">
@@ -313,9 +318,10 @@
                                     style="width: 40px; height: 40px; border-radius: 100%" type="button"><i
                                         class="bi bi-x-circle"></i></button>
                             </div>
+                            </div>
                     </div>
 
-                    <input type="submit" class="btn btn-primary w-25" value="Postar">
+                    <input type="submit" id="postar" class="disabled btn btn-primary w-25" value="Postar">
 
                 </form>
             </div>
@@ -348,7 +354,7 @@
             "nome": "XG7Lobby",
             "imagens64": [
                 {
-                    "imagem64": "",
+                    "imagem64": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAsJCQcJCQcJCQkJCwkJCQkJCQsJCwsMCwsLDA0QDBEODQ4MEhkSJRodJR0ZHxwpKRYlNzU2GioyPi0pMBk7IRP/2wBDAQcICAsJCxULCxUsHRkdLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCz/wAARCADqASADASIAAhEBAxEB/8QAGwAAAwEBAQEBAAAAAAAAAAAAAwQFAgYBAAf/xAA/EAACAQMDAgYAAwYEBAUFAAABAgMABBESITEFQRMiUWFxgRQykQYjQlKhsSRiwdEVM3LwNENTguFEc7LC8f/EABsBAAIDAQEBAAAAAAAAAAAAAAQFAgMGAQcA/8QANREAAgIBAwIEAwYGAgMAAAAAAQIAAxEEEiEFMRMiQVEGMmEUI3GRsdEVJDOBwfCh4RZS8f/aAAwDAQACEQMRAD8A5KPatFt68wQKwDg+1JLV3CEEER2HUaaK5G9LQMu1HdwO9KLU2tLEfAmGUChawO9b1as0vICDmrFUEcy3T0m1uJ9IxPrvX0MLuw+awpywzVexjUkfVcvuNacTRV9OXblozaWYABNfXcaqpFVQFRO2wFSL2QMTSSl2usyZC1FrXiR2U6j80RAdq9wDRFArRIeMRY43DM2hx3ppH25pF2xRrdskUDbVk5M+pt2nEehd9XeizStjGa+RQFzSk8gDUt2B7MCMbbMV5lKxchgSavxsSo3rk7W4CkfNX7e4DKPigNdpyrZkdLYGGDFeqplW37VynhEzfddX1B8qfuufUDxcn1proywqkb3wZSgjxF9Uqz6ZCM96pwgGL6qPd5STPvVdfmJE7uyoxPLtdaZqDOCCfurviK6YzUu6Qb0w0rFTtMqtz3kosQdqKsjEcmguDk1qMHIFO8AjMHyY5CzBgarLPpj57VMhTg1qWQgEfVCNWHbEiz7RA3c5ZjvWLXUXFLyNqY0/ZLggn2omxQlZAgied8mdFaOUjG/anI5Sx5qOLgKoFOWcoZt6yt9J5YxyjhfKI3doxQ71Mt428Xf1qzcFTH9UlbKPEz71do3xWRKrhlpat0xGvxRc470uJQqgZrBuB60u1FRY7odU+BicYUGKC8fendOcV80YxWp8fDYgL6YeHmIoxU0xrJFYaPc1kbbVadtozFIrIPMYTNfSDmvo2Fetg0OVKmaTp9S4BEV0nNU7CQqRmlkj1Gn4ICu+Kp1JUrgxrbxxH5pzo2O2KjyyamOabmJAxU1s6jQ2nq29oh1Z5ms0RMmvo4y+KbW2YDNFhwneVrXuXiJS1q2PmFeXAIrNsfOKjacrkSlaCrcyyXIjNSpmZnPzVPQXTb7rC2i6sn7pfSwQ5MIvXcMCKwRyEg71ctQygZ9qxFCiKDgVma5WPYf0qu9/HbAEjUnhDMPdAMp781DkXQ+fenxcGQYqddvpJ5pnRpyExBbrdxlS1lBXBNK30YbJA3pG1u8HGafMyvj3oB6mqfMMoIK4MlOJE9aRnlJyDXStbLIhIA4zUlukX13KVt4hjBYySZSID3YjFMtD/MPsUZMhq7VoTc5AEi4z2okUUkrBYY3kb0jVn/XSK6W26F0y2UvcyJdyYwQ2tI43HOlAcn2JpnxmVQtviJcaQIgEBA2wcVvdJ8N3XDNrbRMFq/iepGK0jd+kkW3R+rzLkQLH5QyieRI2YewJ/vivrv8AZ7rSRLIsccpyPEihkUyR57kHAx8U88rxsAwbUcrzk55r0XkgIHiE52RiSWX2G/FOB8LUgcMcxb/5FqXOdoxOUlguLaYw3MTxSjB0yDBIO+R2I+KaicKNua6gXMNzE0d3Ek0WcSROu65OcxsBkDvtUO/6esAaeyZ5bUZLq2TJBvtrPce/+9Iuo9Du0ylxyoj3QdYrvYI3laJSTt603Z3ehhk/1qSxJNeozDiszZp1ddsfC0g5nVtfB1AzRbeQDLd+a5uGR8jJNUluNKYBPFLDpNnAhK3bu8sNcgnANZaSkLUPK4qjNCypnBoO0Kh2mEq5xmQYpOKKzg0BUIr3c0YcZzOvflcQoAI+qWlGDTK5ArDRl67VZtMhWyuuIujGmFVmxRIbNieKoRWgGMipXalPSGaJmrOPSCtoeNqfKhV+q0kYT0ocrik72NY0ZPbu7QJiMhNBlsyu+Kdt2BO9GuSmj6rv2hkYAQK9AwzJduoDAEcVZWFWjHxUeIgSfdXrchkA9qH1ljZDCQ0wkC/h06sCkITpff1rob+HUCQKifh21n5o3T3B6/NIXA7uJRinULRBcLnakxEyrQ1JDYNELWjJkQZyynmVPGYjANLtG8pPNHgj1AVRitgBnFKLLxUeJYqNZJ0VqVpLqEBAJrotKqd6SvLdpsJGjO77KqAlj8AU16fq2tIWU6mkIu4zjQxjc54q3061vbweJHGVgGzTSZEfwudyfinrbocELma6jjuJgcpAWykenkuBsTTN1cTSnLEp4YCBRsqAbYUAACvQdH8OHU4bUcD29Zg9d8TLp8ppeT7+k2rWtoNJXx3B28QaY8e6g/pvQJ76WTILkKA2I0OFUE8AGlvEJ8xyB77775NKyHOduMnIO5z7VtNF0zS6JdtCAfrMfqNbqtc+7UOT+n5QzzDBJ3zwMbn9KVeQkjfffK4HA9K8fUoYnVpI9PMO+M0BpBpOJlxkbOCSB84ptwJ9XSB2g5Z5VKlVO5IOxB/U+lBN2u4kUHJ/MuxGPQivHuF1YJLZOO/+lJztFrwHIPJxsT8Zqp7McgxtTSDwRHhdrsNX5gVyD+mabgumVkcY2OiQHGkg7FWHoeK53WMg85Bz+vcetNwXPhyANho+GyNselfLeLAVaW26TaMp3jl/YJG4mtwfw0xbQpOTC3JiY+3Y9x8UokJ9Kt2jrcQXdqzZZUEyhscp5gw+RkUoUCnb5rzDrenGi1ZRPlIyP8iazpdzamjL9xx/3FRCRRFV9hTiIp7CiCJSw9Kz1lo5zHSV5Mo9KgyVJqveRqsf1SvTU0AUzfuPDPxWT1Fpa7EaLWFrnJEV6sLE5xTMEDOd6oLboi70zsuCniLwhYcyaITTMFuGPFMBVJ2HemYY8UI15l1NOGmordVHFZkwvFNE4H1S5Uu2KGRucmMgABgQGGalplIzVuO3ULx2pO4iXf7o2lg/InVcKeZNjfSa9mmYrjNfOmkmsiPWQKm6AeYydo3DiChVi4+av2qkBaTtrQDBIqogCgUr1dwbgSNKFe8zNEHGDSf4RQc4/pTpYV6MGqa7GVcQjbnmTLiLCkY7VOWM6+O9X5YdQPxS62gBzimlGpCoQYJfXkz20jxjaqI2WgxIRgAEngADcmisYFUrIxeVtlhhbLKO5cjiq9H0vU9UuxQvHqfQQTVdR03Tq83Nyew9TAeHPISyrhAcF3wqDvy1DkuLZFkiEkzsyFXSBvCBYdi+NWPsViYsnmSNBzGodi2jvlVPf3qZI8bEsNRc76t9yfb1r1zonw7p+njefM/v+08x6312/XeRfKvtNGFchlU7E4XWxC574zisanORrGN+TXzRyFQzTHW5J7KMfFBCP5/MNfJxsCM+nFbLsczIqAR3zNFSBknPfY4744NYYrgEjcjP2B3rZAjXWxUDuQfLx7140aNkk7kDGfLke9EqeJNfrPmeMndAVwOx7juKQnhUeYMBnfGwHpvtRSpEgUkhctjGcHbYDNeOkoxnGGznjjGKiX9IXWNhGDI90sqrLLC+GjU7Hcn3U1IN2GjkDmUvpTQDoZWfUdZYkBgMYxg/3roJoJVZm5AXsu2PSpctrDlnS30tsfMzYBHJUbCs31Cm9m3ITNPor6wuG5k9nddBz+YBhgg7ehxW1uSP7n67Vt4GJdnwqkjLAZKY34Bz810v7OdE/Zi7txddQuLuSZpWRbaDw41CjbLMcnekram+ggEnmNQtdgzHP2Wgteo28jXli4kWVmtr9HKYDAJ4HO+MFgDkbmtX9jcWMoWUao3J8KVfyOB2PofUVVn6D+ys4C2t91OynUaYy0oljX0BDHgVtoet2Vu8PUI4erWGNJu7HJnjXgNLE3m+dvug9VX9owbPmHrCNO/gnyjg+khoMCtqwBFfSpGhDQSCW3ct4UgyOOVYHfI70Asay99ZDFTNFUoIDqeJdtJgAKDf3WxGaTtpDjk0K9yRSPwV8aHHJSWI41iXJA4pW4uNyqn2o1xNhSM+1IxoZHz71ylM+ZpE1e0etULEE8b1RVFUZxQLdQiitSThQaHcbm4klXYJmeQLkVq3wxqTcXQL896esZ1OMmo3VFUzK0vBfEqysI0PxUSe6HiEfVP3c6lNmFQHBeQketGaBBt5kNS2TxHGw4yPStQLht61CmE39KwzhTgc1O4hyVEJoDMOZTRwAAKNnPFT4CWxzT4GBSW2vacQ7tBscUSM5paV98UWA5FSavas5vHaNMQBvQ9QOceh+Nu59qFO5xgAk5AAUZJJ2AAodxazKmgzYbSfHWLco3Ph54JHf0p50TpDdQtCnhB3MQ9Z6mvT6S45Y9h/vtPZpULKUuFWJF8zKdLvI3l0ovJr5WtrePAYgk5ZmOTn6qTqWNwscCSOe8rMx1Z/hxitSSXCvqaON8cB9QGcf9ivYqKK9IgqqXCjtPJ7L7NUTbY2WPc+34RuSTWRoaWRW8xcZLvn0U+lBaO4LNiJk3CrnTkgjBLFdqJHdSZBIjLHBOgBR+p7VuadSqlnA05UJFvse7cD5oipi7cDEhciqnmOYuYHVgokiMgH5U8xQ77elBmtgg8jOzYO4YKMnHtRPxECZKJgsMZGcnHrXvjIVwCxLc4wuT6Z5o7cWODAdgVcqRE1jvU4ETgg6QWII22yfaixNrRhKoVh3J2OfitqxDMoBYtuPUE439a+y0eMgaydONj+tTGVPBlW7dwRASRK6gKdMu+lkGTv60qUmU6ZNimcMclX7DG1PyylRpQAHYlzuT7UHLSDLadxhsbjPbIqwkMeeDLUcqPpEn8pILebOgjvg+woUh0jdeB6duNqoLCNYZkEgAIV9wV7cigzwEagFbDAgHTnSeeSauQ+8JS5cgSLcI0hHlVdTBcZwH7k59qEBPbKvgzFXjXI06RscYGkjnen3iUSyLjHk21ctgg7/NKSxu35RvzkZ2JOTSrV6ZLzkjMeVX7cBTiF6ZL1Ge4YTvmNInY4AQ7cfl+arQmdXDRzTq3YrNID/Q0PpVtIttdzHu0UZON8HUf9KqW1uCwzXnnW7PslvhqccfrNn0WpdTWbHAPOPyi62pzI/mLSNqcsxOpvU571lrcg8VadFRNscUkQGJrGPrHsbJM1KUIgwoxFYl0Vm5wVNGdSDS0+QpHtXyHcwMhtzkQ0kms4pm3Uc8UjGCzU+mUX6r5+Btlp4ELNcCNefbapk12zEgGtTl3OBQ0tGO5G1XVKiDLQG4M3AijszHJzTNvcMmBmtSwBBSwXB2q5griL2rZGyJQa4Z9s1uGPUQcUvEhJFVYI8LS+1/DGFhlSFzzMP5Fx7UnuzfdOTgnYV5DBwSK+VsLkxog2CNWqAAU4cYoCAKMUXkUKF3Nkys2g9olN+b7o9vsKDKDqUAEsTsAMkn2Ap+GAW0Ml3e4SONC5jPPbBb59KbUdNt1zBKxx6n0EU6zqFeiU2OefQepmXJt1ExA8Qq3gFjjw8/8Am49fSok1yuqNA5EkxKxKc63B3Y+uPWsX111rqIkaxs5lgkcr+MuUZIye4iU+lT7fp01rObm7lkmlEboM54YY8ua9S0B0vS6BptNyfU/5nmmqp1XU7jq9Xx/6r9JT8aKEq7AgA+GuFBJ9Sood5dxMqIgMlxKBoRRkJk7ZPGaCLuHzDR51AOWHY5O2aXiaJpXdiV0FWHGt9xkDO1HEZU2QXOCKsfjGzqj0pkagAraCTliOxrJK5JYgBFy5yefT5oMt2kjv4YKt+UAnJCjbUcbZNKmZy3hghgFBJHGr/ei67lrr3NBH0xewhY4Hz7dlAO5FbLqhXcgKMuRuQe4FTPxDIWGcHAOcHIJ9B619DIZGbGoacFtX5BnbfNdq1yMQFnX0bLywlI3Y1Ex5BbggnUB7kVgSLqbON89tx7bUrKeAhY4Ay2MZx6D0rUEUhDM7AKc4Hr3q1nZm4Eq8JQuY4S2lewwcb8+vFZiDyNhSTgHbjT8ZrSaShyT3BzsMZ2AzX1usK3GXmCK2SH5yF4XYd+1EHnBMoxwcRlVxhSSGUHJHBP1RBGzKAxPDHGN8535rUqoMFSSVAPOwJr0hwCVI06Dkk7HvwO1ErwIvLZ5EVubO1kUOr4cAYyp9vzdqRNqFfGxA3OOST6VY2kUY4cDGM42HBpeZQCo5AwCQN911VYmB3hNV7Dykz2xCjxYhnDxOMH2Gsf2pm2ZdqUs2P4lVB5JX6bI70W2BzXmPxxSPFRx6g/8AE9N+Dbz4dtZ9wfzEcmOobUsgwadKeTfFK8NivMR2wJ6EDkz3wQ1KXMGFO1VYV1YzQb1QENQruIfEm6AAsItDbhVBNeSso2FburhYkIB3qfDKZpB6ZpiqlhvaLmtGcR6CDXuRTbpHGnArcKhEyan31zjIB9aEBa59okyQq5it1ICWApJDlvsVlpC7UzbxlmBPrTYr4ScwRT4hj9pFnFUSoRcV9bRBVG3avrjOKRu/ivgw9UCjMFgMaOE0jal4c5p9RkY9q5c+04g9rntEnkIosUgKlmOFUZYn0oktszAaRlicAep9KIsFhaRLLeuhVMssOQBLINwGJONvSn/RenHqBLHhF7n/ABEvUeoDQIAOXbsJ8Lrp3TIW6l1B/DUo34WIY8WXP8SrXE9W/bLqt6+m1ZbW2Vg6rpUyOw/ikYiqvVOmX/Vrie/vJUjgjXy/vY1iiiXsGY4/QVJbpXToo0kaW2VGbSuZUMrZ32XOR91us11J4VIwszSUvZZ41/mb/gRdP2w/aMtO891+KaRAuq5jRhCo2xAMYXPsKctOqz35H+G0hD+9csSGzvkseT6Cpvg9LNyYvFiWLbLhtQX2IUHc+gO3rVhIYoYhFCcRA5yoILe+/wDSiNFpU1D4PYcynqOsbTJhRyZOup52uvDthrl3LH+BRzg4pqJZFUGeXU5HmCgKoPsBRSI18kSKD3x6+5FKyzqraIh4tx3x+SPt5jT8VivzMZnd7XAIo/H3hWdYx5mWOOR1B1bMx3A43+d6w0Z4OQTjYZG1LeA5dZLgtNOxxGo4z/KorM3UBbtJbD/EXqyeGwzmKMKN/Mvpx9VSbq0z4g7whNO7/wBM595uWK8aVRGwVfyNqUeVc5LD3pWeS5F7GiBgnlRO4IH8Rqh+Pij8FrwIkrcRwBjsx2YjnA+d6KZLTAmJCmVmES8MRjJ2HFDBKnPl4hHiWoPOMiJ/i5jeeCNggOQAN8LnJzRY76OQTHBOhhlcck7c1rw7dXZ2GJWXGRyTzisCOJXbylAxBZsd8c4pxUllbZLd4KTW4+XHaNh5VMLRvkOBj/KCNsg09bBUleQ+eTUAGUDBJ5IHYVLSRokwcAEkqGAyTjnHtTXTC5Lyqx84AMZO4KnGWz/Siw6s4IMCvrIrb2lhyjbAEJvqxuCR/KfSgrNoAVc9wQN9+3NYHiFnjG7Pzg4GM8Z9K9LxxkYIJTJBx+b3orjEUrXjiGjc6WwAMtggH8pA/SvWVWjYj8+Qw0nYbcYNKGdF0nfUXXGMYBOOfajxSAMM42kyRtn3FfDntIuhXzQNvohZ55TtGAVA5ZuAtM2bAnJpS8IMngouAkjux7EtjA+hRbZtFeO/FWvOs1RRPlXgf5nr3wv09qNOLWHL8/tK8rKF+qnlgX2r2S4JXA9KXQlmrHJXtU5m0fIleDj6pa/bCn4pi3zgfFL36Eqx9qX148XmTsJ2TnL65MjHB70x07YgmpbZZiT601FN4a7GtVbT93tET1AE7jOglulVcA9qlSs0zYFJm4d2xk1WsIPE0kjNBCldONxk2s3+UQEVkx3xTkMOhhtxVtLZAnA4paVFQ/dCWanxBiTrr2czcZAUV5IA1AEozijoCd6BVMH6wnxQeJmOPBpyCOWRisa5I3Yk4VR6s1KPcQQ/5iPzYO2Pmk5uqTzqYUxHATkIgxq92PJrZdH+EdT1Ai3Ujant6n9hMZ1n4mp0pNem8zj8h+8oX3VLbp8crq8buikNLuUUYziP396/M+rdYu+pTlnkIiDHw0HA9/mnut3sMsv4ZpHCxY1hBkE80n03x5JQnTenpLIGy004LaR7ngVtLqqqB9j0q4RfbuTEGkRm/ndUcsffsBERadRmVSsUpTcrqz/+1ORdDu20+K8cYbB8x7eueKvpJIkbRTzJLcSHLJbLq9tPwKL4TEKGGT2UESED3IOBj5oU1pV/VIH6w4XWW8ULn69hJUXT7S3dBGvjY05kyQgIO5GapE5xqfb570yI4EAXSZWJAKoVK5bjXISEHxml5XhJKxR+NKoJK2mJEjPI1zNhcjviiNN1KuptoHB9YLqul3XLuZhkekC+t8Bcog4wcMfcUILBBFLI5WKNGw8j74bnSFHmLHsMViach/D8aMSkfkgzO4Pf8m39aABbrhLo+FCzZ1ODJIST5iQN6Jv6hWTtrPPvBNP0y3busGB7Rb/iN5PGyWsfha8+JcyZaXcnKxY2A4GwztyK1NEOjqtv4aydVnUSOj6X/CK48viruNZG+Dxnffaqiz2tpHGeko8195Da3Dw/uLTG5ZImBLOOxIAB9TwGy6cimWScvLKXdnjBLzzy5y3iN2BzuT+hNA/Mc5/v+0PzsGNv9v3iMNq+i4v7t9Ur5KasDxpTtpjGMYHLegosVtdNIDJh7l0QopGCNX5cLwABvvirhtG1rNdzWySafIpIMFrGDtoUZyfQb7757VMueqRW8k1p01QWlJjlupFPjPq2YIDxn9fiueIAcLOit28zCK3Ej250tJrYg6y3qeTnmvrO5uXSVYkiKrvJdTZxCD6b4J9KWkgiDGa+mMcZJAjTeaT1wKC889/JFaWyLDbIcJGNlUd5JW7mivFsDZLf2HeVCpGXCj8Se3/2PwyJeyTxxM7OCmmUrvz5mAGwAHAq/bxIqaFB7ZJ5ZuCTilOn2sVjCUjwWc6pJGyNSjuc8Z9PSmUmlZiVwqY0qceZiM7+3/fpT7RhqwC/czO6ywWkrX8ohDKVMwzpSMeZuCM7YXFKtLIwZVIMjZAHOnI3rE7Dws7aTgseARwPr/vtRI40RIxjSRGxfPOojnPr2ozcWJAlCoEXdNQBUVA++xdWO/mAxvTduVkeOQnAOXkPooG+aQAfCqBsAzD72p4gIiwr+dwpmI/h7hP96A6j1FNBpix7+n4w/p/Tn6jqRWvbuT7D/ufBS5dyN2ZmP3XjErtT0EDFQcdqWniKtXjHjh3M9toC1rtHpMopfFNRxAEGhQ4A3ptcHFLb2OZczLG4cACvZkDqRjtWY8gUTUDtSvOGzKywIxOAySaIATXojxRkXitrZaMcTPAkNgT23gJcZFdVYRBFB9qkWcWSDjuKuoyRJ5mCgc5P+lItW72HanMPoULy0aeQKv1vUO9usHA5zwKLc9UtgGCnYbFm2X6pKKRbiTXDEzqAWaVwVjHwWpl03oOqvILjaD7xd1Hq1FIIU5MNaLI7BpAwH8oGXP1xTNxMxLIqGOMDfUcsfmhPK0cbZkCqw28PYn7qVeXij+LyjH616l03oOl0IFlgG76zzXXdYv1reFUTj/f95m7m5ydOcKDgYpf8TGmCDlcHO9TZbkOMA4z370lLMqDnI9zTpuoV1HynMHp0GRgwV6beW7uJT+8LuGWNMjVtxmjRS38wWFT4dvx4MJ8GLB/9V18xpaBkNxC7gqokUnAydOd9qdnuFjdtDO6bhRar3/lLtsP0rIaq1t5ZT3mt01SFQG5x7ypHHa2oRXfxJ3XMdvbox3/ywp5j8swFGkn8FdN1PZ2WFDFLiQTygH+WC38uT6E//MWKPqVyjrHpsbNyPEMeTNJ/1OfMf1A9qYS3tLQosEMEbncXF7+9ncnvHAAf/wAaWbMnLRlvxwI3+JWUBoLe4vAnFx1Rhb2Ea8eSFcZFAmmS5/dzXUl0UA/cdLi8K1Qr2LDAPyc0Kdd1e9k1bEoeov4aen7q1j8x+69kZI0jM+pYnUMjXpNpanG2UgjHit+lWbc9pAtjvPTJMFMNskVtr2/D2X7+6kPH7+bgfrXlvbxmUpHGrzr+ZFVrqZCBk6txEo+TWlR5YtQD/hT/AOZKR0zpwGP5ifHf4FNERQ28fjyRR2hIMYlRrSxIxuYbNP8AESnsCxANTWr3lLXY7RO9ZIEjdZm8bOldDhgi483njwmc9lz7mhW9zMg8ssxLbk6iGPc8VvqGLho3HixJGm0l6VSabfYQ20YwqegCj5qZrm3WNt8kZXGfgncf3qewk4WR3rjLSjdXixq7PqaTSCgZjsM9sZOB81CzI5yoYnOrOTn5pxLeQtl/Nkb6gdt853rZt5yN9kG4CgD422ohNK/eUPqk7CLW9lcXL4Gwz525054+66G2sYLUBANRG7sdst6UOwCqnkQqUzqbG316mmZ3zCB/N5nwd8A7L8mnWjprrXe3JiHV6qy1/DHAjajUGGcgHzkbgE/wjHf1/wDihEkkgDKgEAcYxySf6mkI7iS2jy+CXkZY9RIw3JPwKH+KnVjwyyNk74JAOSBRn2nPMCGlbJIjkpV2t42IVARITwFiTbgf9/rWvG1q5CkKThTtx61PMsspkLgKWI0422HH1VK3tXZEcyKIUjVizEYz7CuWatK/MxwJadOThQMmFR44FVySZZR+7B4AG2s/6U9Zp4hB5/1qJJJ4twxXIQYVAeyjYf7/AHXQdMU+X6rzTrusfUEvnj0no/Q9Oukp2Y8x7mX7a3GgccUpeW252FVoMaR8Vm4QEGsBXqSj5mjYZnLuDHRLeTUwye9M3duSTgUnDEyPv600Z0sTPrBzuDStsEzSZnw+PemxvGPip8kR10DSoJOZa+QJzjcmmbeF5WCopJ/pSeok+52HuafSWdYFhUiIZJJUDxGz7mtdTSLDhu0zzWmsbh3jclzFZpguBJwFXdv0oHidRvARloYScFpMgn4FfW1mpJYkAk5LP5pD91VCxxoAPMR3bfJowavQ6Ltyfp+8FNGr1X0H1k+O1sbcLJKGlcb5m3X6WsT9VXaNFYoDuFwi4HbFeXru2cZx7VK0MW3opOu3EfcgKJ9/AKWH3pLH8o6bp7hgGBCcYDH+tPxWVhOgV4wR971KRMYNVbR8Y3pRr9dq9Qd7WGHaTpWn0nC1iZk6H0jG6SAegkYClj0DoWdZjlJ7AzPp/SqFzKQNqlT3zqHWJ0V+GdyMJ8Z70HQ2suwqufzjS3T6SpPEdBELiz6bb3OVLjyMqquW0E9z2rMKQx6jGrMgOokgLGCO5LYFLpLCMlrmWYhjnw11DVycu2F/rXr3cCsmiDcZ/eXeZjnsyxjC/wB61dauFAY5MzVjIGJUYEdEs87HwI5JVXlrc+FFHjs1zIAB74/WheNCjmCO51TNnNt0KAzSsfR7uTf5IzQGuLS6KLeXN5clVysUgMNsuOAsUHmP9KbQTtH4cEYjgPKOfwkJ+Ybb94w/6pKu3Ko5MpyzHCiDTxYpdKJBZzacslqh6l1X188jEopPuwxQ1e3jkZl0NeMcggf8V6o3uXb/AA6H6OPqm0sFZClxO7wn/wCmtVFra/8AuSI6j9mmltrQxmBUMMJGGS2JiVh/m07n7oS3qVNRx3/CELoL29MfjJkt2ykyyOlvKNxNdSf8R6m3/Rq/dJ+gqe/UcOz26SGd8h7q6czXTZ7h2/L9AfNXJf2f6W6sY5JkfkZYMM/Yrmpomt5ZIzjMbFc9j8VbpdZXqc7PSDajSvR882sc0rapnbDkkgZySfXO9OQIEyqkKDt6E+wPNI+KwIGrc7D/AOTR1WQ7mRgQRjtj4pzRciHgRTajkZYyivhJnIyScZIzj29Kz5SD5jvzk53zS0befDOAAvJK6Cf8zH/aieJbebDZGcoFXGrsSc8D0oxtSM4xAfAOM5hYJHjfSCTHksM4AJ/mb2rx2lkc6Wxv5MYwQDu312r7lThRk9hwO5pcwySNhSdhgkHAA9BUHfngzigE5MLrhJGo5xlQTv7k14n72Q6Qd8Yx2WgK9pAH1OMqwB7/AKVY6e8EyxyW65UqQxcDJbggj0ofU65dPXvMK0+jsvfagmo7UHTJMv7vHlX+KQY4Ar6TWcltuMAbBQOABVuO0ymphkkDf/alp7Qknb4rI6rqx1b88ATU6HpY0i57kyVEmXyfaugsSF071HaMxnBpy1n0lRQOr+9r4jSkBG5nXQSDSK9lkG+9T7aXKjftWp5SM71i2q8+I2LDGYZtLUpIgB2FfRSFv6URwTVgBQ4nFO6exkYx7UCUDVRFODiteHqP3Ug+0yWNwnGrKI1URRhXx55W8zk/5c7AfVYErBtROTTEkOkHalGG4rXC02DmZ9UVRKdvOzYqvCusb1DtAAVz61aimVRSjUrzhRGFHPJmbi2Qg7VIkjVGNVLm5BBAqPLIWY+tFaRHA80KJxzCINXFORIy7/dBs01MM1aFsAmcdq5fqVQ7TIn7zmc31K4lJEELOHP52RCzAegPFS06dFq1si5OT+9Ysc/9PFdNcwHOB70g0BB4pnTrEqQLWII2jOobda39hERbRbDJ24xsB9/7AURLO3Axoz3OTz80wI8HemFQVGzWue5nx6dWvIEDFAiDCIqj0VQP7Vpo8dqbjjJwBW5LcgE1St+e5nKqdrcCIopY04tuxXOKXTCv91atmRkxgcUBq7CpyIyZfeQ7oTIrBThsHHzXNvY3LFyTqYknJPr812t/AMEgVEKYf7ph0/WGpCVEWX6BdQw3EzmkUxTFHUrIpwdX+lNyOpCqdIYjzYB2FP8AWenNJa/8Qgz41qA0yj+OIH83/t7+3xXW2cXReo2drfpa25E8Stug1KwGGQ47g5H1TO7q61VLcVzk4P0MUt0h2tNYb8PwnBx28k2fDR3CqWOAdIA71q3sr+61+FbyCNT5mII3HZc7k12101vCNCIiIMeVAAMD4pJb9UZQuAARjG2Kr/i9ti5VJ9/CFrPmacrI8UYmGshojiUY3yOVpa56k8iaYQURcgnuSd9Rx3oN5DdWtxdRMS2p2k1fzqx1Bvuq3QunwzIk9wqsrykojgEFU74+afo5IBBiw6dVODIz2V34KTurAOusBsg6c7HB9aqdEvE6fIn4jV+Gl/Mw38MjuR/euou7ZJ38TC4jABwNm24wK+6NZRa+pLcW8em5lBWJ1B0xkacH5qNtYtUo3Yy5HNbBll638GaGOWF1eKQAoyHKkURrVSCcdq5yxgfo37Rx2MbSx9Nv45Gt1clo3lCatKn23rssbfVeb9T0z6G/w92QeZrtJcuoq345nJ9QgCEnFS43KuB710XU0GG+65sqRJ9070b76sGC21sHyJ0lg2VAzTzxF6ldOb8tXUOQKzGtylpxD0UleYCODT2r1wOKM7aQaUeXehVLOcy1cKOZ8qHVmm0UY4oERzvTAI7VGwntJ1zjrhgMip7bsTT10jAmkdJzWuoxtmZL+8PHIVx7UcXDetLrGxxgVoowqShS0vptJOIRpC1BIyc+tERSxxRjbkAHFX7gvEfsV2cRmwGGH1XQAjw+3GK561JRhmqn4kBcZHFZ/WVM75EEDBYOfGo/NLPGpBNFd9Rzt3oJlUbbUTVSwUEyNb5eJSAKTWovM2PivpgWyR3olqh1jIq9z5Y17iV7S3UgEivbxUVSKPHIscY+Km3U/iEgHahKWLHJgfAaSpCdZI9adtZiuM14lsXweaKLZl7VfdYjLicsbniFnkDqakOo1Zqi6vjG9KtE3pUaBtHErfcORPYJVXysFZWBVlYZDKdiD80l0qY9IvbzpLP/AIS4Ju+nMx/m2Mfz2+R70VlZTkVM64F/D2k7MQ8E+lB3ZZB5t+dsA0z01QsJpbs36+hgeosIXxB3WUeoXJJbBqN47l6+W6klVUlzqIzHJ2lXHPzXtvbme5hi1BNT7sSNgBk8nFNa9KavIRFdmo3+YQXUEkGuRwctGN8ZxnCjNX+hxiOKzjZA2lSyjbJJO5zUmYT3F4LFI/Ej/HRRCQkuzRqf4tPauzgsktp1QkRAoiKEGynOTjO3pTgLtAAi3ucwzRnw2jMR1MdiBjvnNDtVc38sboVURxgkjG5zgmqzSRRxtI7DCPhtOCwweN/619aRNK0086gSXDq+n/04lXCAVLPM+xJl1avcdV6TJp023S3uJTIx3nuHQRhYwP4V5JNV9Q0/VT7qfF2YhjTCABj1bzE0wJPLz2rzjr1rXao+w4ms6dWEoB9+ZL6m4w33XPZGv7qx1JwdQzUIZ1k+9G6AEVxollZODLlljaraMMVzlnLjAq5G+VG/alWvqJbMm230hZX2NT3bzfdNOTSjDzULSMCAajIHEbgbam03NIRHYU1G+O9U2LzOUWcSHcQggnFILbEvjHerbJqFfRW4zkimteo2rzFfg7opHZ4XOKDPCFzVhyqrt6VPddbfddq1B3Zl5Va+0XtoCSNvSqZtho47V9axhcGnm0he3FSfVFmhCsWEhSJoJoLyEU9dgDNSJNROKLqO/kyoqYRrjAwDQ42kkYYzzQ1id2HPNWrGyGxI/Wrbr0rXEkg54nsNmXUZHamEtBHviqccaIlBlddxSY3ljiGhyBiSrqUoCMmp6OWfem70g5PzU6NvOKYVp5OJWeZ0FqisBTZiXBpayI0inZCAKR3Ft+JICIvECTtQngGOBTRbJ+69ZQRRVTkT524xJTwZzgVH6vYm5txCqs0ocSRKvJ0jzA524rpiuMgipd/hJLN9RAMyxDBVSHk2H5vLjtvT3p9mdQoJi/UnFTTiJPFt7ZopUkVkkOnOAVGdjxRrBOiMym+muRER5miAOWIHIPpvmr3XbSEj8ThjOsjQzwnAIyuM6ef9PepS9LtpYbRraRluVjfUp0lZJVfP9sVticjmZkCGt+jTnqfTreE6YrpHukdTICbcPp82k5//ALXdQdJurOSEpfSPCV1CJw2lJQwAdNZJ4PrXEWfUupdKvo3vYXklishbiOQlHihkfxBg77d6/QOj9Sj6wgmUIAsfhlMksr+ICATxg9q5idEHNb20sdgohcs97+DjlHdVdsmUZ3Jw2Ko3DPE0zZZQEJ3xgKMnO3pQ7Rg1v0nXESGvLlnk5SPQZiHJPc9qT/aKZorG6dGOZFS0TB3Jc5b+marJwCZLGTOejvjLPLKzEtJIzfRO1VFuvJz2rlYWZTiqSTNpxk8ViNbpgX3R6mp2JiEu5NWd6n4GaLK5JNL6j/WrqV2rgS3TksdxjcTaSKsW8wIxmoAYinbac5FD6mrcsZJauZcZgRmlWbevDMNPNLGUFuaWJUZTqrR2lBDgCt6yKBGwI5rTEaTVJXmCo2J7EwOKK8iotJwM1ZuC+KsNeWxJqeMibeYMSK8WkUZs705GeKuZNg4glrljiORHG9eyzBdqwnFI3cjKaorTc8LQ7Vm531ik1h1tXqSatiacgUcmmTHwl4nfmmobZFwSP1qnBoXFTprhYxsazFej1H60vat7eTLFIWVppQqnepUtzuRnv60O5vMqcGpbTMxJzzRFGl9TPnswIxcTBs0gHww+a2xJoO+abomFxKhqVA5l6yuQoGaoNOrDY1y8crLwSKowSuxGf60st0nm3T6rVBzgStH5jTQXC70rC4AHFGkmUKdxxQAUl8CFNzE7mUITv3qTfqLq3ePOGBV4z/K67g/3H3RL2fc4NIiUnan1VRTDjuIHYu4YhhcQ9RsktJwv4iCQLHLIW8QKdgAe69sHjtU2wgEN3cwESRtGkmrwyzH8wClSu+Dv+lFaPXJqQ6ZDgjHDMNxkVm2jnS8S8eYa5DqITykKi/8ALYEeu9a6m4WpuEz1lLVttM6I9Pt5+tXYmij8FrW0t9cjjVvEASAd85FLR9OvP2fuJb6wDultMPxEWT4U0KKHkVwe4BGD6/NdH0y3jlkvL1ChFwIIw+EkGEt4lbS2M85ol/GkfS+orsqTCS2iUDSf8RMsGoqfnNXDtKgJ90uS5k6faMcMksaSqpjUGNZNTKCec4O9I/tQhFjZfym8ck47iM4q6ES3jWGOPSI0CpHGu+hPIAqk42wO9SeuLPcdIaSS38JoJY5tPiK7BclG1FQB3ztVVudhxJr8wnEMNO9FiJNDY0W353rMaj3jGuo2HEI8eRkil9G9PuQFpU8mhK2OJoa9PivEzp7USNSDXyjNMIoHNSdyVxF61lXmZJGAoMcp1bmiTgYpMEg1XWgIg+pzulVJyMb0wJQy1JVjtTCS4FQs0hxkSKWSlF5CNv1o7KJF3FZwPQUZfy/rS51wN0YoMcSeYlVsAd63p08UQ/8AMH3RGA22FdLHODINWCMzyM7Uhf8Ac1QGMfpU6+71ZQPvJIjy4iMLeaqKzBFPHFTIvzGmZPy0fcoYgSCxa6uWJ2NLxzODzXkv5v1rEdGpWqrxBbHIaNBmeiCI4BxWoAMrsOabYDSNhQrPg4EMQbkyYiQKEwppgN6A/I+auQ5inVJjtPI13p+EqoFIr/DTCdq6eYPpiVaONc6dgaG12SMZpaT/AFoJ7/dRSlc5j9TkTM8hbO9CjNfSVmOjG+XiWEDE2eQR24p63sZbpYvDYDJlU5DFm8XsuCOOBStW+gf8xf8A75P2AKM0D5YrFuvUFQ3tOoaFLKzW0slKwpB4SAABVZmESgE998mhdVETxW0bagrdR6XDhd2YrKZRk/C03MT/AIIZ2N3bZHY/vBzSd6B43R9ueryE/ItJcfpTmI4zLIsZSWSRzIIpCqAk5JOrcDfP+9c+1z1K+kmjdAsDW8iPIxwD+7YjGexP9qp9QA8Lpx7lo8nudjzSTf8AhOoDsIbjHt5e1RPYz71AnFgn+lGRtO/ahL2ovY1nLVBmj0qgMJp5c7f614hyaC3P3RIuVqjYFGRNWqDbGlwN6IGArI4r6qCAREFwxYZiQk5pbTvmmn/3oTd6nUBAr0BmK91Vk15R57Qbbgif/9k=",
                     "titulo": "",
                     "descricao": ""
                 },
@@ -387,7 +393,41 @@
 </script>
 <script>
 
+    let changed = false;
+    $("#editar").on("change", function(event) {
+        if (!changed) {
+            $("#edicao").removeClass("d-none");
+            $("#edicao").addClass("d-inline");
+            changed = true;
+            return;
+        }
+        $("#edicao").removeClass("d-inline")
+        $("#edicao").addClass("d-none")
+        changed = false;
+    })
+
     $("#plugin").on("change", function (event) {
+        img_index = 0;
+
+        $("#edicao").removeClass("d-inline")
+        $("#edicao").addClass("d-none")
+        document.getElementById("editar").checked = false
+        changed = false;
+
+        $('#imgs').children().each(function (e) {
+            $(this).remove();
+        })
+        $('#comandos').children().each(function (e) {
+            $(this).remove();
+        })
+        $('#permissoes').children().each(function (e) {
+            $(this).remove();
+        })
+        $('#recursos').children().each(function (e) {
+            $(this).remove();
+        })
+
+
 
         let plselect = null;
 
@@ -397,9 +437,20 @@
                 break;
             }
         }
-        if (plselect == null) return;
+        if (plselect == null) {
+            $("#atualizacao").removeClass("d-inline");
+            $("#atualizacao").addClass("d-none");
+
+            $("#postar").addClass("disabled")
+
+            return;
+        }
+        $("#postar").removeClass("disabled")
+        $("#atualizacao").addClass("d-inline");
+        $("#atualizacao").removeClass("d-none");
 
         plselect.comandos.forEach(function (e) {
+
             $('#comandos').append("<div class=\"mt-3 mb-3 rounded border row p-2 caixacomando\"\n" +
                 "                                            style=\"background-color: rgba(0,255,225,0.37)\">\n" +
                 "                                            <div class=\"col-sm-6\">\n" +
@@ -441,6 +492,19 @@
                 "                                        </div>")
         })
 
+        plselect.imagens64.forEach(function (e) {
+           $("#imgs").append(
+               "<div id=\"" + img_index + "\" class=\"w-100 d-flex flex-column align-items-center justify-content-center caixa-imagem\">\n" +
+               "                                    <label class=\"\">\n" +
+               "                                        \n" +
+               "                                        <input name=\"img" + img_index + "\" type=\"file\" class=\"input-file\" accept=\"image/*\">\n" +
+               "                                    <img src=\"data:image/png;base64," + e.imagem64 + "\">\n" +
+               " </label>" +
+               "                                <label class=\"w-50\"> Título: <input class=\"form-control\" value='" + e.titulo +"' type=\"text\" placeholder=\"Digite um título\" name=\"img-titulo0\"></label><label class=\"w-50\">Descrição:<input class=\"form-control\" type=\"text\" value='" + e.descricao + "' placeholder=\"Digite uma breve descrição\" name=\"img-desc0\"></label></div>"
+           )
+            img_index++;
+        });
+
 
 
 
@@ -471,7 +535,6 @@
         $(label).removeClass("btn-upload")
         $(label).append('<img src="" alt="">')
         r.onload = function () {
-            console.log(r.result)
             $(label).find("img").attr("src", r.result)
         }
 
@@ -501,13 +564,6 @@
         imageInput(event, $(this).parent(), $(this), 0)
     });
 
-    $("form").submit(function (event) {
-        if (parseInt($("#preco").val()) < 0) {
-            event.preventDefault();
-            window.alert("O valor do plugin não pode ser menor que 0");
-        }
-    }
-    )
     document.getElementById("plugin").addEventListener('change', function (e) {
         var nextSibling = e.target.nextElementSibling;
         nextSibling.innerText = document.getElementById("plugin").files.length + " arquivo selecionado";

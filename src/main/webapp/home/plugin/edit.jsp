@@ -130,7 +130,7 @@
             </div>
         </header>
         <div class="pag">
-            <form enctype="multipart/form-data" method="post" action="<%="editarplugin?plugin=" + request.getParameter("plugin")%>">
+            <form id="form" enctype="multipart/form-data" method="post" action="<%="editarplugin?plugin=" + request.getParameter("plugin")%>">
 
                 <div>
 

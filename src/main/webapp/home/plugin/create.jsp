@@ -118,7 +118,7 @@
             </div>
         </header>
         <div class="pag">
-                        <form enctype="multipart/form-data" method="post" action="criarplugin">
+                        <form id="form" enctype="multipart/form-data" method="post" action="criarplugin">
 
                             <div>
 

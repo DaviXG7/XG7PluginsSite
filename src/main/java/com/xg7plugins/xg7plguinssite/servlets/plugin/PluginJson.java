@@ -44,16 +44,6 @@ public class PluginJson {
         }
         json.put("recursos", recursos);
 
-        JSONArray imagens64 = new JSONArray();
-        for (Imagem imagem : pluginModel.getImages()) {
-            JSONObject imgJson = new JSONObject();
-            imgJson.put("titulo", imagem.getTitulo());
-            imgJson.put("descricao", imagem.getDescricao());
-            imgJson.put("imagem64", imagem.getImageData());
-            imagens64.put(imgJson);
-        }
-        json.put("imagens64", imagens64);
-
         JSONArray comandos = new JSONArray();
         for (Pair<String, String> comando : pluginModel.getCommands()) {
             JSONObject cmdJson = new JSONObject();
@@ -81,6 +71,17 @@ public class PluginJson {
             changelogArray.put(clJson);
         }
         json.put("changelog", changelogArray);
+
+        JSONArray imagens64 = new JSONArray();
+        for (Imagem imagem : pluginModel.getImages()) {
+            JSONObject imgJson = new JSONObject();
+            imgJson.put("titulo", imagem.getTitulo());
+            imgJson.put("descricao", imagem.getDescricao());
+            imgJson.put("imagem64", imagem.getImageData());
+            imagens64.put(imgJson);
+        }
+        json.put("imagens64", imagens64);
+
         return json.toString();
     }
 

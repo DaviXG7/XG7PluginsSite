@@ -1,4 +1,5 @@
 <%@ page import="com.xg7plugins.xg7plguinssite.models.UserModel" %>
+<%@ page import="com.xg7plugins.xg7plguinssite.servlets.plugin.PluginJson" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true" %>
 
 <!DOCTYPE html>
@@ -9,13 +10,31 @@
     <title>Plugins</title>
     <link rel="stylesheet" href="../../css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="css/dashboard.css" rel="stylesheet">
+    <link href="../css/dashboard.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="../../imgs/logo.png" />
-
 
     <%
         UserModel model = (UserModel) request.getSession().getAttribute("user");
     %>
+
+    <style>
+        .plugin {
+            width: calc(40% - 10px);
+            background-color: #f5f5f5;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0 10px 0;
+            border-radius: 10px;
+            margin: 0 0 0 6px;
+        }
+        .plugins {
+            width: 100%;
+            padding: 10px;
+            flex-wrap: wrap;
+        }
+    </style>
 
 
 
@@ -26,8 +45,8 @@
     <div id="barra-lateral" class="barra-lateral sidebar">
 
 
-        <a href="../../index.jsp">
-            <img src="../../imgs/logo.png" width="135" alt="">
+        <a href="../index.jsp">
+            <img src="../imgs/logo.png" width="135" alt="">
         </a>
 
         <hr>
@@ -88,8 +107,8 @@
                         <i class="bi bi-plus" style="font-size: 30px; padding: 0 10px 0 10px"></i>
                     </button>
                     <ul class="dropdown-menu">
-                        <a class="dropdown-item" href="../plugin/create.jsp">Criar Plugin</a>
-                        <a class="dropdown-item" href="../plugin/update.jsp">Postar atualização</a>
+                        <a class="dropdown-item" href="plugin/create.jsp">Criar Plugin</a>
+                        <a class="dropdown-item" href="plugin/update.jsp">Postar atualização</a>
                     </ul>
                 </div>
                 <%
@@ -103,7 +122,7 @@
                     <ul class="dropdown-menu">
                         <p class="dropdown-item"><%=model.getNome()%></p>
                         <div class="dropdown-divider"></div>
-                        <a href=<%="../user/user.jsp?uuid=" + model.getId().toString()%> class="dropdown-item">
+                        <a href=<%="user/user.jsp?uuid=" + model.getId().toString()%> class="dropdown-item">
                             <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                             Configurações
                         </a>
@@ -118,6 +137,27 @@
         </header>
         <div class="pag">
 
+            <div class="plugins">
+                <div class="plugin">
+                    <div class="plugin-caixa">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="currentColor" class="bi bi-plugin" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a7 7 0 1 1 2.898 5.673c-.167-.121-.216-.406-.002-.62l1.8-1.8a3.5 3.5 0 0 0 4.572-.328l1.414-1.415a.5.5 0 0 0 0-.707l-.707-.707 1.559-1.563a.5.5 0 1 0-.708-.706l-1.559 1.562-1.414-1.414 1.56-1.562a.5.5 0 1 0-.707-.706l-1.56 1.56-.707-.706a.5.5 0 0 0-.707 0L5.318 5.975a3.5 3.5 0 0 0-.328 4.571l-1.8 1.8c-.58.58-.62 1.6.121 2.137A8 8 0 1 0 0 8a.5.5 0 0 0 1 0"></path>
+                        </svg>
+                        <p>Utilidades</p>
+                        <h5>XG7Lobby</h5>
+                        <p>Grátis</p>
+                        <div class="plugin-botoes">
+                            <button class="btn btn-success">Editar</button>
+                            <button class="btn btn-danger">Excluir</button>
+                            <button onclick="abrirTela('XG7Lobby')" class="btn btn-primary">Ver detalhes</button>
+                        </div>
+                    </div>
+                    <div class="change-log">
+
+                    </div>
+                </div>
+            </div>
+
 
         </div>
     </main>
@@ -127,7 +167,16 @@
 </body>
 
 <script src="../js/menu.js"></script>
-<script src="../js/dashboard.js"></script>
+<script>
+    let plsJSON = <%=PluginJson.getAllPluginsJSON()%>;
+    let pls = []
+    plsJSON.forEach(function (e) {
+        pls.push(JSON.parse(e))
+    })
+
+</script>
+<script src="../../js/showplugins.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/dashboard.js"></script>
 
 </html>
