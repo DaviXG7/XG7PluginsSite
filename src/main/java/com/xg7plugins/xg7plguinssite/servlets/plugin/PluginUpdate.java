@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Date;
 import java.sql.SQLException;
 
-@WebServlet(name = "criarplugin", value = "/home/plugin/atualizarpl")
+@WebServlet(name = "atualizarpl", value = "/home/plugin/atualizarpl")
 public class PluginUpdate extends HttpServlet {
 
     @Override
@@ -20,7 +20,11 @@ public class PluginUpdate extends HttpServlet {
         if (plName.isEmpty()) throw new RuntimeException();
 
         String newVersion = request.getParameter("newVersion");
-        String log = request.getParameter("log");
+        String log = request.getParameter("changelog");
+        System.out.println(log == null );
+        System.out.println(log.isEmpty());
+        System.out.println(newVersion == null);
+        System.out.println(newVersion.isEmpty());
 
         if (log == null || log.isEmpty() || newVersion == null || newVersion.isEmpty()) throw new RuntimeException();
 

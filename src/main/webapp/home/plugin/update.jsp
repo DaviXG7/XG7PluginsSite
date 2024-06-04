@@ -151,9 +151,8 @@
                                        id="newVersion" name="newVersion" required>
                             </div>
                             <div class="col-6">
-                                <label for="log">Log*</label>
-                                <textarea class="form-control" type="number" placeholder="Digite o que você mudou no plugin" id="log"
-                                          name="log" required></textarea>
+                                <label for="changelog">Log*</label>
+                                <textarea class="form-control" placeholder="Digite o que você mudou no plugin" id="changelog" name="changelog" rows="2" required></textarea>
                             </div>
                         </div>
                         <label for="editar" class="d-flex">
