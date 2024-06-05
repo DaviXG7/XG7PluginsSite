@@ -9,7 +9,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Blob;
-import java.sql.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,9 +39,6 @@ public class PluginModel {
         for (UUID uuid : downloads) {
             if (!uuid.equals(id)) downloads.add(id);
         }
-    }
-    public void addChangelog(String version, String text) {
-        changelogList.add(new Changelog(new Date(System.currentTimeMillis()),version,text));
     }
 
 

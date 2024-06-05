@@ -168,7 +168,7 @@ public class DBManager {
         }
         for (Changelog log : model.getChangelogList()) {
             preparedStatementChangelog.setString(1, model.getName());
-            preparedStatementChangelog.setDate(2, log.getDate());
+            preparedStatementChangelog.setTimestamp(2, log.getDate());
             preparedStatementChangelog.setString(3, log.getChangelogText());
             preparedStatementChangelog.setString(4, log.getPluginVersion());
             preparedStatementChangelog.executeUpdate();
@@ -192,8 +192,8 @@ public class DBManager {
 
     public static void postUpdate(String name, Changelog log) throws SQLException {
 
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO pluginchangelog(changedate,changelog,pluginversion) VALUES(?,?,?) WHERE pluginname = ?");
-        PreparedStatement statement2 = connection.prepareStatement("UPDATE plugins SET version = ? WHERE pluginname = ?");
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO pluginchangelog(changedate,changelog,pluginversion,pluginname) VALUES(?,?,?,?)");
+        PreparedStatement statement2 = connection.prepareStatement("UPDATE plugins SET version = ? WHERE name = ?");
         statement.setString(1, log.getDate().toString());
         statement.setString(2, log.getChangelogText());
         statement.setString(3, log.getPluginVersion());
@@ -202,7 +202,7 @@ public class DBManager {
 
         statement2.setString(1, log.getPluginVersion());
         statement2.setString(2, name);
-        statement.executeUpdate();
+        statement2.executeUpdate();
 
     }
     public static void editPlugin(PluginModel model) throws SQLException {
@@ -293,7 +293,7 @@ public class DBManager {
         while (pdr.next()) downloads.add(UUID.fromString(pdr.getString("userid")));
 
         List<Changelog> changelogs = new ArrayList<>();
-        while (pcr.next()) changelogs.add(new Changelog(pcr.getDate("changedate"), pcr.getString("pluginversion"), pcr.getString("changelog")));
+        while (pcr.next()) changelogs.add(new Changelog(pcr.getTimestamp("changedate"), pcr.getString("pluginversion"), pcr.getString("changelog")));
 
         List<Imagem> imagens = new ArrayList<>();
         while (pir.next()) imagens.add(new Imagem(pir.getBlob("image"), pir.getString("title"), pir.getString("description")));

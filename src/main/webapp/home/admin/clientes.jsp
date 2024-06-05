@@ -110,6 +110,10 @@
                     <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
                 </svg>
             </button>
+            <form id="pesquisa" class="d-md-flex bg-white rounded">
+                <a class="btn"><i class="bi bi-search"></i></a>
+                <input class="form-control" type="search" placeholder="Buscar cliente..." aria-label="Search">
+            </form>
             <div class="h-botoes">
                 <%
                     if (model.getPermission() > 1) {

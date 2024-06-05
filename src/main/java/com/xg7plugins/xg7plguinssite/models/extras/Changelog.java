@@ -4,13 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 //Changelog de plugin
 @Getter
 @AllArgsConstructor
 public class Changelog {
 
-    private Date date;
+    private Timestamp date;
     private String pluginVersion;
     private String changelogText;
 

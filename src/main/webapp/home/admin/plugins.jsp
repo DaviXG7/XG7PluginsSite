@@ -19,7 +19,27 @@
 
     <style>
         .plugin {
-            width: calc(40% - 10px);
+            width: 500px;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            padding: 10px 0 10px 0;
+            border-radius: 10px;
+            justify-content: space-between;
+        }
+        .plugins {
+            width: 100%;
+            padding: 10px;
+            flex-wrap: wrap;
+        }
+        .change-log {
+            height: 350px;
+            max-height: 350px;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+        .plugin-caixa {
+            width: 200px;
             background-color: #f5f5f5;
             height: 300px;
             display: flex;
@@ -27,12 +47,24 @@
             align-items: center;
             padding: 10px 0 10px 0;
             border-radius: 10px;
-            margin: 0 0 0 6px;
         }
-        .plugins {
+        .atualizacao {
             width: 100%;
-            padding: 10px;
+            background-color: #f5f5f5;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+            border-radius: 10px;
             flex-wrap: wrap;
+        }
+        .change-log {
+            padding: 10px 0 10px 0;
+            margin: 6px;
+            width: 350px;
+            overflow-y: auto;
         }
     </style>
 
@@ -154,6 +186,18 @@
                     </div>
                     <div class="change-log">
 
+                        <div class="atualizacao">
+                            <div style="border-left: 1px solid black; padding: 3px 0 3px 1px; flex-wrap: wrap; height: auto">
+
+                                <h2><strong>Versão 1.2.3_03</strong></h2>
+                                <p style="font-size: 15px">04/06/2024 ás 00:00
+                                </p>
+                                <ul>
+                                    <li>asddssasadasddasadsadsasd</li>
+                                </ul>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

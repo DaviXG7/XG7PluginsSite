@@ -21,6 +21,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.*;
 import java.sql.Date;
 
@@ -103,7 +104,7 @@ public class PluginCreateServlet extends HttpServlet {
             perms.add(stringStringPair);
         }
 
-        Changelog log = new Changelog(new Date(System.currentTimeMillis()), versaoPlugin, "Lançamento do plugin com seus recursos: \n\n" + resources.replace(";;;", "\n"));
+        Changelog log = new Changelog(new Timestamp(System.currentTimeMillis()), versaoPlugin, "Lançamento do plugin com seus recursos: \n\n" + resources.replace(";;;", "\n"));
 
         PluginModel model = null;
         try {

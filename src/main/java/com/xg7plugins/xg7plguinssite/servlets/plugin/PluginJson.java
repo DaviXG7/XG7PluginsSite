@@ -9,6 +9,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 
 public class PluginJson {
 
@@ -66,7 +68,7 @@ public class PluginJson {
         for (Changelog changelog : pluginModel.getChangelogList()) {
             JSONObject clJson = new JSONObject();
             clJson.put("versao", changelog.getPluginVersion());
-            clJson.put("data", changelog.getDate().toString());
+            clJson.put("data", changelog.getDate().toLocalDateTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " ás " + changelog.getDate().toLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm")) + "\n");
             clJson.put("logs", changelog.getChangelogText());
             changelogArray.put(clJson);
         }

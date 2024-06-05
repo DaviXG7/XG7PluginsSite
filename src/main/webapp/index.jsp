@@ -173,7 +173,7 @@
                 <%
                     }
                 %>
-                <p id="textocliente"><%=model == null ? "Área do cliente" : model.getNome()%></p>
+                <p id="textocliente" style="align-content: center; display: flex"><%=model == null ? "Área do cliente" : model.getNome()%></p>
             </a>
         </div>
 
