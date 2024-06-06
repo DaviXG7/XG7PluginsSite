@@ -42,13 +42,13 @@
 </head>
 
 <body>
-<div class="confirmar" id="confirmar">
-    <div class="d-flex flex-column justify-content-around bg-white rounded align-items-center" style="width: 300px; height: 250px;">
-        <h2>Tem certeza que quer exluir este usuário???</h2>
-        <div class="d-flex">
-            <button class="btn btn-primary" onclick="confirmar()">Sim</button>
-            <button class="btn btn-primary" onclick="toggleMenu('confirmar', 'none', 'flex')">Não</button>
+<div id="confirm" class="d-none certeza">
+    <div class="certeza-caixa">
 
+        <h1>Tem Certeza que quer fazer isso?</h1>
+        <div>
+            <a id="sim" href="" class="btn btn-danger">Sim</a>
+            <button class="btn btn-success" onclick="fecharCerteza()">Não</button>
         </div>
 
     </div>
@@ -85,8 +85,8 @@
                 ADMIN
             </div>
             <div class="botoes">
-                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href="../admin/clientes.jsp?page=1"><i style="color: rgba(255,255,255,.5);" class="bi bi-people"></i> <p class="textos-botoes" > Clientes</p></a>
-                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href=""><i style="color: rgba(255,255,255,.5);" class="bi bi-plug"></i> <p class="textos-botoes" > Plugins</p></a>
+                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href="/home/admin/clientes.jsp?page=1"><i style="color: rgba(255,255,255,.5);" class="bi bi-people"></i> <p class="textos-botoes" > Clientes</p></a>
+                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href="/home/admin/plugins.jsp"><i style="color: rgba(255,255,255,.5);" class="bi bi-plug"></i> <p class="textos-botoes" > Plugins</p></a>
             </div>
         </div>
 
@@ -116,15 +116,15 @@
             </form>
             <div class="h-botoes">
                 <%
-                    if (model.getPermission() > 1) {
+                    if (model.getPermission() != 4 && model.getPermission() > 2) {
                 %>
                 <div class="dropdown">
                     <button style="border: none; background: none" type="button" data-bs-toggle="dropdown">
                         <i class="bi bi-plus" style="font-size: 30px; padding: 0 10px 0 10px"></i>
                     </button>
                     <ul class="dropdown-menu">
-                        <a class="dropdown-item" href="../plugin/create.jsp">Criar Plugin</a>
-                        <a class="dropdown-item" href="../plugin/update.jsp">Postar atualização</a>
+                        <a class="dropdown-item" href="/home/plugin/create.jsp">Criar Plugin</a>
+                        <a class="dropdown-item" href="/home/plugin/update.jsp">Postar atualização</a>
                     </ul>
                 </div>
                 <%
@@ -138,7 +138,7 @@
                     <ul class="dropdown-menu">
                         <p class="dropdown-item"><%=model.getNome()%></p>
                         <div class="dropdown-divider"></div>
-                        <a href=<%="../user/user.jsp?uuid=" + model.getId().toString()%> class="dropdown-item">
+                        <a href=<%="/home/user/user.jsp?uuid=" + model.getId().toString()%> class="dropdown-item">
                             <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                             Configurações
                         </a>
@@ -175,7 +175,7 @@
                         <td><%=item.getPermission()%></td>
                         <td>
                             <a href="../user/user.jsp?uuid=<%=item.getId().toString()%>" class="<%=model.getPermission() < 5 ? "disabled" : ""%> btn btn-primary">Editar</a>
-                            <button class="<%=model.getPermission() < 5 ? "disabled" : ""%> btn btn-danger" onclick="solicitar('confirmar','none','flex','<%=item.getId().toString()%>')">Excluir</button>
+                            <button class="<%=model.getPermission() < 5 ? "disabled" : ""%> btn btn-danger" onclick="abrirCerteza('/excluirusuario?uuid=<%=item.getId()%>')">Excluir</button>
                         </td>
 
                     </tr>
@@ -207,25 +207,11 @@
 </div>
 
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <script src="../../js/menu.js"></script>
 <script src="../../js/dashboard.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    let itemAtual = "";
-    function cancelar() {
-        itemAtual = "";
-    }
-    function solicitar(id,toggle1,toggle2,item) {
-
-        toggleMenu(id,toggle1,toggle2);
-        itemAtual = item;
-
-    }
-
-    function confirmar() {
-        window.location.href = "excluirusuario?uuid=" + itemAtual;
-    }
-</script>
+<script src="../js/confirmar.js"></script>
 
 </html>

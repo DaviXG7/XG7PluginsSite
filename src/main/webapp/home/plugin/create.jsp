@@ -55,8 +55,8 @@
                 ADMIN
             </div>
             <div class="botoes">
-                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href="admin/clientes.jsp?page=1"><i style="color: rgba(255,255,255,.5);" class="bi bi-people"></i> <p class="textos-botoes" > Clientes</p></a>
-                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href=""><i style="color: rgba(255,255,255,.5);" class="bi bi-plug"></i> <p class="textos-botoes" > Plugins</p></a>
+                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href="/home/admin/clientes.jsp?page=1"><i style="color: rgba(255,255,255,.5);" class="bi bi-people"></i> <p class="textos-botoes" > Clientes</p></a>
+                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href="/home/admin/plugins.jsp"><i style="color: rgba(255,255,255,.5);" class="bi bi-plug"></i> <p class="textos-botoes" > Plugins</p></a>
             </div>
         </div>
 
@@ -82,7 +82,7 @@
             </button>
             <div class="h-botoes">
                 <%
-                    if (model.getPermission() > 1) {
+                    if (model.getPermission() != 4 && model.getPermission() > 2) {
                 %>
                 <div class="dropdown">
                     <button style="border: none; background: none" type="button" data-bs-toggle="dropdown">
@@ -104,7 +104,7 @@
                     <ul class="dropdown-menu">
                         <p class="dropdown-item"><%=model.getNome()%></p>
                         <div class="dropdown-divider"></div>
-                        <a href=<%="../user/user.jsp?uuid=" + model.getId().toString()%> class="dropdown-item">
+                        <a href=<%="/home/user/user.jsp?uuid=" + model.getId().toString()%> class="dropdown-item">
                             <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                             Configurações
                         </a>
@@ -334,6 +334,6 @@
         }
         window.addEventListener("resize", getTamanhoDaTela);
 </script>
-<script src="../../js/dashboard.js"></script>
+<script src="../js/dashboard.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </html>

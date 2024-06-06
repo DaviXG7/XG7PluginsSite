@@ -73,8 +73,8 @@
                 ADMIN
             </div>
             <div class="botoes">
-                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href="../admin/clientes.jsp?page=1"><i style="color: rgba(255,255,255,.5);" class="bi bi-people"></i> <p class="textos-botoes" > Clientes</p></a>
-                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href=""><i style="color: rgba(255,255,255,.5);" class="bi bi-plug"></i> <p class="textos-botoes" > Plugins</p></a>
+                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href="/home/admin/clientes.jsp?page=1"><i style="color: rgba(255,255,255,.5);" class="bi bi-people"></i> <p class="textos-botoes" > Clientes</p></a>
+                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href="/home/admin/plugins.jsp"><i style="color: rgba(255,255,255,.5);" class="bi bi-plug"></i> <p class="textos-botoes" > Plugins</p></a>
             </div>
         </div>
 
@@ -100,15 +100,15 @@
             </button>
             <div class="h-botoes">
                 <%
-                    if (model.getPermission() > 1) {
+                    if (model.getPermission() != 4 && model.getPermission() > 2) {
                 %>
                 <div class="dropdown">
                     <button style="border: none; background: none" type="button" data-bs-toggle="dropdown">
                         <i class="bi bi-plus" style="font-size: 30px; padding: 0 10px 0 10px"></i>
                     </button>
                     <ul class="dropdown-menu">
-                        <a class="dropdown-item" href="../plugin/create.jsp">Criar Plugin</a>
-                        <a class="dropdown-item" href="../plugin/update.jsp">Postar atualização</a>
+                        <a class="dropdown-item" href="/home/plugin/create.jsp">Criar Plugin</a>
+                        <a class="dropdown-item" href="/home/plugin/create.jsp">Postar atualização</a>
                     </ul>
                 </div>
                 <%
@@ -143,7 +143,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Nome: </label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="nome" placeholder="Novo nome" value="<%=userModel.getNome()%>">
+                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Novo nome" value="<%=userModel.getNome()%>">
                 </div>
             </div>
             <div class="form-group row">
@@ -156,13 +156,13 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Senha*: </label>
                 <div class="col-sm-10">
-                    <input type="password" id="senha" class="form-control" placeholder="Senha" required>
+                    <input type="password" name="senha" id="senha" class="form-control" placeholder="Senha" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Nova senha: </label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="novasenha" placeholder="Nova senha">
+                    <input type="password" class="form-control" id="novasenha" name="novaSenha" placeholder="Nova senha">
                     <small class="form-text text-muted"><i id="caractere" style="color: red" class="bi bi-exclamation-circle"></i> Pelo menos 8 caracteres</small> <br>
                     <small class="form-text text-muted"><i id="caixaalta" style="color: red" class="bi bi-exclamation-circle"></i> Pelo menos 1 letra maiúscula</small> <br>
                 </div>
@@ -177,20 +177,20 @@
             <div class="d-flex flex-column align-items-center">
                 <div class="d-flex flex-column justify-content-between align-items-center">
                     <h4><strong>Imagem atual</strong></h4>
-                    <img alt="Você não tem uma imagem" width="125" height="125" src="<%=model.getImageData()%>">
+                    <img class="m-3" alt="Você não tem uma imagem" id="uimg" width="125" height="125" src="<%=model.getImageData()%>">
                 </div>
 
 
                 <div class="d-flex align-items-center justify-content-center w-75">
                     <label class="btn-upload"><i class="bi bi-upload"></i>
                         <p>Adicionar imagem</p>
-                        <input name="img0" type="file" class="input-file" accept="image/*">
+                        <input name="imagem" id="eimg" type="file" class="input-file" accept="image/*">
                     </label>
                 </div>
 
             </div>
 
-            <input type="submit" class="btn btn-primary" value="Enviar"></input>
+            <input type="submit" class="btn btn-primary" value="Enviar">
         </form>
 
         <%
@@ -238,13 +238,22 @@
 
 
 </body>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../../js/menu.js"></script>
 <script src="../../js/bootstrap.js"></script>
 <script src="../../js/user.js"></script>
-<script src="../../js/dashboard.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/dashboard.js"></script>
 <script>
+
+    $("#eimg").on("change", function (event) {
+        var r = new FileReader();
+        r.onload = function () {
+            $("#uimg").attr("src", r.result)
+        }
+
+        r.readAsDataURL(event.target.files[0])
+    })
+
     $('#usuario').submit(function (event) {
         let txtnome = $('#nome').val();
         if (txtnome === "" && txtnovaSenha === "") {

@@ -148,7 +148,7 @@
                     <i class="bi bi-plug"></i>
                     Plugins
                 </a>
-                <a href="" class="linkComum  d-md-flex link-underline link-underline-opacity-0" style="color: #646464">
+                <a href="https://discord.gg/GXe8WbZnKa" class="linkComum  d-md-flex link-underline link-underline-opacity-0" style="color: #646464">
                     <i class="bi bi-discord"></i>
                     Discord
                 </a>
@@ -285,6 +285,31 @@
     plsJSON.forEach(function (e) {
         pls.push(JSON.parse(e))
     })
+
+    $().ready(function (e) {
+
+        pls.forEach(function (e) {
+            const c1 = e.preco === 0 ? "Grátis" : "R$" + e.preco;
+            const c2 = e.preco === 0 ? "Baixar" : "Comprar R$" + e.preco;
+            const html =
+                '<div class="plugin-caixa">' +
+                '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="currentColor" class="bi bi-plugin" viewBox="0 0 16 16">' +
+                '<path fill-rule="evenodd" d="M1 8a7 7 0 1 1 2.898 5.673c-.167-.121-.216-.406-.002-.62l1.8-1.8a3.5 3.5 0 0 0 4.572-.328l1.414-1.415a.5.5 0 0 0 0-.707l-.707-.707 1.559-1.563a.5.5 0 1 0-.708-.706l-1.559 1.562-1.414-1.414 1.56-1.562a.5.5 0 1 0-.707-.706l-1.56 1.56-.707-.706a.5.5 0 0 0-.707 0L5.318 5.975a3.5 3.5 0 0 0-.328 4.571l-1.8 1.8c-.58.58-.62 1.6.121 2.137A8 8 0 1 0 0 8a.5.5 0 0 0 1 0"/>' +
+                '</svg>' +
+                '</svg>' +
+                '<p>' + e.categoria + '</p>' +
+                '<h5>' + e.nome + '</h5>' +
+                '<p>' + c1 + '</p>' +
+                '<div class="plugin-botoes">' +
+                '<button class="btn btn-primary">' + c2 + '</button>' +
+                '<button onclick="abrirTela(\'' + e.nome + '\')" class="btn btn-primary">Ver detalhes</button>' +
+                '</div>' +
+                '</div>'
+            $("#plugins-caixas").append(html)
+        })
+
+    })
+
 
 </script>
 <script src="js/showplugins.js"></script>

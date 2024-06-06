@@ -125,7 +125,7 @@ public class PluginEditServlet extends HttpServlet {
             model.setDependencies(depedencies);
             model.setPrice(preco);
             model.setConfig(configs.getSubmittedFileName().isEmpty() ? model.getConfig() : new SerialBlob(configs.getInputStream().readAllBytes()));
-            editar(model);
+            DBManager.editPlugin(model);
 
 
         } catch (SQLException e) {
@@ -148,9 +148,6 @@ public class PluginEditServlet extends HttpServlet {
         }
     }
 
-    public static void editar(PluginModel model) throws SQLException {
-        DBManager.editPlugin(model);
 
-    }
 
 }

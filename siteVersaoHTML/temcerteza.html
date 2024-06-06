@@ -38,19 +38,32 @@
 <body>
 
 
-<div class="certeza">
+<div id="confirm" class="d-none certeza">
     <div class="certeza-caixa">
 
         <h1>Tem Certeza que quer fazer isso?</h1>
         <div>
-            <button class="btn btn-danger">Sim</button>
-            <button class="btn btn-success">Não</button>
+            <a id="sim" href="" class="btn btn-danger">Sim</a>
+            <button class="btn btn-success" onclick="fecharCerteza()">Não</button>
         </div>
 
     </div>
 </div>
 algoAtras
-<button class="btn btn-primary"></button>
+<button class="btn btn-dark" onclick="abrirCerteza('lioaujsdfgpoidfjsv´poasdj')">Abrir coisa</button>
 
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script>
+    function abrirCerteza(link) {
+        $("#confirm").removeClass("d-none");
+        $("#sim").attr("href", link);
+    }
+    function fecharCerteza() {
+        $("#confirm").addClass("d-none");
+        $("#sim").attr("href", "");
+    }
+</script>
+
 </html>

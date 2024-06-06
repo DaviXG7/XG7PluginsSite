@@ -316,5 +316,32 @@ public class DBManager {
         );
     }
 
+    public static void deletePlugin(PluginModel model) throws SQLException {
+        PreparedStatement deletecmd = connection.prepareStatement("DELETE FROM plugincommands WHERE pluginname = ?");
+        deletecmd.setString(1, model.getName());
+        deletecmd.executeUpdate();
+
+        PreparedStatement deletedownloads = connection.prepareStatement("DELETE FROM plugindownloads WHERE pluginname = ?");
+        deletedownloads.setString(1, model.getName());
+        deletedownloads.executeUpdate();
+
+        PreparedStatement deleteper = connection.prepareStatement("DELETE FROM pluginperms WHERE pluginname = ?");
+        deleteper.setString(1, model.getName());
+        deleteper.executeUpdate();
+
+        PreparedStatement deleteimg = connection.prepareStatement("DELETE FROM pluginimages WHERE pluginname = ?");
+        deleteimg.setString(1, model.getName());
+        deleteimg.executeUpdate();
+
+        PreparedStatement deletechangelogs = connection.prepareStatement("DELETE FROM pluginchangelog WHERE pluginname = ?");
+        deletechangelogs.setString(1, model.getName());
+        deletechangelogs.executeUpdate();
+
+        PreparedStatement deletepl = connection.prepareStatement("DELETE FROM plugins WHERE name = ?");
+        deletepl.setString(1, model.getName());
+        deletepl.executeUpdate();
+
+    }
+
 
 }

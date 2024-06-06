@@ -18,7 +18,6 @@
         $(label).removeClass("btn-upload")
         $(label).append('<img src="" alt="">')
         r.onload = function () {
-            console.log(r.result)
             $(label).find("img").attr("src", r.result)
         }
 
