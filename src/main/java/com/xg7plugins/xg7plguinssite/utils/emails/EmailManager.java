@@ -23,8 +23,8 @@ public class EmailManager {
         properties.put("mail.smtp.port", "465");
         properties.put("mail.smtp.ssl.trust", "*");
 
-        String mail = "xg7mails@gmail.com";
-        String senha = "ibmd udou virw krvr";
+        String mail = "xg7msds@gmail.com";
+        String senha = "ibmdasd virw krvr";
 
         session = Session.getDefaultInstance(properties,
                 new Authenticator() {
