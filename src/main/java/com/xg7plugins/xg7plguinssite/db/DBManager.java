@@ -205,25 +205,30 @@ public class DBManager {
         statement2.executeUpdate();
 
     }
-    public static void editPlugin(PluginModel model) throws SQLException {
+    public static void editPlugin(String name, PluginModel model) throws SQLException {
 
         PreparedStatement deletecmd = connection.prepareStatement("DELETE FROM plugincommands WHERE pluginname = ?");
-        deletecmd.setString(1, model.getName());
+        deletecmd.setString(1, name);
         deletecmd.executeUpdate();
 
         PreparedStatement deleteper = connection.prepareStatement("DELETE FROM pluginperms WHERE pluginname = ?");
-        deleteper.setString(1, model.getName());
+        deleteper.setString(1, name);
         deleteper.executeUpdate();
 
         PreparedStatement deleteimg = connection.prepareStatement("DELETE FROM pluginimages WHERE pluginname = ?");
-        deleteimg.setString(1, model.getName());
+        deleteimg.setString(1, name);
         deleteimg.executeUpdate();
 
+        PreparedStatement deleteupdates = connection.prepareStatement("DELETE FROM pluginchangelog WHERE pluginname = ?");
+        deleteupdates.setString(1, name);
+        deleteupdates.executeUpdate();
 
-        PreparedStatement preparedStatementPlugins = connection.prepareStatement("UPDATE plugins SET description = ?, category = ?, video = ?, github = ?, price = ?, dependencies = ?, config = ? WHERE name = ?");
+
+        PreparedStatement preparedStatementPlugins = connection.prepareStatement("UPDATE plugins SET description = ?, category = ?, video = ?, github = ?, price = ?, dependencies = ?, config = ?, name = ? WHERE name = ?");
         PreparedStatement preparedStatementCommands = connection.prepareStatement("INSERT INTO plugincommands(pluginname,command,description) VALUES (?,?,?)");
         PreparedStatement preparedStatementPerms = connection.prepareStatement("INSERT INTO pluginperms(pluginname,perm,description) VALUES (?,?,?)");
         PreparedStatement preparedStatementImages = connection.prepareStatement("INSERT INTO pluginimages(pluginname,image,title,description) VALUES (?,?,?,?)");
+        PreparedStatement preparedStatementChangelog = connection.prepareStatement("INSERT INTO pluginchangelog(pluginname,changedate,pluginversion,changelog) VALUES (?,?,?,?)");
 
         preparedStatementPlugins.setString(1, model.getDescription());
         preparedStatementPlugins.setInt(2, model.getCategory().getIndex());
@@ -232,7 +237,8 @@ public class DBManager {
         preparedStatementPlugins.setDouble(5, model.getPrice());
         preparedStatementPlugins.setString(6, model.getDependencies());
         preparedStatementPlugins.setBlob(7, model.getConfig());
-        preparedStatementPlugins.setString(8,model.getName());
+        preparedStatementPlugins.setString(8, model.getName());
+        preparedStatementPlugins.setString(9,name);
         preparedStatementPlugins.executeUpdate();
 
         for (Pair<String, String> commands : model.getCommands()) {
@@ -253,6 +259,13 @@ public class DBManager {
             preparedStatementImages.setString(3, imagem.getTitulo());
             preparedStatementImages.setString(4, imagem.getDescricao());
             preparedStatementImages.executeUpdate();
+        }
+        for (Changelog changelog : model.getChangelogList()) {
+            preparedStatementChangelog.setString(1, model.getName());
+            preparedStatementChangelog.setTimestamp(2, changelog.getDate());
+            preparedStatementChangelog.setString(3, changelog.getPluginVersion());
+            preparedStatementChangelog.setString(4, changelog.getChangelogText());
+            preparedStatementChangelog.executeUpdate();
         }
     }
 
@@ -290,7 +303,7 @@ public class DBManager {
         while (per.next()) perms.add(new Pair<>(per.getString("perm"), per.getString("description")));
 
         List<UUID> downloads = new ArrayList<>();
-        while (pdr.next()) downloads.add(UUID.fromString(pdr.getString("userid")));
+        while (pdr.next()) downloads.add(UUID.fromString(pdr.getString("uuid")));
 
         List<Changelog> changelogs = new ArrayList<>();
         while (pcr.next()) changelogs.add(new Changelog(pcr.getTimestamp("changedate"), pcr.getString("pluginversion"), pcr.getString("changelog")));

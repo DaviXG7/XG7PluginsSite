@@ -1,5 +1,6 @@
 package com.xg7plugins.xg7plguinssite.models;
 
+import com.xg7plugins.xg7plguinssite.db.DBManager;
 import com.xg7plugins.xg7plguinssite.models.extras.Categoria;
 import com.xg7plugins.xg7plguinssite.models.extras.Changelog;
 import com.xg7plugins.xg7plguinssite.models.extras.Imagem;
@@ -9,6 +10,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Blob;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
@@ -36,9 +39,17 @@ public class PluginModel {
     private double price;
 
     public void addDownload(UUID id) {
-        for (UUID uuid : downloads) {
-            if (!uuid.equals(id)) downloads.add(id);
-        }
+            if (!downloads.contains(id)) {
+                downloads.add(id);
+                try {
+                    PreparedStatement statement = DBManager.getConnection().prepareStatement("INSERT INTO plugindownloads(pluginname,uuid) VALUES(?,?)");
+                    statement.setString(1, name);
+                    statement.setString(2, id.toString());
+                    statement.executeUpdate();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
     }
 
 

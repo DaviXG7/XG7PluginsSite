@@ -241,7 +241,7 @@
             ADMIN
         </div>
         <div class="botoes">
-            <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="/home/admin/clientes.jsp?page=1"><i style="color: rgba(255,255,255,.5);" class="bi bi-people"></i> <p class="textos-botoes" > Clientes</p></a>
+            <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="/home/admin/clientes.jsp"><i style="color: rgba(255,255,255,.5);" class="bi bi-people"></i> <p class="textos-botoes" > Clientes</p></a>
             <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="/home/admin/plugins.jsp"><i style="color: rgba(255,255,255,.5);" class="bi bi-plug"></i> <p class="textos-botoes" > Plugins</p></a>
         </div>
     </div>
@@ -266,6 +266,10 @@
                 <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
             </svg>
         </button>
+        <div class="pesquisa bg-white rounded">
+            <a class="btn"><i class="bi bi-search"></i></a>
+            <input class="form-control" id="pesquisar" type="search" placeholder="Buscar plugin..." aria-label="Search">
+        </div>
         <div class="h-botoes">
             <%
                 if (model.getPermission() != 4 && model.getPermission() > 2) {
@@ -315,7 +319,7 @@
                     }
                     for (PluginModel plugin : models) {
                 %>
-                <div class="plugin">
+                <div class="plugin" id=<%=plugin.getName()%>>
                     <div class="plugin-caixa">
                         <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="currentColor" class="bi bi-plugin" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M1 8a7 7 0 1 1 2.898 5.673c-.167-.121-.216-.406-.002-.62l1.8-1.8a3.5 3.5 0 0 0 4.572-.328l1.414-1.415a.5.5 0 0 0 0-.707l-.707-.707 1.559-1.563a.5.5 0 1 0-.708-.706l-1.559 1.562-1.414-1.414 1.56-1.562a.5.5 0 1 0-.707-.706l-1.56 1.56-.707-.706a.5.5 0 0 0-.707 0L5.318 5.975a3.5 3.5 0 0 0-.328 4.571l-1.8 1.8c-.58.58-.62 1.6.121 2.137A8 8 0 1 0 0 8a.5.5 0 0 0 1 0"></path>
@@ -382,7 +386,21 @@
         pls.push(JSON.parse(e))
     })
 
+    function mostrarPlugins(nome) {
 
+
+        pls.forEach(function (e) {
+
+            if (!e.nome.toLowerCase().includes(nome.toLowerCase())) $("#" + e.nome).addClass("d-none");
+            else $("#" + e.nome).removeClass("d-none");
+
+
+        })
+    }
+
+    $("#pesquisar").on("input", function (event) {
+        mostrarPlugins($(this).val());
+    })
 
 </script>
 <script src="../../js/showplugins.js"></script>

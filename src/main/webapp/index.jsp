@@ -1,6 +1,10 @@
 <%@ page import="com.xg7plugins.xg7plguinssite.models.UserModel" %>
 <%@ page import="com.xg7plugins.xg7plguinssite.db.DBManager" %>
 <%@ page import="com.xg7plugins.xg7plguinssite.servlets.plugin.PluginJson" %>
+<%@ page import="com.xg7plugins.xg7plguinssite.models.PluginModel" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="java.util.Comparator" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true" %>
 <!DOCTYPE html>
 <html>
@@ -13,9 +17,33 @@
     <link href="css/body.css" rel="stylesheet">
     <link href="css/detalhes.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="imgs/logo.png" />
+    <style>
+        .pesquisa {
+            height: 50px;
+            display: flex !important;
+            align-items: center;
+        }
+    </style>
 
     <%
         UserModel model = (UserModel) request.getSession().getAttribute("user");
+
+        List<PluginModel> plugins;
+
+        try {
+            plugins = DBManager.getAllPlugins();
+
+            String sort = request.getParameter("sort");
+
+            if (sort != null) {
+                if (sort.equals("maisRecentes")) plugins.sort((o1, o2) -> o2.getChangelogList().getLast().getDate().compareTo(o1.getChangelogList().getLast().getDate()));
+                if (sort.equals("maisPopulares")) plugins.sort((o1, o2) -> Math.max(o2.getDownloads().size(), o1.getDownloads().size()));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
     %>
 </head>
 
@@ -123,6 +151,8 @@
                     <div class="content">
                         <div id="changelog" class="plugin-content" style="background-color: #eaeaea !important;">
 
+
+
                         </div>
                     </div>
 
@@ -136,10 +166,10 @@
         <div class="nav-left d-flex justify-content-left align-items-center">
             <a class="navbar-brand" href=""><img src="imgs/logo.png" width="100px" alt=""></a>
 
-            <form id="pesquisa" class="d-md-flex bg-white rounded">
+            <div class="d-md-flex bg-white rounded">
                 <a class="btn"><i class="bi bi-search"></i></a>
-                <input class="form-control" type="search" placeholder="Buscar plugin..." aria-label="Search">
-            </form>
+                <input class="form-control" id="pesquisar" type="search" placeholder="Buscar plugin..." aria-label="Search">
+            </div>
         </div>
         <div class="nav-right d-flex justify-content-right align-items-center">
             <div class="d-md-flex align-items-center" id="items">
@@ -210,13 +240,13 @@
                     <p style="font-size: 25px; color: white; padding: 50px">
                         Deixe seu servidor mais profissional com os melhores plugins do Brasil!
                     </p>
-                    <a href="#plugins" class="btn btn-outline-light">
+                    <a href="#plugins" class="m-3 btn btn-outline-light">
                         Conheça agora os melhores plugins!
                     </a>
-                    <a href="" class="btn btn-outline-light" >
+                    <a href="" class="m-3 btn btn-outline-light" >
                         Quem somos?
                     </a>
-            </div>
+    </div>
 
     <div class="mt-5">
 
@@ -227,11 +257,11 @@
             </div>
             <div class="dropdown" style="position: static !important;">
                 <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-bar-chart-fill"></i> Mais recentes
+                    <i class="bi bi-bar-chart-fill"></i> <%=request.getParameter("sort") == null ? "Filtrar" : request.getParameter("sort").equals("maisRecentes") ? "Mais recentes" : request.getParameter("sort").equals("maisPopulares") ? "Mais populares" : "Filtrar"%>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="?sort=maisRecentes">Mais recentes</a></li>
-                    <li><a class="dropdown-item" href="?sort=maisPopulares">Mais populares</a></li>
+                    <li><a class="dropdown-item" href="?sort=maisRecentes#plugins">Mais recentes</a></li>
+                    <li><a class="dropdown-item" href="?sort=maisPopulares#plugins">Mais populares</a></li>
                 </ul>
             </div>
         </div>
@@ -239,11 +269,34 @@
         <div id="plugins" class="plugins">
                         <div class="categoria">
                             <h4>Selecione a categoria</h4>
-                            <a class="link link-dark link-underline-opacity-0" href=""><i class="bi bi-hash"></i> Gestão</a>
-                            <a class="link link-dark link-underline-opacity-0" href=""><i class="bi bi-hash"></i> Minigames</a>
-                            <a class="link link-dark link-underline-opacity-0" href=""><i class="bi bi-hash"></i> Utilidades</a>
+                            <a href="#plugins" onclick="mostrarPlugins(document.getElementById('pesquisar').value, '')" class="link link-dark link-underline-opacity-0" ><i class="bi bi-hash"></i> Todos</a>
+                            <a href="#plugins" onclick="mostrarPlugins(document.getElementById('pesquisar').value, 'Gestão')" class="link link-dark link-underline-opacity-0" ><i class="bi bi-hash"></i> Gestão</a>
+                            <a href="#plugins" onclick="mostrarPlugins(document.getElementById('pesquisar').value, 'Minigames')" class="link link-dark link-underline-opacity-0" ><i class="bi bi-hash"></i> Minigames</a>
+                            <a href="#plugins" onclick="mostrarPlugins(document.getElementById('pesquisar').value, 'Utilidades')" class="link link-dark link-underline-opacity-0"><i class="bi bi-hash"></i> Utilidades</a>
+                            <a href="#plugins" onclick="mostrarPlugins(document.getElementById('pesquisar').value, 'Dependencias')" class="link link-dark link-underline-opacity-0"><i class="bi bi-hash"></i> Dependencias</a>
                         </div>
                         <div class="plugins-container" id="plugins-caixas">
+
+                            <%
+                                for (PluginModel pluginModel : plugins) {
+                            %>
+
+                            <div class="plugin-caixa">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="currentColor" class="bi bi-plugin" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 8a7 7 0 1 1 2.898 5.673c-.167-.121-.216-.406-.002-.62l1.8-1.8a3.5 3.5 0 0 0 4.572-.328l1.414-1.415a.5.5 0 0 0 0-.707l-.707-.707 1.559-1.563a.5.5 0 1 0-.708-.706l-1.559 1.562-1.414-1.414 1.56-1.562a.5.5 0 1 0-.707-.706l-1.56 1.56-.707-.706a.5.5 0 0 0-.707 0L5.318 5.975a3.5 3.5 0 0 0-.328 4.571l-1.8 1.8c-.58.58-.62 1.6.121 2.137A8 8 0 1 0 0 8a.5.5 0 0 0 1 0"/>
+                            </svg>
+                            <p><%=pluginModel.getCategory().getName()%></p>
+                            <h5><%=pluginModel.getName()%></h5>
+                            <p><%=pluginModel.getPrice() == 0 ? "Grátis" : "Comprar R$" + pluginModel.getPrice()%></p>
+                            <div class="plugin-botoes">
+                                <a href="<%=pluginModel.getPrice() == 0 ? "/download?plugin=" + pluginModel.getName() + "&type=" + "plugin": ""%>" class="btn btn-primary"><%=pluginModel.getPrice() == 0 ? "Grátis" : "Comprar R$" + pluginModel.getPrice()%></a>
+                                <button onclick="abrirTela('<%=pluginModel.getName()%>')" class="btn btn-primary">Ver detalhes</button>
+                                </div>
+                            </div>
+
+                            <%
+                                }
+                            %>
 
 
                         </div>
@@ -264,11 +317,13 @@
 
     <h1><strong>XG7Plugins</strong></h1>
     <p>Os melhores plugins para seu servidor de Minecraft!</p>
-    <div class="footer-buttons mb-2 w-25 d-flex justify-content-around">
-        <a href="https://github.com/DaviXG7"><i class="bi bi-github" style="font-size: 40px; color: black"></i></a>
-        <a href="https://discord.gg/2fACbYbBsf"><i class="bi bi-discord" style="font-size: 40px; color: black"></i></a>
+    <div class="footer-buttons mb-2 d-flex justify-content-around">
+        <a href="https://github.com/DaviXG7"><i class="bi bi-github" style="font-size: 35px; color: black"></i><small>Github</small></a>
+        <a href="https://discord.gg/2fACbYbBsf" style="display: flex; flex-direction: column"><i class="bi bi-discord" style="font-size: 35px; color: black"></i><small>Discord</small></a>
+        <a href=""><i class="bi bi-book" style="font-size: 35px; color: black"></i><small>API</small></a>
+        <a href=""><i class="bi bi-laptop" style="font-size: 35px; color: black"></i> <small>Termos</small></a>
     </div>
-    <small><a href="">Easter-egg :D</a></small>
+    <small><a href="easteregg/jogos.html">Easter egg :D</a></small>
     <h6 class="w-100 d-flex align-items-center justify-content-center" style="background-color: rgb(196, 196, 196); height: 3em;">
         Copyright ₢ XG7Plugins Todos os direitos reservados <br>
     </h6>
@@ -286,30 +341,40 @@
         pls.push(JSON.parse(e))
     })
 
-    $().ready(function (e) {
+    $("#pesquisar").on("input", function () {
+        mostrarPlugins($(this).val(), "")
+    })
+
+    function mostrarPlugins(nome,categoria) {
+        $("#plugins-caixas").children().remove()
+
+
 
         pls.forEach(function (e) {
-            const c1 = e.preco === 0 ? "Grátis" : "R$" + e.preco;
-            const c2 = e.preco === 0 ? "Baixar" : "Comprar R$" + e.preco;
-            const link = e.preco === 0 ? "/download?plugin=" + e.nome + "&type=" + "plugin": "";
-            const html =
-                '<div class="plugin-caixa">' +
-                '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="currentColor" class="bi bi-plugin" viewBox="0 0 16 16">' +
-                '<path fill-rule="evenodd" d="M1 8a7 7 0 1 1 2.898 5.673c-.167-.121-.216-.406-.002-.62l1.8-1.8a3.5 3.5 0 0 0 4.572-.328l1.414-1.415a.5.5 0 0 0 0-.707l-.707-.707 1.559-1.563a.5.5 0 1 0-.708-.706l-1.559 1.562-1.414-1.414 1.56-1.562a.5.5 0 1 0-.707-.706l-1.56 1.56-.707-.706a.5.5 0 0 0-.707 0L5.318 5.975a3.5 3.5 0 0 0-.328 4.571l-1.8 1.8c-.58.58-.62 1.6.121 2.137A8 8 0 1 0 0 8a.5.5 0 0 0 1 0"/>' +
-                '</svg>' +
-                '</svg>' +
-                '<p>' + e.categoria + '</p>' +
-                '<h5>' + e.nome + '</h5>' +
-                '<p>' + c1 + '</p>' +
-                '<div class="plugin-botoes">' +
-                '<a href="' + link + '" class="btn btn-primary">' + c2 + '</a>' +
-                '<button onclick="abrirTela(\'' + e.nome + '\')" class="btn btn-primary">Ver detalhes</button>' +
-                '</div>' +
-                '</div>'
-            $("#plugins-caixas").append(html)
-        })
 
-    })
+            if (e.nome.toLowerCase().includes(nome.toLowerCase()) && e.categoria.toUpperCase().includes(categoria.toUpperCase())) {
+
+                const c1 = e.preco === 0 ? "Grátis" : "R$" + e.preco;
+                const c2 = e.preco === 0 ? "Baixar" : "Comprar R$" + e.preco;
+                const link = e.preco === 0 ? "/download?plugin=" + e.nome + "&type=" + "plugin" : "";
+                const html =
+                    '<div class="plugin-caixa">' +
+                    '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="currentColor" class="bi bi-plugin" viewBox="0 0 16 16">' +
+                    '<path fill-rule="evenodd" d="M1 8a7 7 0 1 1 2.898 5.673c-.167-.121-.216-.406-.002-.62l1.8-1.8a3.5 3.5 0 0 0 4.572-.328l1.414-1.415a.5.5 0 0 0 0-.707l-.707-.707 1.559-1.563a.5.5 0 1 0-.708-.706l-1.559 1.562-1.414-1.414 1.56-1.562a.5.5 0 1 0-.707-.706l-1.56 1.56-.707-.706a.5.5 0 0 0-.707 0L5.318 5.975a3.5 3.5 0 0 0-.328 4.571l-1.8 1.8c-.58.58-.62 1.6.121 2.137A8 8 0 1 0 0 8a.5.5 0 0 0 1 0"/>' +
+                    '</svg>' +
+                    '</svg>' +
+                    '<p>' + e.categoria + '</p>' +
+                    '<h5>' + e.nome + '</h5>' +
+                    '<p>' + c1 + '</p>' +
+                    '<div class="plugin-botoes">' +
+                    '<a href="' + link + '" class="btn btn-primary">' + c2 + '</a>' +
+                    '<button onclick="abrirTela(\'' + e.nome + '\')" class="btn btn-primary">Ver detalhes</button>' +
+                    '</div>' +
+                    '</div>'
+                $("#plugins-caixas").append(html)
+            }
+        })
+    }
 
 
 </script>

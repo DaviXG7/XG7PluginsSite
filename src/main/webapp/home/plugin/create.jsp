@@ -52,7 +52,7 @@
             ADMIN
         </div>
         <div class="botoes">
-            <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="/home/admin/clientes.jsp?page=1"><i style="color: rgba(255,255,255,.5);" class="bi bi-people"></i> <p class="textos-botoes" > Clientes</p></a>
+            <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="/home/admin/clientes.jsp"><i style="color: rgba(255,255,255,.5);" class="bi bi-people"></i> <p class="textos-botoes" > Clientes</p></a>
             <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="/home/admin/plugins.jsp"><i style="color: rgba(255,255,255,.5);" class="bi bi-plug"></i> <p class="textos-botoes" > Plugins</p></a>
         </div>
     </div>
@@ -125,7 +125,7 @@
                                     <div class="col-7">
                                         <label for="nome">Nome*</label>
                                         <input type="text" class="form-control" name="nome" id="nome"
-                                            placeholder="Digite o nome do plugin" required>
+                                            placeholder="Digite o nome do plugin (Um plugin que não exista)" required>
                                     </div>
                                     <div class="col-5">
                                         <label for="versaoPlugin">Versão atual*</label>

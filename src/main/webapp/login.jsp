@@ -10,6 +10,7 @@
     <link rel="icon" type="image/png" href="imgs/logo.png" />
 
 
+
 </head>
 <body>
 <a href="index.jsp" class="voltar link link-light link-underline link-underline-opacity-0" style="font-size: 30px">
@@ -29,11 +30,12 @@
             <label for="exampleInputPassword1">Senha:*</label>
             <input type="password" name="senha" class="form-control" id="exampleInputPassword1" placeholder="Senha">
         </div>
-        <a href="">Esqueci minha senha</a>
+        <a style="font-size: 9px" href="">Esqueci minha senha <br>(Indisponível, entre em contato com xg7mails@gmail.com
+            <br> ou no discord)</a>
         <br>
-        <button type="submit" class="btn btn-primary w-100">Iniciar seção</button>
+        <button type="submit" class="btn btn-primary w-100">Iniciar sessão</button>
         <p style="font-size: 11px">Não tem uma conta? Clique aqui para <a href="cadastro.jsp">criar uma conta</a></p>
-        <p style="font-size: 11px; color: red"><%=request.getAttribute("errormsg") != null ? request.getAttribute("errormsg") : ""%></p>
+        <p style="font-size: 11px; color: red"><%=request.getAttribute("erromsg") != null ? request.getAttribute("erromsg") : ""%></p>
 
 
     </form>

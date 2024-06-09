@@ -65,7 +65,8 @@ public class RegisterServlet extends HttpServlet {
                 new Message("Bem-vindo ao XG7Plugins!",
                         "<div style=\"\">" +
                                 "Depois eu coloco algo aqui, estou com preguiça :P" +
-                                "</div>").enviarEmail(email);
+                                "</div>")
+                        .enviarEmail(email);
             } catch(MessagingException | UnsupportedEncodingException e)
 
             {

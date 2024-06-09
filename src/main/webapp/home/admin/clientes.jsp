@@ -28,13 +28,6 @@
         }
 
 
-        int paginaAtual = Integer.parseInt(request.getParameter("page"));
-
-        int indiceInicial = (paginaAtual - 1) * 15;
-        int indiceFinal = Math.min(indiceInicial + 15, allUsers.size());
-
-        List<UserModel> itensPagina = allUsers.subList(indiceInicial, indiceFinal);
-
     %>
 
 
@@ -82,7 +75,7 @@
             ADMIN
         </div>
         <div class="botoes">
-            <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="/home/admin/clientes.jsp?page=1"><i style="color: rgba(255,255,255,.5);" class="bi bi-people"></i> <p class="textos-botoes" > Clientes</p></a>
+            <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="/home/admin/clientes.jsp"><i style="color: rgba(255,255,255,.5);" class="bi bi-people"></i> <p class="textos-botoes" > Clientes</p></a>
             <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="/home/admin/plugins.jsp"><i style="color: rgba(255,255,255,.5);" class="bi bi-plug"></i> <p class="textos-botoes" > Plugins</p></a>
         </div>
     </div>
@@ -107,6 +100,10 @@
                 <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
             </svg>
         </button>
+        <div class="pesquisa bg-white rounded">
+            <a class="btn"><i class="bi bi-search"></i></a>
+            <input class="form-control" id="pesquisar" type="search" placeholder="Buscar plugin..." aria-label="Search">
+        </div>
         <div class="h-botoes">
             <%
                 if (model.getPermission() != 4 && model.getPermission() > 2) {
@@ -158,9 +155,9 @@
                         <th scope="col">Ações</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <% for (UserModel item : itensPagina) { %>
-                    <tr>
+                    <tbody id="tabela">
+                    <% for (UserModel item : allUsers) { %>
+                    <tr id="<%=item.getNome() + allUsers.indexOf(item)%>">
                         <th scope="row"><%=item.getId().toString()%></th>
                         <td><img src="<%=item.getImageData() != null ? item.getImageData() : ""%>" alt="N/A" width="50" height="auto"></td>
                         <td><%=item.getNome()%></td>
@@ -177,29 +174,32 @@
                 </table>
 
             </div>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-end">
-                    <li class="page-item <%=paginaAtual > 1 ? "" : "disabled"%>">
-                        <a class="page-link" href="?page=<%= paginaAtual - 1 %>" tabindex="-1">Anterior</a>
-                    </li>
-                    <%
-                        for (int i = Math.max(1, paginaAtual - 1); i <= Math.min(3, Math.max(1, Math.max(allUsers.size() / 15, paginaAtual / 3))); i++) {
-                    %>
-                    <li class="page-item"><a class="page-link" href="?page=<%= i %>"><%=i%></a></li>
-                    <%
-                        }
-                    %>
-                    <li class="page-item <%=paginaAtual == 1 ? "" : "disabled"%>">
-                        <a class="page-link" href="?page=<%= paginaAtual + 1 %>">Próxima</a>
-                    </li>
-                </ul>
-            </nav>
+
         </div>
 
 </main>
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script>
+    function mostrarPessoas(nome) {
+
+
+        document.getElementById("tabela").querySelectorAll("*").forEach(function (e) {
+
+            if (!e.id.toLowerCase().includes(nome.toLowerCase())) $("#" + e.id).addClass("d-none");
+            else $("#" + e.id).removeClass("d-none");
+
+
+        })
+    }
+
+    $("#pesquisar").on("input", function (event) {
+        mostrarPessoas($(this).val());
+    })
+
+</script>
 
 <script src="../../js/menu.js"></script>
 <script src="../../js/dashboard.js"></script>

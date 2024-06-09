@@ -35,6 +35,7 @@ public class PluginEditServlet extends HttpServlet {
         //Pega todas as informações da página
         Part configs = request.getPart("configs");
 
+        String nome = request.getParameter("nome");
         String descricao = request.getParameter("description");
         String categoria = request.getParameter("categoria");
         String url = request.getParameter("urlVideo");
@@ -113,6 +114,7 @@ public class PluginEditServlet extends HttpServlet {
             PluginModel model = DBManager.getPlugin(plName);
             if (model == null) throw new RuntimeException();
 
+            model.setName(nome);
             model.setDescription(descricao);
             model.setCategory(Categoria.fromValue(Integer.parseInt(categoria)));
             model.setCommands(commands);
@@ -125,7 +127,7 @@ public class PluginEditServlet extends HttpServlet {
             model.setDependencies(depedencies);
             model.setPrice(preco);
             model.setConfig(configs.getSubmittedFileName().isEmpty() ? model.getConfig() : new SerialBlob(configs.getInputStream().readAllBytes()));
-            DBManager.editPlugin(model);
+            DBManager.editPlugin(plName, model);
 
 
         } catch (SQLException e) {

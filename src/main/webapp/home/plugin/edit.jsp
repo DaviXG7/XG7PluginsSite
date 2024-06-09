@@ -64,7 +64,7 @@
             ADMIN
         </div>
         <div class="botoes">
-            <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="/home/admin/clientes.jsp?page=1"><i style="color: rgba(255,255,255,.5);" class="bi bi-people"></i> <p class="textos-botoes" > Clientes</p></a>
+            <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="/home/admin/clientes.jsp"><i style="color: rgba(255,255,255,.5);" class="bi bi-people"></i> <p class="textos-botoes" > Clientes</p></a>
             <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="/home/admin/plugins.jsp"><i style="color: rgba(255,255,255,.5);" class="bi bi-plug"></i> <p class="textos-botoes" > Plugins</p></a>
         </div>
     </div>
@@ -136,7 +136,7 @@
                     <div class="form-group row">
                         <div class="col-5">
                             <label for="nome">Nome*</label>
-                            <input type="text" class="form-control-plaintext" value="<%=plugin.getName()%>" disabled name="nome" id="nome"
+                            <input type="text" class="form-control" value="<%=plugin.getName()%>" name="nome" id="nome"
                                    placeholder="Sem nome???" required>
                         </div>
                         <div class="col-7">

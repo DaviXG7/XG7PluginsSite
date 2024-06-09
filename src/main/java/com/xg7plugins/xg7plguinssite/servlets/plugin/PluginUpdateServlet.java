@@ -122,7 +122,7 @@ public class PluginUpdateServlet extends HttpServlet {
             model.setPermissions(perms);
 
             try {
-                DBManager.editPlugin(model);
+                DBManager.editPlugin(model.getName(), model);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

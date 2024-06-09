@@ -54,7 +54,7 @@
         <br>
         <button id="cadsubmit" type="submit" class="btn btn-primary w-100 disabled">Criar conta</button>
         <p style="font-size: 11px">Já tem uma conta? Clique aqui para <a href="login.jsp">entrar na conta.</a></p>
-        <p style="font-size: 11px; color: red"><%=request.getAttribute("errormsg") != null ? request.getAttribute("errormsg") : ""%></p>
+        <p style="font-size: 11px; color: red"><%=request.getAttribute("erromsg") != null ? request.getAttribute("erromsg") : ""%></p>
     </form>
 
 

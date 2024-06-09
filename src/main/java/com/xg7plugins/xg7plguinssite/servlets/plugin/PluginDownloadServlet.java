@@ -2,6 +2,7 @@ package com.xg7plugins.xg7plguinssite.servlets.plugin;
 
 import com.xg7plugins.xg7plguinssite.db.DBManager;
 import com.xg7plugins.xg7plguinssite.models.PluginModel;
+import com.xg7plugins.xg7plguinssite.models.UserModel;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,6 +18,9 @@ import java.sql.SQLException;
 public class PluginDownloadServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        UserModel user = (UserModel) request.getSession().getAttribute("user");
+
         String pluginName = request.getParameter("plugin");
         String type = request.getParameter("type");
 
@@ -53,6 +57,8 @@ public class PluginDownloadServlet extends HttpServlet {
             case "plugin" -> {
                 try {
                     PluginModel model = DBManager.getPlugin(pluginName);
+
+                    if (user != null) model.addDownload(user.getId());
 
                     if (model.getPrice() != 0) throw new RuntimeException();
 

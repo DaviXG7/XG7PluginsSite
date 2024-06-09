@@ -1,0 +1,70 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+    background: linear-gradient(156deg, rgb(204, 201, 6) 0%, rgb(234, 129, 0) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Calibri,serif;
+}
+
+
+.principal {
+    width: 300px;
+    height: 435px;
+}
+
+.caixa {
+    position: relative;
+    background: linear-gradient(156deg, rgb(255, 255, 255) 0%, rgb(239, 239, 239) 100%);
+    border-radius: 20px;
+    border: rgba(0,0,0,.8) 2px solid;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+}
+.checks > * {
+    margin: 10px;
+}
+.fundo {
+    position: absolute;
+    width: 300px;
+    height: 400px;
+    filter: blur(40px);
+}
+
+.malha {
+    max-height: 350px;
+    height: 350px;
+    width: 350px;
+    flex-wrap: wrap;
+    display: grid;
+    gap: 0;
+
+}
+
+.jogo {
+    justify-content: center !important;
+}
+.span-bixo {
+    background-color: #b9fff6 !important;
+    transition: 0.5s !important;
+    cursor: pointer;
+}
+span {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    border: solid black 4px;
+    align-items: center;
+    justify-content: center;
+}

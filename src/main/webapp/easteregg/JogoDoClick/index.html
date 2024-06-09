@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Whack a mole</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        .voltar {
+            position: absolute;
+            top: 0;
+            left: 10px;
+        }
+    </style>
+</head>
+<body>
+<a href="../jogos.html" class="voltar link link-light link-underline link-underline-opacity-0" style="font-size: 30px">
+
+    Voltar
+</a>
+<img class="fundo" src="https://img.freepik.com/fotos-gratis/papel-de-parede-padrao-de-fundo-abstrato-grunge-preto-com-foto-gratis_1340-33834.jpg" alt="">
+<form class="caixa principal" id="inicio" style="display: flex">
+    <img src="imgs/whack.png" alt="" style="max-height: 100px; border-radius: 20px">
+    <h3>Whack a Mole :D</h3>
+    <div class="d-flex">
+        <p class="m-1" id="cS">Sorrisos capturados: </p>
+    </div>
+    <select required id="dificuldade" class="form-select" aria-label="Default select example">
+        <option value="0" selected>Selecione a dificuldade</option>
+        <option value="1">Fácil (2s)</option>
+        <option value="2">Médio (1s)</option>
+        <option value="3">Difícil (0.5s)</option>
+        <option value="4">Personalizado</option>
+    </select>
+    <div class="input-group d-none" id="persdif">
+        <input type="text" id="ipdif" class="form-control" placeholder="Digite os segundos" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <select required id="tamanho" class="form-select" aria-label="Default select example">
+        <option value="0" selected>Selecione o tamanho da malha</option>
+        <option value="1">3x3</option>
+        <option value="2">5x5</option>
+        <option value="3">10x10</option>
+        <option value="4">Personalizado</option>
+    </select>
+    <div id="persm" class="input-group d-none">
+        <input type="text" id="ipm" class="form-control" placeholder="Digite o lado da malha (max.: 10)" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+
+    <button class="btn btn-outline-primary" type="submit">Começar o jogo</button>
+
+    <small style="font-size: 11px; text-align: center">Feito por DaviXG7</small>
+    <small id="error" style="color: red; font-size: 11px; text-align: center"></small>
+</form>
+<br>
+<div class="caixa jogo d-none" id="jogo" style="">
+    <div id="malha" class="malha bg-dark"></div>
+    <p id="jcS">Sorrisos capturados</p>
+    <button id="parar" class="btn btn-outline-danger">Parar jogo</button>
+    <div id="acabou" style="" class="d-flex w-100">
+        <button id="jogarDeNovo" class="d-none btn m-1 btn-success">Jogar Novamente</button>
+        <button id="voltar" class="d-none btn m-1 btn-warning">Voltar ao início</button>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="js/jogo.js">
+
+</script>
+
+</body>
+</html>

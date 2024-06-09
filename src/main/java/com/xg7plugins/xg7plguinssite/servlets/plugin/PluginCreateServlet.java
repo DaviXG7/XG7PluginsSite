@@ -66,6 +66,11 @@ public class PluginCreateServlet extends HttpServlet {
         if (!plugin.getSubmittedFileName().contains("jar")) throw new RuntimeException();
         if (commandValues.length != commandDescriptions.length) throw new RuntimeException();
         if (permValues.length != permDescriptions.length) throw new RuntimeException();
+        try {
+            if (DBManager.getPlugin(name) != null) throw new RuntimeException();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         Collection<Part> fileParts = request.getParts();
 

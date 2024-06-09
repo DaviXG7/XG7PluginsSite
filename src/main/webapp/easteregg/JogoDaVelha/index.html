@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jogo da velha</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        .voltar {
+            position: absolute;
+            top: 0;
+            left: 10px;
+        }
+    </style>
+</head>
+<body>
+<a href="../jogos.html" class="voltar link link-light link-underline link-underline-opacity-0" style="font-size: 30px">
+
+    Voltar
+</a>
+<main>
+    <img class="fundo" src="https://img.freepik.com/fotos-gratis/papel-de-parede-padrao-de-fundo-abstrato-grunge-preto-com-foto-gratis_1340-33834.jpg" alt="">
+    <form class="caixa" id="inicio" style="display: flex">
+        <img src="imgs/jogo-da-velha.png" alt="" style="max-height: 100px; border-radius: 20px">
+        <h3>Jogo da velha</h3>
+        <div class="d-flex">
+            <p class="m-1" id="vX">Vitórias X: </p>
+            <p class="m-1" id="vO">Vitórias O: </p>
+        </div>
+        <div id="opcoes">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="bot" onclick="toggle('default')">
+                <label class="form-check-label" for="bot">
+                    Jogar contra bot
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="default" onclick="toggle('bot')">
+                <label class="form-check-label" for="default">
+                    2 jogadores
+                </label>
+            </div>
+        </div>
+
+        <button class="btn btn-outline-primary" type="submit">Começar o jogo</button>
+
+        <small style="font-size: 11px; text-align: center">Feito por DaviXG7</small>
+        <small id="error" style="display: none; color: red; font-size: 11px; text-align: center">Selecione uma caixa</small>
+    </form>
+    <div class="caixa jogo" id="jogo" style="display: none">
+        <div id="malha" class="malha bg-dark">
+            <span id="1"></span>
+            <span id="2"></span>
+            <span id="3"></span>
+            <span id="4"></span>
+            <span id="5"></span>
+            <span id="6"></span>
+            <span id="7"></span>
+            <span id="8"></span>
+            <span id="9"></span>
+        </div>
+        <p id="vez">Vez de: X</p>
+        <button id="parar" class="btn btn-outline-danger">Parar jogo</button>
+        <div id="acabou" style="display: none !important;" class="d-flex w-100">
+            <button id="jogarDeNovo" class="d-none btn m-1 btn-success" onclick="comecarJogo(jogo.type)">Jogar Novamente</button>
+            <button id="voltar" class="d-none btn m-1 btn-warning">Voltar ao início</button>
+        </div>
+    </div>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="js/jogo.js"></script>
+</body>
+</html>
