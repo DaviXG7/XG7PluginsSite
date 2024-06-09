@@ -41,103 +41,100 @@
 </head>
 
 <body>
-<div class="wrapper">
-    <div id="barra-lateral" class="barra-lateral sidebar">
+<div class="barra-lateral" id="barra">
+    <a href="/home/dashboard.jsp">
+        <img src="../../imgs/logo.png" width="135" alt="">
+    </a>
 
+    <hr>
 
-        <a href="../../index.jsp">
-            <img src="../../imgs/logo.png" width="135" alt="">
-        </a>
-
-        <hr>
-
-        <!-- Heading -->
-        <div class="menus">
-            <div class="sidebar-heading side-title">
-                INTERFACE
-            </div>
-            <div class="botoes">
-                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href="https://discord.gg/84rqYVREsY"><i style="color: rgba(255,255,255,.5);" class="bi bi-telephone"></i><p class="textos-botoes"> Suporte</p></a>
-                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href="https://ko-fi.com/davixg7"><i style="color: rgba(255,255,255,.5);" class="bi bi-cash"></i><p class="textos-botoes" > Doação</p></a>
-            </div>
+    <!-- Heading -->
+    <div class="menus">
+        <div class="sidebar-heading side-title">
+            INTERFACE
         </div>
-
-        <hr>
-
-        <%
-            if (model.getPermission() > 1) {
-        %>
-
-        <div class="menus">
-            <div class="sidebar-heading side-title">
-                ADMIN
-            </div>
-            <div class="botoes">
-                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href="/home/admin/clientes.jsp?page=1"><i style="color: rgba(255,255,255,.5);" class="bi bi-people"></i> <p class="textos-botoes" > Clientes</p></a>
-                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href="/home/admin/plugins.jsp"><i style="color: rgba(255,255,255,.5);" class="bi bi-plug"></i> <p class="textos-botoes" > Plugins</p></a>
-            </div>
+        <div class="botoes">
+            <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="https://discord.gg/84rqYVREsY"><i style="color: rgba(255,255,255,.5);" class="bi bi-telephone"></i><p class="textos-botoes"> Suporte</p></a>
+            <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="https://ko-fi.com/davixg7"><i style="color: rgba(255,255,255,.5);" class="bi bi-cash"></i><p class="textos-botoes" > Doação</p></a>
         </div>
-
-        <hr>
-        <%
-            }
-        %>
-
-
-
-
-
     </div>
 
+    <hr>
 
-    <main>
+    <%
+        if (model.getPermission() > 1) {
+    %>
 
-        <header>
-            <button id="hamburger" class="btn" onclick="toggleMenu('barra-lateral','flex','none')">
-                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
-                </svg>
-            </button>
-            <div class="h-botoes">
-                <%
-                    if (model.getPermission() != 4 && model.getPermission() > 2) {
-                %>
-                <div class="dropdown">
-                    <button style="border: none; background: none" type="button" data-bs-toggle="dropdown">
-                        <i class="bi bi-plus" style="font-size: 30px; padding: 0 10px 0 10px"></i>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <a class="dropdown-item" href="/home/plugin/create.jsp">Criar Plugin</a>
-                        <a class="dropdown-item" href="/home/plugin/create.jsp">Postar atualização</a>
-                    </ul>
-                </div>
-                <%
-                    }
-                %>
+    <div class="menus">
+        <div class="sidebar-heading side-title">
+            ADMIN
+        </div>
+        <div class="botoes">
+            <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="/home/admin/clientes.jsp?page=1"><i style="color: rgba(255,255,255,.5);" class="bi bi-people"></i> <p class="textos-botoes" > Clientes</p></a>
+            <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="/home/admin/plugins.jsp"><i style="color: rgba(255,255,255,.5);" class="bi bi-plug"></i> <p class="textos-botoes" > Plugins</p></a>
+        </div>
+    </div>
 
-                <div class="dropdown">
-                    <button style="border: none; background-color: white" type="button" data-bs-toggle="dropdown">
-                        <img src="<%=model.getImageData() == null ? "alt.png" : model.getImageData()%>" width="60" height="60" style="border: solid black 1px; border-radius: 100%" alt="">
-                    </button>
-                    <ul class="dropdown-menu">
-                        <p class="dropdown-item"><%=model.getNome()%></p>
-                        <div class="dropdown-divider"></div>
-                        <a href=<%="?uuid=" + model.getId().toString()%> class="dropdown-item">
-                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Configurações
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="/logout" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
-                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Encerrar seção
-                        </a>
-                    </ul>
-                </div>
+    <hr>
+    <%
+        }
+    %>
+
+    <button id="sairbarra" class="btn" onclick="toggleMenu('barra-lateral','flex','none')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+        </svg>
+    </button>
+</div>
+<div class="tela" id="tela">
+</div>
+<main class="w-100 h-100">
+    <header>
+        <button id="hamburger" class="btn" onclick="toggleMenu('barra-lateral','flex','none')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+            </svg>
+        </button>
+        <div class="h-botoes">
+            <%
+                if (model.getPermission() != 4 && model.getPermission() > 2) {
+            %>
+            <div class="dropdown">
+                <button style="border: none; background: none" type="button" data-bs-toggle="dropdown">
+                    <i class="bi bi-plus" style="font-size: 30px; padding: 0 10px 0 10px"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <a class="dropdown-item" href="/home/plugin/create.jsp">Criar Plugin</a>
+                    <a class="dropdown-item" href="">Postar atualização</a>
+                </ul>
             </div>
-        </header>
+            <%
+                }
+            %>
+
+            <div class="dropdown">
+                <button style="border: none; background-color: white" type="button" data-bs-toggle="dropdown">
+                    <img src="<%=model.getImageData() == null ? "alt.png" : model.getImageData()%>" width="60" height="60" style="border: solid black 1px; border-radius: 100%" alt="">
+                </button>
+                <ul class="dropdown-menu">
+                    <p class="dropdown-item"><%=model.getNome()%></p>
+                    <div class="dropdown-divider"></div>
+                    <a href=<%="/home/user/user.jsp?uuid=" + model.getId().toString()%> class="dropdown-item">
+                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Configurações
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="/logout" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Encerrar seção
+                    </a>
+                </ul>
+            </div>
+        </div>
+    </header>
 
     <div class="pag">
-        <form class="configs usuario" id="usuario" method="post" action="<%="editarusuario?uuid=" + model.getId().toString()%>">
+        <form class="configs usuario" id="usuario" method="post" action="<%="editarusuario?uuid=" + userModel.getId().toString()%>">
             <h4>Configurações</h4>
 
             <div class="form-group row">
@@ -177,7 +174,7 @@
             <div class="d-flex flex-column align-items-center">
                 <div class="d-flex flex-column justify-content-between align-items-center">
                     <h4><strong>Imagem atual</strong></h4>
-                    <img class="m-3" alt="Você não tem uma imagem" id="uimg" width="125" height="125" src="<%=model.getImageData()%>">
+                    <img class="m-3" alt="Você não tem uma imagem" id="uimg" width="125" height="125" src="<%=userModel.getImageData()%>">
                 </div>
 
 
@@ -197,21 +194,29 @@
             if (model.getPermission() >= 5) {
         %>
 
-        <form class="configs usuario" id="permissao" action="<%="editarpermissao?uuid=" + model.getId().toString()%>" method="post">
+        <form class="configs usuario" id="permissao" action="<%="editarpermissao?uuid=" + userModel.getId().toString()%>" method="post">
             <h4>Permissão</h4>
 
             <div class="form-group row">
                 <label for="exampleFormControlSelect2">Escolha a permissão</label>
                 <select class="form-control" name="permissions" id="exampleFormControlSelect2">
-                    <option value="0">Selecione uma permissão...</option>
+                    <option selected value="0">Selecione uma permissão...</option>
                     <%
-                        if (model.getPermission() <= 5) {
-                    %>>
+                        if (model.getPermission() > 5) {
+                    %>
                         <option value="6">CEO</option>
                     <%
                         }
                     %>
-                    <option value="5">Administrador</option>
+
+                    <%
+                        if (model.getPermission() >= 5) {
+                    %>
+                        <option value="5">Administrador</option>
+                    <%
+                        }
+                    %>
+
                     <option value="4">Editor site</option>
                     <option value="3">Editor plugin</option>
                     <option value="2">Auxiliar</option>
@@ -234,7 +239,6 @@
 
 
 </main>
-</div>
 
 
 </body>

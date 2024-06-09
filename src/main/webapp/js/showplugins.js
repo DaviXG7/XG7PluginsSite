@@ -31,7 +31,7 @@ function abrirTela(NomePlugin) {
         }
     }
     if (plselect == null) return;
-
+    const link = plselect.preco === 0 ? "/download?plugin=" + plselect.nome + "&type=" + "plugin": "";
     let nomelabel = $("#nomePlugin");
     let downloads = $("#downloads");
     let descricao = $("#description");
@@ -56,14 +56,14 @@ function abrirTela(NomePlugin) {
     //Provisório!
     linkBaixar.text("Comprar R$" + plselect.preco)
     if (plselect.preco === 0) {
-        linkBaixar.attr("href", plselect.baixar);
+        linkBaixar.attr("href", "/download?plugin=" + plselect.nome + "&type=plugin");
         linkBaixar.text("Baixar");
     }
 
     if (plselect.github !== "") linkGithub.attr("href", plselect.github);
     else linkGithub.addClass("d-none");
 
-    if (plselect.github !== "") config.attr("href", plselect.config);
+    if (plselect.config !== "") config.attr("href", "/download?plugin=" + plselect.nome + "&type=config");
     else config.addClass("d-none");
 
     if (plselect.linkYoutube !== "") linkVideo.html("<h5><strong>Demostração:</strong></h5> <iframe width=\"100%\" height=\"250" +

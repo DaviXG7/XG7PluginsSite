@@ -9,7 +9,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 
 public class PluginJson {
@@ -31,7 +30,7 @@ public class PluginJson {
         json.put("downloads", pluginModel.getDownloads().size());
         json.put("github", pluginModel.getGithub());
         json.put("baixar", pluginModel.getPlugin() == null ? JSONObject.NULL : pluginModel.getPlugin().toString());
-        json.put("config", pluginModel.getConfig() == null ? JSONObject.NULL : pluginModel.getConfig().toString());
+        json.put("config", pluginModel.getConfig() == null ? "" : "notNull");
         json.put("preco", pluginModel.getPrice());
         json.put("categoria", pluginModel.getCategory().getName());
         json.put("linkYoutube", pluginModel.getUrlVideo());

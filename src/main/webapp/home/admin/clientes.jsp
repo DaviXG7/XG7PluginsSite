@@ -53,104 +53,97 @@
 
     </div>
 </div>
-<div class="wrapper">
-    <div id="barra-lateral" class="barra-lateral sidebar">
+<div class="barra-lateral" id="barra">
+    <a href="/home/dashboard.jsp">
+        <img src="../../imgs/logo.png" width="135" alt="">
+    </a>
 
+    <hr>
 
-        <a href="../../index.jsp">
-            <img src="../../imgs/logo.png" width="135" alt="">
-        </a>
-
-        <hr>
-
-        <!-- Heading -->
-        <div class="menus">
-            <div class="sidebar-heading side-title">
-                INTERFACE
-            </div>
-            <div class="botoes">
-                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href="https://discord.gg/84rqYVREsY"><i style="color: rgba(255,255,255,.5);" class="bi bi-telephone"></i><p class="textos-botoes"> Suporte</p></a>
-                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href="https://ko-fi.com/davixg7"><i style="color: rgba(255,255,255,.5);" class="bi bi-cash"></i><p class="textos-botoes" > Doação</p></a>
-            </div>
+    <!-- Heading -->
+    <div class="menus">
+        <div class="sidebar-heading side-title">
+            INTERFACE
         </div>
-
-        <hr>
-
-        <%
-            if (model.getPermission() > 1) {
-        %>
-
-        <div class="menus">
-            <div class="sidebar-heading side-title">
-                ADMIN
-            </div>
-            <div class="botoes">
-                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href="/home/admin/clientes.jsp?page=1"><i style="color: rgba(255,255,255,.5);" class="bi bi-people"></i> <p class="textos-botoes" > Clientes</p></a>
-                <a class="d-flex link-offset-2 link-dark link-underline link-underline-opacity-0" href="/home/admin/plugins.jsp"><i style="color: rgba(255,255,255,.5);" class="bi bi-plug"></i> <p class="textos-botoes" > Plugins</p></a>
-            </div>
+        <div class="botoes">
+            <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="https://discord.gg/84rqYVREsY"><i style="color: rgba(255,255,255,.5);" class="bi bi-telephone"></i><p class="textos-botoes"> Suporte</p></a>
+            <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="https://ko-fi.com/davixg7"><i style="color: rgba(255,255,255,.5);" class="bi bi-cash"></i><p class="textos-botoes" > Doação</p></a>
         </div>
-
-        <hr>
-        <%
-            }
-        %>
-
-
-
-
-
     </div>
 
+    <hr>
 
-    <main>
+    <%
+        if (model.getPermission() > 1) {
+    %>
 
-        <header>
-            <button id="hamburger" class="btn" onclick="toggleMenu('barra-lateral','flex','none')">
-                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
-                </svg>
-            </button>
-            <form id="pesquisa" class="d-md-flex bg-white rounded">
-                <a class="btn"><i class="bi bi-search"></i></a>
-                <input class="form-control" type="search" placeholder="Buscar cliente..." aria-label="Search">
-            </form>
-            <div class="h-botoes">
-                <%
-                    if (model.getPermission() != 4 && model.getPermission() > 2) {
-                %>
-                <div class="dropdown">
-                    <button style="border: none; background: none" type="button" data-bs-toggle="dropdown">
-                        <i class="bi bi-plus" style="font-size: 30px; padding: 0 10px 0 10px"></i>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <a class="dropdown-item" href="/home/plugin/create.jsp">Criar Plugin</a>
-                        <a class="dropdown-item" href="/home/plugin/update.jsp">Postar atualização</a>
-                    </ul>
-                </div>
-                <%
-                    }
-                %>
+    <div class="menus">
+        <div class="sidebar-heading side-title">
+            ADMIN
+        </div>
+        <div class="botoes">
+            <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="/home/admin/clientes.jsp?page=1"><i style="color: rgba(255,255,255,.5);" class="bi bi-people"></i> <p class="textos-botoes" > Clientes</p></a>
+            <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="/home/admin/plugins.jsp"><i style="color: rgba(255,255,255,.5);" class="bi bi-plug"></i> <p class="textos-botoes" > Plugins</p></a>
+        </div>
+    </div>
 
-                <div class="dropdown">
-                    <button style="border: none; background-color: white" type="button" data-bs-toggle="dropdown">
-                        <img src="<%=model.getImageData() == null ? "alt.png" : model.getImageData()%>" width="60" height="60" style="border: solid black 1px; border-radius: 100%" alt="">
-                    </button>
-                    <ul class="dropdown-menu">
-                        <p class="dropdown-item"><%=model.getNome()%></p>
-                        <div class="dropdown-divider"></div>
-                        <a href=<%="/home/user/user.jsp?uuid=" + model.getId().toString()%> class="dropdown-item">
-                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Configurações
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="/logout" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
-                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Encerrar seção
-                        </a>
-                    </ul>
-                </div>
+    <hr>
+    <%
+        }
+    %>
+
+    <button id="sairbarra" class="btn" onclick="toggleMenu('barra-lateral','flex','none')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+        </svg>
+    </button>
+</div>
+<div class="tela" id="tela">
+</div>
+<main class="w-100 h-100">
+    <header>
+        <button id="hamburger" class="btn" onclick="toggleMenu('barra-lateral','flex','none')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+            </svg>
+        </button>
+        <div class="h-botoes">
+            <%
+                if (model.getPermission() != 4 && model.getPermission() > 2) {
+            %>
+            <div class="dropdown">
+                <button style="border: none; background: none" type="button" data-bs-toggle="dropdown">
+                    <i class="bi bi-plus" style="font-size: 30px; padding: 0 10px 0 10px"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <a class="dropdown-item" href="/home/plugin/create.jsp">Criar Plugin</a>
+                    <a class="dropdown-item" href="/home/plugin/update.jsp">Postar atualização</a>
+                </ul>
             </div>
-        </header>
+            <%
+                }
+            %>
+
+            <div class="dropdown">
+                <button style="border: none; background-color: white" type="button" data-bs-toggle="dropdown">
+                    <img src="<%=model.getImageData() == null ? "alt.png" : model.getImageData()%>" width="60" height="60" style="border: solid black 1px; border-radius: 100%" alt="">
+                </button>
+                <ul class="dropdown-menu">
+                    <p class="dropdown-item"><%=model.getNome()%></p>
+                    <div class="dropdown-divider"></div>
+                    <a href=<%="/home/user/user.jsp?uuid=" + model.getId().toString()%> class="dropdown-item">
+                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Configurações
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="/logout" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Encerrar seção
+                    </a>
+                </ul>
+            </div>
+        </div>
+    </header>
 
         <div class="pag">
             <div class="tabela">
@@ -174,8 +167,8 @@
                         <td><%=item.getEmail()%></td>
                         <td><%=item.getPermission()%></td>
                         <td>
-                            <a href="../user/user.jsp?uuid=<%=item.getId().toString()%>" class="<%=model.getPermission() < 5 ? "disabled" : ""%> btn btn-primary">Editar</a>
-                            <button class="<%=model.getPermission() < 5 ? "disabled" : ""%> btn btn-danger" onclick="abrirCerteza('/excluirusuario?uuid=<%=item.getId()%>')">Excluir</button>
+                            <a href="../user/user.jsp?uuid=<%=item.getId().toString()%>" class="<%=model.getPermission() < item.getPermission() || model.getPermission() == 3 ? "disabled" : ""%> btn btn-primary">Editar</a>
+                            <button class="<%=model.getPermission() < item.getPermission() || model.getPermission() == 3 ? "disabled" : ""%> btn btn-danger" onclick="abrirCerteza('/excluirusuario?uuid=<%=item.getId()%>')">Excluir</button>
                         </td>
 
                     </tr>
@@ -204,7 +197,6 @@
         </div>
 
 </main>
-</div>
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

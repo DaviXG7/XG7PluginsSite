@@ -260,18 +260,18 @@
 
 </main>
 
-<footer class="bg-light rounded pt-3 d-flex align-items-center justify-content-between flex-column" style="height: 250px">
+<footer class="bg-light rounded p-0 pt-3 d-flex align-items-center justify-content-between flex-column" style="height: 250px">
 
     <h1><strong>XG7Plugins</strong></h1>
     <p>Os melhores plugins para seu servidor de Minecraft!</p>
     <div class="footer-buttons mb-2 w-25 d-flex justify-content-around">
         <a href="https://github.com/DaviXG7"><i class="bi bi-github" style="font-size: 40px; color: black"></i></a>
         <a href="https://discord.gg/2fACbYbBsf"><i class="bi bi-discord" style="font-size: 40px; color: black"></i></a>
-    </div> 
+    </div>
+    <small><a href="">Easter-egg :D</a></small>
     <h6 class="w-100 d-flex align-items-center justify-content-center" style="background-color: rgb(196, 196, 196); height: 3em;">
-        Copyright ₢ XG7Plugins Todos os direitos reservados
+        Copyright ₢ XG7Plugins Todos os direitos reservados <br>
     </h6>
-</div>
 
 
 </footer>
@@ -291,6 +291,7 @@
         pls.forEach(function (e) {
             const c1 = e.preco === 0 ? "Grátis" : "R$" + e.preco;
             const c2 = e.preco === 0 ? "Baixar" : "Comprar R$" + e.preco;
+            const link = e.preco === 0 ? "/download?plugin=" + e.nome + "&type=" + "plugin": "";
             const html =
                 '<div class="plugin-caixa">' +
                 '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="currentColor" class="bi bi-plugin" viewBox="0 0 16 16">' +
@@ -301,7 +302,7 @@
                 '<h5>' + e.nome + '</h5>' +
                 '<p>' + c1 + '</p>' +
                 '<div class="plugin-botoes">' +
-                '<button class="btn btn-primary">' + c2 + '</button>' +
+                '<a href="' + link + '" class="btn btn-primary">' + c2 + '</a>' +
                 '<button onclick="abrirTela(\'' + e.nome + '\')" class="btn btn-primary">Ver detalhes</button>' +
                 '</div>' +
                 '</div>'

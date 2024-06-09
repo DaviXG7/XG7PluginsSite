@@ -67,8 +67,8 @@ public class UserFilter implements Filter {
         }
 
         //Só quem tem permissão pode fazer alterações nesta pasta
-        if (request.getServletPath().contains("plugin")) {
-            if (((UserModel) session.getAttribute("user")).getPermission() != 4 && ((UserModel) session.getAttribute("user")).getPermission() < 2) {
+        if (request.getServletPath().contains("plugin/")) {
+            if (((UserModel) session.getAttribute("user")).getPermission() != 4 && ((UserModel) session.getAttribute("user")).getPermission() < 3) {
                 response.sendRedirect("/home/dashboard.jsp");
                 filterChain.doFilter(request, response);
                 return;

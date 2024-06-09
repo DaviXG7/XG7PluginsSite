@@ -47,7 +47,7 @@ public class RegisterServlet extends HttpServlet {
         }
 
         //Pega a imagem do usuário do minecraft pela API do minotar.net
-        InputStream inputStream = new URL("https://minotar.net/avatar/" + nome + ".png").openStream();
+        InputStream inputStream = new URL("https://minotar.net/avatar/" + nome.replace( " ", "") + ".png").openStream();
 
         //Cria o usuário
         UserModel model = null;

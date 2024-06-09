@@ -32,8 +32,10 @@ public class EditUserServlet extends HttpServlet {
         String novoNome = request.getParameter("nome");
         String senha = request.getParameter("senha");
         String novaSenha = request.getParameter("novaSenha");
-        novaSenha = novaSenha.equals("undefined") ? "" : novaSenha;
+        novaSenha = novaSenha == null || novaSenha.equals("undefined") ? "" : novaSenha;
         novoNome = novoNome.equals("undefined") ? "" : novoNome;
+
+        System.out.println(novaSenha);
 
         //Verifica se não há erros
         if (userRequest.getPermission() < 5) {
@@ -46,7 +48,7 @@ public class EditUserServlet extends HttpServlet {
 
         if (novoNome.isEmpty() && novaSenha.isEmpty()) throw new RuntimeException();
 
-        if (novaSenha.toLowerCase().equals(novaSenha) || novaSenha.length() < 8) throw new RuntimeException("O tamanho da senha é menor que 8 caracteres ou não tem letra maiúscula");
+        if (!novaSenha.isEmpty() && (novaSenha.toLowerCase().equals(novaSenha) || novaSenha.length() < 8)) throw new RuntimeException("O tamanho da senha é menor que 8 caracteres ou não tem letra maiúscula");
 
         //Coloca o nome e a senha
         if (!novoNome.equals(userEdit.getNome()) && !novoNome.isEmpty()) userEdit.setNome(novoNome);

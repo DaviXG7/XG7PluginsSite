@@ -49,7 +49,7 @@ public class PluginUpdateServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-        if (request.getParameter("editar").equals("on")) {
+        if (request.getParameter("editar") != null && request.getParameter("editar").equals("on")) {
 
             String[] commandValues = request.getParameterValues("commandName");
             String[] commandDescriptions = request.getParameterValues("commandDescription");

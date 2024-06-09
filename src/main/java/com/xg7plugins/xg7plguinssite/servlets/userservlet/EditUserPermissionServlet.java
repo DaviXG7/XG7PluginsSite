@@ -33,7 +33,7 @@ public class EditUserPermissionServlet extends HttpServlet {
 
         int permission = Integer.parseInt(request.getParameter("permissions"));
         if (permission == 0) throw new RuntimeException();
-        if (permission < 6 && userEdit.getPermission() <= 5) throw new RuntimeException();
+        if (permission == 6 && userEdit.getPermission() <= 5) throw new RuntimeException();
 
         //Coloca a permissão e manda ao banco de dados
         userEdit.setPermission(permission);
