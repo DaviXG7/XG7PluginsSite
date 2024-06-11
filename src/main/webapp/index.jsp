@@ -289,7 +289,7 @@
                             <h5><%=pluginModel.getName()%></h5>
                             <p><%=pluginModel.getPrice() == 0 ? "Grátis" : "Comprar R$" + pluginModel.getPrice()%></p>
                             <div class="plugin-botoes">
-                                <a href="<%=pluginModel.getPrice() == 0 ? "/download?plugin=" + pluginModel.getName() + "&type=" + "plugin": ""%>" class="btn btn-primary"><%=pluginModel.getPrice() == 0 ? "Grátis" : "Comprar R$" + pluginModel.getPrice()%></a>
+                                <a href="<%=pluginModel.getPrice() == 0 ? "/download?plugin=" + pluginModel.getName() + "&type=" + "plugin": ""%>" class="btn btn-primary"><%=pluginModel.getPrice() == 0 ? "Baixar" : "Comprar R$" + pluginModel.getPrice()%></a>
                                 <button onclick="abrirTela('<%=pluginModel.getName()%>')" class="btn btn-primary">Ver detalhes</button>
                                 </div>
                             </div>

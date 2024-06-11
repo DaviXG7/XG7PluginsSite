@@ -27,7 +27,7 @@ public class DeleteUserServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
         if (targetUser == null) throw new RuntimeException();
-        if (!user.getId().equals(targetUser.getId()) && user.getPermission() < 5 || targetUser.getPermission() >= 5) throw new RuntimeException();
+        if (!user.getId().equals(targetUser.getId()) && (user.getPermission() < 5 || targetUser.getPermission() >= 5)) throw new RuntimeException("Você não tem permissão para executar isto!");
 
         try {
             DBManager.deleteUser(targetUser.getId());

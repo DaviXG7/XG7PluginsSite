@@ -165,7 +165,7 @@
                     <div class="form-group">
                         <label for="categoria">Categoria*</label>
                         <select class="form-select" id="categoria" name="categoria" required>
-                            <option <%=plugin.getCategory().getIndex() <= 0 || plugin.getCategory().getIndex() > 3 ? "selected" : ""%> value="0">Selecione uma categoria...</option>
+                            <option value="0">Selecione uma categoria...</option>
                             <option <%=plugin.getCategory().getIndex() == 1 ? "selected" : ""%> value="1">Gestão</option>
                             <option <%=plugin.getCategory().getIndex() == 2 ? "selected" : ""%> value="2">Utilidades</option>
                             <option <%=plugin.getCategory().getIndex() == 3 ? "selected" : ""%> value="3">Minigames</option>

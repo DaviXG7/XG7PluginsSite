@@ -167,7 +167,7 @@
                                 <div class="form-group">
                                     <label for="categoria">Categoria*</label>
                                     <select class="form-select" id="categoria" name="categoria" required>
-                                        <option selected value="0">Selecione uma categoria...</option>
+                                        <option value="0">Selecione uma categoria...</option>
                                         <option value="1">Gestão</option>
                                         <option value="2">Utilidades</option>
                                         <option value="3">Minigames</option>
@@ -320,6 +320,10 @@
 </script>
 <script src="js/createpl.js"></script>
 <script>
+
+    $("form").on("submit", function(event) {
+        if ($("categoria").val() === "0") event.preventDefault();
+    })
 
        function getTamanhoDaTela() {
             var largura = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;

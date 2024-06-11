@@ -57,22 +57,7 @@ public class RegisterServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-        //Envia um email
-        new Thread(() -> {
-            try
 
-            {
-                new Message("Bem-vindo ao XG7Plugins!",
-                        "<div style=\"\">" +
-                                "Depois eu coloco algo aqui, estou com preguiça :P" +
-                                "</div>")
-                        .enviarEmail(email);
-            } catch(MessagingException | UnsupportedEncodingException e)
-
-            {
-                throw new RuntimeException(e);
-            }
-        });
 
         //Adiciona o usuário ao banco de dados
         try {

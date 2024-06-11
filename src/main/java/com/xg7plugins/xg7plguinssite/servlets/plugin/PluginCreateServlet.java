@@ -59,13 +59,13 @@ public class PluginCreateServlet extends HttpServlet {
         plugin == null || name == null || name.isEmpty()
         || categoria == null || versaoPlugin == null || versaoPlugin.isEmpty() || depedencies == null
         || depedencies.isEmpty() || versaoCompativel == null || versaoCompativel.isEmpty() ||
-        descricao == null || descricao.isEmpty()) throw new RuntimeException();
-        if (categoria.equals("0")) throw new RuntimeException();
-        if (preco < 0) throw new RuntimeException();
+        descricao == null || descricao.isEmpty()) throw new RuntimeException("Não foi inserido um dos valores esperados!");
+        if (categoria.equals("0")) throw new RuntimeException("Categoria inválida");
+        if (preco < 0) throw new RuntimeException("O preço nao pode ser 0");
         if (!Objects.equals(configs.getSubmittedFileName(), "") && !configs.getSubmittedFileName().contains("zip")) throw new RuntimeException();
         if (!plugin.getSubmittedFileName().contains("jar")) throw new RuntimeException();
-        if (commandValues.length != commandDescriptions.length) throw new RuntimeException();
-        if (permValues.length != permDescriptions.length) throw new RuntimeException();
+        if (commandValues.length != commandDescriptions.length) throw new RuntimeException("Não foi inserido um dos valores esperados!");
+        if (permValues.length != permDescriptions.length) throw new RuntimeException("Não foi inserido um dos valores esperados!");
         try {
             if (DBManager.getPlugin(name) != null) throw new RuntimeException();
         } catch (SQLException e) {

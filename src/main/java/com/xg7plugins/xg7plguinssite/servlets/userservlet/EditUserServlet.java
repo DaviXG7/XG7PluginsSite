@@ -26,7 +26,7 @@ public class EditUserServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
         if (userEdit == null) throw new RuntimeException();
-        if (userRequest.getPermission() < 5 && !userEdit.getId().equals(userRequest.getId())) throw new RuntimeException();
+        if (userRequest.getPermission() < 5 && !userEdit.getId().equals(userRequest.getId())) throw new RuntimeException("Você não tem permissão para executar isto!");
 
         //Pega o valor dos inputs
         String novoNome = request.getParameter("nome");

@@ -29,11 +29,11 @@ public class EditUserPermissionServlet extends HttpServlet {
         //Verifica se tem erros
         if (userEdit == null) throw new RuntimeException();
         if (userRequest.getPermission() < 5) throw new RuntimeException();
-        if (request.getParameter("permissions") == null) throw new RuntimeException();
+        if (request.getParameter("permissions") == null) throw new RuntimeException("Não foi inserido o valor esperado");
 
         int permission = Integer.parseInt(request.getParameter("permissions"));
         if (permission == 0) throw new RuntimeException();
-        if (permission == 6 && userEdit.getPermission() <= 5) throw new RuntimeException();
+        if (permission == 6 && userEdit.getPermission() <= 5) throw new RuntimeException("Você não tem permissão para executar isto!");
 
         //Coloca a permissão e manda ao banco de dados
         userEdit.setPermission(permission);

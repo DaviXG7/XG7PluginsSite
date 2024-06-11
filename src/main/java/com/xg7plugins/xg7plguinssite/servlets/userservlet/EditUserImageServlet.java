@@ -32,7 +32,7 @@ public class EditUserImageServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
         if (userEdit == null) throw new RuntimeException();
-        if (userRequest.getPermission() < 5 && !userEdit.getId().equals(userRequest.getId())) throw new RuntimeException();
+        if (userRequest.getPermission() < 5 && (!userEdit.getId().equals(userRequest.getId()))) throw new RuntimeException("Você não tem permissão para executar isto!");
 
         //Pega a imagem na página
         Part part = request.getPart("imagem");

@@ -30,7 +30,7 @@ public class PluginEditServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String plName = request.getParameter("plugin");
-        if (plName.isEmpty()) throw new RuntimeException();
+        if (plName.isEmpty()) throw new RuntimeException("Não foi inserido um dos valores esperados!");
 
         //Pega todas as informações da página
         Part configs = request.getPart("configs");
@@ -57,12 +57,12 @@ public class PluginEditServlet extends HttpServlet {
                 permDescriptions.length == 0 || permValues.length == 0 || resources.isEmpty()
                 || categoria == null || depedencies == null
                 || depedencies.isEmpty() || versaoCompativel == null || versaoCompativel.isEmpty() ||
-                descricao == null || descricao.isEmpty()) throw new RuntimeException();
-        if (categoria.equals("0")) throw new RuntimeException();
-        if (preco < 0) throw new RuntimeException();
-        if (!Objects.equals(configs.getSubmittedFileName(), "") && !configs.getSubmittedFileName().contains("zip")) throw new RuntimeException();
-        if (commandValues.length != commandDescriptions.length) throw new RuntimeException();
-        if (permValues.length != permDescriptions.length) throw new RuntimeException();
+                descricao == null || descricao.isEmpty()) throw new RuntimeException("Não foi inserido um dos valores esperados!");
+        if (categoria.equals("0")) throw new RuntimeException("Categoria ta errada!");
+        if (preco < 0) throw new RuntimeException("preço não pode ser menor que 0");
+        if (!Objects.equals(configs.getSubmittedFileName(), "") && !configs.getSubmittedFileName().contains("zip")) throw new RuntimeException("Tipo de arquivo inválido");
+        if (commandValues.length != commandDescriptions.length) throw new RuntimeException("Não foi inserido um dos valores esperados!");
+        if (permValues.length != permDescriptions.length) throw new RuntimeException("Não foi inserido um dos valores esperados!");
 
         Collection<Part> fileParts = request.getParts();
 

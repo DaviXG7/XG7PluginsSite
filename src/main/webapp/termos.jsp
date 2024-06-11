@@ -96,7 +96,7 @@
             <li>Última atualização - 09/06/2024</li>
         </ul>
 
-        A XG7Plugins tem regras
+        Incompleto, iremos fazer ainda. Portanto, não use algum serviço nosso ou entre e contato no discord
     </div>
 
 

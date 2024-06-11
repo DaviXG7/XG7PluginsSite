@@ -100,9 +100,9 @@
                 <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
             </svg>
         </button>
-        <div class="pesquisa bg-white rounded">
+        <div class="pesquisa bg-white rounded d-flex">
             <a class="btn"><i class="bi bi-search"></i></a>
-            <input class="form-control" id="pesquisar" type="search" placeholder="Buscar plugin..." aria-label="Search">
+            <input style="height: 50px" class="form-control" id="pesquisar" type="search" placeholder="Buscar cliente..." aria-label="Search">
         </div>
         <div class="h-botoes">
             <%
@@ -165,7 +165,7 @@
                         <td><%=item.getPermission()%></td>
                         <td>
                             <a href="../user/user.jsp?uuid=<%=item.getId().toString()%>" class="<%=model.getPermission() < item.getPermission() || model.getPermission() == 3 ? "disabled" : ""%> btn btn-primary">Editar</a>
-                            <button class="<%=model.getPermission() < item.getPermission() || model.getPermission() == 3 ? "disabled" : ""%> btn btn-danger" onclick="abrirCerteza('/excluirusuario?uuid=<%=item.getId()%>')">Excluir</button>
+                            <button class="<%=model.getPermission() < item.getPermission() || model.getPermission() == 3 ? "disabled" : ""%> btn btn-danger" onclick="abrirCerteza('/home/admin/excluirusuario?uuid=<%=item.getId()%>')">Excluir</button>
                         </td>
 
                     </tr>

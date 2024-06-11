@@ -61,7 +61,7 @@ public class PluginUpdateServlet extends HttpServlet {
 
             if (commandValues.length == 0 || commandDescriptions.length == 0 ||
                     permDescriptions.length == 0 || permValues.length == 0 || resources.isEmpty())
-                throw new RuntimeException();
+                throw new RuntimeException("Não foi inserido um dos valores esperados!");
 
             Collection<Part> fileParts = request.getParts();
 

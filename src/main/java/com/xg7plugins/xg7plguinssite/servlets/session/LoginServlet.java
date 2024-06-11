@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
         String senha = request.getParameter("senha");
 
         //Vê se algo ta errado e faz o modelo caso contrário
-        if (email == null || email.isEmpty() || senha == null || senha.isEmpty()) throw new RuntimeException();
+        if (email == null || email.isEmpty() || senha == null || senha.isEmpty()) throw new RuntimeException("Não foi inserido um dos valores esperados!");
 
 
         UserModel model;

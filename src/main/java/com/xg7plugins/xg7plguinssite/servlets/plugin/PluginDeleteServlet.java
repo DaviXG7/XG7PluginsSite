@@ -28,7 +28,7 @@ public class PluginDeleteServlet extends HttpServlet {
         }
 
 
-        if (user.getPermission() == 4 && user.getPermission() <= 2) throw new RuntimeException();
+        if (user.getPermission() == 4 || user.getPermission() <= 2) throw new RuntimeException("Você não tem permissão para fazer isso");
 
             try {
             DBManager.deletePlugin(plugin);
