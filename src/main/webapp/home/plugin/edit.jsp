@@ -4,6 +4,7 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="com.xg7plugins.xg7plguinssite.utils.Pair" %>
 <%@ page import="com.xg7plugins.xg7plguinssite.models.extras.Imagem" %>
+<%@ page import="com.xg7plugins.xg7plguinssite.models.extras.Categoria" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true" %>
 
 <!DOCTYPE html>
@@ -166,9 +167,13 @@
                         <label for="categoria">Categoria*</label>
                         <select class="form-select" id="categoria" name="categoria" required>
                             <option value="0">Selecione uma categoria...</option>
-                            <option <%=plugin.getCategory().getIndex() == 1 ? "selected" : ""%> value="1">Gestão</option>
-                            <option <%=plugin.getCategory().getIndex() == 2 ? "selected" : ""%> value="2">Utilidades</option>
-                            <option <%=plugin.getCategory().getIndex() == 3 ? "selected" : ""%> value="3">Minigames</option>
+                            <%
+                                for (Categoria categoria : Categoria.values()) {
+                            %>
+                            <option <%=plugin.getCategory().getIndex() == categoria.getIndex() ? "selected" : ""%> value="<%=categoria.getIndex()%>"><%=categoria.getName()%></option>
+                            <%
+                                }
+                            %>
                         </select>
                     </div>
                     <div class="form-group row">

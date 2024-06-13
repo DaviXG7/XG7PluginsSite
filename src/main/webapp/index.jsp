@@ -238,13 +238,10 @@
 
     <div class="banner d-flex justify-content-center container">
                     <p style="font-size: 25px; color: white; padding: 50px">
-                        Deixe seu servidor mais profissional com os melhores plugins do Brasil!
+                        Deixe o seu servidor mais profissional com os melhores plugins do Brasil!
                     </p>
                     <a href="#plugins" class="m-3 btn btn-outline-light">
                         Conheça agora os melhores plugins!
-                    </a>
-                    <a href="" class="m-3 btn btn-outline-light" >
-                        Quem somos?
                     </a>
     </div>
 

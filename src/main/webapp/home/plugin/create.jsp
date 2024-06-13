@@ -1,4 +1,5 @@
 <%@ page import="com.xg7plugins.xg7plguinssite.models.UserModel" %>
+<%@ page import="com.xg7plugins.xg7plguinssite.models.extras.Categoria" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true" %>
 
 <!DOCTYPE html>
@@ -168,9 +169,13 @@
                                     <label for="categoria">Categoria*</label>
                                     <select class="form-select" id="categoria" name="categoria" required>
                                         <option value="0">Selecione uma categoria...</option>
-                                        <option value="1">Gestão</option>
-                                        <option value="2">Utilidades</option>
-                                        <option value="3">Minigames</option>
+                                        <%
+                                            for (Categoria categoria : Categoria.values()) {
+                                        %>
+                                        <option value="<%=categoria.getIndex()%>"><%=categoria.getName()%></option>
+                                        <%
+                                            }
+                                        %>
                                     </select>
                                 </div>
                                 <div class="form-group row">

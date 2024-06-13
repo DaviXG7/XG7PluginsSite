@@ -95,7 +95,7 @@ public class DBManager {
                 resultSet.getInt("perm"));
     }
     public static void addUser(UserModel session) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO users(name,id,email,senha,perm,avatarimg) VALUES (?,?,?,?,?,?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO users(name,id,email,senha,perm,avatarimg) VALUES (?,?,?,?,?,?)");
         preparedStatement.setString(1, session.getNome());
         preparedStatement.setString(2, session.getId().toString());
         preparedStatement.setString(3, session.getEmail());
@@ -120,10 +120,6 @@ public class DBManager {
 
         return users;
 
-    }
-
-    public static ResultSet executeQuery(String sql) throws SQLException {
-        return connection.prepareStatement(sql).executeQuery();
     }
 
     public static void deleteUser(UUID id) throws SQLException {
@@ -353,8 +349,5 @@ public class DBManager {
         PreparedStatement deletepl = connection.prepareStatement("DELETE FROM plugins WHERE name = ?");
         deletepl.setString(1, model.getName());
         deletepl.executeUpdate();
-
     }
-
-
 }

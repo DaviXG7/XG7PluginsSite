@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 public enum Categoria {
 
-    ADMIN(4, "Administração"),
+    GESTAO(4, "Gestão"),
     DEPENDENCIAS(3, "Dependencias"),
     MINIGAMES(2, "Minigames"),
     UTILS(1, "Utilidades");
