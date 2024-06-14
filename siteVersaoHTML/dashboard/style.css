@@ -1,0 +1,67 @@
+/*FONT FACE INICIO*/
+@font-face {
+    font-family: 'MOON GEAT';
+        src: url(.//fonts/moon_get-Heavy.otf) format("opentype");
+}
+@font-face{
+    font-family: 'Modern';
+        src: url(./fonts/Modern\ Age.otf) format("opentype");
+}
+/* FONT FACE FINAL */
+/*ESTILO GERAL*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: black;
+    height: 100vh;
+}
+.interface{
+    max-width: 1280px;
+    margin: 0 auto;
+}
+/* LOGO INICIO */
+#logo a{
+    text-decoration: none;
+    font-family: 'Modern', Times, serif;
+    color: white;
+    font-size: 25px;
+}
+/* LOGO FINAL */
+/* ESTILO CABEÇALHO */
+header{
+    padding: 40px 4%;
+
+}
+header > .interface{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+header nav a{
+    font-family: 'MOON GEAT', Times, serif;
+    color: rgb(0, 153, 255);
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 20px;
+    padding: 3px 40px;
+}
+header li a{
+    color:brown
+}
+#suporte a{
+    font-family: 'MOON GEAT', Times, serif;
+    color: green;
+    border-radius: 20px;
+    padding: 4px 15px;
+    text-decoration: none;
+}
+#suporte a:hover{
+    background-color: rgb(82, 153, 82);
+}
+header nav a:hover{
+    background-color: rgb(24, 23, 23);
+}
+/* ESTILO CABEÇALHO FINAL */
