@@ -161,7 +161,7 @@
             </div>
         </div>
     </div>
-<nav>
+<nav id="nav-principal">
     <div id="nav-c" class="container d-flex justify-content-between">
         <div class="nav-left d-flex justify-content-left align-items-center">
             <a class="navbar-brand" href=""><img src="imgs/logo.png" width="100px" alt=""></a>
@@ -234,7 +234,7 @@
 </menu>
 
 
-<main style="padding: 15px;">
+<main>
 
     <div class="banner d-flex justify-content-center container">
                     <p style="font-size: 25px; color: white; padding: 50px">

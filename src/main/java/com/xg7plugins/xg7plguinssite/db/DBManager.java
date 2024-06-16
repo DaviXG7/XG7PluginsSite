@@ -26,7 +26,7 @@ public class DBManager {
     public static void init() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/xg7plugins", "root", ""
+                "jdbc:mysql://localhost:3306/xg7plugins", "root", "root"
         );
         connection.setAutoCommit(true);
     }

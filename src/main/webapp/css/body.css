@@ -3,7 +3,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-nav, menu {
+#nav-principal, menu {
     position: fixed;
     background-color: white;
 }
@@ -75,8 +75,7 @@ footer small {
 
 
 main {
-    padding: 120px 15px 15px 15px
-;
+    padding: 120px 15px 15px 15px;
     width: 100%;
 
 }

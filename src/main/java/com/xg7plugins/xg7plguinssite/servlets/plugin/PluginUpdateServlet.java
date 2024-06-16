@@ -12,12 +12,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javax.imageio.ImageIO;
+import javax.net.ssl.HttpsURLConnection;
 import javax.sql.rowset.serial.SerialBlob;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -55,6 +59,46 @@ public class PluginUpdateServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        new Thread(() -> {
+
+            //Manda a atualização para o discord
+
+            JSONObject embed = new JSONObject();
+            embed.put("title", plName);
+            embed.put("color", 0x00FFFF); // Cor no formato decimal (ex: 0xFF0000 para vermelho)
+
+            // Adiciona campos ao embed
+            JSONArray fields = new JSONArray();
+            JSONObject field1 = new JSONObject();
+            field1.put("name", "Versão atual");
+            field1.put("value", changelog.getPluginVersion());
+            field1.put("inline", false);
+            fields.put(field1);
+
+            JSONObject field2 = new JSONObject();
+            field2.put("name", "Novidades");
+            field2.put("value", changelog.getChangelogText());
+            field2.put("inline", false);
+            fields.put(field2);
+
+            embed.put("fields", fields);
+
+            embed.put("footer", new JSONObject().put("text", "Para mais informações acesse https://xg7plguins.com"));
+
+            // Adiciona o embed ao payload
+            JSONObject payload = new JSONObject();
+            payload.put("content", "# NOVA ATUALIZAÇÃO do plugin " + plName + " \n @everyone");
+            payload.put("embeds", new JSONArray().put(embed));
+
+            // Envia o payload ao webhook
+            try {
+                sendWebhook(payload);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+
 
         //Edita caso a pessoa escolha a opção para editar
         //Ele pega as informações do site e edita o plugin
@@ -158,5 +202,29 @@ public class PluginUpdateServlet extends HttpServlet {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * Manda a atualização para o discord
+     *
+     * @param payload o json do embed
+     * @throws Exception Se ocorrer algum erro ao enviar
+     */
+
+    private static void sendWebhook(JSONObject payload) throws Exception {
+        URL url = new URL("https://discord.com/api/webhooks/1251771970073395313/qD4y20xe__UFlPenzSFk-0TUS0HnIj67mMf5_BDQ-MIysMO_Vac2HCyWAFz-Whv3cz0L");
+        HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+        connection.addRequestProperty("Content-Type", "application/json");
+        connection.addRequestProperty("User-Agent", "Java-DiscordWebhook-BY-Gelox_");
+        connection.setDoOutput(true);
+        connection.setRequestMethod("POST");
+
+        OutputStream stream = connection.getOutputStream();
+        stream.write(payload.toString().getBytes());
+        stream.flush();
+        stream.close();
+
+        connection.getInputStream().close();
+        connection.disconnect();
     }
 }

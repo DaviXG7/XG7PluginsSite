@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
+import java.util.UUID;
 
 //Baixa o plugin ou a config dele
 
@@ -61,7 +62,8 @@ public class PluginDownloadServlet extends HttpServlet {
                     //Baixa o plugin e adiciona o download no banco de dados
                     PluginModel model = DBManager.getPlugin(pluginName);
 
-                    if (user != null || !request.getHeader("Referer").startsWith("localhost")) model.addDownload(user.getId());
+                    //Se vier de um site externo ele adiciona o dowload também
+                    if (user != null || !request.getHeader("Referer").startsWith("http://localhost:8080")) model.addDownload(user != null ? user.getId() : UUID.randomUUID());
 
                     if (model.getPrice() != 0) throw new RuntimeException();
 
