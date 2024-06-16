@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+//Login no site
 @WebServlet(name = "login", value = "/login")
 public class LoginServlet extends HttpServlet {
 
@@ -31,6 +32,7 @@ public class LoginServlet extends HttpServlet {
         UserModel model;
 
         try {
+            //Verifica se existe
             if (!DBManager.exists(email)) {
                 request.setAttribute("erromsg", "Este usuário não existe!");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
@@ -46,6 +48,7 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
+        //Coloca o usuário na sessão do navegador
         //Manda o usuário para a página do dashboard
         request.getSession().setAttribute("user", model);
         response.sendRedirect("home/dashboard.jsp");

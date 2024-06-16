@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
+//Modelo do plugin
 @Getter
 @Setter
 @AllArgsConstructor
@@ -38,6 +39,11 @@ public class PluginModel {
     private List<UUID> downloads;
     private double price;
 
+    /**
+     * Adiciona um download ao plugin
+     *
+     * @param id id do usuário que baixou
+     */
     public void addDownload(UUID id) {
             if (!downloads.contains(id)) {
                 downloads.add(id);

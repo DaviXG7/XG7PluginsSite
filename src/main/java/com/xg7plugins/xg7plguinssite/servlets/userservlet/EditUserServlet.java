@@ -11,6 +11,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+//Edita as informações do usuário
+
 @WebServlet(name = "editarusuario", urlPatterns = "/home/user/editarusuario")
 public class EditUserServlet extends HttpServlet {
 
@@ -34,8 +36,6 @@ public class EditUserServlet extends HttpServlet {
         String novaSenha = request.getParameter("novaSenha");
         novaSenha = novaSenha == null || novaSenha.equals("undefined") ? "" : novaSenha;
         novoNome = novoNome.equals("undefined") ? "" : novoNome;
-
-        System.out.println(novaSenha);
 
         //Verifica se não há erros
         if (userRequest.getPermission() < 5) {
@@ -63,6 +63,7 @@ public class EditUserServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
+        //Redireciona para o site
         response.sendRedirect("/home/user/user.jsp?uuid=" + userEdit.getId());
 
 

@@ -19,6 +19,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.UUID;
 
+//Faz o cadastro do usuário
 @WebServlet(name = "cadastro", value = "/cadastro")
 public class RegisterServlet extends HttpServlet {
 

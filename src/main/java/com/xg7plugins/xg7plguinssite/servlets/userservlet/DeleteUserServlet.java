@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+//Deleta o usuário do site
 @WebServlet(name = "excluirusuario", value = "/home/admin/excluirusuario")
 
 public class DeleteUserServlet extends HttpServlet {
@@ -26,10 +27,12 @@ public class DeleteUserServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        //O usuário precisa das suas permissões
         if (targetUser == null) throw new RuntimeException();
         if (!user.getId().equals(targetUser.getId()) && (user.getPermission() < 5 || targetUser.getPermission() >= 5)) throw new RuntimeException("Você não tem permissão para executar isto!");
 
         try {
+            //Deleta do banco de dados
             DBManager.deleteUser(targetUser.getId());
         } catch (SQLException e) {
             throw new RuntimeException(e);

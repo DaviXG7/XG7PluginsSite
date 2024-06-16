@@ -12,6 +12,8 @@ import javax.mail.internet.MimeMultipart;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 
+//A parte de email ainda não foi implementada ao site!
+
 public class Message {
 
     private String assunto;

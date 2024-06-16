@@ -17,22 +17,36 @@ public class DBManager {
     @Getter
     private static Connection connection;
 
-    //Iniciar Database
+    /**
+     * Conecta ao banco de dados
+     *
+     * @throws SQLException Se ocorrer algum erro no sql
+     * @throws ClassNotFoundException Se não achar o Driver do sql
+     */
     public static void init() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/xg7plugins","root",""
+                "jdbc:mysql://localhost:3306/xg7plugins", "root", ""
         );
         connection.setAutoCommit(true);
     }
 
-    //Desconectar database
+    /**
+     * Desonecta do banco de dados
+     *
+     * @throws SQLException Se ocorrer algum erro no sql
+     */
     public static void discconect() throws SQLException {
         connection.close();
         connection = null;
     }
 
-    //Verificar se o usuário existe
+    /**
+     * Verifica se o usuário existe
+     *
+     * @param email o email para verificar se o usuário existe
+     * @throws SQLException Se ocorrer algum erro no sql
+     */
     public static boolean exists(String email) throws SQLException {
         PreparedStatement ps = connection.prepareStatement("SELECT * FROM users WHERE email = ?");
         ps.setString(1, email);
@@ -41,6 +55,13 @@ public class DBManager {
     }
 
     //Usuários
+
+    /**
+     * Atualiza a imagem do usuário
+     *
+     * @param user Usuário a ser editado
+     * @throws  SQLException Se ocorrer algum erro no sql
+     */
     public static void updateUserImage(UserModel user) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("UPDATE users SET avatarimg = ? WHERE id = ?");
         statement.setBlob(1, user.getAvatarImg());
@@ -48,6 +69,13 @@ public class DBManager {
         statement.executeUpdate();
 
     }
+
+    /**
+     * Atualiza a permissão do usuário
+     *
+     * @param userModel Usuário a ser editado
+     * @throws  SQLException Se ocorrer algum erro no sql
+     */
     public static void updateUserPermission(UserModel userModel) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("UPDATE users SET perm = ? WHERE id = ?");
         statement.setInt(1, userModel.getPermission());
@@ -55,6 +83,12 @@ public class DBManager {
         statement.executeUpdate();
     }
 
+    /**
+     * Atualiza o usuário
+     *
+     * @param user Usuário a ser editado
+     * @throws  SQLException Se ocorrer algum erro no sql
+     */
     public static void updateUser(UserModel user) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("UPDATE users SET name = ?, senha = ? WHERE id = ?");
         statement.setString(1, user.getNome());
@@ -63,6 +97,13 @@ public class DBManager {
         statement.executeUpdate();
     }
 
+    /**
+     * Pega um usuário pelo email e senha
+     *
+     * @param email email do usuário
+     * @param senha senha do usuário
+     * @throws SQLException Se ocorrer algum erro no sql
+     */
     public static UserModel getUser(String email, String senha) throws SQLException {
 
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE email = ? AND senha = ?");
@@ -70,6 +111,7 @@ public class DBManager {
         preparedStatement.setString(1, email);
         ResultSet resultSet = preparedStatement.executeQuery();
 
+        //Significa que nenhum usuário foi achado
         if (!resultSet.next()) {
             return null;
         }
@@ -80,10 +122,19 @@ public class DBManager {
                 resultSet.getString("senha"),
                 resultSet.getInt("perm"));
     }
+
+    /**
+     * Pega um usuário pelo id
+     *
+     * @param id id do usuário
+     * @throws SQLException Se ocorrer algum erro no sql
+     */
     public static UserModel getUserById(String id) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
         preparedStatement.setString(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
+
+        //Significa que nenhum usuário foi achado
         if (!resultSet.next()) {
             return null;
         }
@@ -94,6 +145,13 @@ public class DBManager {
                 resultSet.getString("senha"),
                 resultSet.getInt("perm"));
     }
+
+    /**
+     * Adiciona o usuário ao banco de dados
+     *
+     * @param session modelo do usuário a ser adicionado
+     * @throws SQLException Se ocorrer algum erro no sql
+     */
     public static void addUser(UserModel session) throws SQLException {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO users(name,id,email,senha,perm,avatarimg) VALUES (?,?,?,?,?,?)");
         preparedStatement.setString(1, session.getNome());
@@ -104,6 +162,12 @@ public class DBManager {
         preparedStatement.setBlob(6, session.getAvatarImg());
         preparedStatement.executeUpdate();
     }
+
+    /**
+     * Pega todos os usuários no banco de dados
+     *
+     * @throws SQLException Se ocorrer algum erro no sql
+     */
     public static List<UserModel> allUsers() throws SQLException {
         List<UserModel> users = new ArrayList<>();
         ResultSet set = connection.prepareStatement("SELECT * FROM users").executeQuery();
@@ -122,14 +186,28 @@ public class DBManager {
 
     }
 
+    /**
+     * Deleta o usuário do banco de dados
+     *
+     * @param id id do usuário a ser removido
+     * @throws SQLException Se ocorrer algum erro no sql
+     */
     public static void deleteUser(UUID id) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM users WHERE id = ?");
         preparedStatement.setString(1, id.toString());
         preparedStatement.executeUpdate();
     }
 
-    //Add a plugin
+    //Plugins
+
+    /**
+     * Adiciona um plugin ao banco de dados
+     *
+     * @param model modelo do plugin a ser adicionado
+     * @throws SQLException Se ocorrer algum erro no sql
+     */
     public static void addPlugin(PluginModel model) throws SQLException {
+        //Ele junta as informações de várias tabelas
         PreparedStatement preparedStatementPlugins = connection.prepareStatement("INSERT INTO plugins(name,category,version,description,video,plugin,compatibilyVersion,price,resourses,github,dependencies,config) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
         PreparedStatement preparedStatementCommands = connection.prepareStatement("INSERT INTO plugincommands(pluginname,command,description) VALUES (?,?,?)");
         PreparedStatement preparedStatementPerms = connection.prepareStatement("INSERT INTO pluginperms(pluginname,perm,description) VALUES (?,?,?)");
@@ -178,6 +256,12 @@ public class DBManager {
         }
 
     }
+
+    /**
+     * Pega todos os plugins
+     *
+     * @throws SQLException Se ocorrer algum erro no sql
+     */
     public static List<PluginModel> getAllPlugins() throws SQLException {
         ResultSet set = connection.prepareStatement("SELECT name FROM plugins").executeQuery();
         List<PluginModel> models = new ArrayList<>();
@@ -186,6 +270,13 @@ public class DBManager {
         return models;
     }
 
+    /**
+     * Atualiza um plugin e posta no banco de dados
+     *
+     * @param name Nome do plugin
+     * @param log Atualização feita no plugin
+     * @throws SQLException Se ocorrer algum erro no sql
+     */
     public static void postUpdate(String name, Changelog log) throws SQLException {
 
         PreparedStatement statement = connection.prepareStatement("INSERT INTO pluginchangelog(changedate,changelog,pluginversion,pluginname) VALUES(?,?,?,?)");
@@ -201,6 +292,13 @@ public class DBManager {
         statement2.executeUpdate();
 
     }
+    /**
+     * Edita um plugin
+     *
+     * @param model Modelo do plugin que tem as informações novas para colocar ao banco de dados
+     * @param name Nome do plugin a ser editado
+     * @throws SQLException Se ocorrer algum erro no sql
+     */
     public static void editPlugin(String name, PluginModel model) throws SQLException {
 
         PreparedStatement deletecmd = connection.prepareStatement("DELETE FROM plugincommands WHERE pluginname = ?");
@@ -265,6 +363,12 @@ public class DBManager {
         }
     }
 
+    /**
+     * Pega o modelo de um plugin
+     *
+     * @param pluginName Nome do plugin para pegar
+     * @throws SQLException Se ocorrer algum erro no sql
+     */
     public static PluginModel getPlugin(String pluginName) throws SQLException {
         PreparedStatement ps = connection.prepareStatement("SELECT * FROM plugins WHERE name = ?");
         ps.setString(1, pluginName);
@@ -325,6 +429,12 @@ public class DBManager {
         );
     }
 
+    /**
+     * Deleta um plugin do banco de dados
+     *
+     * @param model Plugin a ser deletado
+     * @throws SQLException Se ocorrer algum erro no sql
+     */
     public static void deletePlugin(PluginModel model) throws SQLException {
         PreparedStatement deletecmd = connection.prepareStatement("DELETE FROM plugincommands WHERE pluginname = ?");
         deletecmd.setString(1, model.getName());

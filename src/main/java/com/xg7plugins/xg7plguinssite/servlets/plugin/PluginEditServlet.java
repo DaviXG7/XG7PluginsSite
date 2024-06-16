@@ -64,6 +64,8 @@ public class PluginEditServlet extends HttpServlet {
         if (commandValues.length != commandDescriptions.length) throw new RuntimeException("Não foi inserido um dos valores esperados!");
         if (permValues.length != permDescriptions.length) throw new RuntimeException("Não foi inserido um dos valores esperados!");
 
+
+        //Pega as imagens do site
         Collection<Part> fileParts = request.getParts();
 
         List<Imagem> imagens = new ArrayList<>();
@@ -110,6 +112,7 @@ public class PluginEditServlet extends HttpServlet {
             perms.add(stringStringPair);
         }
 
+        //Edita o plugin e bota no banco de dados
         try {
             PluginModel model = DBManager.getPlugin(plName);
             if (model == null) throw new RuntimeException();
@@ -134,12 +137,18 @@ public class PluginEditServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-
+        //Redireciona a pessoa para o site
         response.sendRedirect("/home/admin/plugins.jsp");
 
 
     }
 
+    /**
+     * Verifica se a Part é uma imagem
+     *
+     * @param part A Part da imagem
+     * @return se é uma imagem ou não
+     */
     private boolean isImage(Part part) {
         try (InputStream input = part.getInputStream()) {
             BufferedImage image = ImageIO.read(input);

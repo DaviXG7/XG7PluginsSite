@@ -23,7 +23,8 @@ import java.io.InputStream;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.*;
-import java.sql.Date;
+
+//Cria o plugin
 
 @WebServlet(name = "criarplugin", value = "/home/plugin/criarplugin")
 @MultipartConfig
@@ -72,6 +73,8 @@ public class PluginCreateServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
+        //Junta todas as informações para colocar no construtor
+
         Collection<Part> fileParts = request.getParts();
 
         List<Imagem> imagens = new ArrayList<>();
@@ -113,6 +116,7 @@ public class PluginCreateServlet extends HttpServlet {
 
         PluginModel model = null;
         try {
+            //Constrói o plugin
             model = new PluginModel(
                     name,
                     Categoria.fromValue(Integer.parseInt(categoria)),
@@ -127,7 +131,7 @@ public class PluginCreateServlet extends HttpServlet {
                     perms,
                     imagens,
                     new SerialBlob(plugin.getInputStream().readAllBytes()),
-                    configs.getSubmittedFileName().equals("") ? null : new SerialBlob(configs.getInputStream().readAllBytes()),
+                    configs.getSubmittedFileName().isEmpty() ? null : new SerialBlob(configs.getInputStream().readAllBytes()),
                     Collections.singletonList(log),
                     new ArrayList<>(),
                     preco
@@ -136,17 +140,25 @@ public class PluginCreateServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
+        //Adiciona ao banco de dados
         try {
             DBManager.addPlugin(model);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
+        //Redireciona para a página de plugins
         response.sendRedirect("/home/admin/plugins.jsp");
 
 
     }
 
+    /**
+     * Verifica se a Part é uma imagem
+     *
+     * @param part A Part da imagem
+     * @return se é uma imagem ou não
+     */
     private boolean isImage(Part part) {
         try (InputStream input = part.getInputStream()) {
             BufferedImage image = ImageIO.read(input);

@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 
+//Edita a imagem do usuário
+
 @MultipartConfig
 @WebServlet(name = "editarimagem", urlPatterns = "/home/user/editarimagem")
 public class EditUserImageServlet extends HttpServlet {
@@ -57,6 +59,12 @@ public class EditUserImageServlet extends HttpServlet {
         response.sendRedirect("/home/user/user.jsp?uuid=" + userEdit.getId());
     }
 
+    /**
+     * Verifica se a Part é uma imagem
+     *
+     * @param part A Part da imagem
+     * @return se é uma imagem ou não
+     */
     private boolean isImage(Part part) {
         try (InputStream input = part.getInputStream()) {
             BufferedImage image = ImageIO.read(input);

@@ -49,7 +49,7 @@
         <br>
         <div class="form-check">
             <input type="checkbox" class="form-check-input" id="termos" name="termos" required>
-            <label style="font-size: 12px" class="form-check-label" for="termos">Ao continuar você concorda com os <a href=""> Termos e condições</a></label>
+            <label style="font-size: 12px" class="form-check-label" for="termos">Ao continuar você concorda com os <a href=""> Termos e política de privacidade</a></label>
         </div>
         <br>
         <button id="cadsubmit" type="submit" class="btn btn-primary w-100 disabled">Criar conta</button>

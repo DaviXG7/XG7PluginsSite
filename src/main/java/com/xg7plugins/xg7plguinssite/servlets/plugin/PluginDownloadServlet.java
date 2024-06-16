@@ -14,10 +14,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
 
+//Baixa o plugin ou a config dele
+
 @WebServlet(name = "download", value = "/download")
 public class PluginDownloadServlet extends HttpServlet {
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         UserModel user = (UserModel) request.getSession().getAttribute("user");
 
@@ -56,9 +58,10 @@ public class PluginDownloadServlet extends HttpServlet {
             }
             case "plugin" -> {
                 try {
+                    //Baixa o plugin e adiciona o download no banco de dados
                     PluginModel model = DBManager.getPlugin(pluginName);
 
-                    if (user != null) model.addDownload(user.getId());
+                    if (user != null || !request.getHeader("Referer").startsWith("localhost")) model.addDownload(user.getId());
 
                     if (model.getPrice() != 0) throw new RuntimeException();
 
@@ -79,6 +82,8 @@ public class PluginDownloadServlet extends HttpServlet {
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
+
+                return;
 
             }
         }

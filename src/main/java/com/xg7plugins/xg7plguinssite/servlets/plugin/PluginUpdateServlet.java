@@ -25,12 +25,16 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
+//Atualiza um plugin
+
 @MultipartConfig
 @WebServlet(name = "atualizarpl", value = "/home/plugin/atualizarpl")
 public class PluginUpdateServlet extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        //Pega as insformações do site
 
         String plName = request.getParameter("plugin");
         if (plName.isEmpty()) throw new RuntimeException();
@@ -41,13 +45,19 @@ public class PluginUpdateServlet extends HttpServlet {
 
         if (log == null || log.isEmpty() || newVersion == null || newVersion.isEmpty()) throw new RuntimeException();
 
+        //Faz uma atualização
+
         Changelog changelog = new Changelog(new Timestamp(System.currentTimeMillis()), newVersion, log);
 
         try {
+            //Posta a atualização
             DBManager.postUpdate(plName, changelog);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        //Edita caso a pessoa escolha a opção para editar
+        //Ele pega as informações do site e edita o plugin
 
         if (request.getParameter("editar") != null && request.getParameter("editar").equals("on")) {
 
@@ -128,11 +138,18 @@ public class PluginUpdateServlet extends HttpServlet {
             }
         }
 
+        //Redireciona a pessoa para o site
         response.sendRedirect("/home/admin/plugins.jsp");
 
 
     }
 
+    /**
+     * Verifica se a Part é uma imagem
+     *
+     * @param part A Part da imagem
+     * @return se é uma imagem ou não
+     */
     private boolean isImage(Part part) {
         try (InputStream input = part.getInputStream()) {
             BufferedImage image = ImageIO.read(input);

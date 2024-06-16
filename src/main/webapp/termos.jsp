@@ -90,13 +90,102 @@
 
 <main style="padding: 15px; display: flex; align-items: center; justify-content: center">
     <div class="w-75" style="background-color: #eaeaea; padding: 15px; border-radius: 20px">
-        <h1><strong>Termos de Serviço da XG7Plugins!</strong></h1>
+        <h1><strong>Termos de Serviço e política de privacidade da XG7Plugins!</strong></h1>
 
         <ul>
-            <li>Última atualização - 09/06/2024</li>
+            <li>Última atualização - 15/06/2024</li>
         </ul>
 
-        Incompleto, iremos fazer ainda. Portanto, não use algum serviço nosso ou entre e contato no discord
+        <strong>
+            Esse site se encontra em desenvolvimento, os termos não estão teminados ainda!
+        </strong>
+        <br><br>
+
+        Esses termos são necessários manter a originalidade dos plugins e a segurança do usuário. Com os termos concordados e aceitados, você terá acesso a se cadastrar no site e futuramente acesso a fóruns e outros.
+        <br><br>
+        Nós da XG7Plugins precisamos que as nossas regras sejam seguidas.
+
+        <br><br>
+        Caso haja alguma dúvida, entre em contato com <a href="xg7mails@gmail.com">xg7mails@gmail.com</a>
+
+        <h2><strong>1. Acordo com a XG7PPlugins</strong></h2>
+        <strong>1.1</strong> Para usar os Serviços da XG7Plugins, primeiro você deve concordar com os Termos.
+        Você pode concordar com os Termos usando efetivamente os Serviços da XG7Plugins.
+        Você entende e concorda que a XG7Plugins considerará o uso dos Serviços da XG7Plugins como
+        uma aceitação dos Termos a partir desse ponto em diante.
+        <br><br>
+
+        <strong>1.2</strong> Você não poderá usar os Serviços da XG7Plugins se você for uma pessoa impedida de receber os Serviços da XG7Plugins
+        sob as leis de qualquer país, incluindo o país onde o usuário é residente ou a partir do qual usa os Serviços da XG7Plugins.
+
+        <br><br>
+        <strong>1.3</strong> Para usar os Serviços da XG7Plugins você precisa seguir, aceitar e concordar com nossas Políticas de uso, caso contrario está impedido de usar o serviço.
+
+        <br><br>
+        <h2><strong>2. Uso de dados</strong></h2>
+        A XG7Plugins usa os dados coletados para vários fins:
+        <br><br>
+        Para fornecer e manter o nosso Serviço;
+        <br>
+        Para fornecer a você avisos sobre a sua conta via email;
+        <br>
+        Para fornecer suporte ao cliente;
+        <br>
+        Para monitorar o uso do nosso Serviço;
+        <br>
+        Para dados estatísticos sobre os nossos plugins;
+        <br>
+        Para qualquer outra finalidade com o seu consentimento.
+        <br><br>
+        <h2><strong>3. Políticas de Serviços e Privacidade</strong></h2>
+        <strong>3.1</strong> Você concorda em cumprir com a Política de Uso, que é aqui incorporada por esta referência e que pode ser atualizada de tempos em tempos.
+        <br><br>
+        <strong>3.2</strong> Os Serviços da XG7Pluigns estarão sujeitos à política de privacidade e você concorda com a utilização de seus dados de acordo com as Políticas de Privacidade da XG7Pluigns, que é aqui incorporada por esta referência e que pode ser atualizada de tempos em tempos.
+        <br><br>
+        <strong>3.3</strong> Você concorda que irá proteger a privacidade e os direitos legais dos usuários finais de sua aplicação (“Usuários finais”). Você deve fornecer aviso de privacidade legalmente adequado e proteção para usuários finais. Se os usuários finais lhe fornecerem os nomes de usuário, senhas ou outras informações de login ou informações pessoais, você deve tornar os usuários cientes de que a informação estará disponível para sua aplicação e consequentemente para XG7Pluigns.
+        <br><br>
+        <h2><strong>4. Licença da XG7Pluigns e Restrições</strong></h2>
+        <strong>4.1</strong> XG7Pluigns dá-lhe uma licença pessoal, não atribuível e não exclusiva para utilizar o plugin fornecido. Esta licença tem como único objetivo permitir-lhe usar e gozar os benefícios dos Serviços da XG7Plugins, como previsto nos Termos.
+        <br><br>
+        <strong>4.2</strong> Você não pode (e não pode permitir a mais ninguém): (a) copiar, modificar, criar uma obra derivada de engenharia reversa, decompor ou de outro modo tentar extrair o código-fonte dos Serviços da XG7Plugins ou qualquer parte dele, a menos que que seja expressamente permitido ou exigido por lei, ou a menos que lhe tenha sido especificamente dito que você pode fazê-lo pela XG7Pluigns, por escrito (por exemplo, através de uma fonte aberta licença de plugin); ou (b) tentar desativar ou contornar qualquer mecanismo de segurança usados ​​pelos Serviços da XG7Pluigns.
+        <br><br>
+        <strong>4.3</strong> Licenças de plugin  para componentes dos Serviços da XG7Pluigns. Na medida em que as licenças de plugin expressamente estes Termos, as licenças de código aberto regem o seu contrato com a XG7Plugins para a utilização dos componentes dos Serviços da XG7Plugins.
+        <br><br>
+        <strong>4.4</strong> XG7Pluigns concede a você uma licença limitada, não exclusiva, com o direito de sub-licença, para exibir as marcas XG7Plugins e / ou logotipos, tal como previsto aqui ("Marcas") para o único propósito de promoção ou publicidade que você usar os Serviços da XG7Plugins. Você concorda que todo ágio gerado através de seu uso das Marcas XG7Pluign.
+        <br><br>
+        <strong>4.5</strong> XG7Plugins permite que você faça plugins com a finalidade e recursos parecidos, desde que seja indicado em alguma parte do código que foi inspirado nos nossos plugins.
+        <h2><strong>5. Manutenções</strong></h2>
+        <strong>5.1</strong> As manutenções dos serviços da XG7Plugins serão realizadas sempre que necessário, podendo ocasionar instabilidade e indisponibilidade parcial ou total no site. Toda manutenção nos serviços da XG7Plugins, será previamente comunicada através do nosso discord.
+        <br><br>
+        <h2><strong>6. Limitação de Responsabilidade</strong></h2>
+        <strong>6.1</strong> ACIMA, O USUÁRIO ENTENDE E CONCORDA QUE A XG7PLUGINS NÃO SERA RESPONSÁVEL POR QUALQUER DANO DIRETO, INDIRETO, ACIDENTAL, OU CONSEQUÊNCIA DE DANOS ESPECIAIS QUE POSSAM SER SOFRIDOS POR VOCÊ, NO ENTANTO CAUSADOS E SOB QUALQUER TEORIA DE RESPONSABILIDADE. ESTA INFORMAÇÃO DEVE INCLUIR MAS NÃO SE LIMITANDO A, QUALQUER PERDA DE LUCROS (INCORRIDA DIRETA OU INDIRETAMENTE), QUALQUER PERDA DE BOA VONTADE OU REPUTAÇÃO DE NEGÓCIOS, SOFRER PERDA DE DADOS, CUSTOS DE AQUISIÇÃO DE BENS OU SERVIÇOS OU OUTRA PERDA INTANGÍVEL.
+        <br><br>
+        <strong>6.2</strong> AS LIMITAÇÕES DE RESPONSABILIDADE DA XG7PLUGINS PARA VOCÊ NO PARÁGRAFO 10.1 ACIMA, SERÃO APLICÁVEIS OU NÃO CASO A XG7Plugins TENHA SIDO AVISADO DE OU DEVERIA TER CONHECIMENTO DA POSSIBILIDADE DE OCORRÊNCIA DE TAIS PERDAS.
+        <br><br>
+        <h2><strong>7. Indenização</strong></h2>
+        <strong>7.1</strong> Você concorda em isentar e indenizar A XG7Plugins,  diretores, funcionários, fornecedores ou parceiros (coletivamente "XG7Plugins e Parceiros") de e contra qualquer reivindicação de terceiros decorrentes ou de qualquer forma relacionada com (a) a sua violação dos Termos, (b) o uso dos Serviços da XG7Plugins, (c) violação de leis, normas ou regulamentos em conexão com os Serviços da XG7Plugins, ou (d) o seu conteúdo ou a sua aplicação, incluindo qualquer responsabilidade ou despesa proveniente de reclamações, perdas, danos (diretos e consequenciais), ações judiciais, sentenças, despesas processuais e honorários advocatícios, de qualquer tipo e natureza. Em tal caso, XG7Plugins irá fornecer-lhe um aviso por escrito de tal reclamação, processo ou ação.
+        <br><br>
+        <h2><strong>8. Política de Direitos Autorais</strong></h2>
+        <strong>8.1</strong> Você concorda em estabelecer um processo para responder a acusações de supostas infrações. É política da XG7Plugins responder às notificações de qualquer origem ou outras leis de direitos autorais aplicáveis ​​e encerrar as contas de infratores reincidentes. Reservamo-nos o direito de remover conteúdo em sua aplicação ou, se necessário, o próprio aplicativo após o recebimento de uma notificação válida.
+        <br><br>
+        <h2><strong>9. Outros conteúdos</strong></h2>
+        <strong>9.1</strong> O usuário reconhece e concorda que XG7Plugins não é responsável pela disponibilidade de qualquer um desses sites ou recursos externos e não endossa qualquer publicidade, produtos ou outros materiais presentes ou disponíveis em tais bots ou recursos.
+        <br><br>
+        <strong>9.2</strong> O usuário reconhece e concorda que XG7Plugins não se responsabiliza por qualquer perda ou dano em que possa incorrer por você ou seus usuários finais como resultado da disponibilidade de tais sites ou recursos externos, ou como resultado da confiança depositada por você na integridade, precisão ou existência de quaisquer anúncios, produtos ou outros materiais presentes ou disponíveis a partir de tais sites ou recursos.
+        <br><br>
+        <h2><strong>10. Alterações nos Termos</strong></h2>
+        <strong>10.1</strong> XG7Plugins pode fazer alterações nos Termos de tempos em tempos. Se mudarmos os Termos de nenhuma forma substantiva, damos-lhe, pelo menos, sete (7) dias de aviso antes que as alterações entrem em vigor, período de tempo que você pode rejeitar as alterações encerrando sua conta.
+        <br><br>
+        <strong>10.2</strong> Você compreende e concorda que, se utilizar os Serviços da XG7Plugins após a data em que os Termos foram alterados, XG7Plugins tomará o seu uso como uma aceitação dos Termos atualizados.
+        <br><br>
+        <h2><strong>11. Termos jurídicos gerais</strong></h2>
+        <strong>11.1</strong> Os Termos constituem o contrato integral entre você e a XG7Plugins e regulam a utilização dos Serviços da XG7Plugins (excluindo quaisquer serviços que possam eventualmente ser fornecidos com um contrato escrito em separado), e substituem na íntegra quaisquer contratos anteriores entre você e a XG7Plugins em relação aos Serviços da XG7Plugins.
+        <br><br>
+        <strong>11.2</strong> Se XG7Plugins fornece-lhe uma tradução da versão destes Termos, a versão destes Termos no idioma Português irá controlar qualquer conflito.
+        <br><br>
+        <strong>11.3</strong> Você concorda que XG7Plugins pode lhe enviar avisos, incluindo aqueles sobre alterações feitas aos Termos, por e-mail, ou publicações nos Serviços da XG7Plugins. Ao fornecer o seu endereço de e-mail XG7Plugins, você concorda em utilizarmos o endereço de e-mail para enviar-lhe quaisquer avisos exigidos por lei.
+        <br><br>
+        <strong>11.4</strong> Você concorda que se XG7Plugins não exercer ou utilizar qualquer direito legal ou direito reconhecido contido nos Termos (ou ao qual XG7Plugins tem direito nos termos de qualquer lei aplicável), isso não será considerado como uma renúncia formal aos direitos da XG7Plugins e que esses direitos ou recursos ainda estarão disponíveis para XG7Plugins.
     </div>
 
 

@@ -8,6 +8,7 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Base64;
 
+//Imagem do plugin
 @AllArgsConstructor
 @Getter
 @Setter
@@ -16,6 +17,11 @@ public class Imagem {
     private String titulo;
     private String descricao;
 
+    /**
+     * Pega o valor em base64 da imagem
+     *
+     * @return a imagem em base64 para HTML
+     */
     public String getImageData() {
         byte[] imagemBytes = null;
         try {

@@ -11,8 +11,15 @@ import org.json.JSONObject;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 
+//Pega todos os plugin e coloca em um json para ser pego no site
 public class PluginJson {
 
+    /**
+     * Transforma um plugin em um JSON
+     *
+     * @param pluginName O nome do plugin a ser pego
+     * @return O JSON do plugin
+     */
     public static String getPluginJson(String pluginName) {
         PluginModel pluginModel = null;
         try {
@@ -86,6 +93,11 @@ public class PluginJson {
         return json.toString();
     }
 
+    /**
+     * Pega todos os plugins e coloca em formato JSON
+     *
+     * @return Todos os plugin em formato JSON
+     */
     public static String getAllPluginsJSON() {
         JSONArray array = new JSONArray();
 

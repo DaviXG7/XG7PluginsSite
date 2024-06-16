@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+
+//Classe pair para pares Ex.: par<Nome do plugin, Atualização dele>
+
 @Getter
 @Setter
 @AllArgsConstructor

@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.Base64;
 import java.util.UUID;
 
+//Modelo do usuário
 @Getter
 @Setter
 @AllArgsConstructor
@@ -20,6 +21,12 @@ public class UserModel {
     private String email;
     private String senha;
     private int permission;
+
+    /**
+     * Pega a imagem em base64 do usuário
+     *
+     * @return a imagem do usuário em base64 para HTML
+     */
     public String getImageData() {
         if (this.avatarImg == null) return null;
         byte[] imagemBytes = null;

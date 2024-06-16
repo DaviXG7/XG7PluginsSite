@@ -318,7 +318,7 @@
         <a href="https://github.com/DaviXG7"><i class="bi bi-github" style="font-size: 35px; color: black"></i><small>Github</small></a>
         <a href="https://discord.gg/2fACbYbBsf" style="display: flex; flex-direction: column"><i class="bi bi-discord" style="font-size: 35px; color: black"></i><small>Discord</small></a>
         <a href=""><i class="bi bi-book" style="font-size: 35px; color: black"></i><small>API</small></a>
-        <a href=""><i class="bi bi-laptop" style="font-size: 35px; color: black"></i> <small>Termos</small></a>
+        <a href="termos.jsp"><i class="bi bi-laptop" style="font-size: 35px; color: black"></i> <small>Termos</small></a>
     </div>
     <small><a href="easteregg/jogos.html">Easter egg :D</a></small>
     <h6 class="w-100 d-flex align-items-center justify-content-center" style="background-color: rgb(196, 196, 196); height: 3em;">

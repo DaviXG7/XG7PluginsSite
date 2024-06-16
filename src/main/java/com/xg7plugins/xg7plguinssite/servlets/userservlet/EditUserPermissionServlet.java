@@ -11,6 +11,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+//Edita as permissões do usuário
+
 @WebServlet(name = "editarpermissao", urlPatterns = "/home/user/editarpermissao")
 public class EditUserPermissionServlet extends HttpServlet {
 
