@@ -95,14 +95,14 @@
 </div>
 <main class="w-100 h-100">
     <header>
-        <button id="hamburger" class="btn" onclick="toggleMenu('barra-lateral','flex','none')">
+        <button id="hamburger" class="btn" onclick="toggleMenu('barra-lateral','flex')">
             <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
             </svg>
         </button>
-        <div class="pesquisa bg-white rounded d-flex">
+        <div class="pesquisa bg-white rounded d-flex align-items-center">
             <a class="btn"><i class="bi bi-search"></i></a>
-            <input style="height: 50px" class="form-control" id="pesquisar" type="search" placeholder="Buscar cliente..." aria-label="Search">
+            <input style="height: 40px" class="form-control" id="pesquisar" type="search" placeholder="Buscar cliente..." aria-label="Search">
         </div>
         <div class="h-botoes">
             <%
@@ -202,7 +202,7 @@
 </script>
 
 <script src="../../js/menu.js"></script>
-<script src="../../js/dashboard.js"></script>
+<script src="/home/js/dashboard.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../js/confirmar.js"></script>
 

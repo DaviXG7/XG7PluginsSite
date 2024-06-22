@@ -59,6 +59,11 @@ public class EditUserServlet extends HttpServlet {
         //Manda ao banco de dados
         try {
             DBManager.updateUser(userEdit);
+            if (!novaSenha.isEmpty()) {
+                request.getSession().setAttribute("user", null);
+                response.sendRedirect("/");
+                return;
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

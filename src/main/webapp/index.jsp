@@ -11,11 +11,13 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XG7Plugins</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="css/body.css" rel="stylesheet">
     <link href="css/detalhes.css" rel="stylesheet">
+    <link href="css/buttonsair.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="imgs/logo.png" />
     <style>
         .pesquisa {
@@ -236,14 +238,7 @@
 
 <main>
 
-    <div class="banner d-flex justify-content-center container">
-                    <p style="font-size: 25px; color: white; padding: 50px">
-                        Deixe o seu servidor mais profissional com os melhores plugins do Brasil!
-                    </p>
-                    <a href="#plugins" class="m-3 btn btn-outline-light">
-                        Conheça agora os melhores plugins!
-                    </a>
-    </div>
+    <div class="banner d-flex justify-content-center container"></div>
 
     <div class="mt-5">
 

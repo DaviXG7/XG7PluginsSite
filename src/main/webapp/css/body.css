@@ -81,7 +81,7 @@ main {
 }
 
 .banner {
-    background-image: url("../imgs/banner.png");
+    background-image: url("../imgs/banner.jpg");
     width: 85%;
     height: 65vh;
     background-size: cover;
@@ -124,45 +124,6 @@ main {
 .plugin-botoes > * {
     margin: 0 5px 0 5px
 }
-
-@keyframes in {
-            from {
-                bottom: -10%;
-            }
-
-            to {
-                bottom: 15%;
-            }
-
-        }
-
-        @keyframes out {
-            from {
-                bottom: 15%;
-            }
-
-            to {
-                bottom: -10%;
-            }
-
-        }
-
-        .in {
-            animation: in 0.5s;
-        }
-
-        .out {
-            animation: out 0.5s;
-        }
-
-
-        #sair {
-            border-radius: 50px;
-            z-index: 100;
-            bottom: -10%;
-            width: 50px;
-            height: 50px;
-        }
 
 
 
