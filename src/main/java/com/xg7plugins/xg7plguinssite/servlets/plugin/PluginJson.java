@@ -46,7 +46,7 @@ public class PluginJson {
 
         JSONArray recursos = new JSONArray();
         if (pluginModel.getResourses() != null) {
-            for (String recurso : pluginModel.getResourses().split(",")) {
+            for (String recurso : pluginModel.getResourses().split(";;;")) {
                 recursos.put(recurso);
             }
         }

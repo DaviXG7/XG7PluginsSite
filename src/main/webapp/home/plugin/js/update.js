@@ -128,7 +128,7 @@ $("form").submit(function (event) {
             break;
         }
     }
-    if (plselect == null) {
+    if (plselect == null ) {
         event.preventDefault();
         return;
     }

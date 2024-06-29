@@ -14,6 +14,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javax.imageio.ImageIO;
 import javax.sql.rowset.serial.SerialBlob;
@@ -147,11 +149,62 @@ public class PluginCreateServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
+        PluginModel finalModel = model;
+        new Thread(() -> {
+
+            //Manda a atualização para o discord
+
+            JSONObject embed = new JSONObject();
+            embed.put("title", "NOVO PLUGIN " + finalModel.getImages());
+            embed.put("color", 0x00FFFF);
+
+            // Adiciona campos ao embed
+            JSONArray fields = new JSONArray();
+            JSONObject field1 = new JSONObject();
+            field1.put("name", "<:file:1254976723066290188> Descrição");
+            field1.put("value", "<:java:1252027840552108143> " + finalModel.getDescription());
+            field1.put("inline", false);
+            fields.put(field1);
+
+            JSONObject field2 = new JSONObject();
+            field2.put("name", "<a:estrela:1254976686454345770> Recursos");
+            field2.put("value", finalModel.getResourses().replace(";;;", "\n") );
+            field2.put("inline", false);
+            fields.put(field2);
+
+            JSONObject field3 = new JSONObject();
+            field3.put("name", "Links");
+            String a = finalModel.getPrice() == 0 ? "\n[<:8719downloadapps:1252027852573114459> Download](https://xg7plugins.com/download?plugin=" + finalModel.getName() + "&type=plugin)" : "";
+            field3.put("value", "[<:8346github:1252027857228664872> Github](https://github.com/DaviXG7)\n"
+                    + "[\uD83D\uDCAD Saiba mais](https://xg7plugins.com)"
+                    +  a);
+
+            field3.put("inline", false);
+            fields.put(field3);
+
+            embed.put("fields", fields);
+
+            embed.put("footer", new JSONObject().put("text", "XG7Plugins - Todos os direitos reservados"));
+
+            // Adiciona o embed ao payload
+            JSONObject payload = new JSONObject();
+            payload.put("content", "@everyone");
+            payload.put("embeds", new JSONArray().put(embed));
+
+            // Envia o payload ao webhook
+            try {
+                PluginUpdateServlet.sendWebhook(payload);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+
         //Redireciona para a página de plugins
         response.sendRedirect("/home/admin/plugins.jsp");
 
 
     }
+
 
     /**
      * Verifica se a Part é uma imagem

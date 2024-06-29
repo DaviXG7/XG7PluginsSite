@@ -7,8 +7,6 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import java.util.Properties;
 
-//A parte de email ainda não foi implementada ao site!
-
 public class EmailManager {
 
     @Getter
@@ -25,8 +23,8 @@ public class EmailManager {
         properties.put("mail.smtp.port", "465");
         properties.put("mail.smtp.ssl.trust", "*");
 
-        String mail = "xg7msds@gmail.com";
-        String senha = "ibmdasd virw krvr";
+        String mail = "xg7mails@gmail.com";
+        String senha = "";
 
         session = Session.getDefaultInstance(properties,
                 new Authenticator() {
@@ -39,5 +37,6 @@ public class EmailManager {
 
         session.setDebug(true);
     }
+
 
 }

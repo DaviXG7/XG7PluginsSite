@@ -8,6 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Termos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="css/body.css" rel="stylesheet">
@@ -16,13 +17,29 @@
     <%
         UserModel model = (UserModel) request.getSession().getAttribute("user");
     %>
+
+    <style>
+
+        .termos {
+            width: 75%;
+        }
+
+        @media screen and (max-width: 600px) {
+
+            .termos {
+                width: 100%;
+            }
+
+
+        }
+    </style>
 </head>
 
 <body>
 <nav id="nav-principal">
     <div id="nav-c" class="container d-flex justify-content-between">
         <div class="nav-left d-flex justify-content-left align-items-center">
-            <a class="navbar-brand" href=""><img src="imgs/logo.png" width="100px" alt=""></a>
+            <a class="navbar-brand" href="index.jsp"><img src="imgs/logo.png" width="100px" alt=""></a>
 
         </div>
         <div class="nav-right d-flex justify-content-right align-items-center">
@@ -36,6 +53,10 @@
                     <i class="bi bi-discord"></i>
                     Discord
                 </a>
+                <a href="apoie.jsp" class="linkComum  d-md-flex link-underline link-underline-opacity-0" style="color: #646464">
+                    <i class="bi bi-cup-hot"></i>
+                    Apoie
+                </a>
 
                 <button id="hamburger" class="btn" onclick="toggleMenu()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
@@ -45,7 +66,7 @@
 
             </div>
 
-            <a href="login.jsp" class="btn btn-primary d-md-flex justify-content-center align-items-center" style="margin-left: 15px">
+            <a href="login.jsp" class="btn btn-primary d-flex justify-content-center align-items-center" style="margin-left: 15px">
                 <%
                     if (model == null || model.getImageData() == null) {
                 %>
@@ -53,11 +74,11 @@
                 <%
                 } else {
                 %>
-                <img src="<%=model.getImageData()%>" width="50" height="50" style="border-radius: 20px" alt="img">
+                <img src="<%=model.getImageData()%>" width="30" height="30" style="border-radius: 20px" alt="img">
                 <%
                     }
                 %>
-                <p id="textocliente" style="align-content: center; display: flex"><%=model == null ? "Área do cliente" : model.getNome()%></p>
+                <%=model == null ? "Fazer login" : model.getNome()%>
             </a>
         </div>
 
@@ -71,25 +92,18 @@
 
 </nav>
 <menu id="menu">
-
-    <div class="d-flex flex-column" style="padding: 0 10px 0 10px" id="itemsMenu">
-
-        <a href="#plugins" class="menu-items d-md-flex link-underline link-underline-opacity-0" style="color: #646464">
-            <i class="bi bi-plug"></i>
-            Plugins
-        </a>
-        <a href="" class="menu-items d-md-flex link-underline link-underline-opacity-0" style="color: #646464">
-            <i class="bi bi-discord"></i>
-            Discord
-        </a>
-
+    <a href="https://discord.gg/JKUgMsF3bH" class="link-dark link-underline link-underline-opacity-0"><i class="bi bi-discord"></i>Discord</a>
+    <a href="index.jsp#plugins" class="link-dark link-underline link-underline-opacity-0"><i class="bi bi-plug"></i>Plugins</a>
+    <a href="apoie.jsp" class="link-dark link-underline link-underline-opacity-0"><i class="bi bi-cup-hot"></i>Apioe</a>
+    <div class="w-100 pt-2 d-flex justify-content-center  bg-white rounded" id="pesquisa2">
+        <button class="btn"><i class="bi bi-search"></i></button>
+        <input class="form-control" id="pesquisar2" type="search" placeholder="Buscar plugin..." aria-label="Search">
     </div>
-
 </menu>
 
 
 <main style="display: flex; align-items: center; justify-content: center">
-    <div class="w-75" style="background-color: #eaeaea; padding: 15px; border-radius: 20px">
+    <div class="termos" style="background-color: #eaeaea; padding: 15px; border-radius: 20px">
         <h1><strong>Termos de Serviço e política de privacidade da XG7Plugins!</strong></h1>
 
         <ul>
@@ -108,7 +122,7 @@
         <br><br>
         Caso haja alguma dúvida, entre em contato com <a href="xg7mails@gmail.com">xg7mails@gmail.com</a>
 
-        <h2><strong>1. Acordo com a XG7PPlugins</strong></h2>
+        <h2><strong>1. Acordo com a XG7Plugins</strong></h2>
         <strong>1.1</strong> Para usar os Serviços da XG7Plugins, primeiro você deve concordar com os Termos.
         Você pode concordar com os Termos usando efetivamente os Serviços da XG7Plugins.
         Você entende e concorda que a XG7Plugins considerará o uso dos Serviços da XG7Plugins como
@@ -186,6 +200,12 @@
         <strong>11.3</strong> Você concorda que XG7Plugins pode lhe enviar avisos, incluindo aqueles sobre alterações feitas aos Termos, por e-mail, ou publicações nos Serviços da XG7Plugins. Ao fornecer o seu endereço de e-mail XG7Plugins, você concorda em utilizarmos o endereço de e-mail para enviar-lhe quaisquer avisos exigidos por lei.
         <br><br>
         <strong>11.4</strong> Você concorda que se XG7Plugins não exercer ou utilizar qualquer direito legal ou direito reconhecido contido nos Termos (ou ao qual XG7Plugins tem direito nos termos de qualquer lei aplicável), isso não será considerado como uma renúncia formal aos direitos da XG7Plugins e que esses direitos ou recursos ainda estarão disponíveis para XG7Plugins.
+        <h2><strong>12. Doação</strong></h2>
+        <strong>12.1</strong> A quantia enviada pela página de doação é apenas para fruto de doação então não será permitido o reembolso.
+        <br><br>
+        <strong>12.2</strong> O usuário tem direito ou não de doar, com direito a confirmação antes de enviar o pagamento.
+        <br><br>
+        <strong>12.3</strong> O dinheiro enviado é somente para apoio a nossa equipe, para continuármos nosso trabalho, nada mais.
     </div>
 
 
@@ -198,16 +218,16 @@
 <footer class="bg-light rounded p-0 pt-3 d-flex align-items-center justify-content-between flex-column" style="height: 250px">
 
     <h1><strong>XG7Plugins</strong></h1>
-    <p>Os melhores plugins para seu servidor de Minecraft!</p>
+    <p style="text-align: center">Os melhores plugins para seu servidor de Minecraft!</p>
     <div class="footer-buttons mb-2 d-flex justify-content-around">
         <a href="https://github.com/DaviXG7"><i class="bi bi-github" style="font-size: 35px; color: black"></i><small>Github</small></a>
         <a href="https://discord.gg/2fACbYbBsf" style="display: flex; flex-direction: column"><i class="bi bi-discord" style="font-size: 35px; color: black"></i><small>Discord</small></a>
         <a href=""><i class="bi bi-book" style="font-size: 35px; color: black"></i><small>API</small></a>
-        <a href=""><i class="bi bi-laptop" style="font-size: 35px; color: black"></i> <small>Termos</small></a>
+        <a href="termos.jsp"><i class="bi bi-laptop" style="font-size: 35px; color: black"></i> <small>Termos</small></a>
     </div>
     <small><a href="easteregg/jogos.html">Easter egg :D</a></small>
-    <h6 class="w-100 d-flex align-items-center justify-content-center" style="background-color: rgb(196, 196, 196); height: 3em;">
-        Copyright ₢ XG7Plugins Todos os direitos reservados <br>
+    <h6 class="w-100 d-flex align-items-center justify-content-center" style="background-color: rgb(196, 196, 196); height: 3em; text-align: center">
+        Copyright © XG7Plugins Todos os direitos reservados <br>
     </h6>
 
 
@@ -222,7 +242,7 @@
     function toggleMenu() {
         let menu = document.getElementById("menu");
         if (menu.style.display === "none" || menu.style.display === "") {
-            menu.style.display = "inline";
+            menu.style.display = "flex";
         } else {
             menu.style.display = "none";
         }

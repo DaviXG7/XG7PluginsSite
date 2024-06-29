@@ -2,7 +2,9 @@ body {
     height: 100%;
     font-family: Arial, Helvetica, sans-serif;
 }
-
+h6 {
+    margin: 0;
+}
 #nav-principal, menu {
     position: fixed;
     background-color: white;
@@ -15,7 +17,8 @@ nav {
 }
 
 #nav-c {
-    border-bottom: 1px solid;
+    border-bottom: 1px solid black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
 }
 menu {
@@ -56,7 +59,7 @@ footer h6 {
 }
 .footer-buttons i {
     text-align: center;
-
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 50px;
     height: 50px;
     border-radius: 10000px;
@@ -82,6 +85,7 @@ main {
 
 .banner {
     background-image: url("../imgs/banner.jpg");
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     width: 85%;
     height: 65vh;
     background-size: cover;
@@ -142,7 +146,7 @@ main {
     }
 
     #pesquisa {
-        display: none;
+        display: none !important;
     }
 
     .linkComum {
@@ -160,8 +164,29 @@ main {
 
     #menu {
         display: none;
+        padding: 15px;
+        flex-direction: column;
+        border-bottom: black solid 1px;
+        border-radius: 10px;
+        width: 100%;
+        background-color: white;
+        top: 75px;
 
-
+        position: fixed;
+    }
+    #menu a {
+        font-size: 17px;
+        width: 100px;
+    }
+    #menu a i {
+        padding-right: 10px;
+    }
+    #menu > * {
+        height: 50px;
+    }
+    #menu input {
+        height: 40px;
+        width: 250px !important;
     }
 
 
@@ -197,7 +222,9 @@ main {
     .banner {
         width: 100%;
     }
+    .footer-buttons {
+        width: 100% !important;
 
 
-
+    }
 }

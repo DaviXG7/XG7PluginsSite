@@ -43,6 +43,27 @@ public class PluginUpdateServlet extends HttpServlet {
         String plName = request.getParameter("plugin");
         if (plName.isEmpty()) throw new RuntimeException();
 
+        Part plugin = request.getPart("plugin-novo");
+
+        if (plugin.getSubmittedFileName().equals("")) throw new RuntimeException();
+        if (!plugin.getSubmittedFileName().contains("jar")) throw new RuntimeException();
+
+        PluginModel model = null;
+
+        try {
+            model = DBManager.getPlugin(plName);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            model.setPlugin(new SerialBlob(plugin.getInputStream().readAllBytes()));
+
+            DBManager.editPlugin(model.getName(), model);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
 
         String newVersion = request.getParameter("newVersion");
         String log = request.getParameter("changelog");
@@ -65,30 +86,43 @@ public class PluginUpdateServlet extends HttpServlet {
             //Manda a atualização para o discord
 
             JSONObject embed = new JSONObject();
-            embed.put("title", plName);
+            embed.put("title", "Atualização " + plName);
             embed.put("color", 0x00FFFF); // Cor no formato decimal (ex: 0xFF0000 para vermelho)
 
             // Adiciona campos ao embed
             JSONArray fields = new JSONArray();
             JSONObject field1 = new JSONObject();
-            field1.put("name", "Versão atual");
-            field1.put("value", changelog.getPluginVersion());
+            field1.put("name", "<:file:1254976723066290188> Versão");
+            field1.put("value", "> " + changelog.getPluginVersion());
             field1.put("inline", false);
             fields.put(field1);
 
             JSONObject field2 = new JSONObject();
-            field2.put("name", "Novidades");
+            field2.put("name", "<a:estrela:1254976686454345770> Novidades");
             field2.put("value", changelog.getChangelogText());
             field2.put("inline", false);
             fields.put(field2);
 
+            JSONObject field3 = new JSONObject();
+            field3.put("name", "Links");
+            try {
+                String a = DBManager.getPlugin(plName).getPrice() == 0 ? "\n[<:8719downloadapps:1252027852573114459> Download](https://xg7plugins.com/download?plugin=" + plName + "&type=plugin)" : "";
+                field3.put("value", "[<:8346github:1252027857228664872> Github](https://github.com/DaviXG7)\n"
+                + "[\uD83D\uDCAD Saiba mais](https://xg7plugins.com)"
+                +  a);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            field3.put("inline", false);
+            fields.put(field3);
+
             embed.put("fields", fields);
 
-            embed.put("footer", new JSONObject().put("text", "Para mais informações acesse https://xg7plguins.com"));
+            embed.put("footer", new JSONObject().put("text", "XG7Plugins - Todos os direitos reservados"));
 
             // Adiciona o embed ao payload
             JSONObject payload = new JSONObject();
-            payload.put("content", "# NOVA ATUALIZAÇÃO do plugin " + plName + " \n @everyone");
+            payload.put("content", "@everyone");
             payload.put("embeds", new JSONArray().put(embed));
 
             // Envia o payload ao webhook
@@ -137,15 +171,9 @@ public class PluginUpdateServlet extends HttpServlet {
                         } catch (SQLException e) {
                             throw new RuntimeException(e);
                         }
-                    } else {
-                        try {
-                            PluginModel model = DBManager.getPlugin(plName);
+                    } else if (model.getImages().size() > indexImage) imagens.add(model.getImages().get(indexImage));
 
-                            if (model.getImages().size() > indexImage) imagens.add(model.getImages().get(indexImage));
-                        } catch (SQLException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
+
                     indexImage++;
                 }
             }
@@ -163,12 +191,7 @@ public class PluginUpdateServlet extends HttpServlet {
                 perms.add(stringStringPair);
             }
 
-            PluginModel model = null;
-            try {
-                model = DBManager.getPlugin(plName);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+
 
             model.setResourses(resources);
             model.setImages(imagens);
@@ -211,7 +234,7 @@ public class PluginUpdateServlet extends HttpServlet {
      * @throws Exception Se ocorrer algum erro ao enviar
      */
 
-    private static void sendWebhook(JSONObject payload) throws Exception {
+    public static void sendWebhook(JSONObject payload) throws Exception {
         URL url = new URL("https://discord.com/api/webhooks/1251771970073395313/qD4y20xe__UFlPenzSFk-0TUS0HnIj67mMf5_BDQ-MIysMO_Vac2HCyWAFz-Whv3cz0L");
         HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
         connection.addRequestProperty("Content-Type", "application/json");

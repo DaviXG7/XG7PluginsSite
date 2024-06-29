@@ -1,8 +1,8 @@
 package com.xg7plugins.xg7plguinssite.filters;
 
 import com.xg7plugins.xg7plguinssite.db.DBManager;
-import com.xg7plugins.xg7plguinssite.utils.emails.EmailManager;
 import com.xg7plugins.xg7plguinssite.models.UserModel;
+import com.xg7plugins.xg7plguinssite.utils.emails.EmailManager;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;

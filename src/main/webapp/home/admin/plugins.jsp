@@ -22,6 +22,7 @@
     <link href="../../css/detalhes.css" rel="stylesheet">
     <link href="../../css/buttonsair.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="../../imgs/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <%
         UserModel model = (UserModel) request.getSession().getAttribute("user");
@@ -227,7 +228,7 @@
         </div>
         <div class="botoes">
             <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="https://discord.gg/84rqYVREsY"><i style="color: rgba(255,255,255,.5);" class="bi bi-telephone"></i><p class="textos-botoes"> Suporte</p></a>
-            <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="https://ko-fi.com/davixg7"><i style="color: rgba(255,255,255,.5);" class="bi bi-cash"></i><p class="textos-botoes" > Doação</p></a>
+            <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="/apoie.jsp"><i class="bi bi-cup-hot" style="color: rgba(255,255,255,.5);"></i><p class="textos-botoes" > Apioe</p></a>
         </div>
     </div>
 

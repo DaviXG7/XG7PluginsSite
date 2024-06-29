@@ -80,7 +80,7 @@ function abrirTela(NomePlugin) {
         if (i === 0) {
             html += ' active'
         }
-        html += '"> <img class="d-block w-100" src=' + e.imagem64 + ' " alt="Imagem não carregada">'
+        html += '"> <img class="d-block w-100" src=' + e.imagem64 + '" alt="Imagem não carregada">'
 
         if (e.titulo !== "" || e.descricao !== "") {
 
@@ -216,3 +216,16 @@ document.addEventListener('mousemove', function (event) {
         }
     }
 });
+
+window.addEventListener("resize", function () {
+    const threshold = window.innerHeight * 0.75;
+
+    if (!$("#detalhes").hasClass("d-none")) {
+        if (window.innerWidth <= 600) {
+            document.getElementById("sair").classList.remove("out")
+            document.getElementById("sair").classList.add("in")
+            document.getElementById("sair").style.bottom = "15%";
+        }
+    }
+
+})

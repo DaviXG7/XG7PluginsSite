@@ -26,7 +26,7 @@ public class DBManager {
     public static void init() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/xg7plugins", "root", "root"
+                ""
         );
         connection.setAutoCommit(true);
     }
@@ -318,7 +318,7 @@ public class DBManager {
         deleteupdates.executeUpdate();
 
 
-        PreparedStatement preparedStatementPlugins = connection.prepareStatement("UPDATE plugins SET description = ?, category = ?, video = ?, github = ?, price = ?, dependencies = ?, config = ?, name = ? WHERE name = ?");
+        PreparedStatement preparedStatementPlugins = connection.prepareStatement("UPDATE plugins SET description = ?, category = ?, video = ?, github = ?, price = ?, dependencies = ?, config = ?, name = ?, resourses = ? WHERE name = ?");
         PreparedStatement preparedStatementCommands = connection.prepareStatement("INSERT INTO plugincommands(pluginname,command,description) VALUES (?,?,?)");
         PreparedStatement preparedStatementPerms = connection.prepareStatement("INSERT INTO pluginperms(pluginname,perm,description) VALUES (?,?,?)");
         PreparedStatement preparedStatementImages = connection.prepareStatement("INSERT INTO pluginimages(pluginname,image,title,description) VALUES (?,?,?,?)");
@@ -332,7 +332,8 @@ public class DBManager {
         preparedStatementPlugins.setString(6, model.getDependencies());
         preparedStatementPlugins.setBlob(7, model.getConfig());
         preparedStatementPlugins.setString(8, model.getName());
-        preparedStatementPlugins.setString(9,name);
+        preparedStatementPlugins.setString(9, model.getResourses());
+        preparedStatementPlugins.setString(10,name);
         preparedStatementPlugins.executeUpdate();
 
         for (Pair<String, String> commands : model.getCommands()) {

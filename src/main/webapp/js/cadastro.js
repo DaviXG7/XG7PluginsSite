@@ -9,20 +9,9 @@ function verificar() {
     let inputLenght = input.value.length > 7;
     let inputChar = /[A-Z]/.test(input.value); // Verifica se há pelo menos uma letra maiúscula
     let igual = input.value === inputConfirmar.value;
+    let espaco = input.value.trim().includes(" ");
 
-    tamanho.classList.toggle("bi-check-circle", inputLenght);
-    tamanho.classList.toggle("bi-exclamation-circle", !inputLenght);
-    tamanho.style.color = inputLenght ? "green" : "red";
-
-    caixaalta.classList.toggle("bi-check-circle", inputChar);
-    caixaalta.classList.toggle("bi-exclamation-circle", !inputChar);
-    caixaalta.style.color = inputChar ? "green" : "red";
-
-    caractere.classList.toggle("bi-check-circle", igual);
-    caractere.classList.toggle("bi-exclamation-circle", !igual);
-    caractere.style.color = igual ? "green" : "red";
-
-    return igual && inputChar && inputLenght;
+    return igual && inputChar && inputLenght && !espaco;
 }
 
 window.addEventListener("input", function (event) {
@@ -38,3 +27,8 @@ window.addEventListener("input", function (event) {
 $('form').submit(function(event) {
     $(this).find('[type="submit"]').addClass("disabled");
 });
+
+var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+    return new bootstrap.Popover(popoverTriggerEl)
+})

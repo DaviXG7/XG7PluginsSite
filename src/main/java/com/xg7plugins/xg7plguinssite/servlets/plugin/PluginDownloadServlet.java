@@ -63,7 +63,7 @@ public class PluginDownloadServlet extends HttpServlet {
                     PluginModel model = DBManager.getPlugin(pluginName);
 
                     //Se vier de um site externo ele adiciona o dowload também
-                    if (user != null || !request.getHeader("Referer").startsWith("http://localhost:8080")) model.addDownload(user != null ? user.getId() : UUID.randomUUID());
+                    if (user != null || !request.getHeader("Referer").contains("https://xg7plugins.com")) model.addDownload(user != null ? user.getId() : UUID.randomUUID());
 
                     if (model.getPrice() != 0) throw new RuntimeException();
 

@@ -168,7 +168,7 @@
         <div class="nav-left d-flex justify-content-left align-items-center">
             <a class="navbar-brand" href=""><img src="imgs/logo.png" width="100px" alt=""></a>
 
-            <div class="d-md-flex bg-white rounded">
+            <div class="d-md-flex bg-white rounded" id="pesquisa">
                 <a class="btn"><i class="bi bi-search"></i></a>
                 <input class="form-control" id="pesquisar" type="search" placeholder="Buscar plugin..." aria-label="Search">
             </div>
@@ -184,6 +184,10 @@
                     <i class="bi bi-discord"></i>
                     Discord
                 </a>
+                <a href="apoie.jsp" class="linkComum  d-md-flex link-underline link-underline-opacity-0" style="color: #646464">
+                    <i class="bi bi-cup-hot"></i>
+                    Apoie
+                </a>
 
                 <button id="hamburger" class="btn" onclick="toggleMenu()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
@@ -193,7 +197,7 @@
 
             </div>
 
-            <a href="login.jsp" class="btn btn-primary d-md-flex justify-content-center align-items-center" style="margin-left: 15px">
+            <a href="login.jsp" class="btn btn-primary d-flex justify-content-center align-items-center" style="margin-left: 15px">
                 <%
                     if (model == null || model.getImageData() == null) {
                 %>
@@ -201,11 +205,11 @@
                 <%
                     } else {
                 %>
-                <img src="<%=model.getImageData()%>" width="50" height="50" style="border-radius: 20px" alt="img">
+                <img src="<%=model.getImageData()%>" width="30" height="30" style="border-radius: 20px" alt="img">
                 <%
                     }
                 %>
-                <p id="textocliente" style="align-content: center; display: flex"><%=model == null ? "Área do cliente" : model.getNome()%></p>
+                <%=model == null ? "Fazer login" : model.getNome()%>
             </a>
         </div>
 
@@ -219,20 +223,13 @@
 
 </nav>
 <menu id="menu">
-
-    <div class="d-flex flex-column" style="padding: 0 10px 0 10px" id="itemsMenu">
-
-        <a href="#plugins" class="menu-items d-md-flex link-underline link-underline-opacity-0" style="color: #646464">
-            <i class="bi bi-plug"></i>
-            Plugins
-        </a>
-        <a href="" class="menu-items d-md-flex link-underline link-underline-opacity-0" style="color: #646464">
-            <i class="bi bi-discord"></i>
-            Discord
-        </a>
-
+    <a href="https://discord.gg/JKUgMsF3bH" class="link-dark link-underline link-underline-opacity-0"><i class="bi bi-discord"></i>Discord</a>
+    <a href="#plugins" class="link-dark link-underline link-underline-opacity-0"><i class="bi bi-plug"></i>Plugins</a>
+    <a href="apoie.jsp" class="link-dark link-underline link-underline-opacity-0"><i class="bi bi-cup-hot"></i>Apioe</a>
+    <div class="w-100 pt-2 d-flex justify-content-center  bg-white rounded" id="pesquisa2">
+        <button class="btn"><i class="bi bi-search"></i></button>
+        <input class="form-control" id="pesquisar2" type="search" placeholder="Buscar plugin..." aria-label="Search">
     </div>
-
 </menu>
 
 
@@ -308,7 +305,7 @@
 <footer class="bg-light rounded p-0 pt-3 d-flex align-items-center justify-content-between flex-column" style="height: 250px">
 
     <h1><strong>XG7Plugins</strong></h1>
-    <p>Os melhores plugins para seu servidor de Minecraft!</p>
+    <p style="text-align: center">Os melhores plugins para seu servidor de Minecraft!</p>
     <div class="footer-buttons mb-2 d-flex justify-content-around">
         <a href="https://github.com/DaviXG7"><i class="bi bi-github" style="font-size: 35px; color: black"></i><small>Github</small></a>
         <a href="https://discord.gg/2fACbYbBsf" style="display: flex; flex-direction: column"><i class="bi bi-discord" style="font-size: 35px; color: black"></i><small>Discord</small></a>
@@ -316,8 +313,8 @@
         <a href="termos.jsp"><i class="bi bi-laptop" style="font-size: 35px; color: black"></i> <small>Termos</small></a>
     </div>
     <small><a href="easteregg/jogos.html">Easter egg :D</a></small>
-    <h6 class="w-100 d-flex align-items-center justify-content-center" style="background-color: rgb(196, 196, 196); height: 3em;">
-        Copyright ₢ XG7Plugins Todos os direitos reservados <br>
+    <h6 class="w-100 d-flex align-items-center justify-content-center" style="background-color: rgb(196, 196, 196); height: 3em; text-align: center">
+        Copyright © XG7Plugins Todos os direitos reservados <br>
     </h6>
 
 
@@ -334,6 +331,9 @@
     })
 
     $("#pesquisar").on("input", function () {
+        mostrarPlugins($(this).val(), "")
+    })
+    $("#pesquisar2").on("input", function () {
         mostrarPlugins($(this).val(), "")
     })
 
@@ -377,7 +377,7 @@
     function toggleMenu() {
         let menu = document.getElementById("menu");
         if (menu.style.display === "none" || menu.style.display === "") {
-            menu.style.display = "inline";
+            menu.style.display = "flex";
         } else {
             menu.style.display = "none";
         }

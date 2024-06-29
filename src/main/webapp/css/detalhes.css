@@ -23,6 +23,7 @@
     background-color: #eaeaea;
     border: black solid 3px;
     border-radius: 15px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 .detalhes-header {
     display: flex;
@@ -67,6 +68,7 @@
     background-color: #dadada;
     border-radius: 10px;
     scroll-behavior: smooth;
+    overflow-wrap: break-word;
 }
 .content .plugin-content > * {
     margin: 10px 0 10px 0;
@@ -111,6 +113,11 @@
 
     .visao-geral-header {
         justify-content: center;
+    }
+
+    .content .plugin-content {
+        max-width: 320px;
+        width: 320px;
     }
 
 }

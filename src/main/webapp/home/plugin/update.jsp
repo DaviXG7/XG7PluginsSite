@@ -15,6 +15,7 @@
     <link href="../css/dashboard.css" rel="stylesheet">
     <link href="css/plugin.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="../../imgs/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
     <%
@@ -40,7 +41,7 @@
         </div>
         <div class="botoes">
             <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="https://discord.gg/84rqYVREsY"><i style="color: rgba(255,255,255,.5);" class="bi bi-telephone"></i><p class="textos-botoes"> Suporte</p></a>
-            <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="https://ko-fi.com/davixg7"><i style="color: rgba(255,255,255,.5);" class="bi bi-cash"></i><p class="textos-botoes" > Doação</p></a>
+            <a class="d-flex link-offset-2 link-light link-underline link-underline-opacity-0" href="/apoie.jsp"><i class="bi bi-cup-hot" style="color: rgba(255,255,255,.5);"></i><p class="textos-botoes" > Apioe</p></a>
         </div>
     </div>
 
@@ -151,6 +152,13 @@
                                 <label for="changelog">Log*</label>
                                 <textarea class="form-control" placeholder="Digite o que você mudou no plugin" id="changelog" name="changelog" rows="2" required></textarea>
                             </div>
+                        </div>
+                        <div style="display: flex" class="w-100 flex-column align-items-center justify-content-center m-3">
+                            <label class="btn-upload"><i class="bi bi-upload"></i>
+                                <p id="text-plugin">Novo plugin</p>
+                                <input id="plugin-file" name="plugin-novo" type="file" class="input-file" required accept=".jar">
+                            </label>
+
                         </div>
                         <label for="editar" class="d-flex">
                             <input id="editar" type="checkbox" name="editar" class="form-check"> Editar Plugin?
@@ -289,5 +297,9 @@
 
 </script>
 <script src="../js/dashboard.js"></script>
-
+<script>
+    $("#plugin-file").on("change", function () {
+        document.getElementById("text-plugin").textContent = document.getElementById("plugin-file").files[0].name
+    })
+</script>
 </html>

@@ -109,6 +109,7 @@ public class PluginEditServlet extends HttpServlet {
         for (int i = 0; i < permValues.length; i++) {
             if (Objects.equals(permValues[i], "") || Objects.equals(permDescriptions[i], "")) throw new RuntimeException();
             Pair<String, String> stringStringPair = new Pair<>(permValues[i], permDescriptions[i]);
+
             perms.add(stringStringPair);
         }
 
